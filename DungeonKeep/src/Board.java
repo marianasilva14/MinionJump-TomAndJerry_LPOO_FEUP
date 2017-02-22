@@ -74,6 +74,7 @@ public class Board {
 			System.out.println("To move up, insert 'u'");
 			System.out.println("To move left, insert 'l'");
 			System.out.println("To move right, insert 'r'");
+			
 
 			Scanner reader = new Scanner(System.in);
 			char c = reader.next().charAt(0);
