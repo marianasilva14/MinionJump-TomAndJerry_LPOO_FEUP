@@ -15,6 +15,9 @@ public class Board {
 
 	int row = 1;
 	int col = 1;
+	
+	int row_guard=1;
+	int col_guard=8;
 
 	public void printBoard()
 	{
@@ -39,12 +42,7 @@ public class Board {
 
 		return false;
 	}
-	/*
-	public void movementGuard()
-	{
-
-	}*/
-
+	
 	public void checkLever(){
 		int row_aux = board.length;
 		int col_aux = board[0].length;
@@ -99,15 +97,75 @@ public class Board {
 		printBoard();
 		chooseOption();
 	}
+	
+	public void movementGuard(){
+		if(board[row_guard-1][col_guard]== 'X' && board[row_guard][col_guard+1]== 'X')
+		{
+			board[row_guard][col_guard-1]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			col_guard=col_guard-1;
+		}
+		
+		else if(board[row_guard][col_guard-1]== 'X')
+		{
+			board[row_guard+1][col_guard]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			row_guard=row_guard+1;
+		}	
+		else if(board[row_guard+1][col_guard]== ' ' && board[row_guard][col_guard+2] == 'X')
+		{
+			board[row_guard][col_guard-1]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			col_guard=col_guard-1;
+		}
+		else if(board[row_guard-1][col_guard]== ' ' && board[row_guard-1][col_guard+1] == 'X')
+		{
+			board[row_guard][col_guard-1]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			col_guard=col_guard-1;
+		}
+		else if(board[row_guard][col_guard-1]== ' ' && board[row_guard-1][col_guard] == 'X')
+		{
+			board[row_guard][col_guard-1]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			col_guard=col_guard-1;
+		}
+		
+		else if(board[row_guard-1][col_guard]== 'X' && board[row_guard][col_guard-1]== 'I')
+		{
+			board[row_guard+1][col_guard]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			row_guard=row_guard+1;
+		}
+		
+		else if(board[row_guard-1][col_guard]== ' ' && board[row_guard+1][col_guard]== 'X')
+		{
+			board[row_guard][col_guard+1]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			col_guard=col_guard+1;
+		}
+		else if(board[row_guard+1][col_guard]== ' ' && board[row_guard+1][col_guard+1]== 'X')
+		{
+			board[row_guard][col_guard+1]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			col_guard=col_guard+1;
+		}
+		
+		else if(board[row_guard][col_guard+1]== 'X')
+		{
+			board[row_guard-1][col_guard]= 'G';
+			board[row_guard][col_guard] =  ' ';
+			row_guard=row_guard-1;
+		}
+	}
 
 	public void movementUp(){
-		boolean movement = false;
 
 		if(board[row-1][col] == ' ')
 		{
-			movement = true;
 			board[row][col]= ' ';
 			board[row-1][col]='H';
+			movementGuard();
 			printBoard();
 			row=row-1;
 			chooseOption();
@@ -127,13 +185,12 @@ public class Board {
 	}
 
 	public void movementDown(){	
-		boolean movement = false;
-
+	
 		if(board[row+1][col] == ' ')
 		{
-			movement = true;
 			board[row][col]= ' ';
 			board[row+1][col]='H';
+			movementGuard();
 			printBoard();
 			row=row+1;
 			chooseOption();
@@ -153,13 +210,12 @@ public class Board {
 	}
 
 	public void movementLeft(){
-		boolean movement = false;
 
 		if(board[row][col-1] == ' ')
 		{
-			movement = true;
 			board[row][col]= ' ';
 			board[row][col-1]='H';
+			movementGuard();
 			printBoard();
 			col=col-1;
 			chooseOption();
@@ -179,13 +235,11 @@ public class Board {
 	}
 
 	public void movementRight(){
-		boolean movement = false;
-
 		if(board[row][col+1] == ' ')
 		{
-			movement = true;
 			board[row][col]= ' ';
 			board[row][col+1]='H';
+			movementGuard();
 			printBoard();
 			col=col+1;
 			chooseOption();
