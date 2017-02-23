@@ -19,7 +19,7 @@ public class Board {
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ','*',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X','H',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -36,6 +36,9 @@ public class Board {
 
 	int row_ogre=1;
 	int col_ogre=4;
+	
+	int row_club = 5;
+	int col_club = 2;
 
 	public void printBoard()
 	{
@@ -84,6 +87,15 @@ public class Board {
 
 		return false;
 	}
+	
+	public boolean checkClub()
+	{
+		if(newBoard[row_club-1][col_club] == '*' || newBoard[row_club+1][col_club] == '*' || newBoard[row_club][col_club-1] == '*'|| newBoard[row_club][col_club+1] == '*')
+			return true;
+
+		return false;
+	}
+
 
 	public void checkLever(){
 		int row_aux = board.length;
@@ -132,7 +144,7 @@ public class Board {
 
 	public void newChooseOption()
 	{
-		if(checkOgre()) 
+		if(checkOgre() || checkClub()) 
 			System.out.print("You got caught! Game Over!");
 		else{
 			System.out.println();
@@ -226,6 +238,7 @@ public class Board {
 		}
 	}
 
+	
 	public void movementOgre(){
 
 		int pos_rand;
@@ -267,6 +280,50 @@ public class Board {
 			else
 				newBoard[row_ogre][col_ogre+1] = 'O';
 			col_ogre = col_ogre + 1;
+		}
+	}
+
+	public void movementClub(){
+
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt((4+1) - 1) + 1;
+
+		if(pos_rand == 1 && newBoard[row_club-1][col_club] == ' ')
+		{
+			newBoard[row_club][col_club] = ' ';
+			if(newBoard[row_club-1][col_club] == 'k')
+				newBoard[row_club-1][col_club] = '$';
+			else
+				newBoard[row_club-1][col_club] = '*';
+			row_club = row_club - 1;
+		}
+		else if(pos_rand == 2 && newBoard[row_club+1][col_club] == ' ')
+		{
+			newBoard[row_club][col_club] = ' ';
+			if(newBoard[row_club+1][col_club] == 'k')
+				newBoard[row_club+1][col_club] = '$';
+			else
+				newBoard[row_club+1][col_club] = '*';
+			row_club = row_club + 1;
+		}
+		else if(pos_rand == 3 && newBoard[row_club][col_club-1] == ' ')
+		{
+			newBoard[row_club][col_club] = ' ';
+			if(newBoard[row_club][col_club-1] == 'k')
+				newBoard[row_club][col_club-1] = '$';
+			else
+				newBoard[row_club][col_club-1] = '*';
+			col_club = col_club - 1;
+		}
+		else if(pos_rand == 4 && newBoard[row_club][col_club+1] == ' ')
+		{
+			newBoard[row_club][col_club] = ' ';
+			if(newBoard[row_club][col_club+1] == 'k')
+				newBoard[row_club][col_club+1] = '$';
+			else
+				newBoard[row_club][col_club+1] = '*';
+			col_club = col_club + 1;
 		}
 	}
 
@@ -455,6 +512,7 @@ public class Board {
 			else
 				newBoard[new_row-1][new_col]='H';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			new_row=new_row-1;
 			newChooseOption();
@@ -463,6 +521,7 @@ public class Board {
 			newBoard[new_row][new_col]= ' ';
 			newBoard[new_row-1][new_col] = 'S';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			System.out.println("You win! Congratulations!");
 		}
@@ -470,6 +529,7 @@ public class Board {
 
 			newBoard[new_row-1][new_col] = ' ';
 			movementOgre();
+			movementClub();
 			newChooseOption();
 		}
 		else if(newBoard[new_row-1][new_col] == 'X') 
@@ -489,6 +549,7 @@ public class Board {
 			else
 				newBoard[new_row+1][new_col]='H';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			new_row=new_row+1;
 			newChooseOption();
@@ -497,6 +558,7 @@ public class Board {
 			newBoard[new_row][new_col]= ' ';
 			newBoard[new_row+1][new_col] = 'S';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			System.out.println("You win! Congratulations!");
 		}		
@@ -504,6 +566,7 @@ public class Board {
 
 			newBoard[new_row-1][new_col] = ' ';
 			movementOgre();
+			movementClub();
 			newChooseOption();
 		}
 		else if(newBoard[new_row+1][new_col] == 'X') 
@@ -522,6 +585,7 @@ public class Board {
 			else
 				newBoard[new_row][new_col-1]='H';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			new_col=new_col-1;
 			newChooseOption();
@@ -530,6 +594,7 @@ public class Board {
 			newBoard[new_row][new_col]= ' ';
 			newBoard[new_row][new_col-1] = 'S';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			System.out.println("You win! Congratulations!");
 		}
@@ -537,6 +602,7 @@ public class Board {
 
 			newBoard[new_row-1][new_col] = ' ';
 			movementOgre();
+			movementClub();
 			newChooseOption();
 		}
 		else if(newBoard[new_row][new_col-1] == 'X') 
@@ -556,6 +622,7 @@ public class Board {
 			else
 				newBoard[new_row][new_col+1]='H';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			
 			new_col=new_col+1;
@@ -565,6 +632,7 @@ public class Board {
 			newBoard[new_row][new_col]= ' ';
 			newBoard[new_row][new_col+1] = 'S';
 			movementOgre();
+			movementClub();
 			printNewBoard();
 			System.out.println("You win! Congratulations!");
 		}
@@ -572,6 +640,7 @@ public class Board {
 			
 			newBoard[new_row-1][new_col] = ' ';
 			movementOgre();
+			movementClub();
 			newChooseOption();
 		}
 		else if(newBoard[row][col+1] == 'X') 
