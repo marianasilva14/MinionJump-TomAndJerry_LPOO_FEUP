@@ -557,6 +557,7 @@ public class Board {
 				newBoard[new_row][new_col+1]='H';
 			movementOgre();
 			printNewBoard();
+			
 			new_col=new_col+1;
 			newChooseOption();
 		}
