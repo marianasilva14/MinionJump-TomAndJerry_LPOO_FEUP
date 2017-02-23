@@ -192,7 +192,7 @@ public class Board {
 			board[row_guard][col_guard] =  ' ';
 			row_guard=row_guard+1;
 		}	
-		else if(board[row_guard-1][col_guard]== ' ' && board[row_guard-1][col_guard+1] == 'X')
+		else if(board[row_guard-1][col_guard]== ' ' && board[row_guard-2][col_guard+1] == 'I')
 		{
 			board[row_guard][col_guard-1]= 'G';
 			board[row_guard][col_guard] =  ' ';
@@ -333,7 +333,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row-1][col]='H';
-			//movementGuard();
+			movementGuard();
 			printBoard();
 			row=row-1;
 			chooseOption();
@@ -378,7 +378,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row+1][col]='H';
-			//movementGuard();
+			movementGuard();
 			printBoard();
 			row=row+1;
 			chooseOption();
@@ -422,7 +422,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row][col-1]='H';
-			//movementGuard();
+			movementGuard();
 			printBoard();
 			col=col-1;
 			chooseOption();
@@ -465,7 +465,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row][col+1]='H';
-			//movementGuard();
+			movementGuard();
 			printBoard();
 			col=col+1;
 			chooseOption();
