@@ -333,7 +333,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row-1][col]='H';
-			movementGuard();
+			//movementGuard();
 			printBoard();
 			row=row-1;
 			chooseOption();
@@ -378,7 +378,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row+1][col]='H';
-			movementGuard();
+			//movementGuard();
 			printBoard();
 			row=row+1;
 			chooseOption();
@@ -422,7 +422,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row][col-1]='H';
-			movementGuard();
+			//movementGuard();
 			printBoard();
 			col=col-1;
 			chooseOption();
@@ -465,7 +465,7 @@ public class Board {
 		{
 			board[row][col]= ' ';
 			board[row][col+1]='H';
-			movementGuard();
+			//movementGuard();
 			printBoard();
 			col=col+1;
 			chooseOption();
