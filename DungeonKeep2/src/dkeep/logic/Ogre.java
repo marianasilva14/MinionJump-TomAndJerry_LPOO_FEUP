@@ -6,11 +6,12 @@ import dkeep.logic.Entity;
 public class Ogre extends Entity{
 
 	private int posx, posy;	
+	
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
 	
-	private Direction directions[] = { Direction.RIGHT, Direction.LEFT, Direction.UP, Direction.DOWN};
+	private Direction directions[] = {Direction.RIGHT, Direction.LEFT, Direction.UP, Direction.DOWN};
 	
 	public Ogre(int level)
 	{

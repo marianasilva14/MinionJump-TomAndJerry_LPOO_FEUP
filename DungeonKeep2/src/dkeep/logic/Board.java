@@ -84,7 +84,7 @@ public class Board {
 
 	public boolean changeLevel(int posx, int posy, int level){
 
-		if(board[level][posx][posy] == 'S')
+		if(board[level][posx+1][posy] == 'S' || board[level][posx][posy+1] == 'S' || board[level][posx-1][posy] == 'S' || board[level][posx][posy-1] == 'S')
 			return true;
 
 		return false;
