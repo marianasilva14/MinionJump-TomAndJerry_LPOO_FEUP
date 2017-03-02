@@ -1,6 +1,5 @@
 package dkeep.cli;
 import java.util.Scanner;
-
 import dkeep.logic.Board;
 import dkeep.logic.Hero;
 import dkeep.logic.Guard;
@@ -23,10 +22,12 @@ public class UserInteraction {
 	}
 
 	public void play(){
+
 		printBoard(level);
 		char c;
 
-		while(!b.checkIfEnds()){
+		while(!b.checkGuard(h.getPosx(), h.getPosy(), level, g)){
+
 			System.out.println();
 			System.out.println("Please insert a character:");
 			System.out.println("To move down, insert 'd'");
@@ -45,8 +46,6 @@ public class UserInteraction {
 			}
 
 			Direction direction = Direction.UP;
-			boolean valid=false;
-
 
 			switch (c) {
 			case 'u': direction = Direction.UP;
@@ -66,10 +65,9 @@ public class UserInteraction {
 
 			h.move(direction);
 
-			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
-				valid=true;
+			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level))
 				g.movement();
-			}
+			
 			else{
 				System.out.println("Invalid movement. Try again");
 				h.setPosx(x);
@@ -78,33 +76,36 @@ public class UserInteraction {
 
 			printBoard(level);
 		}
+		
+		System.out.print("You got caught! Game Over!");
+}
 
-	}
+public void printBoard(int level)
+{	
+	char[][] board = b.getBoard(level);
 
-	public void printBoard(int level)
-	{	
-		char[][] board = b.getBoard(level);
+	int hero_x= h.getPosx();
+	int hero_y= h.getPosy();
+	int guard_x = g.getPosx();
+	int guard_y = g.getPosy();
 
-		int hero_x= h.getPosx();
-		int hero_y= h.getPosy();
-		int guard_x = g.getPosx();
-		int guard_y = g.getPosy();
+	int row = board.length;
+	int col = board[0].length;
 
-		int row = board.length;
-		int col = board[0].length;
+	b.checkLever(hero_x,hero_y,level);
 
-		for(int i = 0; i < row; i++){
-			for(int j = 0; j < col; j++){
-				if(i == hero_x && j == hero_y)
-					System.out.print("H ");
-				else if(i == guard_x && j == guard_y)
-					System.out.print("G ");
-				else
-					System.out.print(board[i][j]+" ");
-			}
-			System.out.println();
+	for(int i = 0; i < row; i++){
+		for(int j = 0; j < col; j++){
+			if(i == hero_x && j == hero_y)
+				System.out.print("H ");
+			else if(i == guard_x && j == guard_y)
+				System.out.print("G ");
+			else
+				System.out.print(board[i][j]+" ");
 		}
-
-
+		System.out.println();
 	}
+	}
+
+
 }
