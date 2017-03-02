@@ -7,7 +7,7 @@ import dkeep.logic.Hero;
 public class Board {
 
 	char[][][] board = {{{'X','X','X','X','X','X','X','X','X','X'},
-		{'X',' ',' ',' ','I',' ','X',' ','G','X'},
+		{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 		{'X','X','X',' ','X','X','X',' ',' ','X'},
 		{'X',' ','I',' ','I',' ','X',' ',' ','X'},
 		{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -41,6 +41,15 @@ public class Board {
 	
 	public char[][] getBoard(int level){
 		return board[level];
+	}
+	
+	public boolean invalidMovement(int posx, int posy, int level){
+		
+		if(board[level][posx][posy] == 'X' || board[level][posx][posy] == 'I')
+			return true;
+		else
+			return false;
+		
 	}
 
 
