@@ -3,12 +3,14 @@ import java.util.Scanner;
 import dkeep.logic.Board;
 import dkeep.logic.Hero;
 import dkeep.logic.Guard;
+import dkeep.logic.Ogre;
 
 public class UserInteraction {
 
 	Board b = new Board();
 	Hero h = new Hero(level);
 	Guard g = new Guard(level);
+	Ogre o = new Ogre(level);
 
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
@@ -22,12 +24,19 @@ public class UserInteraction {
 	}
 
 	public void play(){
-
 		printBoard(level);
 		char c;
 
-		while(!b.checkGuard(h.getPosx(), h.getPosy(), level, g)){
+		while(!b.checkIfEnds(h.getPosx(), h.getPosy(),level, g,o)){
 
+			if(b.changeLevel(h.getPosx(), h.getPosy(), level))
+			{
+				if(level==0)
+					level=1;
+				else
+					level=0;
+			}
+			else{
 			System.out.println();
 			System.out.println("Please insert a character:");
 			System.out.println("To move down, insert 'd'");
@@ -65,8 +74,12 @@ public class UserInteraction {
 
 			h.move(direction);
 
-			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level))
-				g.movement();
+			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
+				if(level ==0)
+					g.movement();
+				else
+					o.movement();
+			}
 			
 			else{
 				System.out.println("Invalid movement. Try again");
@@ -76,7 +89,7 @@ public class UserInteraction {
 
 			printBoard(level);
 		}
-		
+		}
 		System.out.print("You got caught! Game Over!");
 }
 
@@ -88,6 +101,8 @@ public void printBoard(int level)
 	int hero_y= h.getPosy();
 	int guard_x = g.getPosx();
 	int guard_y = g.getPosy();
+	int ogre_x = o.getPosx();
+	int ogre_y = o.getPosy();
 
 	int row = board.length;
 	int col = board[0].length;
@@ -98,8 +113,10 @@ public void printBoard(int level)
 		for(int j = 0; j < col; j++){
 			if(i == hero_x && j == hero_y)
 				System.out.print("H ");
-			else if(i == guard_x && j == guard_y)
+			else if(i == guard_x && j == guard_y && level ==0)
 				System.out.print("G ");
+			else if(i == ogre_x && j == ogre_y && level ==1)
+				System.out.print("O ");
 			else
 				System.out.print(board[i][j]+" ");
 		}

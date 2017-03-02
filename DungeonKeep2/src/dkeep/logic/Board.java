@@ -33,22 +33,22 @@ public class Board {
 	public Board(){
 	}
 
-	
+
 	public char[][] getBoard(int level){
 		return board[level];
 	}
-	
+
 	public boolean invalidMovement(int posx, int posy, int level){
-		
+
 		if(board[level][posx][posy] == 'X' || board[level][posx][posy] == 'I')
 			return true;
 		else
 			return false;
-		
+
 	}
 
 	public void checkLever(int posx, int posy, int level){
-		
+
 		if(board[level][posx][posy] == 'k')
 		{
 			int row_aux = board[level].length;
@@ -64,9 +64,27 @@ public class Board {
 			}
 		}	
 	}
-	
-	public boolean checkGuard(int posx,int posy,int level, Guard g){
-		if((posx-1 == g.getPosx() && posy== g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
+
+	public boolean checkIfEnds(int posx,int posy, int level, Guard g, Ogre o){
+		if(level ==0)
+		{
+			if((posx-1 == g.getPosx() && posy== g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
+				return true;
+			else
+				return false;
+		}
+		else{
+			if((posx-1 == o.getPosx() && posy== o.getPosy()) || (posx+1 == o.getPosx() && posy == o.getPosy()) || (posx == o.getPosx() && posy-1 == o.getPosy()) || (posx == o.getPosx() && posy+1 == o.getPosy()))
+				return true;
+			else
+				return false;
+		}
+
+	}
+
+	public boolean changeLevel(int posx, int posy, int level){
+
+		if(board[level][posx][posy] == 'S')
 			return true;
 
 		return false;
