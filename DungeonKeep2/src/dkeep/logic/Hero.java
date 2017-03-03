@@ -16,7 +16,7 @@ public class Hero extends Entity{
 	public StateHero getState() {
 		return state;
 	}
-
+	
 	public void setState(StateHero state) {
 		this.state = state;
 	}

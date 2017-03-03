@@ -1,11 +1,14 @@
 package dkeep.logic;
-import java.util.Random;
-
 import dkeep.logic.Entity;
+import dkeep.cli.UserInteraction;
+
+import java.util.Random;
+import java.util.Vector;
+
 
 public class Ogre extends Entity{
 
-	private int posx, posy;	
+	private int posx, posy;
 	
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
@@ -15,11 +18,11 @@ public class Ogre extends Entity{
 	
 	public Ogre(int level)
 	{
-		if(level ==1)
-		{
-			posx=1;
-			posy=4;
-		}
+		//if(level ==1)
+		//{
+			posx = 1;
+			posy = 4;
+		//}
 	}
 	public Ogre getOgre(){
 		return this;

@@ -1,13 +1,14 @@
 package dkeep.logic;
+import dkeep.cli.UserInteraction;
 
 import java.util.Random;
 import java.util.Vector;
-import dkeep.cli.UserInteraction;
 
 public class Guard extends Entity{
 
 	private int posx, posy;	
 	private int index;
+	
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
@@ -21,12 +22,12 @@ public class Guard extends Entity{
 			posx=1;
 			posy=8;
 			index=0;
-		}
+		}/*
 		else{
 			posx=1;
 			posy=8;
 			index=0;
-		}
+		}*/
 
 	}
 	public Guard getGuard(){

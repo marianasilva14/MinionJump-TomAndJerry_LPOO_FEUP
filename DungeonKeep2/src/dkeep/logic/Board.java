@@ -1,8 +1,8 @@
 package dkeep.logic;
-import java.awt.Point;
 import dkeep.cli.UserInteraction;
 import dkeep.logic.Guard;
-
+import dkeep.logic.Hero;
+import dkeep.logic.Hero.StateHero;
 import dkeep.logic.Hero;
 
 public class Board {
@@ -19,11 +19,11 @@ public class Board {
 		{'X','X','X','X','X','X','X','X','X','X'}}, 
 
 			{{'X','X','X','X','X','X','X','X','X','X'},
-			{'I',' ',' ',' ','O',' ',' ',' ','k','X'},
+			{'I',' ',' ',' ',' ',' ',' ',' ','k','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ','*',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -39,34 +39,46 @@ public class Board {
 	}
 
 	public boolean invalidMovement(int posx, int posy, int level){
-
-		if(board[level][posx][posy] == 'X' || board[level][posx][posy] == 'I')
-			return true;
-		else
-			return false;
+		
+		if(level == 0){
+			if(board[level][posx][posy] == 'X' || board[level][posx][posy] == 'I')
+				return true;
+			else
+				return false;
+		}
+		else{
+			if(board[level][posx][posy] == 'X')
+				return true;
+			else
+				return false;
+		}
+		
 
 	}
 
 	public void checkLever(int posx, int posy, int level){
 
-		if(board[level][posx][posy] == 'k')
-		{
-			int row_aux = board[level].length;
-			int col_aux = board[level][0].length;
-
-			for(int i = 0; i < row_aux; i++)
+		if(level == 0){
+			if(board[level][posx][posy] == 'k')
 			{
-				for(int j = 0; j < col_aux; j++)
+				int row_aux = board[level].length;
+				int col_aux = board[level][0].length;
+
+				for(int i = 0; i < row_aux; i++)
 				{
-					if(board[level][i][j] == 'I')
-						board[level][i][j] = 'S';
+					for(int j = 0; j < col_aux; j++)
+					{
+						if(board[level][i][j] == 'I')
+							board[level][i][j] = 'S';
+					}
 				}
-			}
-		}	
+			}	
+		}
+
 	}
 
 	public boolean checkIfEnds(int posx,int posy, int level, Guard g, Ogre o){
-		if(level ==0)
+		if(level == 0)
 		{
 			if((posx-1 == g.getPosx() && posy== g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
 				return true;
@@ -88,5 +100,60 @@ public class Board {
 			return true;
 
 		return false;
+	}
+
+	public int positionXLever(int posx, int posy, int level){
+		if(level == 1){
+
+			if(board[level][posx][posy] == 'k')
+				return posx;
+		}
+		return 0;
+	}
+
+	public int positionYLever(int posx, int posy, int level){
+		if(level == 1){
+
+			if(board[level][posx][posy] == 'k')
+				return posy;
+		}
+		return 0;
+	}
+
+	public int positionXDoor(int posx, int posy, int level){
+		if(level == 1){
+
+			if(board[level][posx][posy] == 'I')
+				return posx;
+		}
+		return 0;
+	}
+
+	public int positionYDoor(int posx, int posy, int level){
+		if(level == 1){
+
+			if(board[level][posx][posy] == 'I')
+				return posy;
+		}
+		return 0;
+	}
+
+	public void heroIsArmed(int posx, int posy, int level, Hero h){
+
+		if(level == 1){
+			if(posx == positionXLever(posx, posy, level) && posy == positionYLever(posx, posy, level))
+				h.setState(StateHero.ARMED);
+		}
+	}
+
+	public void winGame(int posx, int posy, int level, Hero h){
+
+		if(level == 1){
+			if(h.getState() == StateHero.ARMED)
+				if(posx == positionXDoor(posx, posy, level) && posy == positionYDoor(posx, posy, level)){
+					board[level][posx][posy] = 'I';
+					System.out.println("You won! Congratulations!");
+				}
+		}
 	}
 }
