@@ -71,12 +71,15 @@ public class UserInteraction {
 			int y_o = o.getPosx();
 
 			h.move(direction);
+			o.movement();
 
-			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level) || !b.invalidMovement(o.getPosx(), o.getPosy(), level)){
+			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
 				if(level == 0)
 					g.movement();
-				else
-					o.movement();
+				else{
+					if(!b.invalidMovement(o.getPosx(), o.getPosy(), level))
+						o.movement();
+				}
 			}
 			else{
 				System.out.println("Invalid movement. Try again");

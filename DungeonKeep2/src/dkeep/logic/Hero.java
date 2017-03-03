@@ -61,7 +61,6 @@ public class Hero extends Entity{
 			break;
 		case LEFT:
 			posy--;
-
 		}
 	}
 }

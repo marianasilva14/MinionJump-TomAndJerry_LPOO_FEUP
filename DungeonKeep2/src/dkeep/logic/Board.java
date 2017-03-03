@@ -80,13 +80,13 @@ public class Board {
 	public boolean checkIfEnds(int posx,int posy, int level, Guard g, Ogre o){
 		if(level == 0)
 		{
-			if((posx-1 == g.getPosx() && posy== g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
+			if((posx-1 == g.getPosx() && posy == g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
 				return true;
 			else
 				return false;
 		}
 		else{
-			if((posx-1 == o.getPosx() && posy== o.getPosy()) || (posx+1 == o.getPosx() && posy == o.getPosy()) || (posx == o.getPosx() && posy-1 == o.getPosy()) || (posx == o.getPosx() && posy+1 == o.getPosy()))
+			if((posx-1 == o.getPosx() && posy == o.getPosy()) || (posx+1 == o.getPosx() && posy == o.getPosy()) || (posx == o.getPosx() && posy-1 == o.getPosy()) || (posx == o.getPosx() && posy+1 == o.getPosy()) || (posx == o.getPosx() && posy == o.getPosy()))
 				return true;
 			else
 				return false;

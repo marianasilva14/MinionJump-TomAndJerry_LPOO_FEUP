@@ -48,7 +48,7 @@ public class Ogre extends Entity{
 
 		int pos_rand;
 		Random rand = new Random();
-		pos_rand = rand.nextInt(3);
+		pos_rand = rand.nextInt(4);
 		
 		Direction direction = directions[pos_rand];
 		
