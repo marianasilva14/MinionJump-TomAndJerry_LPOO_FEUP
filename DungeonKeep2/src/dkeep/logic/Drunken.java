@@ -2,6 +2,7 @@ package dkeep.logic;
 
 import java.util.Random;
 
+import dkeep.logic.Hero.StateHero;
 import dkeep.logic.Rookie.Direction;
 
 public class Drunken extends Guard{
@@ -25,11 +26,22 @@ public class Drunken extends Guard{
 			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
 			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
 	
-	public enum State{
+	public enum StateDrunken{
 		G,g;
 	}
 	
-	private State st[] ={State.G,State.g};
+	private StateDrunken status[] ={StateDrunken.G,StateDrunken.g};
+	
+	public StateDrunken state = StateDrunken.G;
+	
+	public StateDrunken getState() {
+		return state;
+	}
+	
+	public void setStateDrunken(StateDrunken st) {
+		this.state = st;
+	}
+
 	
 	public Drunken getDrunken(){
 		return this;
@@ -61,7 +73,7 @@ public class Drunken extends Guard{
 		pos_rand = rand.nextInt(2);
 		
 		Direction direction = directions[index];
-		State state = st[pos_rand];
+		StateDrunken st = status[pos_rand];
 		
 		if(index == 23)
 			index = 0;
@@ -87,7 +99,6 @@ public class Drunken extends Guard{
 		case LEFT:{
 			if(state== state.G)
 			posy--;
-			break;
 		}
 		}
 	}
