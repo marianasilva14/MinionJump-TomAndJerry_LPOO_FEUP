@@ -111,6 +111,7 @@ public class UserInteraction {
 
 		b.checkLever(hero_x,hero_y,level);
 		b.heroIsArmed(hero_x,hero_y,level,h);
+		//b.ogreLever(ogre_x, ogre_y, level, o);
 		b.winGame(hero_x, hero_y, level, h);
 
 		for(int i = 0; i < row; i++){

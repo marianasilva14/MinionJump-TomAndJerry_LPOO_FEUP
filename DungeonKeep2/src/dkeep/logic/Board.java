@@ -104,7 +104,6 @@ public class Board {
 
 	public int positionXLever(int posx, int posy, int level){
 		if(level == 1){
-
 			if(board[level][posx][posy] == 'k')
 				return posx;
 		}
@@ -113,7 +112,6 @@ public class Board {
 
 	public int positionYLever(int posx, int posy, int level){
 		if(level == 1){
-
 			if(board[level][posx][posy] == 'k')
 				return posy;
 		}
@@ -122,7 +120,6 @@ public class Board {
 
 	public int positionXDoor(int posx, int posy, int level){
 		if(level == 1){
-
 			if(board[level][posx][posy] == 'I')
 				return posx;
 		}
@@ -131,15 +128,20 @@ public class Board {
 
 	public int positionYDoor(int posx, int posy, int level){
 		if(level == 1){
-
 			if(board[level][posx][posy] == 'I')
 				return posy;
 		}
 		return 0;
 	}
-
+/*
+	public void ogreLever(int posx, int posy, int level, Ogre o){
+		if(level == 1){
+			if(posx == positionXLever(posx, posy, level) && posy == positionYLever(posx, posy, level))
+				board[level][posx][posy] = '$';
+		}
+	}
+*/	
 	public void heroIsArmed(int posx, int posy, int level, Hero h){
-
 		if(level == 1){
 			if(posx == positionXLever(posx, posy, level) && posy == positionYLever(posx, posy, level))
 				h.setState(StateHero.ARMED);
@@ -147,7 +149,6 @@ public class Board {
 	}
 
 	public void winGame(int posx, int posy, int level, Hero h){
-
 		if(level == 1){
 			if(h.getState() == StateHero.ARMED)
 				if(posx == positionXDoor(posx, posy, level) && posy == positionYDoor(posx, posy, level)){
