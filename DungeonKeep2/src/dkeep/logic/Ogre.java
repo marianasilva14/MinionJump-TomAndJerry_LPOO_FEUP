@@ -8,6 +8,10 @@ import java.util.Vector;
 
 public class Ogre extends Entity{
 
+	public Ogre(int posx, int posy, int level) {
+		super(posx, posy, level);
+	}
+
 	private int posx, posy;
 
 	public enum Direction{
@@ -16,12 +20,6 @@ public class Ogre extends Entity{
 
 	private Direction directions[] = {Direction.RIGHT, Direction.LEFT, Direction.UP, Direction.DOWN};
 
-	public Ogre(int level)
-	{
-		posx = 1;
-		posy = 4;
-
-	}
 	public Ogre getOgre(){
 		return this;
 	}

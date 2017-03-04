@@ -5,12 +5,10 @@ import dkeep.logic.Guard;
 public class Rookie extends Guard{
 
 	private int posx, posy;	
-	private int index;
+	private int index=0;
 
-	public Rookie(int level) {
-		super(level);
-		posx=1;
-		posy=8;
+	public Rookie(int posx, int posy, int level) {
+		super(posx,posy,level);
 		index=0;
 	}
 
@@ -42,7 +40,7 @@ public class Rookie extends Guard{
 		this.posy = posy;
 	}
 
-	public void movement(){
+	public void movement(Guard g){
 
 		Direction direction = directions[index];
 
@@ -50,19 +48,22 @@ public class Rookie extends Guard{
 			index = 0;
 		else
 			index++;
+		
+		int Rookie_x =g.getPosx();
+		int Rookie_y=g.getPosy();
 
 		switch(direction) {
 		case UP:
-			posx--;
+			g.setPosx(Rookie_x--);
 			break;
 		case DOWN:
-			posx++;
+			g.setPosx(Rookie_x++);
 			break;
 		case RIGHT:
-			posy++;
+			g.setPosy(Rookie_y++);
 			break;
 		case LEFT:
-			posy--;
+			g.setPosy(Rookie_y--);
 			break;
 		}
 

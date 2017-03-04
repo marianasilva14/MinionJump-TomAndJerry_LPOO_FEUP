@@ -8,16 +8,17 @@ import dkeep.logic.Ogre;
 
 public class UserInteraction {
 
+	public static int level = 0;
+
 	Board b = new Board();
-	Hero h = new Hero(level);
-	Guard g = new Guard(level);
-	Ogre o = new Ogre(level);
+	Hero h = new Hero(1,1,level);
+	Guard g = new Guard(1,8,level);
+	Ogre o = new Ogre(1,4,level);
 
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
 
-	public static int level = 0;
 
 	public static void main(String[] args) {
 
@@ -77,8 +78,7 @@ public class UserInteraction {
 
 			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
 				if(level == 0)
-					g.movement();
-					//g.raffleGuard();
+					g.raffleGuard(g);
 				else{
 					while(!move_valid){
 						if(b.invalidOgreMovement(o.getPosx(), o.getPosy(),level))
@@ -120,7 +120,6 @@ public class UserInteraction {
 
 		b.checkLever(hero_x,hero_y,level);
 		b.heroIsArmed(hero_x,hero_y,level,h);
-		//b.ogreLever(ogre_x, ogre_y, level, o);
 		b.winGame(hero_x, hero_y, level, h);
 
 		for(int i = 0; i < row; i++){

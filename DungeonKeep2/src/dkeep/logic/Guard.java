@@ -9,13 +9,15 @@ import java.util.Vector;
 
 public class Guard extends Entity{
 
+	public Guard(int posx, int posy, int level) {
+		super(posx, posy, level);
+	}
+
 	private int posx, posy;	
+	
 	public static int level = 0;
-/*
-	Drunken drunken;
-	Suspicious suspicious;
-	Rookie rookie;
-	*/
+	
+	
 	public enum GuardType{
 		Rookie,Suspicious,Drunken
 	}
@@ -24,9 +26,7 @@ public class Guard extends Entity{
 	
 	public GuardType guardType = GuardType.Rookie;
 	
-	public Guard(int level){
-
-	}
+	
 	public Guard getGuard(){
 		return this;
 	}
@@ -56,24 +56,32 @@ public class Guard extends Entity{
 		this.posy = posy;
 	}
 	
-	
+	/*
 	public void raffleGuard(){
 		
-		int pos_rand;
+		int pos_rand=0;
+		
+		Guard g;
+		if(pos_rand == 0)
+		g = new Rookie(level);
+		
 		Random rand = new Random();
 		pos_rand = rand.nextInt(3);
 		
 		GuardType guard = guards[pos_rand];
 		
+		
 		switch(guard) {
 		case Rookie:
-			//rookie.movement();
+			g.movement(g);
 			break;
 		case Suspicious:
-			//suspicious.movement();
+			g.movement(g);
 			break;
 		case Drunken:
-			//drunken.movement();
+			g.movement(g);
+			break;
 		}
 	}
+	*/
 }

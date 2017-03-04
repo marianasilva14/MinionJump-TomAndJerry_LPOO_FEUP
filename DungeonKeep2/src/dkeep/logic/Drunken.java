@@ -10,10 +10,8 @@ public class Drunken extends Guard{
 	private int posx, posy;	
 	private int index;
 	
-	public Drunken(int level) {
-		super(level);
-		posx=1;
-		posy=8;
+	public Drunken(int posx,int posy,int level) {
+		super(posx,posy, level);
 		index=0;
 	}
 
@@ -64,7 +62,7 @@ public class Drunken extends Guard{
 		
 	}
 	
-	public void movement(){
+	public void movement(Guard g){
 		
 		int pos_rand;
 		Random rand = new Random();
@@ -73,6 +71,9 @@ public class Drunken extends Guard{
 		Direction direction = directions[index];
 		StateDrunken st = status[pos_rand];
 		
+		int Drunken_x =g.getPosx();
+		int Drunken_y=g.getPosy();
+		
 		if(index == 23)
 			index = 0;
 		else
@@ -80,23 +81,23 @@ public class Drunken extends Guard{
 
 		switch(direction) {
 		case UP:{
-			if(state== state.G)
-			posx--;
+			if(st== StateDrunken.G)
+			g.setPosx(Drunken_x--);
 		}
 			break;
 		case DOWN:{
-			if(state== state.G)
-			posx++;
+			if(st== StateDrunken.G)
+			g.setPosx(Drunken_x++);
 			break;
 		}
 		case RIGHT:{
-			if(state== state.G)
-			posy++;
+			if(st== StateDrunken.G)
+			g.setPosy(Drunken_y--);
 			break;
 		}
 		case LEFT:{
-			if(state== state.G)
-			posy--;
+			if(st== StateDrunken.G)
+			g.setPosy(Drunken_y--);
 		}
 		}
 	}

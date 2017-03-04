@@ -8,10 +8,8 @@ public class Suspicious extends Guard{
 
 	private int posx, posy;	
 	
-	public Suspicious(int level) {
-		super(level);
-		posx=1;
-		posy=8;
+	public Suspicious(int posx, int posy, int level) {
+		super(posx,posy,level);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -44,26 +42,29 @@ public class Suspicious extends Guard{
 		
 	}
 	
-	public void movement(){
+	public void movement(Guard g){
 
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(4);
 
 		Direction direction = directions[pos_rand];
+		
+		int Suspicious_x =g.getPosx();
+		int Suspicious_y=g.getPosy();
 
 		switch(direction) {
 		case UP:
-			posx--;
+			g.setPosx(Suspicious_x--);
 			break;
 		case DOWN:
-			posx++;
+			g.setPosx(Suspicious_x++);
 			break;
 		case RIGHT:
-			posy++;
+			g.setPosy(Suspicious_y++);
 			break;
 		case LEFT:
-			posy--;
+			g.setPosy(Suspicious_y--);
 			break;
 		}
 

@@ -5,6 +5,19 @@ import dkeep.cli.UserInteraction.Direction;
 
 public class Hero extends Entity{
 
+	public Hero(int posx, int posy, int level) {
+		super(posx, posy, level);
+		// TODO Auto-generated constructor stub
+		if(level == 0){
+			posx=1;
+			posy=1;
+		}
+		else{
+			posx=1;
+			posy=9;
+		}
+	}
+
 	private int posx, posy;
 
 	public enum StateHero{
@@ -21,16 +34,6 @@ public class Hero extends Entity{
 		this.state = state;
 	}
 
-	public Hero(int level){
-		if(level == 0){
-			posx=1;
-			posy=1;
-		}
-		else{
-			posx=1;
-			posy=9;
-		}
-	}
 
 	public int getPosy(){
 		return posy;
