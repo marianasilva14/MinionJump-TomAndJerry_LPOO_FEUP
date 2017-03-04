@@ -1,6 +1,7 @@
 package dkeep.logic;
 import dkeep.cli.UserInteraction;
 import dkeep.logic.Drunken.StateDrunken;
+import dkeep.logic.Drunken;
 import dkeep.logic.Ogre.Direction;
 
 import java.util.Random;
@@ -9,8 +10,12 @@ import java.util.Vector;
 public class Guard extends Entity{
 
 	private int posx, posy;	
-
-	
+	public static int level = 0;
+/*
+	Drunken drunken;
+	Suspicious suspicious;
+	Rookie rookie;
+	*/
 	public enum GuardType{
 		Rookie,Suspicious,Drunken
 	}
@@ -62,13 +67,13 @@ public class Guard extends Entity{
 		
 		switch(guard) {
 		case Rookie:
-			posx--;
+			//rookie.movement();
 			break;
 		case Suspicious:
-			posx++;
+			//suspicious.movement();
 			break;
 		case Drunken:
-			posy++;
+			//drunken.movement();
 		}
 	}
 }

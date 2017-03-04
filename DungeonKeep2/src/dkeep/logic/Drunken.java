@@ -15,7 +15,6 @@ public class Drunken extends Guard{
 		posx=1;
 		posy=8;
 		index=0;
-		// TODO Auto-generated constructor stub
 	}
 
 	public enum Direction{
