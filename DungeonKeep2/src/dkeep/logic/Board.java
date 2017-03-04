@@ -52,8 +52,14 @@ public class Board {
 			else
 				return false;
 		}
-		
-
+	}
+	
+	public boolean invalidOgreMovement(int posx, int posy, int level){
+		if(board[level][posx][posy] == 'X' || board[level][posx][posy] == 'I'){
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public void checkLever(int posx, int posy, int level){
@@ -133,14 +139,13 @@ public class Board {
 		}
 		return 0;
 	}
-/*
-	public void ogreLever(int posx, int posy, int level, Ogre o){
-		if(level == 1){
+
+	public boolean ogreLever(int posx, int posy, int level, Ogre o){
 			if(posx == positionXLever(posx, posy, level) && posy == positionYLever(posx, posy, level))
-				board[level][posx][posy] = '$';
-		}
+				return true;
+			return false;
 	}
-*/	
+
 	public void heroIsArmed(int posx, int posy, int level, Hero h){
 		if(level == 1){
 			if(posx == positionXLever(posx, posy, level) && posy == positionYLever(posx, posy, level))

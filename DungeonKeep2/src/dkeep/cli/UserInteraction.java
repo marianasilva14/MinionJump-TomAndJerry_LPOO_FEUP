@@ -69,24 +69,32 @@ public class UserInteraction {
 			int y = h.getPosy();
 			int x_o = o.getPosx();
 			int y_o = o.getPosx();
+			boolean move_valid= false;
 
 			h.move(direction);
-			o.movement();
+			if(level==1)
+				o.movement();
 
 			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
 				if(level == 0)
 					g.movement();
 				else{
-					if(!b.invalidMovement(o.getPosx(), o.getPosy(), level))
-						o.movement();
+					while(!move_valid){
+						if(b.invalidOgreMovement(o.getPosx(), o.getPosy(),level))
+						{
+							o.setPosx(x_o);
+							o.setPosy(y_o);
+							o.movement();
+						}
+						else
+						move_valid=true;
 				}
+			}
 			}
 			else{
 				System.out.println("Invalid movement. Try again");
 				h.setPosx(x);
 				h.setPosy(y);
-				o.setPosx(x_o);
-				o.setPosy(y_o);
 			}
 
 			printBoard(level);
@@ -122,8 +130,13 @@ public class UserInteraction {
 							System.out.print("A ");
 						else if(i == guard_x && j == guard_y && level == 0)
 							System.out.print("G ");
-						else if(i == ogre_x && j == ogre_y && level == 1)
-							System.out.print("O ");
+						else if(i == ogre_x && j == ogre_y && level == 1){
+							if(!b.ogreLever(ogre_x, ogre_y, level, o))
+								System.out.print("O ");
+							else
+								System.out.print("$ ");
+
+						}
 						else
 							System.out.print(board[i][j]+" ");
 					}
@@ -132,8 +145,12 @@ public class UserInteraction {
 							System.out.print("K ");
 						else if(i == guard_x && j == guard_y && level == 0)
 							System.out.print("G ");
-						else if(i == ogre_x && j == ogre_y && level == 1)
-							System.out.print("O ");
+						else if(i == ogre_x && j == ogre_y && level == 1){
+							if(!b.ogreLever(ogre_x, ogre_y, level, o))
+								System.out.print("O ");
+							else
+								System.out.print("$ ");
+						}
 						else
 							System.out.print(board[i][j]+" ");
 					}
@@ -143,8 +160,12 @@ public class UserInteraction {
 						System.out.print("H ");
 					else if(i == guard_x && j == guard_y && level == 0)
 						System.out.print("G ");
-					else if(i == ogre_x && j == ogre_y && level == 1)
-						System.out.print("O ");
+					else if(i == ogre_x && j == ogre_y && level == 1){
+						if(!b.ogreLever(ogre_x, ogre_y, level, o))
+							System.out.print("O ");
+						else
+							System.out.print("$ ");
+					}
 					else
 						System.out.print(board[i][j]+" ");
 				}

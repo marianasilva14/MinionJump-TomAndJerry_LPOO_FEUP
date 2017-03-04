@@ -9,20 +9,18 @@ import java.util.Vector;
 public class Ogre extends Entity{
 
 	private int posx, posy;
-	
+
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
-	
+
 	private Direction directions[] = {Direction.RIGHT, Direction.LEFT, Direction.UP, Direction.DOWN};
-	
+
 	public Ogre(int level)
 	{
-		//if(level ==1)
-		//{
-			posx = 1;
-			posy = 4;
-		//}
+		posx = 1;
+		posy = 4;
+
 	}
 	public Ogre getOgre(){
 		return this;
@@ -49,9 +47,9 @@ public class Ogre extends Entity{
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(4);
-		
+
 		Direction direction = directions[pos_rand];
-		
+
 		switch(direction) {
 		case UP:
 			posx--;
