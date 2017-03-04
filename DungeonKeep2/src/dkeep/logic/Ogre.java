@@ -62,6 +62,7 @@ public class Ogre extends Entity{
 			break;
 		case LEFT:
 			posy--;
+			break;
 		}
 
 	}

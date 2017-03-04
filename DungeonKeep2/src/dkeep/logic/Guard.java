@@ -8,33 +8,15 @@ import java.util.Vector;
 public class Guard extends Entity{
 
 	private int posx, posy;	
-	private int index;
+
 	
 	public enum GuardType{
 		Rookie,Suspicious,Drunken
 	}
 	
-	public enum Direction{
-		RIGHT,LEFT,UP,DOWN
-	}
-	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
-			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
-			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
-			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
-	
 	private GuardType guards[] = {GuardType.Drunken, GuardType.Rookie, GuardType.Suspicious};
 	
 	public Guard(int level){
-		if(level == 0){
-			posx=1;
-			posy=8;
-			index=0;
-		}/*
-		else{
-			posx=1;
-			posy=8;
-			index=0;
-		}*/
 
 	}
 	public Guard getGuard(){
@@ -57,30 +39,6 @@ public class Guard extends Entity{
 		this.posy = posy;
 	}
 	
-	public void movement(){
-		
-		Direction direction = directions[index];
-	
-		if(index == 23)
-			index = 0;
-		else
-			index++;
-		
-		switch(direction) {
-		case UP:
-			posx--;
-			break;
-		case DOWN:
-			posx++;
-			break;
-		case RIGHT:
-			posy++;
-			break;
-		case LEFT:
-			posy--;
-		}
-		
-	}
 	
 	public void raffleGuard(){
 		
