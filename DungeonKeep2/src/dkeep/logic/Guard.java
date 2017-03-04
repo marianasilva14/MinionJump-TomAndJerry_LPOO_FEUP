@@ -1,5 +1,6 @@
 package dkeep.logic;
 import dkeep.cli.UserInteraction;
+import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Ogre.Direction;
 
 import java.util.Random;
@@ -16,12 +17,23 @@ public class Guard extends Entity{
 	
 	private GuardType guards[] = {GuardType.Drunken, GuardType.Rookie, GuardType.Suspicious};
 	
+	public GuardType guardType = GuardType.Rookie;
+	
 	public Guard(int level){
 
 	}
 	public Guard getGuard(){
 		return this;
 	}
+	
+	public GuardType getGuardType(){
+		return guardType;
+	}
+	
+	public void setGuardType(GuardType g) {
+		this.guardType = g;
+	}
+	
 	
 	public int getPosy(){
 		return posy;

@@ -77,7 +77,7 @@ public class UserInteraction {
 
 			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
 				if(level == 0)
-					g.movement();
+				g.movement();
 				else{
 					while(!move_valid){
 						if(b.invalidOgreMovement(o.getPosx(), o.getPosy(),level))

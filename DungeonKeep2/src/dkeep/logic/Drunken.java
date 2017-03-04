@@ -41,7 +41,6 @@ public class Drunken extends Guard{
 	public void setStateDrunken(StateDrunken st) {
 		this.state = st;
 	}
-
 	
 	public Drunken getDrunken(){
 		return this;

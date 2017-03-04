@@ -1,9 +1,11 @@
 package dkeep.logic;
 import dkeep.cli.UserInteraction;
 import dkeep.logic.Guard;
+import dkeep.logic.Guard.GuardType;
 import dkeep.logic.Hero;
 import dkeep.logic.Hero.StateHero;
 import dkeep.logic.Hero;
+import dkeep.logic.Drunken;
 
 public class Board {
 
@@ -84,7 +86,7 @@ public class Board {
 	}
 
 	public boolean checkIfEnds(int posx,int posy, int level, Guard g, Ogre o){
-		if(level == 0)
+		if(level == 0 && g.getGuardType() == GuardType.Drunken)
 		{
 			if((posx-1 == g.getPosx() && posy == g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
 				return true;
