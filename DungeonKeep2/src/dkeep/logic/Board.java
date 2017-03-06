@@ -110,15 +110,12 @@ public class Board {
 	}
 
 	public boolean changeLevel(int posx, int posy, int level){
-
 		
-		if(posy-1 >=0){
-			if(board[level][posx][posy-1] == 'S')
+			if(board[level][posx][posy] == 'S')
 				return true;
 			else
 				return false;
-		}
-		return false;
+
 	}
 
 		public int positionXLever(int posx, int posy, int level){

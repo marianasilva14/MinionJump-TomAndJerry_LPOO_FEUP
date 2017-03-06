@@ -2,7 +2,7 @@ package dkeep.logic;
 
 public class Door extends Entity{
 
-	Door(int posx, int posy, int level) {
+	public Door(int posx, int posy, int level) {
 		super(posx, posy, level);
 	}
 	

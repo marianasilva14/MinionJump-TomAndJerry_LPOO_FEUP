@@ -1,6 +1,7 @@
 package dkeep.cli;
 import java.util.Scanner;
 import dkeep.logic.Board;
+import dkeep.logic.Door;
 import dkeep.logic.Drunken;
 import dkeep.logic.Hero;
 import dkeep.logic.Hero.StateHero;
@@ -17,7 +18,9 @@ public class UserInteraction {
 	Hero h = new Hero(1,1,level);
 	Guard g = Guard.raffleGuard(1,8,level);
 	Ogre o = new Ogre(1,4,level);
-
+	Door d =new Door(1,0,1);
+			
+	
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
@@ -29,20 +32,24 @@ public class UserInteraction {
 	}
 
 	public void play(){
+	
 		printBoard(level);
 		char c;
+		boolean win=false;
 
 		while(!b.checkIfEnds(h.getPosx(), h.getPosy(),level, g, o)){
 
 			if(b.changeLevel(h.getPosx(), h.getPosy(), level)){
 				if(level==0)
-					level = 1;
+					level=1;
 				else
-					level=2;
+					win=true;
+			}
+			if(win && (d.getPosx() == h.getPosx() && d.getPosy() == h.getPosy()))
+			{	System.out.println("You won!! Congratulations!!");
+				return;
 			}
 			
-			
-
 			System.out.println();
 			System.out.println("Please insert a character:");
 			System.out.println("To move down, insert 'd'");
@@ -64,22 +71,12 @@ public class UserInteraction {
 
 			switch (c) {
 			case 'u': direction = Direction.UP;
-			if(level==2)
-				level--;
 			break;
 			case 'd': direction = Direction.DOWN;
-			if(level==2)
-				level--;
 			break;
 			case 'l': direction = Direction.LEFT;
-			if(level==2){
-				System.out.println("ganhou");
-				return;
-			}
 			break;
 			case 'r': direction = Direction.RIGHT;
-			if(level==2)
-				level--;
 			break;
 			default: System.out.println("Invalid character");
 			break;
