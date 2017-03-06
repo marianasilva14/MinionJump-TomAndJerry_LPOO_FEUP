@@ -24,22 +24,6 @@ public class Ogre extends Entity{
 		return this;
 	}
 
-	public int getPosy(){
-		return posy;
-	}
-
-	public int getPosx(){
-		return posx;
-	}
-
-	public void setPosx(int posx){
-		this.posx = posx;
-	}
-
-	public void setPosy(int posy){
-		this.posy = posy;
-	}
-
 	public void movement(){
 
 		int pos_rand;

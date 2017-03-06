@@ -5,20 +5,29 @@ import java.awt.Point;
 
 public class Entity {
 
-	public Point p;
+	public int posx, posy;
 	public int level;
 
-	Entity(int posx,int posy, int level){
-		p = new Point(posx,posy);
+	Entity(int x,int y, int level){
+		posx = x;
+		posy = y;
 		this.level=level;
 	}
 	
-	public Point getP() {
-		return p;
+	public int getPosy(){
+		return posy;
 	}
-	
-	public void setP(Point p) {
-		this.p = p;
+
+	public int getPosx(){
+		return posx;
+	}
+
+	public void setPosx(int posx){
+		this.posx = posx;
+	}
+
+	public void setPosy(int posy){
+		this.posy = posy;
 	}
 
 	public void setlevel(int level) {

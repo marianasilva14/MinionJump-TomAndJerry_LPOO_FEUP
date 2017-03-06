@@ -6,65 +6,86 @@ import dkeep.logic.Ogre.Direction;
 
 public class Suspicious extends Guard{
 
-	private int posx, posy;	
+	private int index = 0;
+
+	private int move = 1;
 	
 	public Suspicious(int posx, int posy, int level) {
 		super(posx,posy,level);
-		// TODO Auto-generated constructor stub
+		index=0;
 	}
-	
+
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
-
-	private Direction directions[] = {Direction.RIGHT, Direction.LEFT, Direction.UP, Direction.DOWN};
+	
+	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
+			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
+			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
+			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
 
 	public Suspicious getSuspicious(){
 		return this;
 	}
-	
-	public int getPosy(){
-		return posy;
-	}
-	
-	public int getPosx(){
-		return posx;
-	}
-	
-	public void setPosx(int posx){
-		this.posx = posx;
-	}
-	
-	public void setPosy(int posy){
-		this.posy = posy;
-	}
-	public void behaviorGuard(){
+
+	public Direction reverseDirection(){
+
+		index--;
+		if(index < 0)
+			index += directions.length;
 		
-	}
-	
-	public void movement(Guard g){
-
-		int pos_rand;
-		Random rand = new Random();
-		pos_rand = rand.nextInt(4);
-
-		Direction direction = directions[pos_rand];
+		Direction direction = directions[index];
 		
-		int Suspicious_x =g.getPosx();
-		int Suspicious_y=g.getPosy();
-
-		switch(direction) {
+		switch(direction){
 		case UP:
-			g.setPosx(Suspicious_x--);
+			direction= direction.DOWN;
 			break;
 		case DOWN:
-			g.setPosx(Suspicious_x++);
-			break;
-		case RIGHT:
-			g.setPosy(Suspicious_y++);
+			direction= direction.UP;
 			break;
 		case LEFT:
-			g.setPosy(Suspicious_y--);
+			direction= direction.RIGHT;
+			break;
+		case RIGHT:
+			direction= direction.LEFT;
+			break;
+		}
+		
+		return direction;
+	}
+
+	public void movement(){
+ 
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(10);
+
+		Direction direction = directions[index];
+
+		if(pos_rand == 1)
+			move *= -1;
+
+		if(move == 1)
+			direction = reverseDirection();
+		else{
+			index++;
+		}
+		
+		if(index >= directions.length)
+			index -= directions.length;
+		
+		switch(direction) {
+		case UP:
+			posx--;
+			break;
+		case DOWN:
+			posx++;
+			break;
+		case RIGHT:
+			posy++;
+			break;
+		case LEFT:
+			posy--;
 			break;
 		}
 

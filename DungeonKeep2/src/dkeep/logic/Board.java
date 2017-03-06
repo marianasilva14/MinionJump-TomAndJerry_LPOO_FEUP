@@ -86,7 +86,7 @@ public class Board {
 	}
 
 	public boolean checkIfEnds(int posx,int posy, int level, Guard g, Ogre o){
-		if(level == 0 && g.getGuardType() == GuardType.Drunken)
+		if(level == 0)
 		{
 			if((posx-1 == g.getPosx() && posy == g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
 				return true;

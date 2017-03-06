@@ -1,10 +1,13 @@
 package dkeep.cli;
 import java.util.Scanner;
 import dkeep.logic.Board;
+import dkeep.logic.Drunken;
 import dkeep.logic.Hero;
 import dkeep.logic.Hero.StateHero;
 import dkeep.logic.Guard;
 import dkeep.logic.Ogre;
+import dkeep.logic.Suspicious;
+import dkeep.logic.Drunken.StateDrunken;
 
 public class UserInteraction {
 
@@ -12,7 +15,7 @@ public class UserInteraction {
 
 	Board b = new Board();
 	Hero h = new Hero(1,1,level);
-	Guard g = new Guard(1,8,level);
+	Guard g = Guard.raffleGuard(1,8,level);
 	Ogre o = new Ogre(1,4,level);
 
 	public enum Direction{
@@ -78,7 +81,7 @@ public class UserInteraction {
 
 			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
 				if(level == 0)
-					g.raffleGuard(g);
+					g.movement();
 				else{
 					while(!move_valid){
 						if(b.invalidOgreMovement(o.getPosx(), o.getPosy(),level))
@@ -88,9 +91,9 @@ public class UserInteraction {
 							o.movement();
 						}
 						else
-						move_valid=true;
+							move_valid=true;
+					}
 				}
-			}
 			}
 			else{
 				System.out.println("Invalid movement. Try again");
@@ -128,14 +131,11 @@ public class UserInteraction {
 					if(h.getState() != StateHero.ARMED){
 						if(i == hero_x && j == hero_y)
 							System.out.print("A ");
-						else if(i == guard_x && j == guard_y && level == 0)
-							System.out.print("G ");
 						else if(i == ogre_x && j == ogre_y && level == 1){
 							if(!b.ogreLever(ogre_x, ogre_y, level, o))
 								System.out.print("O ");
 							else
 								System.out.print("$ ");
-
 						}
 						else
 							System.out.print(board[i][j]+" ");
@@ -143,8 +143,6 @@ public class UserInteraction {
 					else{
 						if(i == hero_x && j == hero_y)
 							System.out.print("K ");
-						else if(i == guard_x && j == guard_y && level == 0)
-							System.out.print("G ");
 						else if(i == ogre_x && j == ogre_y && level == 1){
 							if(!b.ogreLever(ogre_x, ogre_y, level, o))
 								System.out.print("O ");
@@ -158,19 +156,23 @@ public class UserInteraction {
 				else{
 					if(i == hero_x && j == hero_y)
 						System.out.print("H ");
-					else if(i == guard_x && j == guard_y && level == 0)
-						System.out.print("G ");
-					else if(i == ogre_x && j == ogre_y && level == 1){
-						if(!b.ogreLever(ogre_x, ogre_y, level, o))
-							System.out.print("O ");
+					else if(i == guard_x && j == guard_y && level == 0){
+						if(g instanceof Drunken){
+							if(((Drunken)g).getState() == StateDrunken.G)
+								System.out.print("G ");
+							else
+								System.out.print("g ");
+						}
 						else
-							System.out.print("$ ");
+							System.out.print("G ");
 					}
 					else
 						System.out.print(board[i][j]+" ");
 				}
+
 			}
 			System.out.println();
 		}
 	}
-}
+			
+	}

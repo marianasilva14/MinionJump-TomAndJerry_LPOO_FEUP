@@ -7,12 +7,13 @@ import dkeep.logic.Rookie.Direction;
 
 public class Drunken extends Guard{
 
-	private int posx, posy;	
 	private int index;
-	
+	private int move = 1;
+
+
 	public Drunken(int posx,int posy,int level) {
 		super(posx,posy, level);
-		index=0;
+		index = 0;
 	}
 
 	public enum Direction{
@@ -22,84 +23,97 @@ public class Drunken extends Guard{
 			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
 			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
 			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
-	
+
 	public enum StateDrunken{
 		G,g;
 	}
-	
+
 	private StateDrunken status[] ={StateDrunken.G,StateDrunken.g};
-	
+
 	public StateDrunken state = StateDrunken.G;
-	
+
 	public StateDrunken getState() {
 		return state;
 	}
-	
+
 	public void setStateDrunken(StateDrunken st) {
 		this.state = st;
 	}
-	
+
 	public Drunken getDrunken(){
 		return this;
 	}
-	
-	public int getPosy(){
-		return posy;
-	}
-	
-	public int getPosx(){
-		return posx;
-	}
-	
-	public void setPosx(int posx){
-		this.posx = posx;
-	}
-	
-	public void setPosy(int posy){
-		this.posy = posy;
-	}
+
 	public void behaviorGuard(){
-		
+
 	}
-	
-	public void movement(Guard g){
-		
+
+	public Direction reverseDirection(){
+
+		index--;
+		if(index < 0)
+			index += directions.length;
+
+		Direction direction = directions[index];
+
+		switch(direction){
+		case UP:
+			direction= direction.DOWN;
+			break;
+		case DOWN:
+			direction= direction.UP;
+			break;
+		case LEFT:
+			direction= direction.RIGHT;
+			break;
+		case RIGHT:
+			direction= direction.LEFT;
+			break;
+		}
+
+		return direction;
+	}
+	public void movement(){
+
+		int status_rand;
+		Random rand2 = new Random();
+		status_rand = rand2.nextInt(2);
+		StateDrunken st = status[status_rand];
+
+		setStateDrunken(st);
+
 		int pos_rand;
 		Random rand = new Random();
-		pos_rand = rand.nextInt(2);
-		
-		Direction direction = directions[index];
-		StateDrunken st = status[pos_rand];
-		
-		int Drunken_x =g.getPosx();
-		int Drunken_y=g.getPosy();
-		
-		if(index == 23)
-			index = 0;
-		else
-			index++;
+		pos_rand = rand.nextInt(10);
 
-		switch(direction) {
-		case UP:{
-			if(st== StateDrunken.G)
-			g.setPosx(Drunken_x--);
-		}
-			break;
-		case DOWN:{
-			if(st== StateDrunken.G)
-			g.setPosx(Drunken_x++);
-			break;
-		}
-		case RIGHT:{
-			if(st== StateDrunken.G)
-			g.setPosy(Drunken_y--);
-			break;
-		}
-		case LEFT:{
-			if(st== StateDrunken.G)
-			g.setPosy(Drunken_y--);
-		}
+		Direction direction = directions[index];
+
+		if(pos_rand == 1)
+			move *= -1;
+
+		if(st == StateDrunken.G){
+			if(move == 1)
+				direction = reverseDirection();
+			else
+				index++;
+
+			if(index >= directions.length)
+				index -= directions.length;
+
+			switch(direction) {
+			case UP:
+				posx--;
+				break;
+			case DOWN:
+				posx++;
+				break;
+			case RIGHT:
+				posy++;
+				break;
+			case LEFT:
+				posy--;
+			}
 		}
 	}
-	
+
 }

@@ -12,8 +12,6 @@ public class Guard extends Entity{
 	public Guard(int posx, int posy, int level) {
 		super(posx, posy, level);
 	}
-
-	private int posx, posy;	
 	
 	public static int level = 0;
 	
@@ -21,9 +19,7 @@ public class Guard extends Entity{
 	public enum GuardType{
 		Rookie,Suspicious,Drunken
 	}
-	
-	private GuardType guards[] = {GuardType.Drunken, GuardType.Rookie, GuardType.Suspicious};
-	
+		
 	public GuardType guardType = GuardType.Rookie;
 	
 	
@@ -39,49 +35,33 @@ public class Guard extends Entity{
 		this.guardType = g;
 	}
 	
-	
-	public int getPosy(){
-		return posy;
-	}
-	
-	public int getPosx(){
-		return posx;
-	}
-	
-	public void setPosx(int posx){
-		this.posx = posx;
-	}
-	
-	public void setPosy(int posy){
-		this.posy = posy;
-	}
-	
-	/*
-	public void raffleGuard(){
+	public void movement(){
 		
-		int pos_rand=0;
+	}
+	
+	public static Guard raffleGuard(int posx, int posy, int level){
 		
 		Guard g;
-		if(pos_rand == 0)
-		g = new Rookie(level);
-		
+		int pos_rand=0;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(3);
 		
-		GuardType guard = guards[pos_rand];
-		
-		
-		switch(guard) {
-		case Rookie:
-			g.movement(g);
+		switch(pos_rand) {
+		case 0:
+			g = new Rookie(posx,posy,level);
 			break;
-		case Suspicious:
-			g.movement(g);
+		case 1:
+			g = new Suspicious(posx,posy,level);
 			break;
-		case Drunken:
-			g.movement(g);
+		case 2:
+			g = new Drunken(posx,posy,level);
 			break;
+		default:
+			g = new Rookie(posx,posy,level);
+		break;
 		}
+		
+		return g;
 	}
-	*/
+	
 }
