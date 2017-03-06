@@ -12,8 +12,6 @@ public class Ogre extends Entity{
 		super(posx, posy, level);
 	}
 
-	private int posx, posy;
-
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
