@@ -34,8 +34,14 @@ public class UserInteraction {
 
 		while(!b.checkIfEnds(h.getPosx(), h.getPosy(),level, g, o)){
 
-			if(b.changeLevel(h.getPosx(), h.getPosy(), level))
-				level = 1;
+			if(b.changeLevel(h.getPosx(), h.getPosy(), level)){
+				if(level==0)
+					level = 1;
+				else
+					level=2;
+			}
+			
+			
 
 			System.out.println();
 			System.out.println("Please insert a character:");
@@ -58,12 +64,22 @@ public class UserInteraction {
 
 			switch (c) {
 			case 'u': direction = Direction.UP;
+			if(level==2)
+				level--;
 			break;
 			case 'd': direction = Direction.DOWN;
+			if(level==2)
+				level--;
 			break;
 			case 'l': direction = Direction.LEFT;
+			if(level==2){
+				System.out.println("ganhou");
+				return;
+			}
 			break;
 			case 'r': direction = Direction.RIGHT;
+			if(level==2)
+				level--;
 			break;
 			default: System.out.println("Invalid character");
 			break;
@@ -83,6 +99,12 @@ public class UserInteraction {
 				if(level == 0)
 					g.movement();
 				else{
+
+					if(b.verifyS(h.getPosx(),h.getPosy(),level)){
+						h.setPosx(x);
+						h.setPosy(y);
+						b.getBoard(level)[1][0] = 'S';
+					}
 					while(!move_valid){
 						if(b.invalidOgreMovement(o.getPosx(), o.getPosy(),level))
 						{
@@ -123,7 +145,6 @@ public class UserInteraction {
 
 		b.checkLever(hero_x,hero_y,level);
 		b.heroIsArmed(hero_x,hero_y,level,h);
-		b.winGame(hero_x, hero_y, level, h);
 
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){
@@ -174,5 +195,5 @@ public class UserInteraction {
 			System.out.println();
 		}
 	}
-			
-	}
+
+}
