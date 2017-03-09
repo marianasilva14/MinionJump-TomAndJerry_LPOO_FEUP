@@ -9,7 +9,7 @@ import dkeep.logic.Hero;
 import dkeep.logic.Drunken;
 
 public class Board {
-
+	/*
 	char[][][] board = {{{'X','X','X','X','X','X','X','X','X','X'},
 		{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 		{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -31,142 +31,74 @@ public class Board {
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X','X','X','X','X','X','X','X','X','X'}}};
+	 */
 
+	private char map[][];
+	private static int nr_times;
 
 	public Board(){
 	}
 
-
-	public char[][] getBoard(int level){
-		return board[level];
+	public Board(char b[][]){
+		map=b;
 	}
 
-	public boolean invalidMovement(int posx, int posy, int level){
-
-		if(level == 0){
-			if(board[level][posx][posy] == 'X' || board[level][posx][posy] == 'I')
-				return true;
-			else
-				return false;
-		}
-		else{
-			if(board[level][posx][posy] == 'X')
-				return true;
-			else
-				return false;
-		}
+	public char[][] getBoard(){
+		return map;
 	}
 
-	public boolean verifyS(int posx, int posy, int level){
-		if(board[level][posx][posy] == 'I')
+	public char getSymbol(int posx, int posy){
+		return map[posx][posy];
+	}
+
+
+/*
+	public int positionXLever(Entity e){
+			if(map[e.getPosx()][e.getPosy()] == 'k')
+				return posx;
+		return 0;
+	}
+
+	public int positionYLever(int posx, int posy, int level){
+		if(level == 1){
+			if(map[posx][posy] == 'k')
+				return posy;
+		}
+		return 0;
+	}
+
+	public int positionXDoor(int posx, int posy, int level){
+		if(level == 1){
+			if(map[posx][posy] == 'I')
+				return posx;
+		}
+		return 0;
+	}
+
+	public int positionYDoor(int posx, int posy, int level){
+		if(level == 1){
+			if(map[posx][posy] == 'I')
+				return posy;
+		}
+		return 0;
+	}
+*/
+	public boolean entityLever(Entity e){
+		if(map[e.getPosx()][e.getPosy()] == 'k'){
+			if(e instanceof Ogre)
+				e.setSymbol('$');
+			else if(e instanceof Hero)
+				e.setSymbol('K');
 			return true;
-		else
-			return false;
+		}
+		return false;
 	}
-
-	public boolean invalidOgreMovement(int posx, int posy, int level){
-		if(board[level][posx][posy] == 'X' || board[level][posx][posy] == 'I'){
-			return true;
-		}
-		else
-			return false;
-	}
-
-	public void checkLever(int posx, int posy, int level){
-
-		if(level == 0){
-			if(board[level][posx][posy] == 'k')
-			{
-				int row_aux = board[level].length;
-				int col_aux = board[level][0].length;
-
-				for(int i = 0; i < row_aux; i++)
-				{
-					for(int j = 0; j < col_aux; j++)
-					{
-						if(board[level][i][j] == 'I')
-							board[level][i][j] = 'S';
-					}
-				}
-			}	
-		}
-
-	}
-
-	public boolean checkIfEnds(int posx,int posy, int level, Guard g, Ogre o){
-		if(level == 0)
-		{
-			if(g instanceof Drunken){
-			if(((Drunken)g).getState() == StateDrunken.g)
-				return false;
-			}
-			else{
-			if((posx-1 == g.getPosx() && posy == g.getPosy()) || (posx+1 == g.getPosx() && posy == g.getPosy()) || (posx == g.getPosx() && posy-1 == g.getPosy()) || (posx == g.getPosx() && posy+1 == g.getPosy()))
-				return true;
-			}
-			return false;
-			
-		}
-		else{
-			if((posx-1 == o.getPosx() && posy == o.getPosy()) || (posx+1 == o.getPosx() && posy == o.getPosy()) || (posx == o.getPosx() && posy-1 == o.getPosy()) || (posx == o.getPosx() && posy+1 == o.getPosy()) || (posx == o.getPosx() && posy == o.getPosy()))
-				return true;
-			else
-				return false;
-		}
-
-	}
-
-	public boolean changeLevel(int posx, int posy, int level){
-		
-			if(board[level][posx][posy] == 'S')
-				return true;
-			else
-				return false;
-
-	}
-
-		public int positionXLever(int posx, int posy, int level){
-			if(level == 1){
-				if(board[level][posx][posy] == 'k')
-					return posx;
-			}
-			return 0;
-		}
-
-		public int positionYLever(int posx, int posy, int level){
-			if(level == 1){
-				if(board[level][posx][posy] == 'k')
-					return posy;
-			}
-			return 0;
-		}
-
-		public int positionXDoor(int posx, int posy, int level){
-			if(level == 1){
-				if(board[level][posx][posy] == 'I')
-					return posx;
-			}
-			return 0;
-		}
-
-		public int positionYDoor(int posx, int posy, int level){
-			if(level == 1){
-				if(board[level][posx][posy] == 'I')
-					return posy;
-			}
-			return 0;
-		}
-
-		public boolean ogreLever(int posx, int posy, int level, Ogre o){
-			if(posx == positionXLever(posx, posy, level) && posy == positionYLever(posx, posy, level))
-				return true;
-			return false;
-		}
-
-		public void heroIsArmed(int posx, int posy, int level, Hero h){
-			if(level == 1){
-				if(posx == positionXLever(posx, posy, level) && posy == positionYLever(posx, posy, level))
-					h.setState(StateHero.ARMED);
-			}
+/*
+	public void heroIsArmed(Entity e){
+		if(level == 1){
+			if(e.getPosx() == positionXLever(e.getPosx(),e.getPosy()) && e.getPosy() == positionYLever(e.getPosx(), e.getPosy()))
+				h.setState(StateHero.ARMED);
 		}
 	}
+*/
+}

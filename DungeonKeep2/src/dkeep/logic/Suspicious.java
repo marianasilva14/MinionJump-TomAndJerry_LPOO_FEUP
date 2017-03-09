@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.util.Random;
 
-import dkeep.logic.Ogre.Direction;
+import dkeep.cli.UserInteraction.Direction;
 
 public class Suspicious extends Guard{
 
@@ -10,13 +10,9 @@ public class Suspicious extends Guard{
 
 	private int move = 1;
 	
-	public Suspicious(int posx, int posy, int level) {
-		super(posx,posy,level);
+	public Suspicious(int posx, int posy) {
+		super(posx,posy);
 		index=0;
-	}
-
-	public enum Direction{
-		RIGHT,LEFT,UP,DOWN
 	}
 	
 	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
@@ -28,7 +24,7 @@ public class Suspicious extends Guard{
 		return this;
 	}
 
-	public Direction reverseDirection(){
+	public Direction reverseSuspiciousDirection(){
 
 		index--;
 		if(index < 0)
@@ -54,19 +50,19 @@ public class Suspicious extends Guard{
 		return direction;
 	}
 
-	public void movement(){
+	public void movement(Direction direction){
  
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(10);
 
-		Direction direction = directions[index];
+		direction = directions[index];
 
 		if(pos_rand == 1)
 			move *= -1;
 
 		if(move == 1)
-			direction = reverseDirection();
+			direction = reverseSuspiciousDirection();
 		else{
 			index++;
 		}

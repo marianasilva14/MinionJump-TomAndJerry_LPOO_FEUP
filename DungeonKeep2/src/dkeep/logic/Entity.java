@@ -1,17 +1,22 @@
 package dkeep.logic;
 
 import java.util.Vector;
+
+import dkeep.cli.UserInteraction.Direction;
+
 import java.awt.Point;
 
-public class Entity {
+public abstract class Entity {
 
 	public int posx, posy;
-	public int level;
+	public char symbol;
 
-	Entity(int x,int y, int level){
+
+	Entity(int x,int y){
 		posx = x;
 		posy = y;
-		this.level=level;
+		symbol='?';
+
 	}
 	
 	public int getPosy(){
@@ -20,6 +25,14 @@ public class Entity {
 
 	public int getPosx(){
 		return posx;
+	}
+	
+	public char getSymbol(){
+		return symbol;
+	}
+	
+	public void setSymbol(char symbol){
+		this.symbol=symbol;
 	}
 
 	public void setPosx(int posx){
@@ -30,7 +43,14 @@ public class Entity {
 		this.posy = posy;
 	}
 
-	public void setlevel(int level) {
-		this.level = level;
+	
+	public abstract void movement(Direction direction);
+	
+	public boolean canMove(Board b, int posx,int posy){
+		if(b.getBoard()[posx][posy] == ' ')
+			return true;
+		else
+			return false;
+			
 	}
 }

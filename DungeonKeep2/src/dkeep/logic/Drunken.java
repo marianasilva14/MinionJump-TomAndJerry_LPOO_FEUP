@@ -1,9 +1,7 @@
 package dkeep.logic;
 
 import java.util.Random;
-
-import dkeep.logic.Hero.StateHero;
-import dkeep.logic.Rookie.Direction;
+import dkeep.cli.UserInteraction.Direction;
 
 public class Drunken extends Guard{
 
@@ -11,14 +9,11 @@ public class Drunken extends Guard{
 	private int move = 1;
 
 
-	public Drunken(int posx,int posy,int level) {
-		super(posx,posy, level);
+	public Drunken(int posx,int posy) {
+		super(posx,posy);
 		index = 0;
 	}
 
-	public enum Direction{
-		RIGHT,LEFT,UP,DOWN
-	}
 	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
 			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
 			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
@@ -48,7 +43,7 @@ public class Drunken extends Guard{
 
 	}
 
-	public Direction reverseDirection(){
+	public Direction reverseDrunkenDirection(){
 
 		index--;
 		if(index < 0)
@@ -73,7 +68,7 @@ public class Drunken extends Guard{
 
 		return direction;
 	}
-	public void movement(){
+	public void movement(Direction direction){
 
 		int status_rand;
 		Random rand2 = new Random();
@@ -86,14 +81,14 @@ public class Drunken extends Guard{
 		Random rand = new Random();
 		pos_rand = rand.nextInt(10);
 
-		Direction direction = directions[index];
+		direction = directions[index];
 
 		if(pos_rand == 1)
 			move *= -1;
 
 		if(st == StateDrunken.G){
 			if(move == 1)
-				direction = reverseDirection();
+				direction = reverseDrunkenDirection();
 			else
 				index++;
 

@@ -5,22 +5,51 @@ import dkeep.logic.Door;
 import dkeep.logic.Drunken;
 import dkeep.logic.Hero;
 import dkeep.logic.Hero.StateHero;
+import dkeep.logic.Level;
 import dkeep.logic.Guard;
 import dkeep.logic.Ogre;
 import dkeep.logic.Suspicious;
 import dkeep.logic.Drunken.StateDrunken;
+import dkeep.logic.Entity;
+import dkeep.logic.Game;
+
 
 public class UserInteraction {
 
-	public static int level = 0;
+	//public static int level = 0;
 
-	Board b = new Board();
-	Hero h = new Hero(1,1,level);
-	Guard g = Guard.raffleGuard(1,8,level);
-	Ogre o = new Ogre(1,4,level);
-	Door d =new Door(1,0,1);
-			
-	
+	char[][] board1 = {{'X','X','X','X','X','X','X','X','X','X'},
+			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
+			{'X','X','X',' ','X','X','X',' ',' ','X'},
+			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
+			{'X','X','X',' ','X','X','X',' ',' ','X'},
+			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X','X','X',' ','X','X','X','X',' ','X'},
+			{'X',' ','I',' ','I',' ','X','k',' ','X'},
+			{'X','X','X','X','X','X','X','X','X','X'}};
+
+	char[][] board2 = {{'X','X','X','X','X','X','X','X','X','X'},
+			{'I',' ',' ',' ',' ',' ',' ',' ','k','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X','X','X','X','X','X','X','X','X','X'}};
+
+	//	Board b = new Board();
+	//	Hero h = new Hero(1,1,level);
+	//	Guard g = Guard.raffleGuard(1,8,level);
+	//	Ogre o = new Ogre(1,4,level);
+	//	Door d =new Door(1,0,1);
+
+	public Level[] levels;
+	public Game game;
+
+
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
@@ -28,169 +57,196 @@ public class UserInteraction {
 
 	public static void main(String[] args) {
 
-		new UserInteraction().play();
+		UserInteraction u = new UserInteraction();
+		u.play();
+	}
+
+	public UserInteraction(){
+		//create level 1
+		Board board1 = new Board(this.board1);
+		Entity hero1 = new Hero(1,1);
+		Entity guard = Guard.raffleGuard(1,8);
+		Entity[] characters1 = {hero1, guard};
+		Level lv1 = new Level(board1, characters1, 1);
+
+		// create level 2
+		Board board2 = new Board(this.board2);
+		Entity hero2 = new Hero(7, 1);
+		Entity ogre = new Ogre(1, 4);
+		Entity[] characters2 = { hero2, ogre };
+		Level lv2 = new Level(board2, characters2, 2);
+
+		levels = new Level[2];
+		levels[0] = lv1;
+		levels[1] = lv2;
+		game = new Game(levels);
 	}
 
 	public void play(){
+
+		boolean alreadychange=false;
+		
+		for(int i = 0; i < levels.length;){
+			//while nao ganhou este nivel
 	
-		printBoard(level);
-		char c;
-		boolean win=false;
+			while(!levels[i].checkIfEnds(levels[i].getEntities()[0], levels[i].getEntities()[1])){
+				if(!alreadychange){
+				if(levels[i].getLevel()==2){
+					levels[i].getEntities()[0].setSymbol('A');
+					i++;
+					alreadychange=true;
+				}
+				}
+				
+				printBoard(levels[i]);
+				//pedir movimento ao jogador
+				//correr logica jogo
 
-		while(!b.checkIfEnds(h.getPosx(), h.getPosy(),level, g, o)){
+				char c;
+				boolean win=false;
 
-			if(b.changeLevel(h.getPosx(), h.getPosy(), level)){
-				if(level==0)
-					level=1;
-				else
-					win=true;
-			}
-			if(win && (d.getPosx() == h.getPosx() && d.getPosy() == h.getPosy()))
-			{	System.out.println("You won!! Congratulations!!");
+				if(game.changeLevel(levels[i].getEntities()[0], levels[i])){
+					if(levels[i].getLevel()==1){
+						levels[i].setLevel(2);
+					}
+					else
+						win=true;
+				}
+				if(win && (1 == levels[i].getEntities()[0].getPosx() && 0 == levels[i].getEntities()[0].getPosy() ))
+				{	System.out.println("You won!! Congratulations!!");
 				return;
-			}
-			
-			System.out.println();
-			System.out.println("Please insert a character:");
-			System.out.println("To move down, insert 'd'");
-			System.out.println("To move up, insert 'u'");
-			System.out.println("To move left, insert 'l'");
-			System.out.println("To move right, insert 'r'");
+				}
 
-			Scanner reader = new Scanner (System.in);
-			c = reader.next().charAt(0); 
-			c = Character.toLowerCase(c);
+				System.out.println();
+				System.out.println("Please insert a character:");
+				System.out.println("To move down, insert 'd'");
+				System.out.println("To move up, insert 'u'");
+				System.out.println("To move left, insert 'l'");
+				System.out.println("To move right, insert 'r'");
 
-			while(c!='r' && c!='l' && c!='d' && c!='u'){
-				System.out.println("Invalid character. Try again.");
+				Scanner reader = new Scanner (System.in);
 				c = reader.next().charAt(0); 
 				c = Character.toLowerCase(c);
-			}
 
-			Direction direction = Direction.UP;
+				while(c!='r' && c!='l' && c!='d' && c!='u'){
+					System.out.println("Invalid character. Try again.");
+					c = reader.next().charAt(0); 
+					c = Character.toLowerCase(c);
+				}
 
-			switch (c) {
-			case 'u': direction = Direction.UP;
-			break;
-			case 'd': direction = Direction.DOWN;
-			break;
-			case 'l': direction = Direction.LEFT;
-			break;
-			case 'r': direction = Direction.RIGHT;
-			break;
-			default: System.out.println("Invalid character");
-			break;
-			}
+				Direction direction = Direction.UP;
 
-			int x = h.getPosx();
-			int y = h.getPosy();
-			int x_o = o.getPosx();
-			int y_o = o.getPosx();
-			boolean move_valid= false;
+				switch (c) {
+				case 'u': direction = Direction.UP;
+				break;
+				case 'd': direction = Direction.DOWN;
+				break;
+				case 'l': direction = Direction.LEFT;
+				break;
+				case 'r': direction = Direction.RIGHT;
+				break;
+				default: System.out.println("Invalid character");
+				break;
+				}
 
-			h.move(direction);
-			if(level==1)
-				o.movement();
+				int x = levels[i].getEntities()[0].getPosx();
+				int y = levels[i].getEntities()[0].getPosy();
+				int x_e = levels[i].getEntities()[1].getPosx();
+				int y_e = levels[i].getEntities()[1].getPosy();
 
-			if(!b.invalidMovement(h.getPosx(), h.getPosy(), level)){
-				if(level == 0)
-					g.movement();
-				else{
+				boolean move_valid= false;
 
-					if(b.verifyS(h.getPosx(),h.getPosy(),level)){
-						h.setPosx(x);
-						h.setPosy(y);
-						b.getBoard(level)[1][0] = 'S';
+				levels[i].getEntities()[0].movement(direction);
+				levels[i].getEntities()[1].movement(direction);
+
+				if(!game.invalidMovement(levels[i].getEntities()[0], levels[i])){
+
+					if(levels[i].getLevel() ==2 && game.verifyS(levels[i].getEntities()[0], levels[i])){
+						levels[i].getEntities()[0].setPosx(x);
+						levels[i].getEntities()[0].setPosy(y);
+						levels[i].getBoard().getBoard()[1][0] = 'S';
 					}
-					while(!move_valid){
-						if(b.invalidOgreMovement(o.getPosx(), o.getPosy(),level))
-						{
-							o.setPosx(x_o);
-							o.setPosy(y_o);
-							o.movement();
+					if(levels[i].getEntities()[1] instanceof Ogre){
+						while(!move_valid){
+							if(game.invalidEntityMovement(levels[i].getEntities()[1],levels[i]))
+							{
+								levels[i].getEntities()[1].setPosx(x_e);
+								levels[i].getEntities()[1].setPosy(y_e);
+								levels[i].getEntities()[1].movement(direction);
+							}
+							else
+								move_valid=true;
 						}
-						else
-							move_valid=true;
+					}
+					else{
+						if(levels[i].getEntities()[1] instanceof Drunken){
+							if(((Drunken)levels[i].getEntities()[1]).getState() == StateDrunken.g){
+								levels[i].getEntities()[1].setPosx(x_e);
+								levels[i].getEntities()[1].setPosy(y_e);
+							}
+						}
 					}
 				}
-			}
-			else{
-				System.out.println("Invalid movement. Try again");
-				h.setPosx(x);
-				h.setPosy(y);
+
+				else{
+					System.out.println("Invalid movement. Try again");
+					levels[i].getEntities()[0].setPosx(x);
+					levels[i].getEntities()[0].setPosy(y);
+				}
+
+				printBoard(levels[i]);
 			}
 
-			printBoard(level);
+			System.out.print("You got caught! Game Over!");
+			return;
 		}
-
-		System.out.print("You got caught! Game Over!");
 	}
 
-	public void printBoard(int level)
+	public void printBoard(Level lv)
 	{	
-		char[][] board = b.getBoard(level);
+		System.out.println();
 
-		int hero_x= h.getPosx();
-		int hero_y= h.getPosy();
-		int guard_x = g.getPosx();
-		int guard_y = g.getPosy();
-		int ogre_x = o.getPosx();
-		int ogre_y = o.getPosy();
+		int row = lv.getBoard().getBoard().length;
+		int col = lv.getBoard().getBoard()[0].length;
 
-		int row = board.length;
-		int col = board[0].length;
-
-		b.checkLever(hero_x,hero_y,level);
-		b.heroIsArmed(hero_x,hero_y,level,h);
+		Entity[] e =lv.getEntities();
+		game.checkLever(e[0], lv);
+		char[][] map= new char[10][10];
+		
+		for(int i=0; i < e.length; i++)
+			lv.getBoard().entityLever(e[i]);
 
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){
-				if(level == 1){
-					if(h.getState() != StateHero.ARMED){
-						if(i == hero_x && j == hero_y)
-							System.out.print("A ");
-						else if(i == ogre_x && j == ogre_y && level == 1){
-							if(!b.ogreLever(ogre_x, ogre_y, level, o))
-								System.out.print("O ");
-							else
-								System.out.print("$ ");
-						}
-						else
-							System.out.print(board[i][j]+" ");
-					}
-					else{
-						if(i == hero_x && j == hero_y)
-							System.out.print("K ");
-						else if(i == ogre_x && j == ogre_y && level == 1){
-							if(!b.ogreLever(ogre_x, ogre_y, level, o))
-								System.out.print("O ");
-							else
-								System.out.print("$ ");
-						}
-						else
-							System.out.print(board[i][j]+" ");
-					}
-				}
-				else{
-					if(i == hero_x && j == hero_y)
-						System.out.print("H ");
-					else if(i == guard_x && j == guard_y && level == 0){
-						if(g instanceof Drunken){
-							if(((Drunken)g).getState() == StateDrunken.G)
-								System.out.print("G ");
-							else
-								System.out.print("g ");
-						}
-						else
-							System.out.print("G ");
-					}
-					else
-						System.out.print(board[i][j]+" ");
-				}
-
+				map[i][j] = lv.getBoard().getBoard()[i][j];
 			}
+		}
+
+		for(int i=0; i < e.length;i++){
+
+			if(e[i] instanceof Guard){
+				if(e[i] instanceof Drunken){
+					if(((Drunken)e[i]).getState() == StateDrunken.G)
+						map[e[i].getPosx()][e[i].getPosy()]=e[i].getSymbol();
+					else{
+						lv.getEntities()[1].setSymbol('g');
+						map[e[i].getPosx()][e[i].getPosy()]=e[i].getSymbol();
+					}
+				}
+				else
+					map[e[i].getPosx()][e[i].getPosy()]=e[i].getSymbol();
+			}
+			else
+				map[e[i].getPosx()][e[i].getPosy()]=e[i].getSymbol();
+		}
+
+		for(int i=0; i < map.length;i++){
+			for(int j=0; j< map[0].length;j++)
+				System.out.print(map[i][j]+" ");
 			System.out.println();
 		}
+		
+		System.out.println();
 	}
 
 }

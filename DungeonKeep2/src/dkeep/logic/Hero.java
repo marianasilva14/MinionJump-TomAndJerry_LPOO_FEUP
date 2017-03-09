@@ -3,18 +3,12 @@ package dkeep.logic;
 import dkeep.cli.UserInteraction.Direction;
 
 public class Hero extends Entity{
-
-	public Hero(int posx, int posy, int level) {
-		super(posx, posy, level);
-
-		if(level == 0){
-			posx=1;
-			posy=1;
-		}
-		else{
-			posx=1;
-			posy=9;
-		}
+	
+	private char symbol;
+	
+	public Hero(int posx, int posy) {
+		super(posx, posy);
+		symbol = 'H';
 	}
 
 	public enum StateHero{
@@ -30,8 +24,16 @@ public class Hero extends Entity{
 	public void setState(StateHero state) {
 		this.state = state;
 	}
+	
+	public char getSymbol(){
+		return symbol;
+	}
+	
+	public void setSymbol(char symbol){
+		this.symbol=symbol;
+	}
 
-	public void move(Direction direction){
+	public void movement(Direction direction){
 		switch(direction) {
 		case UP:
 			posx--;

@@ -1,19 +1,17 @@
 package dkeep.logic;
 
+import dkeep.cli.UserInteraction.Direction;
 import dkeep.logic.Guard;
 
 public class Rookie extends Guard{
 
 	private int index = 0;
 
-	public Rookie(int posx, int posy, int level) {
-		super(posx,posy,level);
+	public Rookie(int posx, int posy) {
+		super(posx,posy);
 		index=0;
 	}
 
-	public enum Direction{
-		RIGHT,LEFT,UP,DOWN
-	}
 	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
 			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
 			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
@@ -23,9 +21,9 @@ public class Rookie extends Guard{
 		return this;
 	}
 
-	public void movement(){
+	public void movement(Direction direction){
 
-		Direction direction = directions[index];
+		direction = directions[index];
 
 		if(index == 23)
 			index = 0;

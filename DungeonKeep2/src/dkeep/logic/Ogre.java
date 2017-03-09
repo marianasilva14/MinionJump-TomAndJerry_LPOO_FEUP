@@ -1,19 +1,17 @@
 package dkeep.logic;
 import dkeep.logic.Entity;
-import dkeep.cli.UserInteraction;
+import dkeep.cli.UserInteraction.Direction;
 
 import java.util.Random;
 import java.util.Vector;
 
-
 public class Ogre extends Entity{
 
-	public Ogre(int posx, int posy, int level) {
-		super(posx, posy, level);
-	}
-
-	public enum Direction{
-		RIGHT,LEFT,UP,DOWN
+	private char symbol;
+	
+	public Ogre(int posx, int posy) {
+		super(posx, posy);
+		symbol = 'O';
 	}
 
 	private Direction directions[] = {Direction.RIGHT, Direction.LEFT, Direction.UP, Direction.DOWN};
@@ -21,14 +19,22 @@ public class Ogre extends Entity{
 	public Ogre getOgre(){
 		return this;
 	}
+	
+	public char getSymbol(){
+		return symbol;
+	}
+	
+	public void setSymbol(char symbol){
+		this.symbol=symbol;
+	}
 
-	public void movement(){
+	public void movement(Direction direction){
 
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(4);
 
-		Direction direction = directions[pos_rand];
+		direction = directions[pos_rand];
 
 		switch(direction) {
 		case UP:

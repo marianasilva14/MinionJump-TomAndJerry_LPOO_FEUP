@@ -1,9 +1,13 @@
 package dkeep.logic;
 
-public class Door extends Entity{
+public class Door {
+	
+	int posx;
+	int posy;
 
-	public Door(int posx, int posy, int level) {
-		super(posx, posy, level);
+	public Door(int posx, int posy) {
+		this.posx = posx;
+		this.posy = posy;
 	}
 	
 	boolean found = false;
