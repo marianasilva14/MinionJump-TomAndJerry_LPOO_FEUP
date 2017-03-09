@@ -3,11 +3,20 @@ package dkeep.logic;
 public class Game {
 
 	private Level[] levels;
+	private Level level;
+
+	public enum Direction{
+		RIGHT,LEFT,UP,DOWN
+	}
+
 	
 	public Game(Level[] lvs){
 		levels=lvs;
 	}
 	
+	public Game(Level level){
+		this.level=level;
+	}
 	
 	public boolean invalidMovement(Entity e, Level lv){
 
@@ -72,5 +81,16 @@ public class Game {
 		else
 			return false;
 
+	}
+	
+	public boolean entityLever(Entity e, Level lv){
+		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k'){
+			if(e instanceof Ogre)
+				e.setSymbol('$');
+			else if(e instanceof Hero)
+				e.setSymbol('K');
+			return true;
+		}
+		return false;
 	}
 }

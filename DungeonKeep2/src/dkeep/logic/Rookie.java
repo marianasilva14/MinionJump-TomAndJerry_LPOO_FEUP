@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-import dkeep.cli.UserInteraction.Direction;
+import dkeep.logic.Game.Direction;
 import dkeep.logic.Guard;
 
 public class Rookie extends Guard{

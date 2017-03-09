@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-import dkeep.cli.UserInteraction.Direction;
+import dkeep.logic.Game.Direction;
 
 public class Hero extends Entity{
 	

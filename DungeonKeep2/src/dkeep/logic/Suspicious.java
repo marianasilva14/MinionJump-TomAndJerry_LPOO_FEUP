@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.util.Random;
 
-import dkeep.cli.UserInteraction.Direction;
+import dkeep.logic.Game.Direction;
 
 public class Suspicious extends Guard{
 

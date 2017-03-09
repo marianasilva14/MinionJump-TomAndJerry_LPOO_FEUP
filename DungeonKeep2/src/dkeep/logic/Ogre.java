@@ -1,6 +1,6 @@
 package dkeep.logic;
 import dkeep.logic.Entity;
-import dkeep.cli.UserInteraction.Direction;
+import dkeep.logic.Game.Direction;
 
 import java.util.Random;
 import java.util.Vector;

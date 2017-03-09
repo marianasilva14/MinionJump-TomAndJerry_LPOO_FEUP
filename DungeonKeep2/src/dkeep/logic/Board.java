@@ -42,7 +42,7 @@ public class Board {
 	public Board(char b[][]){
 		map=b;
 	}
-
+	
 	public char[][] getBoard(){
 		return map;
 	}
@@ -83,16 +83,7 @@ public class Board {
 		return 0;
 	}
 */
-	public boolean entityLever(Entity e){
-		if(map[e.getPosx()][e.getPosy()] == 'k'){
-			if(e instanceof Ogre)
-				e.setSymbol('$');
-			else if(e instanceof Hero)
-				e.setSymbol('K');
-			return true;
-		}
-		return false;
-	}
+
 /*
 	public void heroIsArmed(Entity e){
 		if(level == 1){

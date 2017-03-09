@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.util.Vector;
 
-import dkeep.cli.UserInteraction.Direction;
+import dkeep.logic.Game.Direction;
 
 import java.awt.Point;
 

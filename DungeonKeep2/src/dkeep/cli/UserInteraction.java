@@ -12,6 +12,7 @@ import dkeep.logic.Suspicious;
 import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Entity;
 import dkeep.logic.Game;
+import dkeep.logic.Game.Direction;
 
 
 public class UserInteraction {
@@ -48,12 +49,6 @@ public class UserInteraction {
 
 	public Level[] levels;
 	public Game game;
-
-
-	public enum Direction{
-		RIGHT,LEFT,UP,DOWN
-	}
-
 
 	public static void main(String[] args) {
 
@@ -214,7 +209,7 @@ public class UserInteraction {
 		char[][] map= new char[10][10];
 		
 		for(int i=0; i < e.length; i++)
-			lv.getBoard().entityLever(e[i]);
+			game.entityLever(e[i], levels[i]);
 
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){

@@ -1,5 +1,5 @@
 package dkeep.logic;
-import dkeep.cli.UserInteraction.Direction;
+import dkeep.logic.Game.Direction;
 import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Drunken;
 
