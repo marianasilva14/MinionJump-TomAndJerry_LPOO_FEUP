@@ -1,26 +1,26 @@
 package dkeep.logic;
 
-public class Game {
+import dkeep.cli.UserInteraction;
 
-	private Level[] levels;
-	private Level level;
+public class Game {
+	
+	public UserInteraction cli;
+	public Level level;
+	
+
 
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
-	}
-
-	
-	public Game(Level[] lvs){
-		levels=lvs;
 	}
 	
 	public Game(Level level){
 		this.level=level;
 	}
 	
+	
 	public boolean invalidMovement(Entity e, Level lv){
 
-		if(e.getPosx() <0 || e.getPosy()<0)
+		if(e.getPosx() < 0 || e.getPosy()< 0)
 			return true;
 		
 		if(lv.getLevel()==1){
@@ -46,6 +46,10 @@ public class Game {
 	}
 
 	public boolean invalidEntityMovement(Entity e, Level lv){
+
+		if(e.getPosx() < 0 || e.getPosy()< 0)
+			return true;
+		
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I'){
 			return true;
 		}
@@ -92,5 +96,10 @@ public class Game {
 			return true;
 		}
 		return false;
+	}
+
+
+	public Level getLevel() {
+		return level;
 	}
 }

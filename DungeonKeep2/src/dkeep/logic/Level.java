@@ -16,8 +16,8 @@ public class Level {
 
 	}
 	
-	public  Level(Board b){
-
+	public Level(Board b){
+		entities = new Entity[2];
 		board=b;
 
 		int row= b.getBoard().length;
@@ -56,6 +56,10 @@ public class Level {
 	public void setLevel(int lv){
 		this.level=lv;
 	}
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
 	public Entity[] getEntities(){
 		return entities;
 	}
@@ -71,6 +75,11 @@ public class Level {
 				return true;
 		}
 		return false;
+	}
+
+	public void setEntities(Entity[] entities) {
+		this.entities=entities;
+		
 	}
 
 	
