@@ -9,26 +9,15 @@ import dkeep.logic.Game.Direction;
 public class Play {
 
 	private Level level;
-	//private UserInteraction cli;
 	private Game game;
 	private boolean endGame=false;
 	
 	
 	public Play(Level level,Game game) {
 		this.level = level;
-		this.game=game;
-		// UserInteraction u = new UserInteraction();
-
+		this.game = game;
 	}
 
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * Play p = new Play(); p.play();
-	 * 
-	 * 
-	 * }
-	 */
 	public boolean play() {
 
 		// while nao ganhou este nivel

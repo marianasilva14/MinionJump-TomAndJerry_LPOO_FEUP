@@ -7,8 +7,6 @@ public class Game {
 	public UserInteraction cli;
 	public Level level;
 	
-
-
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
@@ -16,7 +14,6 @@ public class Game {
 	public Game(Level level){
 		this.level=level;
 	}
-	
 	
 	public boolean invalidMovement(Entity e, Level lv){
 

@@ -10,20 +10,6 @@ public class Hero extends Entity{
 		super(posx, posy);
 		symbol = 'H';
 	}
-
-	public enum StateHero{
-		ARMED,DISARMED
-	}
-
-	public StateHero state = StateHero.DISARMED;
-
-	public StateHero getState() {
-		return state;
-	}
-	
-	public void setState(StateHero state) {
-		this.state = state;
-	}
 	
 	public char getSymbol(){
 		return symbol;

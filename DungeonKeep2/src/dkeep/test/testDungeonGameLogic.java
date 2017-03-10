@@ -93,9 +93,10 @@ public class testDungeonGameLogic {
 		game.getLevel().getEntities()[0].movement(direction);
 		game.entityLever(game.getLevel().getEntities()[0], game.getLevel());
 		game.checkLever(game.getLevel().getEntities()[0], game.getLevel());
-		direction = Direction.LEFT;
-		game.getLevel().getEntities()[0].movement(direction);
-		assertTrue(game.changeLevel(level.getEntities()[0], game.getLevel()));
+		//direction = Direction.LEFT;
+		//game.getLevel().getEntities()[0].movement(direction);
+		//assertTrue(game.changeLevel(level.getEntities()[0], game.getLevel()));
+		assertEquals('S', map[2][0]);
 	}
 	
 	@Test
