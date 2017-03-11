@@ -44,7 +44,7 @@ public class Game {
 
 	public boolean invalidEntityMovement(Entity e, Level lv){
 
-		if(e.getPosx() < 0 || e.getPosy()< 0)
+		if(e.getPosx() <= 0 || e.getPosy()<= 0)
 			return true;
 		
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I'){
@@ -85,9 +85,16 @@ public class Game {
 	}
 	
 	public boolean entityLever(Entity e, Level lv){
+		
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k'){
-			if(e instanceof Ogre)
+			if(e instanceof Ogre){
+				if(((Ogre) e).getKey()==false){
 				e.setSymbol('$');
+				((Ogre) e).setKey(true);
+				}
+				else
+					e.setSymbol('O');
+			}
 			else if(e instanceof Hero)
 				e.setSymbol('K');
 			return true;

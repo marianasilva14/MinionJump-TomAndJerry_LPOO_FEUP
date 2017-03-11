@@ -1,15 +1,17 @@
 package dkeep.logic;
 
+import java.util.ArrayList;
+
 import dkeep.logic.Drunken.StateDrunken;
 
 public class Level {
 
 	private Board board;
 	private int level;
-	private Entity[] entities;
+	private ArrayList<Entity> entities;
 
 
-	public Level(Board b, Entity[] entities, int l){
+	public Level(Board b, ArrayList<Entity> entities, int l){
 		this.board=b;
 		this.level=l;
 		this.entities=entities;
@@ -17,7 +19,7 @@ public class Level {
 	}
 	
 	public Level(Board b){
-		entities = new Entity[2];
+		entities = new ArrayList<Entity>();
 		board=b;
 
 		int row= b.getBoard().length;
@@ -26,17 +28,20 @@ public class Level {
 		for(int i=0; i < row; i++){
 			for(int j=0; j < col; j++){
 				if(b.getBoard()[i][j] == 'H'){
-					entities[0]= new Hero(i,j);
+					Entity entity_hero= new Hero(i,j);
+					entities.add(entity_hero);
 					b.getBoard()[i][j]= ' ';
 				}
 				else if(b.getBoard()[i][j] == 'G'){
 					level=1;
-					entities[1]= Guard.raffleGuard(i,j);
+					Entity entity_guard=  Guard.raffleGuard(i,j);
+					entities.add(entity_guard);
 					b.getBoard()[i][j]= ' ';
 				}
 				else if(b.getBoard()[i][j] == 'O'){
 					level=2;
-					entities[1]=new Ogre(i,j);
+					Entity entity_ogre= new Ogre(i,j);
+					entities.add(entity_ogre);
 					b.getBoard()[i][j]= ' ';
 				}
 				
@@ -60,7 +65,7 @@ public class Level {
 		this.board = board;
 	}
 
-	public Entity[] getEntities(){
+	public ArrayList<Entity> getEntities(){
 		return entities;
 	}
 
@@ -70,6 +75,15 @@ public class Level {
 			if(((Drunken)capture).getState() == StateDrunken.g)
 				return false;
 		}
+		
+		else if(capture instanceof Ogre){
+	
+			if((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'))
+				return true;
+			else
+				return false;
+		}
+		
 		else{
 			if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 				return true;
@@ -77,7 +91,7 @@ public class Level {
 		return false;
 	}
 
-	public void setEntities(Entity[] entities) {
+	public void setEntities(ArrayList<Entity> entities) {
 		this.entities=entities;
 		
 	}

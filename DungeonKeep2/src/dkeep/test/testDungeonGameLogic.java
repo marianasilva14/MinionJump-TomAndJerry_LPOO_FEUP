@@ -25,12 +25,12 @@ public class testDungeonGameLogic {
 	public void testMoveHeroIntoToFreeCell(){
 		Board board = new  Board(map);
 		Level level = new Level(board);
-		assertEquals(1,level.getEntities()[0].getPosx());
-		assertEquals(1,level.getEntities()[0].getPosy());
+		assertEquals(1,level.getEntities().get(0).getPosx());
+		assertEquals(1,level.getEntities().get(0).getPosy());
 		Direction direction = Direction.DOWN;
-		level.getEntities()[0].movement(direction);
-		assertEquals(2,level.getEntities()[0].getPosx());
-		assertEquals(1,level.getEntities()[0].getPosy());
+		level.getEntities().get(0).movement(direction);
+		assertEquals(2,level.getEntities().get(0).getPosx());
+		assertEquals(1,level.getEntities().get(0).getPosy());
 	}
 	
 	@Test
@@ -38,10 +38,10 @@ public class testDungeonGameLogic {
 		Board board= new Board(map);
 		Level level = new Level(board);
 		Game game= new Game(level);
-		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities()[0],game.getLevel().getEntities()[1] ));
+		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
 		Direction direction = Direction.RIGHT;
-		game.getLevel().getEntities()[0].movement(direction);
-		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities()[0],game.getLevel().getEntities()[1] ));
+		game.getLevel().getEntities().get(0).movement(direction);
+		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
 		
 	}
 	
@@ -50,10 +50,10 @@ public class testDungeonGameLogic {
 		Board board= new Board(map2);
 		Level level = new Level(board);
 		Game game= new Game(level);
-		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities()[0],game.getLevel().getEntities()[1] ));
+		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
 		Direction direction = Direction.RIGHT;
-		game.getLevel().getEntities()[0].movement(direction);
-		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities()[0],game.getLevel().getEntities()[1]));
+		game.getLevel().getEntities().get(0).movement(direction);
+		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
 	}
 	
 	@Test
@@ -61,13 +61,13 @@ public class testDungeonGameLogic {
 		Board board= new Board(map);
 		Level level = new Level(board);
 		Game game= new Game(level);
-		game.entityLever(game.getLevel().getEntities()[0], game.getLevel());
-		assertEquals('H',game.getLevel().getEntities()[0].getSymbol());
+		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
+		assertEquals('H',game.getLevel().getEntities().get(0).getSymbol());
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities()[0].movement(direction);
-		game.getLevel().getEntities()[0].movement(direction);
-		assertTrue(game.entityLever(game.getLevel().getEntities()[0], game.getLevel()));
-		assertEquals('K',game.getLevel().getEntities()[0].getSymbol());
+		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction);
+		assertTrue(game.entityLever(game.getLevel().getEntities().get(0), game.getLevel()));
+		assertEquals('K',game.getLevel().getEntities().get(0).getSymbol());
 	}
 	
 	@Test
@@ -76,10 +76,10 @@ public class testDungeonGameLogic {
 		Level level = new Level(board);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities()[0].movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction);
 		direction = Direction.LEFT;
-		game.getLevel().getEntities()[0].movement(direction);
-		assertTrue(game.invalidMovement(game.getLevel().getEntities()[0], game.getLevel()));
+		game.getLevel().getEntities().get(0).movement(direction);
+		assertTrue(game.invalidMovement(game.getLevel().getEntities().get(0), game.getLevel()));
 	}
 	
 	@Test
@@ -88,11 +88,11 @@ public class testDungeonGameLogic {
 		Level level = new Level(board);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities()[0].movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction);
 	    direction = Direction.DOWN;
-		game.getLevel().getEntities()[0].movement(direction);
-		game.entityLever(game.getLevel().getEntities()[0], game.getLevel());
-		game.checkLever(game.getLevel().getEntities()[0], game.getLevel());
+		game.getLevel().getEntities().get(0).movement(direction);
+		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
+		game.checkLever(game.getLevel().getEntities().get(0), game.getLevel());
 		//direction = Direction.LEFT;
 		//game.getLevel().getEntities()[0].movement(direction);
 		//assertTrue(game.changeLevel(level.getEntities()[0], game.getLevel()));
@@ -104,19 +104,18 @@ public class testDungeonGameLogic {
 		Board board= new Board(map);
 		Level level = new Level(board);
 		Game game= new Game(level);
-		Play play = new Play(level,game);
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities()[0].movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction);
 	    direction = Direction.DOWN;
-		game.getLevel().getEntities()[0].movement(direction);
-		game.entityLever(game.getLevel().getEntities()[0], game.getLevel());
-		game.checkLever(game.getLevel().getEntities()[0], game.getLevel());
+		game.getLevel().getEntities().get(0).movement(direction);
+		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
+		game.checkLever(game.getLevel().getEntities().get(0), game.getLevel());
 		direction = Direction.LEFT;
-		game.getLevel().getEntities()[0].movement(direction);
-		assertTrue(game.changeLevel(level.getEntities()[0], game.getLevel()));
-		play.play();
-		assertFalse(play.end());
+		game.getLevel().getEntities().get(0).movement(direction);
+		assertTrue(game.changeLevel(level.getEntities().get(0), game.getLevel()));
+		
 	}
+
 	
 
 }
