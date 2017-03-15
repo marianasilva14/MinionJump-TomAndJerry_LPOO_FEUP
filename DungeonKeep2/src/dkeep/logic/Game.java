@@ -3,23 +3,23 @@ package dkeep.logic;
 import dkeep.cli.UserInteraction;
 
 public class Game {
-	
+
 	public UserInteraction cli;
 	public Level level;
-	
+
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
-	
+
 	public Game(Level level){
 		this.level=level;
 	}
-	
+
 	public boolean invalidMovement(Entity e, Level lv){
 
 		if(e.getPosx() < 0 || e.getPosy()< 0)
 			return true;
-		
+
 		if(lv.getLevel()==1){
 			if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
 				return true;
@@ -33,7 +33,7 @@ public class Game {
 				return false;
 		}
 	}
-	
+
 
 	public boolean verifyS(Entity e, Level lv){
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
@@ -46,7 +46,7 @@ public class Game {
 
 		if(e.getPosx() <= 0 || e.getPosy()<= 0)
 			return true;
-		
+
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I'){
 			return true;
 		}
@@ -83,14 +83,14 @@ public class Game {
 			return false;
 
 	}
-	
+
 	public boolean entityLever(Entity e, Level lv){
-		
+
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k'){
 			if(e instanceof Ogre){
-				if(((Ogre) e).getKey()==false){
-				e.setSymbol('$');
-				((Ogre) e).setKey(true);
+				if(!((Ogre) e).getKey()){
+					e.setSymbol('$');
+					((Ogre) e).setKey(true);
 				}
 				else
 					e.setSymbol('O');
@@ -99,6 +99,11 @@ public class Game {
 				e.setSymbol('K');
 			return true;
 		}
+		else if(e instanceof Ogre){
+			if(((Ogre) e).getKey())
+			e.setSymbol('O');
+		}
+			
 		return false;
 	}
 

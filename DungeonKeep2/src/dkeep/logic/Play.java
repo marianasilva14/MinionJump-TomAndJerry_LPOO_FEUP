@@ -6,7 +6,7 @@ import dkeep.cli.UserInteraction;
 import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Game.Direction;
 
-public class Play {
+public class Play{
 
 	private Game game;
 	private boolean endGame=false;
@@ -17,7 +17,6 @@ public class Play {
 	}
 
 	public boolean play() {
-
 		// while nao ganhou este nivel
 		boolean alreadychange=false;
 

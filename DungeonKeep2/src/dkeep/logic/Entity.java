@@ -46,11 +46,5 @@ public abstract class Entity {
 	
 	public abstract void movement(Direction direction);
 	
-	public boolean canMove(Board b, int posx,int posy){
-		if(b.getBoard()[posx][posy] == ' ')
-			return true;
-		else
-			return false;
-			
-	}
+
 }

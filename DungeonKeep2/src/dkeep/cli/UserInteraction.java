@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import dkeep.logic.Board;
-import dkeep.logic.Door;
 import dkeep.logic.Drunken;
 import dkeep.logic.Hero;
 import dkeep.logic.Level;

@@ -22,7 +22,6 @@ public class Ogre extends Entity{
 		return this;
 	}
 
-
 	public char getSymbol(){
 		return symbol;
 	}
