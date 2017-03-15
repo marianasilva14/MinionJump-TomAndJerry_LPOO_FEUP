@@ -17,14 +17,14 @@ public class Level {
 		this.entities=entities;
 
 	}
-	
+
 	public Level(Board b){
 		entities = new ArrayList<Entity>();
 		board=b;
 
 		int row= b.getBoard().length;
 		int col= b.getBoard()[0].length;
-		
+
 		for(int i=0; i < row; i++){
 			for(int j=0; j < col; j++){
 				if(b.getBoard()[i][j] == 'H'){
@@ -44,7 +44,7 @@ public class Level {
 					entities.add(entity_ogre);
 					b.getBoard()[i][j]= ' ';
 				}
-				
+
 			}
 		}
 	}
@@ -75,26 +75,28 @@ public class Level {
 			if(((Drunken)capture).getState() == StateDrunken.g)
 				return false;
 		}
-		
+
 		else if(capture instanceof Ogre){
-	
+
 			if((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'))
 				return true;
-			else
-				return false;
-		}
-		
-		else{
-			if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
+			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 				return true;
+
+			return false;
 		}
+
+
+		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
+			return true;
+
 		return false;
 	}
 
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities=entities;
-		
+
 	}
 
-	
+
 }

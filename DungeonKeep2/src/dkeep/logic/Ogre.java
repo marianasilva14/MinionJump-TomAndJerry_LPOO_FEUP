@@ -10,7 +10,7 @@ public class Ogre extends Entity{
 	private char symbol;
 	private int[] pos_club = {1,1};
 	private boolean key=false;
-	
+
 	public Ogre(int posx, int posy) {
 		super(posx, posy);
 		symbol = 'O';
@@ -34,18 +34,19 @@ public class Ogre extends Entity{
 	public boolean getKey(){
 		return key;
 	}
-	
+
 	public void setKey(boolean b){
 		key=b;
 	}
-	
+
 	public void movement(Direction direction){
 
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(4);
 
-		direction = directions[pos_rand];
+		if(direction == null)
+			direction = directions[pos_rand];
 
 		switch(direction) {
 		case UP:
@@ -67,7 +68,7 @@ public class Ogre extends Entity{
 	public void club(Board b){
 
 		while(true){
-			
+
 			int pos_rand;
 			Random rand = new Random();
 			pos_rand = rand.nextInt(4);
