@@ -80,14 +80,20 @@ public class Level {
 
 			if((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'))
 				return true;
-			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
+			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
+					|| (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
+					|| (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) 
+					|| (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 				return true;
 
 			return false;
 		}
 
 
-		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
+		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || 
+				(hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || 
+				(hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || 
+				(hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 			return true;
 
 		return false;
@@ -95,7 +101,6 @@ public class Level {
 
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities=entities;
-
 	}
 
 

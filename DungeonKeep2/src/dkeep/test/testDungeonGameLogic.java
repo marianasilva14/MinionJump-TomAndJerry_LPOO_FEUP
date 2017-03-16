@@ -13,14 +13,14 @@ public class testDungeonGameLogic {
 			{'I','k',' ',' ','X'},
 			{'X','X','X','X','X'}
 	};
-	
+
 	char[][] map2 ={ {'X','X','X','X','X'},
 			{'X','H',' ','O','X'},
 			{'I',' ',' ',' ','X'},
 			{'I','k',' ',' ','X'},
 			{'X','X','X','X','X'}
 	};
-	
+
 	@Test
 	public void testMoveHeroIntoToFreeCell(){
 		Board board = new  Board(map);
@@ -28,11 +28,11 @@ public class testDungeonGameLogic {
 		assertEquals(1,level.getEntities().get(0).getPosx());
 		assertEquals(1,level.getEntities().get(0).getPosy());
 		Direction direction = Direction.DOWN;
-		level.getEntities().get(0).movement(direction);
+		level.getEntities().get(0).movement(direction,board);
 		assertEquals(2,level.getEntities().get(0).getPosx());
 		assertEquals(1,level.getEntities().get(0).getPosy());
 	}
-	
+
 	@Test
 	public void testHeroIsCapturedByGuard(){
 		Board board= new Board(map);
@@ -40,11 +40,11 @@ public class testDungeonGameLogic {
 		Game game= new Game(level);
 		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
 		Direction direction = Direction.RIGHT;
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
-		
+
 	}
-	
+
 	@Test
 	public void testAdjacentPositionOgre(){
 		Board board= new Board(map2);
@@ -52,10 +52,10 @@ public class testDungeonGameLogic {
 		Game game= new Game(level);
 		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
 		Direction direction = Direction.RIGHT;
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
 	}
-	
+
 	@Test
 	public void testExitDoorKeyCell(){
 		Board board= new Board(map);
@@ -64,33 +64,33 @@ public class testDungeonGameLogic {
 		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
 		assertEquals('H',game.getLevel().getEntities().get(0).getSymbol());
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities().get(0).movement(direction);
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		assertTrue(game.entityLever(game.getLevel().getEntities().get(0), game.getLevel()));
 		assertEquals('K',game.getLevel().getEntities().get(0).getSymbol());
 	}
-	
+
 	@Test
 	public void testFailsToOpenWithoutTheKey(){
 		Board board= new Board(map);
 		Level level = new Level(board);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		direction = Direction.LEFT;
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		assertTrue(game.invalidMovement(game.getLevel().getEntities().get(0), game.getLevel()));
 	}
-	
+
 	@Test
 	public void testOpenDoorWithKey(){
 		Board board= new Board(map);
 		Level level = new Level(board);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities().get(0).movement(direction);
-	    direction = Direction.DOWN;
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
+		direction = Direction.DOWN;
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
 		game.checkLever(game.getLevel().getEntities().get(0), game.getLevel());
 		//direction = Direction.LEFT;
@@ -98,23 +98,23 @@ public class testDungeonGameLogic {
 		//assertTrue(game.changeLevel(level.getEntities()[0], game.getLevel()));
 		assertEquals('S', map[2][0]);
 	}
-	
+
 	@Test
 	public void testWinGame(){
 		Board board= new Board(map);
 		Level level = new Level(board);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
-		game.getLevel().getEntities().get(0).movement(direction);
-	    direction = Direction.DOWN;
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
+		direction = Direction.DOWN;
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
 		game.checkLever(game.getLevel().getEntities().get(0), game.getLevel());
 		direction = Direction.LEFT;
-		game.getLevel().getEntities().get(0).movement(direction);
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		assertTrue(game.changeLevel(level.getEntities().get(0), game.getLevel()));
 	}
-	
+
 	@Test
 	public void testIfChangeLeverTo$(){
 		Board board= new Board(map2);
@@ -130,55 +130,111 @@ public class testDungeonGameLogic {
 		assertEquals('O',level.getEntities().get(1).getSymbol());
 	}
 
+
 	@Test(timeout=1000)
 	public void testSomeRandomBehavior(){
-		Ogre g = new Ogre(5,5);
-		int x_old = g.getPosx();
-		int y_old = g.getPosy();
+		Board board= new Board(map2);
+		Level level = new Level(board);
+		Game game= new Game(level);
+		int x_old = level.getEntities().get(1).getPosx();
+		int y_old = level.getEntities().get(1).getPosy();
 		boolean outcome1=false, outcome2=false, outcome3 = false, outcome4 = false;
 		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
-			g.movement(null);
+			level.getEntities().get(1).movement(null,  game.getLevel().getBoard());
 			//cima
-			if(g.getPosx() == x_old - 1){
+			if(level.getEntities().get(1).getPosx() == x_old - 1){
 				outcome1=true;
-				x_old = g.getPosx();
+				x_old =level.getEntities().get(1).getPosx();
 			}
 			//baixo
-			else if(g.getPosx() == x_old + 1){
+			else if(level.getEntities().get(1).getPosx() == x_old + 1){
 				outcome2=true;
-				x_old = g.getPosx();
+				x_old =level.getEntities().get(1).getPosx();
 			}
 			//direita
-			else if(g.getPosy() == y_old - 1){
+			else if(level.getEntities().get(1).getPosy() == y_old - 1){
 				outcome3=true;
-				y_old = g.getPosy();
+				y_old =level.getEntities().get(1).getPosy();
 			}
 			//esquerda
 			else{
 				outcome4=true;
-				y_old = g.getPosy();
+				y_old = level.getEntities().get(1).getPosy();
 			}
 		}
-		
+
 		assertTrue(outcome1);
 		assertTrue(outcome2);
 		assertTrue(outcome3);
 		assertTrue(outcome4);
 	}
+
 	
-	@Test
-	public void testIfClubMovementIsCorrect(){
+	@Test(timeout=1000)
+	public void testOgreClub(){
 		Board board= new Board(map2);
 		Level level = new Level(board);
 		Game game= new Game(level);
-		level.getEntities().get(1).setPosx(3);
-		level.getEntities().get(1).setPosy(1);
-		game.entityLever(game.getLevel().getEntities().get(1), game.getLevel());
-		assertEquals('$',level.getEntities().get(1).getSymbol());
-		level.getEntities().get(1).setPosx(3);
-		level.getEntities().get(1).setPosy(2);
-		game.entityLever(game.getLevel().getEntities().get(1), game.getLevel());
-		assertEquals('O',level.getEntities().get(1).getSymbol());
+		boolean outcome1=false, outcome2=false, outcome3 = false, outcome4 = false;
+
+		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
+			level.getEntities().get(1).movement(null,  game.getLevel().getBoard());
+
+			((Ogre)level.getEntities().get(1)).club(game.getLevel().getBoard());
+			
+			if((level.getEntities().get(1).getPosx()-1 >=0 && level.getEntities().get(1).getPosx()-1 < game.getLevel().getBoard().getBoard().length ) ||
+					(level.getEntities().get(1).getPosx()+1 >=0 &&level.getEntities().get(1).getPosx()+1 <game.getLevel().getBoard().getBoard().length ) || 
+					(level.getEntities().get(1).getPosy()+1 >=0 && level.getEntities().get(1).getPosy()+1 < game.getLevel().getBoard().getBoard().length )||
+						(level.getEntities().get(1).getPosy()-1 >= 0 && level.getEntities().get(1).getPosy()-1 < game.getLevel().getBoard().getBoard().length )){
+			//cima
+			if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()-1][level.getEntities().get(1).getPosy()] == '*'){
+				outcome1=true;
+			}
+			//baixo
+			else if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()+1][level.getEntities().get(1).getPosy()] == '*'){
+				outcome2=true;
+			}
+			//direita
+			else if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()][level.getEntities().get(1).getPosy()-1] == '*'){
+				outcome3=true;
+			}
+			//esquerda
+			else if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()][level.getEntities().get(1).getPosy()+1] == '*'){
+				outcome4=true;
+			}
+			}
+			
+		}
+
+		assertTrue(outcome1);
+		assertTrue(outcome2);
+		assertTrue(outcome3);
+		assertTrue(outcome4);
 	}
 
-}
+	@Test
+	public void testRaffleGuard(){
+
+		boolean outcome1=false, outcome2=false, outcome3 = false;
+		
+		Entity g=  Guard.raffleGuard(5,5);
+		while(!outcome1 || !outcome2 || !outcome3){
+		
+			 g=  Guard.raffleGuard(5,5);
+			 
+			if(g instanceof Drunken)
+				outcome1=true;
+			else if(g instanceof Rookie)
+				outcome2=true;
+			else
+				outcome3=true;
+		}
+		
+		assertTrue(outcome1);
+		assertTrue(outcome2);
+		assertTrue(outcome3);
+		}
+
+
+
+	}

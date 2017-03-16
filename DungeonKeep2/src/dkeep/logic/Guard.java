@@ -42,7 +42,7 @@ public class Guard extends Entity{
 		this.symbol=symbol;
 	}
 	
-	public void movement(Direction direction){
+	public void movement(Direction direction, Board b){
 		
 	}
 	

@@ -46,7 +46,6 @@ public class Board {
 				map[i][j] = game.getLevel().getBoard().getBoard()[i][j];
 			}
 		}
-
 		for(int i=0; i < e.size();i++){
 
 			if(e.get(i) instanceof Guard){
@@ -54,7 +53,7 @@ public class Board {
 					if(((Drunken)e.get(i)).getState() == StateDrunken.G)
 						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
 					else{
-						game.getLevel().getEntities().get(1).setSymbol('g');
+						game.getLevel().getEntities().get(i).setSymbol('g');
 						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
 					}
 				}

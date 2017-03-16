@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.Random;
+
 import dkeep.logic.Game.Direction;
 
 public class Hero extends Entity{
@@ -19,7 +21,8 @@ public class Hero extends Entity{
 		this.symbol=symbol;
 	}
 
-	public void movement(Direction direction){
+	public void movement(Direction direction, Board b){
+		
 		switch(direction) {
 		case UP:
 			posx--;

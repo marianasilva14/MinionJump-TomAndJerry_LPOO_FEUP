@@ -1,5 +1,6 @@
 package dkeep.logic;
 
+import java.util.Random;
 import java.util.Vector;
 
 import dkeep.logic.Game.Direction;
@@ -18,7 +19,7 @@ public abstract class Entity {
 		symbol='?';
 
 	}
-	
+
 	public int getPosy(){
 		return posy;
 	}
@@ -26,11 +27,11 @@ public abstract class Entity {
 	public int getPosx(){
 		return posx;
 	}
-	
+
 	public char getSymbol(){
 		return symbol;
 	}
-	
+
 	public void setSymbol(char symbol){
 		this.symbol=symbol;
 	}
@@ -42,9 +43,64 @@ public abstract class Entity {
 	public void setPosy(int posy){
 		this.posy = posy;
 	}
+	
+	public int boardLimits(Board board){
+		int row= board.getBoard().length-1;
+		int col= board.getBoard()[0].length-1;
 
-	
-	public abstract void movement(Direction direction);
-	
+		boolean valid=false;
+
+		while(!valid){
+
+			int pos_rand;
+			Random rand = new Random();
+			pos_rand = rand.nextInt(4);
+
+			switch(pos_rand){
+			case 0:{
+				if(posy+1 <= col && posy+1 >= 0 ){
+					if(board.getBoard()[posx][posy+1] != 'X'){
+						valid=true;
+						return pos_rand;
+					}
+				}
+				break;
+			}
+			case 1:{
+				if(posy-1 <= col && posy-1 >= 0){
+					if(board.getBoard()[posx][posy-1] != 'X'){
+						valid=true;
+						return pos_rand;
+					}
+				}
+				break;
+			}
+			case 2:{
+				if(posx-1 <= row && posx-1 >= 0){
+					if(board.getBoard()[posx-1][posy] != 'X'){
+						valid=true;
+						return pos_rand;
+					}
+				}
+				break;
+			}
+			case 3:{
+				if(posx+1 <= row && posx+1 >= 0){
+					if(board.getBoard()[posx+1][posy] != 'X'){
+						valid=true;
+						return pos_rand;
+					}
+				}
+				break;
+			}
+
+			}
+		}
+
+		return 1;
+	}
+
+	public abstract void movement(Direction direction, Board b);
+
 
 }

@@ -21,7 +21,7 @@ public class Rookie extends Guard{
 		return this;
 	}
 
-	public void movement(Direction direction){
+	public void movement(Direction direction, Board b){
 
 		direction = directions[index];
 
@@ -31,6 +31,7 @@ public class Rookie extends Guard{
 			index++;
 
 		switch(direction) {
+		
 		case UP:
 			posx--;
 			break;

@@ -68,7 +68,7 @@ public class Drunken extends Guard{
 
 		return direction;
 	}
-	public void movement(Direction direction){
+	public void movement(Direction direction, Board b){
 
 		int status_rand;
 		Random rand2 = new Random();
@@ -82,11 +82,12 @@ public class Drunken extends Guard{
 		pos_rand = rand.nextInt(10);
 
 		direction = directions[index];
-
+		
 		if(pos_rand == 1)
 			move *= -1;
-
+		
 		if(st == StateDrunken.G){
+			setSymbol('G');
 			if(move == 1)
 				direction = reverseDrunkenDirection();
 			else

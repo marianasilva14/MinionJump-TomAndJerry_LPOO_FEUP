@@ -50,7 +50,7 @@ public class Suspicious extends Guard{
 		return direction;
 	}
 
-	public void movement(Direction direction){
+	public void movement(Direction direction, Board b){
  
 		int pos_rand;
 		Random rand = new Random();

@@ -17,7 +17,7 @@ public class Game {
 
 	public boolean invalidMovement(Entity e, Level lv){
 
-		if(e.getPosx() < 0 || e.getPosy()< 0)
+		if(e.getPosx() < 0 || e.getPosy()< 0 || e.getPosx() >= lv.getBoard().getBoard().length || e.getPosy() >= lv.getBoard().getBoard()[0].length)
 			return true;
 
 		if(lv.getLevel()==1){
@@ -44,12 +44,8 @@ public class Game {
 
 	public boolean invalidEntityMovement(Entity e, Level lv){
 
-		if(e.getPosx() <= 0 || e.getPosy()<= 0)
+		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
 			return true;
-
-		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I'){
-			return true;
-		}
 		else
 			return false;
 	}
@@ -74,7 +70,7 @@ public class Game {
 
 
 	}
-
+	
 	public boolean changeLevel(Entity e, Level lv){
 
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'S')
@@ -99,14 +95,27 @@ public class Game {
 				e.setSymbol('K');
 			return true;
 		}
+		
 		else if(e instanceof Ogre){
 			if(((Ogre) e).getKey())
 			e.setSymbol('O');
 		}
-			
+		
 		return false;
 	}
 
+	public void cleanClub(Board b){
+		
+		int row= b.getBoard().length;
+		int col= b.getBoard()[0].length;
+		
+		for(int i = 0; i < row; i++){
+			for(int j = 0; j < col; j++){
+				if(b.getBoard()[i][j] == '*')
+					b.getBoard()[i][j]=' ';
+			}
+		}
+	}
 
 	public Level getLevel() {
 		return level;
