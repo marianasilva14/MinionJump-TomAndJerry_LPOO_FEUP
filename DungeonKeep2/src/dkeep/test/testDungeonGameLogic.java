@@ -1,6 +1,9 @@
 package dkeep.test;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.util.Random;
+
 import dkeep.logic.*;
 import dkeep.logic.Game.Direction;
 
@@ -24,7 +27,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testMoveHeroIntoToFreeCell(){
 		Board board = new  Board(map);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		assertEquals(1,level.getEntities().get(0).getPosx());
 		assertEquals(1,level.getEntities().get(0).getPosy());
 		Direction direction = Direction.DOWN;
@@ -36,7 +42,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testHeroIsCapturedByGuard(){
 		Board board= new Board(map);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
 		Direction direction = Direction.RIGHT;
@@ -48,7 +57,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testAdjacentPositionOgre(){
 		Board board= new Board(map2);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
 		Direction direction = Direction.RIGHT;
@@ -59,7 +71,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testExitDoorKeyCell(){
 		Board board= new Board(map);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
 		assertEquals('H',game.getLevel().getEntities().get(0).getSymbol());
@@ -73,7 +88,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testFailsToOpenWithoutTheKey(){
 		Board board= new Board(map);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
@@ -85,7 +103,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testOpenDoorWithKey(){
 		Board board= new Board(map);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
@@ -102,7 +123,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testWinGame(){
 		Board board= new Board(map);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		Direction direction = Direction.DOWN;
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
@@ -118,7 +142,10 @@ public class testDungeonGameLogic {
 	@Test
 	public void testIfChangeLeverTo$(){
 		Board board= new Board(map2);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		level.getEntities().get(1).setPosx(3);
 		level.getEntities().get(1).setPosy(1);
@@ -134,7 +161,10 @@ public class testDungeonGameLogic {
 	@Test(timeout=1000)
 	public void testSomeRandomBehavior(){
 		Board board= new Board(map2);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		int x_old = level.getEntities().get(1).getPosx();
 		int y_old = level.getEntities().get(1).getPosy();
@@ -173,7 +203,10 @@ public class testDungeonGameLogic {
 	@Test(timeout=1000)
 	public void testOgreClub(){
 		Board board= new Board(map2);
-		Level level = new Level(board);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
 		boolean outcome1=false, outcome2=false, outcome3 = false, outcome4 = false;
 
@@ -216,11 +249,14 @@ public class testDungeonGameLogic {
 	public void testRaffleGuard(){
 
 		boolean outcome1=false, outcome2=false, outcome3 = false;
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
 		
-		Entity g=  Guard.raffleGuard(5,5);
+		Entity g=  Guard.raffleGuard(pos_rand,5,5);
 		while(!outcome1 || !outcome2 || !outcome3){
 		
-			 g=  Guard.raffleGuard(5,5);
+			 g=  Guard.raffleGuard(pos_rand,5,5);
 			 
 			if(g instanceof Drunken)
 				outcome1=true;

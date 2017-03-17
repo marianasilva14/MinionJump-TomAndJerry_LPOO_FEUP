@@ -46,22 +46,19 @@ public class Guard extends Entity{
 		
 	}
 	
-	public static Guard raffleGuard(int posx, int posy){
-		
+	public static Guard raffleGuard(int button, int posx, int posy){
+	
 		Guard g;
-		int pos_rand=0;
-		Random rand = new Random();
-		pos_rand = rand.nextInt(3);
 		
-		switch(pos_rand) {
+		switch(button) {
 		case 0:
-			g = new Rookie(posx,posy);
-			break;
-		case 1:
 			g = new Suspicious(posx,posy);
 			break;
-		case 2:
+		case 1:
 			g = new Drunken(posx,posy);
+			break;
+		case 2:
+			g = new Rookie(posx,posy);
 			break;
 		default:
 			g = new Rookie(posx,posy);

@@ -58,7 +58,10 @@ public class UserInteraction {
 		// create level 1
 		Board board1 = new Board(level1);
 		Entity hero1 = new Hero(1, 1);
-		Entity guard = Guard.raffleGuard(1, 8);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Entity guard = Guard.raffleGuard(pos_rand, 1, 8);
 		ArrayList<Entity> characters1= new ArrayList<Entity>();
 		characters1.add(hero1);
 		characters1.add(guard);

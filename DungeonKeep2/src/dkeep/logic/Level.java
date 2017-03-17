@@ -18,7 +18,7 @@ public class Level {
 
 	}
 
-	public Level(Board b){
+	public Level(Board b, int guard){
 		entities = new ArrayList<Entity>();
 		board=b;
 
@@ -34,7 +34,7 @@ public class Level {
 				}
 				else if(b.getBoard()[i][j] == 'G'){
 					level=1;
-					Entity entity_guard=  Guard.raffleGuard(i,j);
+					Entity entity_guard=  Guard.raffleGuard(guard,i,j);
 					entities.add(entity_guard);
 					b.getBoard()[i][j]= ' ';
 				}
@@ -77,7 +77,6 @@ public class Level {
 		}
 
 		else if(capture instanceof Ogre){
-
 			if((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'))
 				return true;
 			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
@@ -88,7 +87,6 @@ public class Level {
 
 			return false;
 		}
-
 
 		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || 
 				(hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || 

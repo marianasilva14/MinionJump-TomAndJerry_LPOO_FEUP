@@ -99,6 +99,51 @@ public abstract class Entity {
 
 		return 1;
 	}
+	
+	public boolean checkIfMovementIsValid(Direction direction, Board b){
+
+		switch(direction) {
+		case UP:{
+			if((b.getBoard()[posx-1][posy] != ' ' )&&
+					(b.getBoard()[posx-1][posy] != 'k') &&
+					(b.getBoard()[posx-1][posy] != 'S')){
+				return false;
+			}
+			else
+				return true;
+		}
+		case DOWN:{
+			if((b.getBoard()[posx+1][posy] != ' ' )&&
+					(b.getBoard()[posx+1][posy] != 'k') &&
+					(b.getBoard()[posx+1][posy] != 'S')){
+				return false;
+			}
+			else
+				return true;
+		}
+		case RIGHT:{
+			if((b.getBoard()[posx][posy+1] != ' ' )&&
+					(b.getBoard()[posx][posy+1] != 'k') &&
+					(b.getBoard()[posx][posy+1] != 'S')){
+				return false;
+			}
+			else
+				return true;
+		}
+		case LEFT:{
+			if((b.getBoard()[posx][posy-1] != ' ' )&&
+					(b.getBoard()[posx][posy-1] != 'k') &&
+					(b.getBoard()[posx][posy-1] != 'S')){
+				return false;
+			}
+			else
+				return true;
+		}
+		}
+		
+		return true;
+
+	}
 
 	public abstract void movement(Direction direction, Board b);
 

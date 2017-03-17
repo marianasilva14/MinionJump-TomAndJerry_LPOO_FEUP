@@ -38,18 +38,26 @@ public class Ogre extends Entity{
 	public void movement(Direction direction, Board b){
 		
 		int pos_rand = boardLimits(b);
+		boolean invalid=false;
+		
+		if(!checkIfMovementIsValid(direction,b))
+			invalid=true;
 		
 		switch(pos_rand) {
 		case 0:
+			if(!invalid)
 			posy++;
 			break;
 		case 1:
+			if(!invalid)
 			posy--;
 			break;
 		case 2:
+			if(!invalid)
 			posx--;
 			break;
 		case 3:
+			if(!invalid)
 			posx++;
 			break;
 	
