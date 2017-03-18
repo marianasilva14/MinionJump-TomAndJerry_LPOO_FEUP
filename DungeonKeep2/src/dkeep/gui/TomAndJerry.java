@@ -29,9 +29,10 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TomAndJerry {
-
 
 	static char[][] level1 = {{'X','X','X','X','X','X','X','X','X','X'},
 			{'X','H',' ',' ','I',' ','X',' ','G','X'},
@@ -103,6 +104,21 @@ public class TomAndJerry {
 		frame.setBounds(100, 100, 664, 484);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setFocusable(true);
+		
+		frame.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				int keyCode = e.getKeyCode();
+				switch( keyCode ) { 
+				case KeyEvent.VK_UP: move(Direction.UP); break;
+				case KeyEvent.VK_DOWN: move(Direction.DOWN); break;
+				case KeyEvent.VK_RIGHT: move(Direction.RIGHT); break;
+				case KeyEvent.VK_LEFT: move(Direction.LEFT); break;
+				}
+			}
+		});
 
 		game_graphics = new GameGraphics();
 		game_graphics.setBounds(20,86,320,320);
@@ -123,7 +139,7 @@ public class TomAndJerry {
 				}
 				catch(NumberFormatException e){
 					e.printStackTrace();
-				//	textArea.setText("Invalid number of ogres");
+					//	textArea.setText("Invalid number of ogres");
 					numberOfOgres.setText("0");
 					return;
 				}
@@ -192,14 +208,7 @@ public class TomAndJerry {
 
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-
-				for(int i=0; i < level.getEntities().size();i++){
-					level.getEntities().get(i).movement(Direction.RIGHT, level.getBoard());
-					if(level.getEntities().get(i) instanceof Ogre)
-						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
-				}
-
-				gameLogic();
+				move(Direction.RIGHT);
 			}
 		});
 
@@ -207,43 +216,21 @@ public class TomAndJerry {
 
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				for(int i=0; i < level.getEntities().size();i++){
-					level.getEntities().get(i).movement(Direction.LEFT, level.getBoard());
-					if(level.getEntities().get(i) instanceof Ogre)
-						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
-				}
-
-				gameLogic();
+				move(Direction.LEFT);
 			}
 
 		});
 
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				for(int i=0; i < level.getEntities().size();i++){
-					level.getEntities().get(i).movement(Direction.DOWN, level.getBoard());
-					if(level.getEntities().get(i) instanceof Ogre)
-						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
-				}
-
-				gameLogic();
+				move(Direction.DOWN);
 			}
 		});
 
 
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				for(int i=0; i < level.getEntities().size();i++){
-					level.getEntities().get(i).movement(Direction.UP, level.getBoard());
-					if(level.getEntities().get(i) instanceof Ogre)
-						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
-				}
-
-
-				gameLogic();
+				move(Direction.UP);
 			}
 		});
 
@@ -253,6 +240,7 @@ public class TomAndJerry {
 
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame.requestFocusInWindow ();
 				board = new Board(level1);
 				level= new Level(board, guardType);
 				game = new Game(level);
@@ -271,7 +259,16 @@ public class TomAndJerry {
 
 	}
 
+	public void move(Direction direction){
 
+		for(int i=0; i < level.getEntities().size();i++){
+			level.getEntities().get(i).movement(direction, level.getBoard());
+			if(level.getEntities().get(i) instanceof Ogre)
+				((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
+		}
+
+		gameLogic();
+	}
 	public void checkButtons(){
 
 		Entity hero = game.getLevel().getEntities().get(0);
@@ -305,7 +302,7 @@ public class TomAndJerry {
 	public void gameLogic(){
 
 		game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game));
-		
+
 		for(int i=1; i < game.getLevel().getEntities().size();i++){
 			if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(i))){
 				btnUp.setEnabled(false);
