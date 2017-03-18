@@ -15,36 +15,9 @@ public class Game {
 		this.level=level;
 	}
 
-	public boolean invalidMovement(Entity e, Level lv){
-
-		if(e.getPosx() < 0 || e.getPosy()< 0 || e.getPosx() >= lv.getBoard().getBoard().length || e.getPosy() >= lv.getBoard().getBoard()[0].length)
-			return true;
-
-		if(lv.getLevel()==1){
-			if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
-				return true;
-			else
-				return false;
-		}
-		else{
-			if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X')
-				return true;
-			else
-				return false;
-		}
-	}
-
 
 	public boolean verifyS(Entity e, Level lv){
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
-			return true;
-		else
-			return false;
-	}
-
-	public boolean invalidEntityMovement(Entity e, Level lv){
-
-		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'X' || lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
 			return true;
 		else
 			return false;

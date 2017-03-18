@@ -16,6 +16,7 @@ import dkeep.logic.Guard;
 import dkeep.logic.Game.Direction;
 import dkeep.logic.Hero;
 import dkeep.logic.Level;
+import dkeep.logic.Ogre;
 import dkeep.logic.Drunken.StateDrunken;
 
 import javax.swing.JTextField;
@@ -26,6 +27,8 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Graphic {
 
@@ -42,7 +45,7 @@ public class Graphic {
 			{'X','X','X','X','X','X','X','X','X','X'}};
 
 	static char[][] level2 = {{'X','X','X','X','X','X','X','X','X','X'},
-			{'I',' ',' ',' ',' ',' ',' ',' ','k','X'},
+			{'I','H',' ',' ',' ',' ','O',' ','k','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -53,16 +56,19 @@ public class Graphic {
 			{'X','X','X','X','X','X','X','X','X','X'}};
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField numberOfOgres;
 	private JTextArea textArea = new JTextArea();
-	private JButton btnRight = new JButton("Right");
-	private JButton btnUp  = new JButton("Up");
-	private JButton btnLeft = new JButton("Left");
-	private JButton btnDown = new JButton("Down");
+	private JButton btnRight;
+	private JButton btnUp;
+	private JButton btnLeft;
+	private JButton btnDown;
+	private JComboBox comboBox;
+	private JLabel lblNumberOfOgres;
 	private Board board;
 	private Level level;
 	private Game game;
 	private int guardType;
+	private int nrOfOgres;
 
 	/**
 	 * Launch the application.
@@ -96,22 +102,47 @@ public class Graphic {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lblNumberOfOgres = new JLabel("Number of Ogres");
+		lblNumberOfOgres = new JLabel("Number of Ogres");
 		lblNumberOfOgres.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNumberOfOgres.setBounds(10, 11, 121, 33);
 		frame.getContentPane().add(lblNumberOfOgres);
 
-		textField = new JTextField();
-		textField.setBounds(139, 17, 91, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+
+		numberOfOgres = new JTextField();
+		numberOfOgres.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				try{
+					Integer.parseInt(numberOfOgres.getText());
+				}
+				catch(NumberFormatException e){
+					e.printStackTrace();
+					textArea.setText("Invalid number of ogres");
+					numberOfOgres.setText("0");
+					return;
+				}
+				if(Integer.parseInt(numberOfOgres.getText()) > 5){
+					numberOfOgres.setText("5");
+					nrOfOgres = 5;
+				}
+				if(Integer.parseInt(numberOfOgres.getText()) < 1){
+					numberOfOgres.setText("1");
+					nrOfOgres = 1;
+				}
+
+				nrOfOgres = Integer.parseInt(numberOfOgres.getText());
+			}
+		});
+		numberOfOgres.setBounds(139, 17, 91, 20);
+		frame.getContentPane().add(numberOfOgres);
+		numberOfOgres.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Guard personality");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(20, 55, 91, 20);
 		frame.getContentPane().add(lblNewLabel);
 
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				guardType = comboBox.getSelectedIndex();
@@ -135,85 +166,82 @@ public class Graphic {
 		frame.getContentPane().add(textArea);
 		textArea.setFont(new Font("monospaced", Font.PLAIN, 22)); //definir tipo de letra e tamanho
 
-		JButton btnRight = new JButton("Right");
-		btnRight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				int x,y;
-
-				for(int i=0; i < level.getEntities().size();i++){
-					x=level.getEntities().get(i).getPosx();
-					y=level.getEntities().get(i).getPosy();
-					
-					level.getEntities().get(i).movement(Direction.RIGHT, level.getBoard());
-				}
-				gameLogic();
-			}
-		});
-
+		btnRight = new JButton("Right");
+		btnRight.setEnabled(false);
 		btnRight.setBounds(552, 214, 90, 28);
 		frame.getContentPane().add(btnRight);
-		btnRight.setEnabled(false);
 
-		JButton btnLeft = new JButton("Left");
-		
+		btnLeft = new JButton("Left");
+		btnLeft.setEnabled(false);
 		btnLeft.setBounds(439, 214, 90, 28);
 		frame.getContentPane().add(btnLeft);
-		btnLeft.setEnabled(false);
-		
-		btnLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int x,y;
 
-				for(int i=0; i < level.getEntities().size();i++){
-					x=level.getEntities().get(i).getPosx();
-					y=level.getEntities().get(i).getPosy();
 
-					level.getEntities().get(i).movement(Direction.LEFT, level.getBoard());
-				}
-				
-				gameLogic();
-			}
-
-		});
-		
-		JButton btnDown = new JButton("Down");
-		
+		btnDown = new JButton("Down");
+		btnDown.setEnabled(false);
 		btnDown.setBounds(500, 253, 90, 28);
 		frame.getContentPane().add(btnDown);
-		btnDown.setEnabled(false);
-		
-		btnDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int x,y;
+
+
+		btnUp = new JButton("Up");
+		btnUp.setEnabled(false);
+		btnUp.setBounds(500, 174, 90, 28);
+		frame.getContentPane().add(btnUp);
+
+
+		btnRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
 
 				for(int i=0; i < level.getEntities().size();i++){
-					x=level.getEntities().get(i).getPosx();
-					y=level.getEntities().get(i).getPosy();
-
-					level.getEntities().get(i).movement(Direction.DOWN, level.getBoard());
+					level.getEntities().get(i).movement(Direction.RIGHT, level.getBoard());
+					if(level.getEntities().get(i) instanceof Ogre)
+						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
 				}
+
 				gameLogic();
 			}
 		});
-		
-		
-		JButton btnUp = new JButton("Up");
-		
-		btnUp.setBounds(500, 174, 90, 28);
-		frame.getContentPane().add(btnUp);
-		btnUp.setEnabled(false);
-		
-		btnUp.addActionListener(new ActionListener() {
+
+
+
+		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int x,y;
 
 				for(int i=0; i < level.getEntities().size();i++){
-					x=level.getEntities().get(i).getPosx();
-					y=level.getEntities().get(i).getPosy();
+					level.getEntities().get(i).movement(Direction.LEFT, level.getBoard());
+					if(level.getEntities().get(i) instanceof Ogre)
+						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
+				}
+
+				gameLogic();
+			}
+
+		});
+
+		btnDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				for(int i=0; i < level.getEntities().size();i++){
+					level.getEntities().get(i).movement(Direction.DOWN, level.getBoard());
+					if(level.getEntities().get(i) instanceof Ogre)
+						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
+				}
+
+				gameLogic();
+			}
+		});
+
+
+		btnUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				
+				for(int i=0; i < level.getEntities().size();i++){
 					level.getEntities().get(i).movement(Direction.UP, level.getBoard());
+					if(level.getEntities().get(i) instanceof Ogre)
+						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
 				}
 				
+
 				gameLogic();
 			}
 		});
@@ -225,13 +253,10 @@ public class Graphic {
 				level= new Level(board, guardType);
 				game = new Game(level);
 
-				btnUp.setEnabled(true);
-				btnDown.setEnabled(true);
-				btnRight.setEnabled(true);
-				btnLeft.setEnabled(true);
-				
+				checkButtons();
+
 				printBoard();
-				
+
 			}
 		});
 		btnNewGame.setBounds(310, 54, 102, 23);
@@ -252,7 +277,8 @@ public class Graphic {
 		int col = game.getLevel().getBoard().getBoard()[0].length;
 
 		ArrayList<Entity> e = game.getLevel().getEntities();
-		game.checkLever(e.get(0), game.getLevel());
+		if(game.getLevel().getBoard().checkLimits(e.get(0)))
+			game.checkLever(e.get(0), game.getLevel());
 
 		for(int i=0; i < e.size(); i++)
 			game.entityLever(e.get(i), game.getLevel());
@@ -297,42 +323,75 @@ public class Graphic {
 
 		Entity hero = game.getLevel().getEntities().get(0);
 		Hero h = (Hero)hero;
-		System.out.println("BOTAAAAAAAAAAAAAO");
-		if(!h.checkIfMovementIsValid(Direction.UP, game.getLevel().getBoard())){
-			btnUp.setEnabled(false);
+
+		if(game.getLevel().getBoard().checkLimits(h)){
+
+			if(!h.checkIfMovementIsValid(Direction.UP, game.getLevel().getBoard()))
+				btnUp.setEnabled(false);
+			else
+				btnUp.setEnabled(true);
+
+			if(!h.checkIfMovementIsValid(Direction.DOWN, game.getLevel().getBoard()))
+				btnDown.setEnabled(false);
+			else
+				btnDown.setEnabled(true);
+
+			if(!h.checkIfMovementIsValid(Direction.LEFT, game.getLevel().getBoard()))
+				btnLeft.setEnabled(false);
+			else
+				btnLeft.setEnabled(true);
+
+			if(!h.checkIfMovementIsValid(Direction.RIGHT, game.getLevel().getBoard()))
+				btnRight.setEnabled(false);
+			else
+				btnRight.setEnabled(true);
 		}
-		else
-			btnUp.setEnabled(true);
-
-		if(!h.checkIfMovementIsValid(Direction.DOWN, game.getLevel().getBoard()))
-			btnDown.setEnabled(false);
-		else
-			btnDown.setEnabled(true);
-
-		if(!h.checkIfMovementIsValid(Direction.LEFT, game.getLevel().getBoard()))
-			btnLeft.setEnabled(false);
-		else
-			btnLeft.setEnabled(true);
-
-		if(!h.checkIfMovementIsValid(Direction.RIGHT, game.getLevel().getBoard()))
-			btnRight.setEnabled(false);
-		else
-			btnRight.setEnabled(true);
 
 	}
-	
+
 	public void gameLogic(){
 		
+
 		printBoard();
-		
+		game.cleanClub(game.getLevel().getBoard());	
+
 		if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1))){
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			btnRight.setEnabled(false);
 			btnLeft.setEnabled(false);
-			textArea.setText("You Won");	
+			textArea.setText("You got caught!!");
+			return;
 		}
-		
-		checkButtons();
+
+		if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
+
+			int ogres=1;
+
+			if(game.getLevel().getLevel() == 1){
+				board = new Board(level2);
+				level = new Level(board, guardType);
+				game = new Game(level);
+				game.getLevel().getEntities().get(0).setSymbol('A');
+
+				while(ogres != nrOfOgres) {
+					Ogre o = new Ogre(1,4);
+					game.getLevel().getEntities().add(o);
+					ogres++;
+				}
+
+			}
+			else{
+				btnUp.setEnabled(false);
+				btnDown.setEnabled(false);
+				btnRight.setEnabled(false);
+				btnLeft.setEnabled(false);
+				textArea.setText("You won!!");
+				return;
+			}
+
+		}
+		else
+			checkButtons();
 	}
 }

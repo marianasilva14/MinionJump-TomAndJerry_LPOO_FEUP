@@ -17,7 +17,7 @@ public class Board {
 	public Board(char b[][]){
 		map=b;
 	}
-	
+
 	public char[][] getBoard(){
 		return map;
 	}
@@ -26,6 +26,24 @@ public class Board {
 		return map[posx][posy];
 	}
 
+	public boolean checkLimits(Entity e){
+
+		int row= map.length-1;
+		int col= map[0].length-1;
+
+
+		if (e.getPosy() == col || e.getPosy() == 0
+				|| e.getPosx() == row || e.getPosx() == 0)
+			return false;
+		else if ((e.getPosy()+1 <= col && e.getPosy()+1 >= 0)
+				&& (e.getPosy()-1 <= col && e.getPosy()-1 >= 0)
+				&& (e.getPosx()-1 <= row && e.getPosx()-1 >= 0)
+				&& (e.getPosx()+1 <= row && e.getPosx()+1 >= 0))
+			return true;
+
+		else
+			return false;
+	}
 	public void printBoard(Game game)
 	{	
 		System.out.println();
@@ -36,7 +54,7 @@ public class Board {
 		ArrayList<Entity> e =game.getLevel().getEntities();
 		game.checkLever(e.get(0), game.getLevel());
 		char[][] map= new char[10][10];
-		
+
 		for(int i=0; i < e.size(); i++)
 			game.entityLever(e.get(i), game.getLevel());
 
@@ -69,7 +87,7 @@ public class Board {
 				System.out.print(map[i][j]+" ");
 			System.out.println();
 		}
-		
+
 		System.out.println();
 	}
 }
