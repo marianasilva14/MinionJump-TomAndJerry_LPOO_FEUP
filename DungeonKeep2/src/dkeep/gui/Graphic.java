@@ -67,6 +67,7 @@ public class Graphic {
 	private Board board;
 	private Level level;
 	private Game game;
+	private JButton btnNewGame;
 	private int guardType;
 	private int nrOfOgres;
 
@@ -234,19 +235,22 @@ public class Graphic {
 
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				for(int i=0; i < level.getEntities().size();i++){
 					level.getEntities().get(i).movement(Direction.UP, level.getBoard());
 					if(level.getEntities().get(i) instanceof Ogre)
 						((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
 				}
-				
+
 
 				gameLogic();
 			}
 		});
 
-		JButton btnNewGame = new JButton("New Game");
+		btnNewGame = new JButton("New Game");
+		btnNewGame.setBounds(310, 54, 102, 23);
+		frame.getContentPane().add(btnNewGame);
+		
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				board = new Board(level1);
@@ -254,13 +258,11 @@ public class Graphic {
 				game = new Game(level);
 
 				checkButtons();
-
 				printBoard();
 
 			}
 		});
-		btnNewGame.setBounds(310, 54, 102, 23);
-		frame.getContentPane().add(btnNewGame);
+	
 
 
 		JLabel lblYouCanStart = new JLabel("You can start a new game");
@@ -350,20 +352,22 @@ public class Graphic {
 	}
 
 	public void gameLogic(){
-		
 
 		printBoard();
-		game.cleanClub(game.getLevel().getBoard());	
 
-		if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1))){
-			btnUp.setEnabled(false);
-			btnDown.setEnabled(false);
-			btnRight.setEnabled(false);
-			btnLeft.setEnabled(false);
-			textArea.setText("You got caught!!");
-			return;
+		for(int i=1; i < game.getLevel().getEntities().size();i++){
+			if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(i))){
+				btnUp.setEnabled(false);
+				btnDown.setEnabled(false);
+				btnRight.setEnabled(false);
+				btnLeft.setEnabled(false);
+				textArea.setText("You got caught!!");
+				return;
+			}
 		}
-
+		
+		game.cleanClub(game.getLevel().getBoard());	
+		
 		if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
 
 			int ogres=1;
@@ -379,7 +383,6 @@ public class Graphic {
 					game.getLevel().getEntities().add(o);
 					ogres++;
 				}
-
 			}
 			else{
 				btnUp.setEnabled(false);

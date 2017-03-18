@@ -36,117 +36,151 @@ public class Ogre extends Entity{
 	}
 
 	public void movement(Direction direction, Board b){
-		
+
 		int pos_rand = boardLimits(b);
 		boolean invalid=false;
-		
+
 		if(!checkIfMovementIsValid(direction,b))
 			invalid=true;
-		
-		switch(pos_rand) {
-		case 0:
-			if(!invalid)
-			posy++;
-			break;
-		case 1:
-			if(!invalid)
-			posy--;
-			break;
-		case 2:
-			if(!invalid)
-			posx--;
-			break;
-		case 3:
-			if(!invalid)
-			posx++;
-			break;
-	
+
+		if(verifyI(direction, b))
+			invalid=true;
+
+
+		if(!invalid){
+
+			switch(pos_rand) {
+			case 0:
+				posy++;
+				break;
+			case 1:
+				posy--;
+				break;
+			case 2:
+				posx--;
+				break;
+			case 3:
+				posx++;
+				break;
+
+			}
 		}
 	}
 
-	public void club(Board b){
+	public boolean verifyI(Direction direction, Board b){
 
-		while(true){
-			int pos_rand;
-			Random rand = new Random();
-			pos_rand = rand.nextInt(4);
-			switch(pos_rand) {
-			case 0:{
-				if (b.getBoard()[posx-1][posy] == 'X' ||  b.getBoard()[posx-1][posy] == 'I')
-					break;
-				else if(b.getBoard()[posx-1][posy] == 'k')
-				{
-					pos_club[0]=posx-1;
-					pos_club[1]=posy;
-					return;
-				}
-				else if(b.getBoard()[posx-1][posy] != 'A' && b.getBoard()[posx-1][posy] != ' ')
-					break;
-				else{
-					b.getBoard()[posx-1][posy]= '*';
-					pos_club[0]=posx-1;
-					pos_club[1]=posy;
-					return;
-				}
-			}
-			case 1:{
-				if(b.getBoard()[posx][posy+1] == 'X' || b.getBoard()[posx][posy+1] == 'I')
-					break;
-				else if( b.getBoard()[posx][posy+1] == 'k'){
+		switch(direction) {
+		case UP:{
+			if(b.getBoard()[posx-1][posy] == 'I')
+				return true;
+			else
+				return false;
+		}
+		case DOWN:{
+			if(b.getBoard()[posx+1][posy] == 'I')
+				return true;
+			else
+				return false;
+		}
+		case RIGHT:{
+			if(b.getBoard()[posx][posy+1] == 'I')
+				return true;
+			else
+				return false;
+		}
+		case LEFT:{
+			if(b.getBoard()[posx][posy-1] == 'I')
+				return true;
+			else
+				return false;
+		}
+		}
+		return true;
+
+		}
+
+		public void club(Board b){
+
+			while(true){
+				int pos_rand;
+				Random rand = new Random();
+				pos_rand = rand.nextInt(4);
+				switch(pos_rand) {
+				case 0:{
+					if (b.getBoard()[posx-1][posy] == 'X' ||  b.getBoard()[posx-1][posy] == 'I')
+						break;
+					else if(b.getBoard()[posx-1][posy] == 'k')
 					{
 						pos_club[0]=posx-1;
 						pos_club[1]=posy;
 						return;
 					}
+					else if(b.getBoard()[posx-1][posy] != 'A' && b.getBoard()[posx-1][posy] != ' ')
+						break;
+					else{
+						b.getBoard()[posx-1][posy]= '*';
+						pos_club[0]=posx-1;
+						pos_club[1]=posy;
+						return;
+					}
 				}
-				else if(b.getBoard()[posx][posy+1] != 'A' && b.getBoard()[posx][posy+1] != ' ')
-					break;
-				else{
-					b.getBoard()[posx][posy+1]= '*';
-					pos_club[0]=posx;
-					pos_club[1]=posy+1;
-					return;
+				case 1:{
+					if(b.getBoard()[posx][posy+1] == 'X' || b.getBoard()[posx][posy+1] == 'I')
+						break;
+					else if( b.getBoard()[posx][posy+1] == 'k'){
+						{
+							pos_club[0]=posx;
+							pos_club[1]=posy+1;
+							return;
+						}
+					}
+					else if(b.getBoard()[posx][posy+1] != 'A' && b.getBoard()[posx][posy+1] != ' ')
+						break;
+					else{
+						b.getBoard()[posx][posy+1]= '*';
+						pos_club[0]=posx;
+						pos_club[1]=posy+1;
+						return;
+					}
 				}
-			}
-			case 2:{
-				if(b.getBoard()[posx+1][posy] == 'X'|| b.getBoard()[posx+1][posy] == 'I')
-					break;
-				else if(b.getBoard()[posx+1][posy] == 'k'){
-					pos_club[0]=posx-1;
-					pos_club[1]=posy;
-					return;
+				case 2:{
+					if(b.getBoard()[posx+1][posy] == 'X'|| b.getBoard()[posx+1][posy] == 'I')
+						break;
+					else if(b.getBoard()[posx+1][posy] == 'k'){
+						pos_club[0]=posx+1;
+						pos_club[1]=posy;
+						return;
+					}
+					else if(b.getBoard()[posx+1][posy] != 'A' && b.getBoard()[posx+1][posy] != ' ')
+						break;
+					else{
+						b.getBoard()[posx+1][posy]= '*';
+						pos_club[0]=posx+1;
+						pos_club[1]=posy;
+						return;
+					}
 				}
-				else if(b.getBoard()[posx+1][posy] != 'A' && b.getBoard()[posx+1][posy] != ' ')
-					break;
-				else{
-					b.getBoard()[posx+1][posy]= '*';
-					pos_club[0]=posx+1;
-					pos_club[1]=posy;
-					return;
+				case 3:{
+					if( b.getBoard()[posx][posy-1] == 'X' || b.getBoard()[posx][posy-1] == 'I')
+						break;
+					else if(b.getBoard()[posx][posy-1] == 'k'){
+						pos_club[0]=posx;
+						pos_club[1]=posy-1;
+						return;
+					}
+					else if(b.getBoard()[posx][posy-1] != 'A' && b.getBoard()[posx][posy-1] != ' ')
+						break;
+					else{
+						b.getBoard()[posx][posy-1]= '*';
+						pos_club[0]=posx;
+						pos_club[1]=posy-1;
+						return;
+					}
 				}
-			}
-			case 3:{
-				if( b.getBoard()[posx][posy-1] == 'X' || b.getBoard()[posx][posy-1] == 'I')
-					break;
-				else if(b.getBoard()[posx][posy-1] == 'k'){
-					pos_club[0]=posx-1;
-					pos_club[1]=posy;
-					return;
 				}
-				else if(b.getBoard()[posx][posy-1] != 'A' && b.getBoard()[posx][posy-1] != ' ')
-					break;
-				else{
-					b.getBoard()[pos_club[0]][pos_club[1]]=' ';
-					b.getBoard()[posx][posy-1]= '*';
-					pos_club[0]=posx;
-					pos_club[1]=posy-1;
-					return;
-				}
-			}
 			}
 		}
+
+
 	}
-
-
-}
 

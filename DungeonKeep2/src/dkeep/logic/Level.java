@@ -71,20 +71,22 @@ public class Level {
 
 	public boolean checkIfEnds(Entity hero, Entity capture){
 
+		if(board.checkLimits(hero)){
 		if(capture instanceof Drunken){
 			if(((Drunken)capture).getState() == StateDrunken.g)
 				return false;
 		}
 
 		else if(capture instanceof Ogre){
+		
 			if((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'))
 				return true;
 			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
 					|| (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
 					|| (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) 
 					|| (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
-				return true;
-
+				return false;
+			
 			return false;
 		}
 
@@ -93,7 +95,7 @@ public class Level {
 				(hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || 
 				(hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 			return true;
-
+		}
 		return false;
 	}
 
