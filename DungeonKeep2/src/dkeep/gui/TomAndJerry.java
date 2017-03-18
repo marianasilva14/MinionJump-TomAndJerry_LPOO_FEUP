@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class Graphic {
+public class TomAndJerry {
 
 
 	static char[][] level1 = {{'X','X','X','X','X','X','X','X','X','X'},
@@ -57,7 +57,6 @@ public class Graphic {
 
 	private JFrame frame;
 	private JTextField numberOfOgres;
-	private JTextArea textArea = new JTextArea();
 	private JButton btnRight;
 	private JButton btnUp;
 	private JButton btnLeft;
@@ -79,7 +78,7 @@ public class Graphic {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Graphic window = new Graphic();
+					TomAndJerry window = new TomAndJerry();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -91,7 +90,7 @@ public class Graphic {
 	/**
 	 * Create the application.
 	 */
-	public Graphic() {
+	public TomAndJerry() {
 		initialize();
 	}
 
@@ -99,10 +98,15 @@ public class Graphic {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 664, 484);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+
+		game_graphics = new GameGraphics();
+		game_graphics.setBounds(20,86,320,320);
+		frame.getContentPane().add(game_graphics);
 
 		lblNumberOfOgres = new JLabel("Number of Ogres");
 		lblNumberOfOgres.setHorizontalAlignment(SwingConstants.CENTER);
@@ -119,7 +123,7 @@ public class Graphic {
 				}
 				catch(NumberFormatException e){
 					e.printStackTrace();
-					textArea.setText("Invalid number of ogres");
+				//	textArea.setText("Invalid number of ogres");
 					numberOfOgres.setText("0");
 					return;
 				}
@@ -162,11 +166,6 @@ public class Graphic {
 		});
 		blbExit.setBounds(516, 384, 89, 23);
 		frame.getContentPane().add(blbExit);
-		textArea.setEditable(false);
-
-		textArea.setBounds(24, 97, 369, 307);
-		frame.getContentPane().add(textArea);
-		textArea.setFont(new Font("monospaced", Font.PLAIN, 22)); //definir tipo de letra e tamanho
 
 		btnRight = new JButton("Right");
 		btnRight.setEnabled(false);
@@ -251,7 +250,7 @@ public class Graphic {
 		btnNewGame = new JButton("New Game");
 		btnNewGame.setBounds(310, 54, 102, 23);
 		frame.getContentPane().add(btnNewGame);
-		
+
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				board = new Board(level1);
@@ -259,11 +258,11 @@ public class Graphic {
 				game = new Game(level);
 
 				checkButtons();
-				printBoard();
+				game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game));
 
 			}
 		});
-	
+
 
 
 		JLabel lblYouCanStart = new JLabel("You can start a new game");
@@ -272,55 +271,6 @@ public class Graphic {
 
 	}
 
-	public void printBoard(){
-		String gamestring="";
-		char[][] map = new char[10][10];
-
-		int row = game.getLevel().getBoard().getBoard().length;
-		int col = game.getLevel().getBoard().getBoard()[0].length;
-
-		ArrayList<Entity> e = game.getLevel().getEntities();
-		if(game.getLevel().getBoard().checkLimits(e.get(0)))
-			game.checkLever(e.get(0), game.getLevel());
-
-		for(int i=0; i < e.size(); i++)
-			game.entityLever(e.get(i), game.getLevel());
-
-		for(int i = 0; i < row; i++){
-			for(int j = 0; j < col; j++){
-				map[i][j] = game.getLevel().getBoard().getBoard()[i][j];
-			}
-		}
-
-		for(int i=0; i < e.size();i++){
-			if(e.get(i) instanceof Guard){
-				if(e.get(i) instanceof Drunken){
-					if(((Drunken)e.get(i)).getState() == StateDrunken.G)
-						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
-					else{
-						game.getLevel().getEntities().get(i).setSymbol('g');
-						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
-					}
-				}
-				else
-					map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
-			}
-			else
-				map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
-		}
-
-		for(int i=0; i< map.length;i++){
-			for(int j=0; j < map[0].length;j++){
-				gamestring+=map[i][j]+ " ";
-			}
-			gamestring+='\n';
-		}
-
-		gamestring += "\n";
-
-		textArea.setText(gamestring);
-
-	}
 
 	public void checkButtons(){
 
@@ -354,21 +304,21 @@ public class Graphic {
 
 	public void gameLogic(){
 
-		printBoard();
-
+		game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game));
+		
 		for(int i=1; i < game.getLevel().getEntities().size();i++){
 			if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(i))){
 				btnUp.setEnabled(false);
 				btnDown.setEnabled(false);
 				btnRight.setEnabled(false);
 				btnLeft.setEnabled(false);
-				textArea.setText("You got caught!!");
+				game_graphics.updateGame(null);
 				return;
 			}
 		}
-		
+
 		game.cleanClub(game.getLevel().getBoard());	
-		
+
 		if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
 
 			int ogres=1;
@@ -390,7 +340,7 @@ public class Graphic {
 				btnDown.setEnabled(false);
 				btnRight.setEnabled(false);
 				btnLeft.setEnabled(false);
-				textArea.setText("You won!!");
+				//ganha
 				return;
 			}
 

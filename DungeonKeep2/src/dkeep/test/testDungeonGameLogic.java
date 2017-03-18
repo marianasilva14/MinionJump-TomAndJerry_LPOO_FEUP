@@ -97,7 +97,7 @@ public class testDungeonGameLogic {
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		direction = Direction.LEFT;
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
-		assertTrue(game.invalidMovement(game.getLevel().getEntities().get(0), game.getLevel()));
+		assertTrue(game.getLevel().getEntities().get(0).checkIfMovementIsValid(direction, game.getLevel().getBoard()));
 	}
 
 	@Test

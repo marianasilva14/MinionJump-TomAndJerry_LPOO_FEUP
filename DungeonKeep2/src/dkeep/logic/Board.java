@@ -90,4 +90,56 @@ public class Board {
 
 		System.out.println();
 	}
+
+
+
+	public String printBoardToString(Game game){
+		String gamestring="";
+		char[][] map = new char[10][10];
+
+		int row = game.getLevel().getBoard().getBoard().length;
+		int col = game.getLevel().getBoard().getBoard()[0].length;
+
+		ArrayList<Entity> e = game.getLevel().getEntities();
+		if(game.getLevel().getBoard().checkLimits(e.get(0)))
+			game.checkLever(e.get(0), game.getLevel());
+
+		for(int i=0; i < e.size(); i++)
+			game.entityLever(e.get(i), game.getLevel());
+
+		for(int i = 0; i < row; i++){
+			for(int j = 0; j < col; j++){
+				map[i][j] = game.getLevel().getBoard().getBoard()[i][j];
+			}
+		}
+
+		for(int i=0; i < e.size();i++){
+			if(e.get(i) instanceof Guard){
+				if(e.get(i) instanceof Drunken){
+					if(((Drunken)e.get(i)).getState() == StateDrunken.G)
+						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
+					else{
+						game.getLevel().getEntities().get(i).setSymbol('g');
+						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
+					}
+				}
+				else
+					map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
+			}
+			else
+				map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
+		}
+
+		for(int i=0; i< map.length;i++){
+			for(int j=0; j < map[0].length;j++){
+				gamestring+=map[i][j];
+			}
+			gamestring+='\n';
+		}
+
+		gamestring += "\n";
+
+		return gamestring;
+
+	}
 }
