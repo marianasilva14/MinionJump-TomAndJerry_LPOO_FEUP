@@ -34,6 +34,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JInternalFrame;
 
 public class TomAndJerry {
 
@@ -67,6 +68,7 @@ public class TomAndJerry {
 	private JButton btnDown;
 	private JComboBox comboBox;
 	private JLabel lblNumberOfOgres;
+	private JButton btnNewButton;
 	private Board board;
 	private Level level;
 	private Game game;
@@ -108,7 +110,7 @@ public class TomAndJerry {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setFocusable(true);
-		
+
 		frame.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -135,12 +137,12 @@ public class TomAndJerry {
 		});
 
 		game_graphics = new GameGraphics();
-		game_graphics.setBounds(20,86,380,380);
+		game_graphics.setBounds(20,99,360,360);
 		frame.getContentPane().add(game_graphics);
 
-		lblNumberOfOgres = new JLabel("Number of Ogres");
-		lblNumberOfOgres.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNumberOfOgres.setBounds(10, 11, 121, 33);
+		lblNumberOfOgres = new JLabel("Number of Dogs");
+		lblNumberOfOgres.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNumberOfOgres.setBounds(20, 11, 121, 33);
 		frame.getContentPane().add(lblNumberOfOgres);
 
 
@@ -169,14 +171,14 @@ public class TomAndJerry {
 				nrOfOgres = Integer.parseInt(numberOfOgres.getText());
 			}
 		});
-		
+
 		numberOfOgres.setBounds(139, 17, 91, 20);
 		frame.getContentPane().add(numberOfOgres);
 		numberOfOgres.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Guard personality");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(20, 55, 91, 20);
+		JLabel lblNewLabel = new JLabel("Tom personality");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setBounds(20, 55, 111, 20);
 		frame.getContentPane().add(lblNewLabel);
 
 		comboBox = new JComboBox();
@@ -219,10 +221,11 @@ public class TomAndJerry {
 		btnUp.setEnabled(false);
 		btnUp.setBounds(526, 205, 90, 28);
 		frame.getContentPane().add(btnUp);
-		
+
 		commentsLabel = new JLabel("You can start a new game");
+		commentsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		commentsLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		commentsLabel.setBounds(20, 470, 307, 33);
+		commentsLabel.setBounds(20, 459, 360, 33);
 		frame.getContentPane().add(commentsLabel);
 
 
@@ -277,6 +280,16 @@ public class TomAndJerry {
 		btnNewGame.setBounds(310, 54, 102, 23);
 		frame.getContentPane().add(btnNewGame);
 
+		btnNewButton = new JButton("Level editor");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LevelEditor levelEditor = new LevelEditor();
+				levelEditor.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(545, 99, 111, 23);
+		frame.getContentPane().add(btnNewButton);
+
 
 
 	}
@@ -290,7 +303,7 @@ public class TomAndJerry {
 				continue;
 			}
 			level.getEntities().get(i).movement(direction, level.getBoard());
-			
+
 		}
 
 		gameLogic();

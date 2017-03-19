@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class GameGraphics extends JPanel{
 
-	private final int width=40, height=40;
+	private final int width=360, height=360;
 
 	private BufferedImage hero;
 	private BufferedImage ogre;
@@ -96,22 +96,22 @@ public class GameGraphics extends JPanel{
 		int x=0;
 		int y=0;
 		if(lose){
-			g.drawImage(hero_lose ,0,0,380,380,null);
+			g.drawImage(hero_lose ,0,0, width,height,null);
 			lose=false;
 			return;
 		}
 		if(win){
-			g.drawImage(hero_win ,0,0,380,380,null);
+			g.drawImage(hero_win ,0,0, width,height,null);
 			win=false;
 			return;
 		}
 		if(invalid_ogres){
-			g.drawImage(invalidOgres ,0,0,380,380,null);
+			g.drawImage(invalidOgres ,0,0, width,height,null);
 			invalid_ogres=false;
 			return;
 		}
 		if(boardToString == null){
-			g.drawImage(init ,0,0,380,380,null);
+			g.drawImage(init ,0,0, width,height,null);
 			return;
 		}
 		for(int i =0; i < boardToString.length();i++){
@@ -120,7 +120,7 @@ public class GameGraphics extends JPanel{
 				x=0;
 				continue;
 			}
-			g.drawImage(getImage(boardToString.charAt(i)),x*38,y*38,38,38,null);
+			g.drawImage(getImage(boardToString.charAt(i)),x*(width/10),y*(height/10),(width/10),(height/10),null);
 			x++;
 		}
 
