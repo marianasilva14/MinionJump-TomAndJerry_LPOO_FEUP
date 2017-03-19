@@ -12,10 +12,10 @@ import dkeep.logic.Drunken;
 public class Board {
 
 	private char map[][];
-	private static int nr_times;
+
 
 	public Board(char b[][]){
-		map=b;
+		map=copy(b);
 	}
 
 	public char[][] getBoard(){
@@ -141,5 +141,15 @@ public class Board {
 
 		return gamestring;
 
+	}
+
+	public char[][] copy(char[][] layout){
+		char[][] copy = new char[layout.length][layout[0].length];
+		for(int i=0;i<layout.length;i++){
+			for(int j=0; j<layout[0].length;j++){
+				copy[i][j]=layout[i][j];
+			}
+		}
+		return copy;
 	}
 }

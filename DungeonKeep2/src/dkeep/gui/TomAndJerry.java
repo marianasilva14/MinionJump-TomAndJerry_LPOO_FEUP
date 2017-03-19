@@ -21,6 +21,7 @@ import dkeep.logic.Drunken.StateDrunken;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -31,6 +32,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class TomAndJerry {
 
@@ -67,10 +70,10 @@ public class TomAndJerry {
 	private Board board;
 	private Level level;
 	private Game game;
-	private JButton btnNewGame;
 	private GameGraphics game_graphics;
 	private int guardType;
 	private int nrOfOgres;
+	private JLabel commentsLabel;
 
 	/**
 	 * Launch the application.
@@ -139,8 +142,8 @@ public class TomAndJerry {
 				}
 				catch(NumberFormatException e){
 					e.printStackTrace();
-					//	textArea.setText("Invalid number of ogres");
 					numberOfOgres.setText("0");
+					game_graphics.invalidNrOgres();
 					return;
 				}
 				if(Integer.parseInt(numberOfOgres.getText()) > 5){
@@ -204,10 +207,16 @@ public class TomAndJerry {
 		btnUp.setEnabled(false);
 		btnUp.setBounds(500, 174, 90, 28);
 		frame.getContentPane().add(btnUp);
+		
+		commentsLabel = new JLabel("You can start a new game");
+		commentsLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		commentsLabel.setBounds(30, 401, 307, 33);
+		frame.getContentPane().add(commentsLabel);
 
 
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				commentsLabel.setText("Jerry moved right" );
 				move(Direction.RIGHT);
 			}
 		});
@@ -216,6 +225,7 @@ public class TomAndJerry {
 
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				commentsLabel.setText("Jerry moved left" );
 				move(Direction.LEFT);
 			}
 
@@ -223,6 +233,7 @@ public class TomAndJerry {
 
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				commentsLabel.setText("Jerry moved down" );
 				move(Direction.DOWN);
 			}
 		});
@@ -230,13 +241,12 @@ public class TomAndJerry {
 
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				commentsLabel.setText("Jerry moved up" );
 				move(Direction.UP);
 			}
 		});
 
-		btnNewGame = new JButton("New Game");
-		btnNewGame.setBounds(310, 54, 102, 23);
-		frame.getContentPane().add(btnNewGame);
+		JButton btnNewGame = new JButton("New Game");
 
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -251,11 +261,10 @@ public class TomAndJerry {
 			}
 		});
 
+		btnNewGame.setBounds(310, 54, 102, 23);
+		frame.getContentPane().add(btnNewGame);
 
 
-		JLabel lblYouCanStart = new JLabel("You can start a new game");
-		lblYouCanStart.setBounds(34, 396, 359, 49);
-		frame.getContentPane().add(lblYouCanStart);
 
 	}
 
@@ -309,7 +318,8 @@ public class TomAndJerry {
 				btnDown.setEnabled(false);
 				btnRight.setEnabled(false);
 				btnLeft.setEnabled(false);
-				game_graphics.updateGame(null);
+				commentsLabel.setText("Jerry lost!" );
+				game_graphics.lose();
 				return;
 			}
 		}
@@ -337,7 +347,8 @@ public class TomAndJerry {
 				btnDown.setEnabled(false);
 				btnRight.setEnabled(false);
 				btnLeft.setEnabled(false);
-				//g.drawImage(getImage(boardToString.charAt(i)),x*32,y*32,32,32,null);
+				commentsLabel.setText("Jerry won!" );
+				game_graphics.win();
 				return;
 			}
 

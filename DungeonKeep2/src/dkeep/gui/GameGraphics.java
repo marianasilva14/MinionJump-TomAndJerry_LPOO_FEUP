@@ -27,80 +27,38 @@ public class GameGraphics extends JPanel{
 	private BufferedImage hero_armed;
 	private BufferedImage hero_a;
 	private BufferedImage ogre_lever;
+	private BufferedImage stun;
+	private BufferedImage hero_lose;
+	private BufferedImage hero_win;
+	private BufferedImage init;
+	private BufferedImage invalidOgres;
 	private BufferedImage defaulti;
 	private String boardToString= null;
-
+	private boolean lose =false;
+	private boolean win=false;
+	private boolean invalid_ogres =false;
+	
 	public GameGraphics(){
 		super();
 		try {
 			hero =  ImageIO.read(new File("images/jerryFront.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
 			floor =  ImageIO.read(new File("images/floor.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
 			wall =  ImageIO.read(new File("images/wall.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
 			guard =  ImageIO.read(new File("images/tomFront.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
 			lever =  ImageIO.read(new File("images/cheese.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
 			door =  ImageIO.read(new File("images/door.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-
-		try {
 			guard_asleep =  ImageIO.read(new File("images/tomsleep.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			ogre =  ImageIO.read(new File("images/droopy.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			club =  ImageIO.read(new File("images/bone.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			hero_armed =  ImageIO.read(new File("images/tomK.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			hero_a =  ImageIO.read(new File("images/tomA.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			open_door =  ImageIO.read(new File("images/openDoor.png"));
+			hero_lose =  ImageIO.read(new File("images/lose.png"));
+			hero_win =  ImageIO.read(new File("images/win.png"));
+			ogre_lever =  ImageIO.read(new File("images/cifrao.png"));
+			init =  ImageIO.read(new File("images/menu.png"));
+			invalidOgres =  ImageIO.read(new File("images/invalidNumberOfOgres.png"));
+			stun =  ImageIO.read(new File("images/stunned.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -119,9 +77,9 @@ public class GameGraphics extends JPanel{
 		case 'k': return lever;
 		case 'K': return hero_armed;
 		case '*': return club;
-		//    case '8': return stunnedOgre;
+		case '8': return stun;
 		case ' ': return floor;
-		//case '$': return 
+		case '$': return ogre_lever;
 		default: return defaulti;
 		}
 	}
@@ -136,8 +94,23 @@ public class GameGraphics extends JPanel{
 		super.paintComponent(g);
 		int x=0;
 		int y=0;
+		if(lose){
+			g.drawImage(hero_lose ,0,0,320,320,null);
+			lose=false;
+			return;
+		}
+		if(win){
+			g.drawImage(hero_win ,0,0,320,320,null);
+			win=false;
+			return;
+		}
+		if(invalid_ogres){
+			g.drawImage(invalidOgres ,0,0,320,320,null);
+			invalid_ogres=false;
+			return;
+		}
 		if(boardToString == null){
-			g.drawRect(0, 0, 50, 50);
+			g.drawImage(init ,0,0,320,320,null);
 			return;
 		}
 		for(int i =0; i < boardToString.length();i++){
@@ -149,5 +122,18 @@ public class GameGraphics extends JPanel{
 			g.drawImage(getImage(boardToString.charAt(i)),x*32,y*32,32,32,null);
 			x++;
 		}
+
+	}
+
+	public void lose(){
+		lose=true;
+	}
+
+	public void win(){
+		win=true;
+	}
+	
+	public void invalidNrOgres(){
+		invalid_ogres=true;
 	}
 }
