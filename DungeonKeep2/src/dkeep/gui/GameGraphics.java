@@ -37,6 +37,7 @@ public class GameGraphics extends JPanel{
 	private boolean lose =false;
 	private boolean win=false;
 	private boolean invalid_ogres =false;
+
 	
 	public GameGraphics(){
 		super();
@@ -95,22 +96,22 @@ public class GameGraphics extends JPanel{
 		int x=0;
 		int y=0;
 		if(lose){
-			g.drawImage(hero_lose ,0,0,320,320,null);
+			g.drawImage(hero_lose ,0,0,380,380,null);
 			lose=false;
 			return;
 		}
 		if(win){
-			g.drawImage(hero_win ,0,0,320,320,null);
+			g.drawImage(hero_win ,0,0,380,380,null);
 			win=false;
 			return;
 		}
 		if(invalid_ogres){
-			g.drawImage(invalidOgres ,0,0,320,320,null);
+			g.drawImage(invalidOgres ,0,0,380,380,null);
 			invalid_ogres=false;
 			return;
 		}
 		if(boardToString == null){
-			g.drawImage(init ,0,0,320,320,null);
+			g.drawImage(init ,0,0,380,380,null);
 			return;
 		}
 		for(int i =0; i < boardToString.length();i++){
@@ -119,7 +120,7 @@ public class GameGraphics extends JPanel{
 				x=0;
 				continue;
 			}
-			g.drawImage(getImage(boardToString.charAt(i)),x*32,y*32,32,32,null);
+			g.drawImage(getImage(boardToString.charAt(i)),x*38,y*38,38,38,null);
 			x++;
 		}
 

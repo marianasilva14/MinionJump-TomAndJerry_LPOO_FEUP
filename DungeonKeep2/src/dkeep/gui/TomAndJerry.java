@@ -104,7 +104,7 @@ public class TomAndJerry {
 	private void initialize() {
 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 664, 484);
+		frame.setBounds(100, 100, 730, 542);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setFocusable(true);
@@ -115,16 +115,27 @@ public class TomAndJerry {
 
 				int keyCode = e.getKeyCode();
 				switch( keyCode ) { 
-				case KeyEvent.VK_UP: move(Direction.UP); break;
-				case KeyEvent.VK_DOWN: move(Direction.DOWN); break;
-				case KeyEvent.VK_RIGHT: move(Direction.RIGHT); break;
-				case KeyEvent.VK_LEFT: move(Direction.LEFT); break;
+				case KeyEvent.VK_UP:{ 
+					commentsLabel.setText("Jerry moved up" );
+					move(Direction.UP); break;}
+				case KeyEvent.VK_DOWN: {
+					commentsLabel.setText("Jerry moved down" );
+					move(Direction.DOWN); break;
+				}
+				case KeyEvent.VK_RIGHT:{
+					commentsLabel.setText("Jerry moved right" );
+					move(Direction.RIGHT); break;
+				}
+				case KeyEvent.VK_LEFT: {
+					commentsLabel.setText("Jerry moved left" );
+					move(Direction.LEFT); break;
+				}
 				}
 			}
 		});
 
 		game_graphics = new GameGraphics();
-		game_graphics.setBounds(20,86,320,320);
+		game_graphics.setBounds(20,86,380,380);
 		frame.getContentPane().add(game_graphics);
 
 		lblNumberOfOgres = new JLabel("Number of Ogres");
@@ -158,6 +169,7 @@ public class TomAndJerry {
 				nrOfOgres = Integer.parseInt(numberOfOgres.getText());
 			}
 		});
+		
 		numberOfOgres.setBounds(139, 17, 91, 20);
 		frame.getContentPane().add(numberOfOgres);
 		numberOfOgres.setColumns(10);
@@ -183,34 +195,34 @@ public class TomAndJerry {
 				System.exit(0);
 			}
 		});
-		blbExit.setBounds(516, 384, 89, 23);
+		blbExit.setBounds(526, 425, 89, 23);
 		frame.getContentPane().add(blbExit);
 
 		btnRight = new JButton("Right");
 		btnRight.setEnabled(false);
-		btnRight.setBounds(552, 214, 90, 28);
+		btnRight.setBounds(578, 245, 90, 28);
 		frame.getContentPane().add(btnRight);
 
 		btnLeft = new JButton("Left");
 		btnLeft.setEnabled(false);
-		btnLeft.setBounds(439, 214, 90, 28);
+		btnLeft.setBounds(465, 245, 90, 28);
 		frame.getContentPane().add(btnLeft);
 
 
 		btnDown = new JButton("Down");
 		btnDown.setEnabled(false);
-		btnDown.setBounds(500, 253, 90, 28);
+		btnDown.setBounds(526, 284, 90, 28);
 		frame.getContentPane().add(btnDown);
 
 
 		btnUp = new JButton("Up");
 		btnUp.setEnabled(false);
-		btnUp.setBounds(500, 174, 90, 28);
+		btnUp.setBounds(526, 205, 90, 28);
 		frame.getContentPane().add(btnUp);
 		
 		commentsLabel = new JLabel("You can start a new game");
 		commentsLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		commentsLabel.setBounds(30, 401, 307, 33);
+		commentsLabel.setBounds(20, 470, 307, 33);
 		frame.getContentPane().add(commentsLabel);
 
 
@@ -256,6 +268,7 @@ public class TomAndJerry {
 				game = new Game(level);
 
 				checkButtons();
+				commentsLabel.setText("New Game!");
 				game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game));
 
 			}
@@ -271,9 +284,13 @@ public class TomAndJerry {
 	public void move(Direction direction){
 
 		for(int i=0; i < level.getEntities().size();i++){
-			level.getEntities().get(i).movement(direction, level.getBoard());
-			if(level.getEntities().get(i) instanceof Ogre)
+			if(level.getEntities().get(i) instanceof Ogre){
+				((Ogre)level.getEntities().get(i)).movement(direction, level.getBoard(),(Hero) level.getEntities().get(0));
 				((Ogre)level.getEntities().get(i)).club(game.getLevel().getBoard());
+				continue;
+			}
+			level.getEntities().get(i).movement(direction, level.getBoard());
+			
 		}
 
 		gameLogic();
@@ -337,7 +354,7 @@ public class TomAndJerry {
 				game.getLevel().getEntities().get(0).setSymbol('A');
 
 				while(ogres != nrOfOgres) {
-					Ogre o = new Ogre(1,4);
+					Ogre o = new Ogre(7,4);
 					game.getLevel().getEntities().add(o);
 					ogres++;
 				}

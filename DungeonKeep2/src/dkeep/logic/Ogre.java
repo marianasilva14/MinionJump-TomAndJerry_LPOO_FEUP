@@ -9,6 +9,7 @@ public class Ogre extends Entity{
 	private char symbol;
 	private int[] pos_club = {1,1};
 	private boolean key=false;
+	private int nrOfMoves=-1;
 
 	public Ogre(int posx, int posy) {
 		super(posx, posy);
@@ -34,19 +35,39 @@ public class Ogre extends Entity{
 	public void setKey(boolean b){
 		key=b;
 	}
+	
+	public int getNrOfMoves(){
+		return nrOfMoves;
+	}
+	
+	public void setNrOfMoves(int nr){
+		nrOfMoves=nr;
+	}
 
-	public void movement(Direction direction, Board b){
+	public void movement(Direction direction, Board b, Hero hero){
 
 		int pos_rand = boardLimits(b);
 		boolean invalid=false;
+		
+		if(nrOfMoves ==2){
+			symbol='O';
+			nrOfMoves=-1;
+		}
+		if(nrOfMoves >-1)
+			nrOfMoves++;
 
 		if(!checkIfMovementIsValid(direction,b))
 			invalid=true;
 
 		if(verifyI(direction, b))
 			invalid=true;
+		
+		if(ogreNextToTheHero(direction,b,hero)){
+			symbol='8';
+			nrOfMoves++;
+		}
 
-
+		if(nrOfMoves == -1){
 		if(!invalid){
 
 			switch(pos_rand) {
@@ -65,6 +86,17 @@ public class Ogre extends Entity{
 
 			}
 		}
+		}
+	}
+	
+	public boolean ogreNextToTheHero(Direction direction, Board b, Hero hero){
+		if( (posx-1 == hero.getPosx() && posy == hero.getPosy()) || 
+				(posx+1 == hero.getPosx() && posy == hero.getPosy()) ||
+				(posx == hero.getPosx() && posy+1 == hero.getPosy()) ||
+				(posx == hero.getPosx() && posy-1== hero.getPosy()))
+			return true;
+		else
+			return false;
 	}
 
 	public boolean verifyI(Direction direction, Board b){
@@ -179,6 +211,11 @@ public class Ogre extends Entity{
 				}
 				}
 			}
+		}
+
+
+		public void movement(Direction direction, Board b) {
+			
 		}
 
 
