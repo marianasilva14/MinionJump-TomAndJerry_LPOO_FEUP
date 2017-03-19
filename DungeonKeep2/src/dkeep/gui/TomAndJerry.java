@@ -337,7 +337,7 @@ public class TomAndJerry {
 				btnDown.setEnabled(false);
 				btnRight.setEnabled(false);
 				btnLeft.setEnabled(false);
-				//ganha
+				//g.drawImage(getImage(boardToString.charAt(i)),x*32,y*32,32,32,null);
 				return;
 			}
 

@@ -23,6 +23,10 @@ public class GameGraphics extends JPanel{
 	private BufferedImage wall;
 	private BufferedImage guard_asleep;
 	private BufferedImage door;
+	private BufferedImage open_door;
+	private BufferedImage hero_armed;
+	private BufferedImage hero_a;
+	private BufferedImage ogre_lever;
 	private BufferedImage defaulti;
 	private String boardToString= null;
 
@@ -70,6 +74,36 @@ public class GameGraphics extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		try {
+			ogre =  ImageIO.read(new File("images/droopy.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			club =  ImageIO.read(new File("images/bone.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			hero_armed =  ImageIO.read(new File("images/tomK.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			hero_a =  ImageIO.read(new File("images/tomA.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			open_door =  ImageIO.read(new File("images/openDoor.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private Image getImage(char c) {
@@ -77,16 +111,17 @@ public class GameGraphics extends JPanel{
 		case 'H': return hero;
 		case 'X': return wall;
 		case 'I': return door;
-		//  case 'S': return openDoor;
+		case 'S': return open_door;
 		case 'O': return ogre;
-		//  case 'A': return ;
+		case 'A': return hero_a;
 		case 'g': return guard_asleep;
 		case 'G': return guard;
 		case 'k': return lever;
-		// case 'K': return keyHero;
+		case 'K': return hero_armed;
 		case '*': return club;
 		//    case '8': return stunnedOgre;
 		case ' ': return floor;
+		//case '$': return 
 		default: return defaulti;
 		}
 	}
@@ -115,8 +150,4 @@ public class GameGraphics extends JPanel{
 			x++;
 		}
 	}
-
-
-
-
 }

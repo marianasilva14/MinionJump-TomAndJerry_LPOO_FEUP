@@ -62,12 +62,12 @@ public class Graphic {
 	private JButton btnUp;
 	private JButton btnLeft;
 	private JButton btnDown;
+	private JButton btnNewGame;
 	private JComboBox comboBox;
 	private JLabel lblNumberOfOgres;
 	private Board board;
 	private Level level;
 	private Game game;
-	private JButton btnNewGame;
 	private GameGraphics game_graphics;
 	private int guardType;
 	private int nrOfOgres;
@@ -178,17 +178,19 @@ public class Graphic {
 		btnLeft.setBounds(439, 214, 90, 28);
 		frame.getContentPane().add(btnLeft);
 
-
 		btnDown = new JButton("Down");
 		btnDown.setEnabled(false);
 		btnDown.setBounds(500, 253, 90, 28);
 		frame.getContentPane().add(btnDown);
 
-
 		btnUp = new JButton("Up");
 		btnUp.setEnabled(false);
 		btnUp.setBounds(500, 174, 90, 28);
 		frame.getContentPane().add(btnUp);
+		
+		btnNewGame = new JButton("New Game");
+		btnNewGame.setBounds(310, 54, 102, 23);
+		frame.getContentPane().add(btnNewGame);
 
 
 		btnRight.addActionListener(new ActionListener() {
@@ -247,10 +249,6 @@ public class Graphic {
 				gameLogic();
 			}
 		});
-
-		btnNewGame = new JButton("New Game");
-		btnNewGame.setBounds(310, 54, 102, 23);
-		frame.getContentPane().add(btnNewGame);
 		
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
