@@ -35,6 +35,12 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JInternalFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JRadioButtonMenuItem;
 
 public class TomAndJerry {
 
@@ -118,20 +124,35 @@ public class TomAndJerry {
 
 				int keyCode = e.getKeyCode();
 				switch( keyCode ) { 
-				case KeyEvent.VK_UP:{ 
-					commentsLabel.setText("Jerry moved up" );
-					move(Direction.UP); break;}
+				case KeyEvent.VK_UP:{ 		
+					if(!checkKeyboardButtons()){
+						commentsLabel.setText("Jerry moved up" );
+						move(Direction.UP);
+					}
+					break;
+				}
 				case KeyEvent.VK_DOWN: {
-					commentsLabel.setText("Jerry moved down" );
-					move(Direction.DOWN); break;
+
+					if(!checkKeyboardButtons()){
+						commentsLabel.setText("Jerry moved down" );
+						move(Direction.DOWN); 
+					}
+					break;
 				}
 				case KeyEvent.VK_RIGHT:{
-					commentsLabel.setText("Jerry moved right" );
-					move(Direction.RIGHT); break;
+
+					if(!checkKeyboardButtons()){
+						commentsLabel.setText("Jerry moved right" );
+						move(Direction.RIGHT); 
+					}
+					break;
 				}
 				case KeyEvent.VK_LEFT: {
-					commentsLabel.setText("Jerry moved left" );
-					move(Direction.LEFT); break;
+					if(!checkKeyboardButtons()){
+						commentsLabel.setText("Jerry moved left" );
+						move(Direction.LEFT);
+					}
+					break;
 				}
 				}
 			}
@@ -289,10 +310,20 @@ public class TomAndJerry {
 				levelEditor.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(515, 116, 111, 23);
+		btnNewButton.setBounds(535, 53, 111, 23);
 		frmDungeonKeep.getContentPane().add(btnNewButton);
-
-
+		
+		JButton btnLoadLevel = new JButton("Load level");
+		btnLoadLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		btnLoadLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnLoadLevel.setBounds(535, 75, 111, 23);
+		frmDungeonKeep.getContentPane().add(btnLoadLevel);
+	
 
 	}
 
@@ -388,5 +419,15 @@ public class TomAndJerry {
 		else
 			checkButtons();
 	}
-	
+
+	public boolean checkKeyboardButtons(){
+		for(int i=1; i < game.getLevel().getEntities().size();i++){
+			if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(i)))
+				return true;
+
+			return false;
+		}
+
+		return false;
+	}
 }

@@ -22,6 +22,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class LevelEditor extends JFrame{
@@ -43,9 +44,18 @@ public class LevelEditor extends JFrame{
 	private char character_selected;
 	private BufferedImage defaulti;
 	private boolean cheese_placed=false, jerry_placed=false;
+	private char[][] board;
+	private JButton btnSaveLevel;
+	private FileWriter fw;
+	
 
 	public LevelEditor() {
-
+		try {
+			fw = new FileWriter("images/level.txt",true);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setTitle("Level Editor");
@@ -177,61 +187,87 @@ public class LevelEditor extends JFrame{
 				if(character_selected == 'H'){
 					if(!jerry_placed){
 						panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+						board[square_x][square_y]=character_selected;
 						jerry_placed= true;
 					}
 				}
 				else if(character_selected == 'k'){
 					if(!cheese_placed){
 						panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+						board[square_x][square_y]=character_selected;
 						cheese_placed= true;
 					}
 				}
-				else
+				else{
 					panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
-
+					board[square_x][square_y]=character_selected;
+				}
 				revalidate();
 			}
-	});
+		});
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setBounds(22, 50, width, height);
 		getContentPane().add(panel_1);
-}
 
-public char[][] drawBoard(int nRows, int nColumns){
-	char[][] b= new char[nRows][nColumns];
+		btnSaveLevel = new JButton("Save level");
+		btnSaveLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-	for(int i=0; i < nRows; i++){
-		for(int j=0; j < nColumns; j++){
-			b[i][j]= ' ';
-		}
+			}
+		});
+		btnSaveLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnSaveLevel.setBounds(520, 427, 112, 29);
+		getContentPane().add(btnSaveLevel);
 	}
-	return b;
-}
 
-private Image getImage(char c) {
-	try{
-		switch(c){
-		case 'H': return ImageIO.read(new File("images/jerryFront.png"));
-		case 'X': return ImageIO.read(new File("images/wall.png"));
-		case 'I': return ImageIO.read(new File("images/door.png"));
-		case 'S': return ImageIO.read(new File("images/openDoor.png"));
-		case 'O': return ImageIO.read(new File("images/droopy.png"));
-		case 'A': return ImageIO.read(new File("images/tomA.png"));
-		case 'g': return ImageIO.read(new File("images/tomsleep.png"));
-		case 'G': return ImageIO.read(new File("images/tomFront.png"));
-		case 'k': return ImageIO.read(new File("images/cheese.png"));
-		case 'K': return ImageIO.read(new File("images/tomK.png"));
-		case '*': return ImageIO.read(new File("images/bone.png"));
-		case '8': return ImageIO.read(new File("images/stunned.png"));
-		case ' ': return ImageIO.read(new File("images/floor.png"));
-		case '$': return ImageIO.read(new File("images/cifrao.png"));
-		default: return defaulti;
+	public char[][] drawBoard(int nRows, int nColumns){
+		char[][] b= new char[nRows][nColumns];
+
+		for(int i=0; i < nRows; i++){
+			for(int j=0; j < nColumns; j++){
+				b[i][j]= ' ';
+			}
 		}
-	} catch (IOException e) {
-		e.printStackTrace();
+		return b;
 	}
-	return null;
-}
 
+	private Image getImage(char c) {
+		try{
+			switch(c){
+			case 'H': return ImageIO.read(new File("images/jerryFront.png"));
+			case 'X': return ImageIO.read(new File("images/wall.png"));
+			case 'I': return ImageIO.read(new File("images/door.png"));
+			case 'S': return ImageIO.read(new File("images/openDoor.png"));
+			case 'O': return ImageIO.read(new File("images/droopy.png"));
+			case 'A': return ImageIO.read(new File("images/tomA.png"));
+			case 'g': return ImageIO.read(new File("images/tomsleep.png"));
+			case 'G': return ImageIO.read(new File("images/tomFront.png"));
+			case 'k': return ImageIO.read(new File("images/cheese.png"));
+			case 'K': return ImageIO.read(new File("images/tomK.png"));
+			case '*': return ImageIO.read(new File("images/bone.png"));
+			case '8': return ImageIO.read(new File("images/stunned.png"));
+			case ' ': return ImageIO.read(new File("images/floor.png"));
+			case '$': return ImageIO.read(new File("images/cifrao.png"));
+			default: return defaulti;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void createBoardToFile(){
+
+		for(int i=0; i < board.length;i++){
+			for(int j=0; j< board[0].length;j++){
+				try {
+					fw.write(board[i][j]+"");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
 
 }
