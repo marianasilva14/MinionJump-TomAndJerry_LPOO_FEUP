@@ -42,6 +42,7 @@ public class LevelEditor extends JFrame{
 	private final int width=405, height=348;
 	private char character_selected;
 	private BufferedImage defaulti;
+	private boolean cheese_placed=false, jerry_placed=false;
 
 	public LevelEditor() {
 
@@ -172,51 +173,65 @@ public class LevelEditor extends JFrame{
 				int square_x, square_y;
 				square_x = mouse.getX()/size_x;
 				square_y = mouse.getY()/size_y;
-				panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+
+				if(character_selected == 'H'){
+					if(!jerry_placed){
+						panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+						jerry_placed= true;
+					}
+				}
+				else if(character_selected == 'k'){
+					if(!cheese_placed){
+						panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+						cheese_placed= true;
+					}
+				}
+				else
+					panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+
 				revalidate();
 			}
-		});
+	});
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setBounds(22, 50, width, height);
 		getContentPane().add(panel_1);
-	}
+}
 
-	public char[][] drawBoard(int nRows, int nColumns){
-		char[][] b= new char[nRows][nColumns];
+public char[][] drawBoard(int nRows, int nColumns){
+	char[][] b= new char[nRows][nColumns];
 
-		for(int i=0; i < nRows; i++){
-			for(int j=0; j < nColumns; j++){
-				b[i][j]= ' ';
-			}
+	for(int i=0; i < nRows; i++){
+		for(int j=0; j < nColumns; j++){
+			b[i][j]= ' ';
 		}
-
-		return b;
 	}
+	return b;
+}
 
-	private Image getImage(char c) {
-		try{
-			switch(c){
-			case 'H': return ImageIO.read(new File("images/jerryFront.png"));
-			case 'X': return ImageIO.read(new File("images/wall.png"));
-			case 'I': return ImageIO.read(new File("images/door.png"));
-			case 'S': return ImageIO.read(new File("images/openDoor.png"));
-			case 'O': return ImageIO.read(new File("images/droopy.png"));
-			case 'A': return ImageIO.read(new File("images/tomA.png"));
-			case 'g': return ImageIO.read(new File("images/tomsleep.png"));
-			case 'G': return ImageIO.read(new File("images/tomFront.png"));
-			case 'k': return ImageIO.read(new File("images/cheese.png"));
-			case 'K': return ImageIO.read(new File("images/tomK.png"));
-			case '*': return ImageIO.read(new File("images/bone.png"));
-			case '8': return ImageIO.read(new File("images/stunned.png"));
-			case ' ': return ImageIO.read(new File("images/floor.png"));
-			case '$': return ImageIO.read(new File("images/cifrao.png"));
-			default: return defaulti;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+private Image getImage(char c) {
+	try{
+		switch(c){
+		case 'H': return ImageIO.read(new File("images/jerryFront.png"));
+		case 'X': return ImageIO.read(new File("images/wall.png"));
+		case 'I': return ImageIO.read(new File("images/door.png"));
+		case 'S': return ImageIO.read(new File("images/openDoor.png"));
+		case 'O': return ImageIO.read(new File("images/droopy.png"));
+		case 'A': return ImageIO.read(new File("images/tomA.png"));
+		case 'g': return ImageIO.read(new File("images/tomsleep.png"));
+		case 'G': return ImageIO.read(new File("images/tomFront.png"));
+		case 'k': return ImageIO.read(new File("images/cheese.png"));
+		case 'K': return ImageIO.read(new File("images/tomK.png"));
+		case '*': return ImageIO.read(new File("images/bone.png"));
+		case '8': return ImageIO.read(new File("images/stunned.png"));
+		case ' ': return ImageIO.read(new File("images/floor.png"));
+		case '$': return ImageIO.read(new File("images/cifrao.png"));
+		default: return defaulti;
 		}
-		return null;
+	} catch (IOException e) {
+		e.printStackTrace();
 	}
+	return null;
+}
 
 
 }

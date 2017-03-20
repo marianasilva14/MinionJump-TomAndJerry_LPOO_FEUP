@@ -101,7 +101,7 @@ public class testDungeonGameLogic {
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		assertFalse(game.getLevel().getEntities().get(0).checkIfMovementIsValid(direction, game.getLevel().getBoard()));
 	}
-/*
+
 	@Test
 	public void testOpenDoorWithKey(){
 		Board board= new Board(map);
@@ -114,12 +114,12 @@ public class testDungeonGameLogic {
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
 		direction = Direction.DOWN;
 		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
-		//game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
-		//assertEquals('K', game.getLevel().getEntities().get(0).getSymbol());
+		game.entityLever(game.getLevel().getEntities().get(0), game.getLevel());
+		assertEquals('K', game.getLevel().getEntities().get(0).getSymbol());
 		game.checkLever(game.getLevel().getEntities().get(0), game.getLevel());
-		assertEquals('S', map[3][0]);
-	}*/
-
+		assertEquals('S', game.getLevel().getBoard().getBoard()[3][0]);
+	}
+/*
 	@Test
 	public void testWinGame(){
 		Board board= new Board(map);
@@ -281,7 +281,7 @@ public class testDungeonGameLogic {
 		assertTrue(outcome3);
 		assertTrue(outcome4);
 	}
-/*
+
 	@Test
 	public void testRaffleGuard(){
 

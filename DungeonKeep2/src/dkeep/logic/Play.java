@@ -48,8 +48,10 @@ public class Play{
 
 			for(int i=1; i < game.getLevel().getEntities().size();i++){
 
-				game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard());
-
+				if(game.getLevel().getEntities().get(i) instanceof Ogre)
+					((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
+				else
+					game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard());
 
 				if (game.getLevel().getLevel() == 2 && game.verifyS(game.getLevel().getEntities().get(0), game.getLevel())) {
 					game.getLevel().getEntities().get(0).setPosx(x);
