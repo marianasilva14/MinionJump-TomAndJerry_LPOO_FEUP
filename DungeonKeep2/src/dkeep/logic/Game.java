@@ -35,13 +35,12 @@ public class Game {
 			{
 				for(int j = 0; j < col_aux; j++)
 				{
+					if(j == lv.getBoard().getBoard().length || j == 0 || i == lv.getBoard().getBoard().length || i == 0)
 					if(lv.getBoard().getBoard()[i][j] == 'I')
 						lv.getBoard().getBoard()[i][j] = 'S';
 				}
 			}
 		}	
-
-
 	}
 	
 	public boolean changeLevel(Entity e, Level lv){

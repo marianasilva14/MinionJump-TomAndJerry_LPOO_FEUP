@@ -60,7 +60,7 @@ public class TomAndJerry {
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X','X','X','X','X','X','X','X','X','X'}};
 
-	private JFrame frame;
+	private JFrame frmDungeonKeep;
 	private JTextField numberOfOgres;
 	private JButton btnRight;
 	private JButton btnUp;
@@ -85,7 +85,7 @@ public class TomAndJerry {
 			public void run() {
 				try {
 					TomAndJerry window = new TomAndJerry();
-					window.frame.setVisible(true);
+					window.frmDungeonKeep.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -105,13 +105,14 @@ public class TomAndJerry {
 	 */
 	private void initialize() {
 
-		frame = new JFrame();
-		frame.setBounds(100, 100, 730, 542);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setFocusable(true);
+		frmDungeonKeep = new JFrame();
+		frmDungeonKeep.setTitle("TOM AND JERRY");
+		frmDungeonKeep.setBounds(100, 100, 730, 542);
+		frmDungeonKeep.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDungeonKeep.getContentPane().setLayout(null);
+		frmDungeonKeep.setFocusable(true);
 
-		frame.addKeyListener(new KeyAdapter() {
+		frmDungeonKeep.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 
@@ -138,12 +139,12 @@ public class TomAndJerry {
 
 		game_graphics = new GameGraphics();
 		game_graphics.setBounds(20,99,360,360);
-		frame.getContentPane().add(game_graphics);
+		frmDungeonKeep.getContentPane().add(game_graphics);
 
 		lblNumberOfOgres = new JLabel("Number of Dogs");
 		lblNumberOfOgres.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNumberOfOgres.setBounds(20, 11, 121, 33);
-		frame.getContentPane().add(lblNumberOfOgres);
+		frmDungeonKeep.getContentPane().add(lblNumberOfOgres);
 
 
 		numberOfOgres = new JTextField();
@@ -173,13 +174,13 @@ public class TomAndJerry {
 		});
 
 		numberOfOgres.setBounds(139, 17, 91, 20);
-		frame.getContentPane().add(numberOfOgres);
+		frmDungeonKeep.getContentPane().add(numberOfOgres);
 		numberOfOgres.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Tom personality");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setBounds(20, 55, 111, 20);
-		frame.getContentPane().add(lblNewLabel);
+		frmDungeonKeep.getContentPane().add(lblNewLabel);
 
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
@@ -189,7 +190,7 @@ public class TomAndJerry {
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Suspicious", "Drunken", "Rookie"}));
 		comboBox.setBounds(139, 55, 127, 20);
-		frame.getContentPane().add(comboBox);
+		frmDungeonKeep.getContentPane().add(comboBox);
 
 		JButton blbExit = new JButton("Exit");
 		blbExit.addActionListener(new ActionListener() {
@@ -198,35 +199,35 @@ public class TomAndJerry {
 			}
 		});
 		blbExit.setBounds(526, 425, 89, 23);
-		frame.getContentPane().add(blbExit);
+		frmDungeonKeep.getContentPane().add(blbExit);
 
 		btnRight = new JButton("Right");
 		btnRight.setEnabled(false);
 		btnRight.setBounds(578, 245, 90, 28);
-		frame.getContentPane().add(btnRight);
+		frmDungeonKeep.getContentPane().add(btnRight);
 
 		btnLeft = new JButton("Left");
 		btnLeft.setEnabled(false);
 		btnLeft.setBounds(465, 245, 90, 28);
-		frame.getContentPane().add(btnLeft);
+		frmDungeonKeep.getContentPane().add(btnLeft);
 
 
 		btnDown = new JButton("Down");
 		btnDown.setEnabled(false);
 		btnDown.setBounds(526, 284, 90, 28);
-		frame.getContentPane().add(btnDown);
+		frmDungeonKeep.getContentPane().add(btnDown);
 
 
 		btnUp = new JButton("Up");
 		btnUp.setEnabled(false);
 		btnUp.setBounds(526, 205, 90, 28);
-		frame.getContentPane().add(btnUp);
+		frmDungeonKeep.getContentPane().add(btnUp);
 
 		commentsLabel = new JLabel("You can start a new game");
 		commentsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		commentsLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		commentsLabel.setBounds(20, 459, 360, 33);
-		frame.getContentPane().add(commentsLabel);
+		frmDungeonKeep.getContentPane().add(commentsLabel);
 
 
 		btnRight.addActionListener(new ActionListener() {
@@ -265,7 +266,7 @@ public class TomAndJerry {
 
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frame.requestFocusInWindow ();
+				frmDungeonKeep.requestFocusInWindow ();
 				board = new Board(level1);
 				level= new Level(board, guardType);
 				game = new Game(level);
@@ -278,17 +279,18 @@ public class TomAndJerry {
 		});
 
 		btnNewGame.setBounds(310, 54, 102, 23);
-		frame.getContentPane().add(btnNewGame);
+		frmDungeonKeep.getContentPane().add(btnNewGame);
 
 		btnNewButton = new JButton("Level editor");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LevelEditor levelEditor = new LevelEditor();
 				levelEditor.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(545, 99, 111, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnNewButton.setBounds(515, 116, 111, 23);
+		frmDungeonKeep.getContentPane().add(btnNewButton);
 
 
 

@@ -76,7 +76,7 @@ public class Drunken extends Guard{
 		StateDrunken st = status[status_rand];
 
 		setStateDrunken(st);
-
+		
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(10);

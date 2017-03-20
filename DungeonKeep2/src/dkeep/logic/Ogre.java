@@ -90,11 +90,16 @@ public class Ogre extends Entity{
 	}
 	
 	public boolean ogreNextToTheHero(Direction direction, Board b, Hero hero){
+		
+		if(hero.getSymbol()=='K'){
 		if( (posx-1 == hero.getPosx() && posy == hero.getPosy()) || 
 				(posx+1 == hero.getPosx() && posy == hero.getPosy()) ||
 				(posx == hero.getPosx() && posy+1 == hero.getPosy()) ||
 				(posx == hero.getPosx() && posy-1== hero.getPosy()))
 			return true;
+		else
+			return false;
+		}
 		else
 			return false;
 	}
