@@ -1,6 +1,5 @@
 package dkeep.logic;
 
-import java.util.Random;
 
 import dkeep.logic.Game.Direction;
 

@@ -1,12 +1,8 @@
 package dkeep.logic;
 import java.util.ArrayList;
 
-import dkeep.cli.UserInteraction;
 import dkeep.logic.Guard;
-import dkeep.logic.Guard.GuardType;
-import dkeep.logic.Hero;
 import dkeep.logic.Drunken.StateDrunken;
-import dkeep.logic.Hero;
 import dkeep.logic.Drunken;
 
 public class Board {

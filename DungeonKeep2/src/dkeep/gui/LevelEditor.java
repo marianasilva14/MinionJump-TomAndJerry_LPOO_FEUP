@@ -1,7 +1,6 @@
 package dkeep.gui;
 
 import javax.swing.JFrame;
-import java.awt.CardLayout;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
@@ -15,9 +14,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-import dkeep.logic.Board;
-
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;

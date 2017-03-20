@@ -1,10 +1,7 @@
 package dkeep.logic;
 import dkeep.logic.Game.Direction;
-import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Drunken;
 
-import java.util.Random;
-import java.util.Vector;
 
 public class Guard extends Entity{
 

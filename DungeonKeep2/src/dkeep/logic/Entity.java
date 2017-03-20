@@ -1,11 +1,9 @@
 package dkeep.logic;
 
 import java.util.Random;
-import java.util.Vector;
 
 import dkeep.logic.Game.Direction;
 
-import java.awt.Point;
 
 public abstract class Entity {
 

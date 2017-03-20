@@ -4,43 +4,28 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import dkeep.logic.Board;
-import dkeep.logic.Drunken;
 import dkeep.logic.Entity;
 import dkeep.logic.Game;
-import dkeep.logic.Guard;
 import dkeep.logic.Game.Direction;
 import dkeep.logic.Hero;
 import dkeep.logic.Level;
 import dkeep.logic.Ogre;
-import dkeep.logic.Drunken.StateDrunken;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JInternalFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JRadioButtonMenuItem;
+
 
 public class TomAndJerry {
 

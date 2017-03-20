@@ -1,9 +1,7 @@
 package dkeep.logic;
 
-import java.util.Scanner;
 
 import dkeep.cli.UserInteraction;
-import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Game.Direction;
 
 public class Play{
