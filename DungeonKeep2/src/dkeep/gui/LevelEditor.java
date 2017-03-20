@@ -44,12 +44,10 @@ public class LevelEditor extends JFrame{
 	private JButton btnSaveLevel;
 	private FileWriter fw;
 	
-
 	public LevelEditor() {
 		try {
 			fw = new FileWriter("images/level.txt",true);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -167,6 +165,8 @@ public class LevelEditor extends JFrame{
 				drawBoard(nRows, nCols);
 				size_x = width/nCols;
 				size_y = height/nRows;
+				
+				board = new char[nRows][nCols];
 			}
 		});
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 13));

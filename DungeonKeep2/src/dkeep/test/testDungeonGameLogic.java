@@ -119,7 +119,7 @@ public class testDungeonGameLogic {
 		game.checkLever(game.getLevel().getEntities().get(0), game.getLevel());
 		assertEquals('S', game.getLevel().getBoard().getBoard()[3][0]);
 	}
-/*
+
 	@Test
 	public void testWinGame(){
 		Board board= new Board(map);
@@ -156,7 +156,6 @@ public class testDungeonGameLogic {
 		game.entityLever(game.getLevel().getEntities().get(1), game.getLevel());
 		assertEquals('O',level.getEntities().get(1).getSymbol());
 	}
-
 
 	@Test(timeout=1000)
 	public void testSomeRandomBehavior(){
@@ -249,13 +248,12 @@ public class testDungeonGameLogic {
 				break;
 			}
 			((Ogre)level.getEntities().get(1)).movement(direction, game.getLevel().getBoard(), (Hero)level.getEntities().get(0));
-
 			((Ogre)level.getEntities().get(1)).club(game.getLevel().getBoard());
 			
-			if((level.getEntities().get(1).getPosx()-1 >=0 && level.getEntities().get(1).getPosx()-1 < game.getLevel().getBoard().getBoard().length ) ||
-					(level.getEntities().get(1).getPosx()+1 >=0 &&level.getEntities().get(1).getPosx()+1 <game.getLevel().getBoard().getBoard().length ) || 
-					(level.getEntities().get(1).getPosy()+1 >=0 && level.getEntities().get(1).getPosy()+1 < game.getLevel().getBoard().getBoard().length )||
-						(level.getEntities().get(1).getPosy()-1 >= 0 && level.getEntities().get(1).getPosy()-1 < game.getLevel().getBoard().getBoard().length )){
+			if((level.getEntities().get(1).getPosx()-1 >=0 && level.getEntities().get(1).getPosx()-1 < game.getLevel().getBoard().getBoard().length)
+			|| (level.getEntities().get(1).getPosx()+1 >=0 &&level.getEntities().get(1).getPosx()+1 <game.getLevel().getBoard().getBoard().length)
+			|| (level.getEntities().get(1).getPosy()+1 >=0 && level.getEntities().get(1).getPosy()+1 < game.getLevel().getBoard().getBoard().length)
+			|| (level.getEntities().get(1).getPosy()-1 >= 0 && level.getEntities().get(1).getPosy()-1 < game.getLevel().getBoard().getBoard().length)){
 			//cima
 			if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()-1][level.getEntities().get(1).getPosy()] == '*'){
 				outcome1=true;
@@ -292,7 +290,9 @@ public class testDungeonGameLogic {
 		
 		Entity g=  Guard.raffleGuard(pos_rand,5,5);
 		while(!outcome1 || !outcome2 || !outcome3){
-		
+			rand = new Random();
+			pos_rand = rand.nextInt(3);
+			
 			 g=  Guard.raffleGuard(pos_rand,5,5);
 			 
 			if(g instanceof Drunken)
@@ -306,6 +306,6 @@ public class testDungeonGameLogic {
 		assertTrue(outcome1);
 		assertTrue(outcome2);
 		assertTrue(outcome3);
-		}*/
+		}
 
 	}
