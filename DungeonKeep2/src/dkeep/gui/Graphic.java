@@ -93,7 +93,7 @@ public class Graphic {
 	public Graphic() {
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */

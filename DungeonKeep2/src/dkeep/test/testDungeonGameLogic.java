@@ -171,6 +171,7 @@ public class testDungeonGameLogic {
 		int x_old = level.getEntities().get(1).getPosx();
 		int y_old = level.getEntities().get(1).getPosy();
 		boolean outcome1=false, outcome2=false, outcome3 = false, outcome4 = false;
+		
 		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
 			Random rand2 = new Random();
 			pos_rand2 = rand.nextInt(4);
@@ -233,6 +234,7 @@ public class testDungeonGameLogic {
 		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
 			Random rand2 = new Random();
 			pos_rand2 = rand.nextInt(4);
+			
 			switch(pos_rand2) {
 			case 0:
 				direction = Direction.UP;
@@ -250,10 +252,7 @@ public class testDungeonGameLogic {
 			((Ogre)level.getEntities().get(1)).movement(direction, game.getLevel().getBoard(), (Hero)level.getEntities().get(0));
 			((Ogre)level.getEntities().get(1)).club(game.getLevel().getBoard());
 			
-			if((level.getEntities().get(1).getPosx()-1 >=0 && level.getEntities().get(1).getPosx()-1 < game.getLevel().getBoard().getBoard().length)
-			|| (level.getEntities().get(1).getPosx()+1 >=0 &&level.getEntities().get(1).getPosx()+1 <game.getLevel().getBoard().getBoard().length)
-			|| (level.getEntities().get(1).getPosy()+1 >=0 && level.getEntities().get(1).getPosy()+1 < game.getLevel().getBoard().getBoard().length)
-			|| (level.getEntities().get(1).getPosy()-1 >= 0 && level.getEntities().get(1).getPosy()-1 < game.getLevel().getBoard().getBoard().length)){
+			if(level.getBoard().checkLimits(level.getEntities().get(1))){
 			//cima
 			if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()-1][level.getEntities().get(1).getPosy()] == '*'){
 				outcome1=true;
@@ -307,5 +306,35 @@ public class testDungeonGameLogic {
 		assertTrue(outcome2);
 		assertTrue(outcome3);
 		}
+	/*
+	@Test
+	public void testMovementGuard(){
 
+		boolean outcome1=false, outcome2=false, outcome3 = false;
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		
+		Entity g =  Guard.raffleGuard(pos_rand,5,5);
+	//	g.movement(direction, level.getBoard().);
+		while(!outcome1 || !outcome2 || !outcome3){
+			rand = new Random();
+			pos_rand = rand.nextInt(3);
+			
+			 g=  Guard.raffleGuard(pos_rand,5,5);
+			 
+			if(g instanceof Drunken)
+				outcome1=true;
+			else if(g instanceof Rookie)
+				outcome2=true;
+			else
+				outcome3=true;
+		}
+		
+		assertTrue(outcome1);
+		assertTrue(outcome2);
+		assertTrue(outcome3);
+		}
+
+*/
 	}

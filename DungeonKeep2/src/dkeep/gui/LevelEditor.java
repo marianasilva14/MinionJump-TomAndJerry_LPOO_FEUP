@@ -17,9 +17,12 @@ import javax.swing.border.BevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class LevelEditor extends JFrame{
 
@@ -34,22 +37,18 @@ public class LevelEditor extends JFrame{
 	private JComboBox comboBox_columns, comboBox_rows, comboBox_level;
 	private JLabel lblColumns,lblRow, lblLevel;
 	private JPanel panel,panel_1;
-	private int size_x=0;
-	private int size_y=0;
+	private int size_x=1;
+	private int size_y=1;
 	private final int width=405, height=348;
 	private char character_selected;
 	private BufferedImage defaulti;
 	private boolean cheese_placed=false, jerry_placed=false;
 	private char[][] board;
 	private JButton btnSaveLevel;
-	private FileWriter fw;
-	
+	private BufferedWriter fw;
+	private int level;
+
 	public LevelEditor() {
-		try {
-			fw = new FileWriter("images/level.txt",true);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setTitle("Level Editor");
@@ -119,7 +118,7 @@ public class LevelEditor extends JFrame{
 		comboBox_columns = new JComboBox();
 		comboBox_columns.setBounds(88, 2, 128, 20);
 		panel.add(comboBox_columns);
-		comboBox_columns.setModel(new DefaultComboBoxModel(new Integer[] {1,2,3,4,5,6,7,8,9,10}));
+		comboBox_columns.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10,11,12,13,14,15}));
 
 		lblColumns = new JLabel("Columns");
 		lblColumns.setBounds(0, 0, 78, 20);
@@ -134,7 +133,7 @@ public class LevelEditor extends JFrame{
 		comboBox_rows = new JComboBox();
 		comboBox_rows.setBounds(88, 61, 128, 20);
 		panel.add(comboBox_rows);
-		comboBox_rows.setModel(new DefaultComboBoxModel(new Integer[] {1,2,3,4,5,6,7,8,9,10}));
+		comboBox_rows.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10,11,12,13,14,15}));
 
 		comboBox_level = new JComboBox();
 		comboBox_level.setBounds(88, 138, 128, 20);
@@ -159,13 +158,15 @@ public class LevelEditor extends JFrame{
 		btnStart = new JButton("Start Editor");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				panel_1.setEnabled(true);
 				panel.setVisible(false);
-				int nRows = (int) comboBox_rows.getSelectedItem();
-				int nCols = (int) comboBox_columns.getSelectedItem();
-				drawBoard(nRows, nCols);
+				int nRows = Integer.parseInt(comboBox_rows.getSelectedItem().toString());
+				int nCols = Integer.parseInt(comboBox_columns.getSelectedItem().toString());
+				level = Integer.parseInt(comboBox_level.getSelectedItem().toString());
+				
 				size_x = width/nCols;
 				size_y = height/nRows;
-				
+
 				board = new char[nRows][nCols];
 			}
 		});
@@ -174,32 +175,21 @@ public class LevelEditor extends JFrame{
 		getContentPane().add(btnStart);
 
 		panel_1 = new JPanel();
+		panel_1.setEnabled(false);
 		panel_1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent mouse) {
+				if(!panel_1.isEnabled())
+					return;
 				int square_x, square_y;
 				square_x = mouse.getX()/size_x;
 				square_y = mouse.getY()/size_y;
 
-				if(character_selected == 'H'){
-					if(!jerry_placed){
-						panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
-						board[square_x][square_y]=character_selected;
-						jerry_placed= true;
-					}
-				}
-				else if(character_selected == 'k'){
-					if(!cheese_placed){
-						panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
-						board[square_x][square_y]=character_selected;
-						cheese_placed= true;
-					}
-				}
-				else{
-					panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
-					board[square_x][square_y]=character_selected;
-				}
-				revalidate();
+				if(checkIfLevelIsValid(square_x,square_y))
+					drawCharacterSelected(square_x,square_y);
+				else if(square_x !=0 && square_x != board.length-1 && square_y !=0 && square_y != board.length-1)
+					drawCharacterSelected(square_x,square_y);
 			}
+
 		});
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setBounds(22, 50, width, height);
@@ -208,23 +198,18 @@ public class LevelEditor extends JFrame{
 		btnSaveLevel = new JButton("Save level");
 		btnSaveLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				try {
+					fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("images/level.txt"), "utf-8"));
+					createBoardToFile();
+					fw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}	
 			}
 		});
 		btnSaveLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnSaveLevel.setBounds(520, 427, 112, 29);
 		getContentPane().add(btnSaveLevel);
-	}
-
-	public char[][] drawBoard(int nRows, int nColumns){
-		char[][] b= new char[nRows][nColumns];
-
-		for(int i=0; i < nRows; i++){
-			for(int j=0; j < nColumns; j++){
-				b[i][j]= ' ';
-			}
-		}
-		return b;
 	}
 
 	private Image getImage(char c) {
@@ -252,18 +237,66 @@ public class LevelEditor extends JFrame{
 		return null;
 	}
 
-	public void createBoardToFile(){
-
+	public void createBoardToFile() throws IOException{
+		
+		String nRows = comboBox_rows.getSelectedItem().toString();
+		String nCols = comboBox_columns.getSelectedItem().toString();
+		String lv = comboBox_level.getSelectedItem().toString();
+		
+		fw.write(nRows);
+		fw.newLine();
+		fw.write(nCols);
+		fw.newLine();
+		fw.write(lv);
+		fw.newLine();
+		
 		for(int i=0; i < board.length;i++){
 			for(int j=0; j< board[0].length;j++){
-				try {
-					fw.write(board[i][j]+"");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				fw.write(board[i][j]+"");
 			}
+			fw.newLine();
 		}
+	}
+
+	public boolean checkIfLevelIsValid(int x, int y){
+
+		if(x == 0 || x == board.length-1 || y == 0 || y == board.length-1){
+			if(character_selected == 'X' || character_selected== 'I')
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
 
 	}
+
+	public void drawCharacterSelected(int square_x, int square_y){
+		if(character_selected == 'H'){
+			if(!jerry_placed){
+				panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+				board[square_x][square_y]=character_selected;
+				jerry_placed= true;
+			}
+		}
+		else if(character_selected == 'k'){
+			if(!cheese_placed){
+				panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+				board[square_x][square_y]=character_selected;
+				cheese_placed= true;
+			}
+		}
+		else if(character_selected == 'O' && level == 2)
+		{
+			panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+			board[square_x][square_y]=character_selected;
+		}
+		else if(character_selected != 'O'){
+			panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+			board[square_x][square_y]=character_selected;
+		}
+		revalidate();
+	}
+	
 
 }

@@ -36,6 +36,7 @@ public class GameGraphics extends JPanel{
 	private boolean lose =false;
 	private boolean win=false;
 	private boolean invalid_ogres =false;
+	private int nrRows,nrCols;
 
 	
 	public GameGraphics(){
@@ -84,11 +85,13 @@ public class GameGraphics extends JPanel{
 		}
 	}
 
-	public void updateGame(String string){
+	public void updateGame(String string, int Rows, int Cols){
 		boardToString =string;
+		nrRows= Rows;
+		nrCols= Cols;
 		repaint();
 	}
-
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -119,7 +122,7 @@ public class GameGraphics extends JPanel{
 				x=0;
 				continue;
 			}
-			g.drawImage(getImage(boardToString.charAt(i)),x*(width/10),y*(height/10),(width/10),(height/10),null);
+			g.drawImage(getImage(boardToString.charAt(i)),x*(width/nrCols),y*(height/nrRows),(width/nrCols),(height/nrRows),null);
 			x++;
 		}
 
