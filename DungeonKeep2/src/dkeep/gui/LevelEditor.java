@@ -119,7 +119,7 @@ public class LevelEditor extends JFrame{
 		comboBox_columns = new JComboBox();
 		comboBox_columns.setBounds(88, 2, 128, 20);
 		panel.add(comboBox_columns);
-		comboBox_columns.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10,11,12,13,14,15}));
+		comboBox_columns.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10}));
 
 		lblColumns = new JLabel("Columns");
 		lblColumns.setBounds(0, 0, 78, 20);
@@ -134,7 +134,7 @@ public class LevelEditor extends JFrame{
 		comboBox_rows = new JComboBox();
 		comboBox_rows.setBounds(88, 61, 128, 20);
 		panel.add(comboBox_rows);
-		comboBox_rows.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10,11,12,13,14,15}));
+		comboBox_rows.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10}));
 
 		comboBox_level = new JComboBox();
 		comboBox_level.setBounds(88, 138, 128, 20);
@@ -169,6 +169,12 @@ public class LevelEditor extends JFrame{
 				size_y = height/nCols;
 
 				board = new char[nRows][nCols];
+				try {
+					drawFloor();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -181,8 +187,8 @@ public class LevelEditor extends JFrame{
 				if(!panel_1.isEnabled())
 					return;
 				int square_x, square_y;
-				square_x = mouse.getX()/size_x;
-				square_y = mouse.getY()/size_y;
+				square_y = mouse.getX()/size_x;
+				square_x = mouse.getY()/size_y;
 
 				if(checkIfLevelIsValid(square_x,square_y))
 					drawCharacterSelected(square_x,square_y);
@@ -268,6 +274,27 @@ public class LevelEditor extends JFrame{
 		for(int i=0; i < board.length;i++){
 			for(int j=0; j< board[0].length;j++){
 				fw.write(board[i][j]+"");
+			}
+			fw.newLine();
+		}
+	}
+	
+	public void drawFloor() throws IOException{
+		
+		String nRows = comboBox_rows.getSelectedItem().toString();
+		String nCols = comboBox_columns.getSelectedItem().toString();
+		String lv = comboBox_level.getSelectedItem().toString();
+		
+		fw.write(nRows);
+		fw.newLine();
+		fw.write(nCols);
+		fw.newLine();
+		fw.write(lv);
+		fw.newLine();
+		
+		for(int i=0; i < board.length;i++){
+			for(int j=0; j< board[0].length;j++){
+				fw.write(" ");
 			}
 			fw.newLine();
 		}
