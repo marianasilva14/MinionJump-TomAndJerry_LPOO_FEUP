@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.awt.event.MouseMotionAdapter;
 
 public class LevelEditor extends JFrame{
 
@@ -164,8 +165,8 @@ public class LevelEditor extends JFrame{
 				int nCols = Integer.parseInt(comboBox_columns.getSelectedItem().toString());
 				level = Integer.parseInt(comboBox_level.getSelectedItem().toString());
 				
-				size_x = width/nCols;
-				size_y = height/nRows;
+				size_x = width/nRows;
+				size_y = height/nCols;
 
 				board = new char[nRows][nCols];
 			}
@@ -175,6 +176,20 @@ public class LevelEditor extends JFrame{
 		getContentPane().add(btnStart);
 
 		panel_1 = new JPanel();
+		panel_1.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent mouse) {
+				if(!panel_1.isEnabled())
+					return;
+				int square_x, square_y;
+				square_x = mouse.getX()/size_x;
+				square_y = mouse.getY()/size_y;
+
+				if(checkIfLevelIsValid(square_x,square_y))
+					drawCharacterSelected(square_x,square_y);
+				else if(square_x !=0 && square_x != board.length-1 && square_y !=0 && square_y != board.length-1)
+					drawCharacterSelected(square_x,square_y);
+			}
+		});
 		panel_1.setEnabled(false);
 		panel_1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent mouse) {

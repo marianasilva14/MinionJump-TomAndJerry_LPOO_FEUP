@@ -1,8 +1,15 @@
-5
-5
-2
-XXIIX
-XHk X
-X   X
-X   X
-XXXXX
+12
+12
+1
+XIIIIIIIIIIX
+XI        XX
+X         XX
+X         XX
+X         XX
+X         XX
+X         XX
+XH    kXXXXX
+X     XXXXXX
+XXXXXXXXXXXX
+XXXXXXXXXXXX
+XXXXXXXXXXXX
