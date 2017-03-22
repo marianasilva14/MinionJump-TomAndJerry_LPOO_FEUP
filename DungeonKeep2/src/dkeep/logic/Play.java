@@ -32,7 +32,7 @@ public class Play{
 				}
 			}
 
-			game.getLevel().getBoard().printBoard(game);
+			System.out.print(game.getLevel().getBoard().printBoardToString(game));
 
 			UserInteraction user = new UserInteraction();
 			Direction direction = user.readDirection();
@@ -61,11 +61,10 @@ public class Play{
 					((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());
 
 				}
-
 			}
 
 		}
-		game.getLevel().getBoard().printBoard(game);
+		System.out.print(game.getLevel().getBoard().printBoardToString(game));
 		System.out.print("You got caught! Game Over!");
 		endGame=true;
 		return true;

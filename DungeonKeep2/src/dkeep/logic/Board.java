@@ -40,6 +40,7 @@ public class Board {
 		else
 			return false;
 	}
+	/*
 	public void printBoard(Game game)
 	{	
 		System.out.println();
@@ -87,7 +88,7 @@ public class Board {
 		System.out.println();
 	}
 
-
+*/
 
 	public String printBoardToString(Game game){
 		String gamestring="";
@@ -108,7 +109,7 @@ public class Board {
 				map[i][j] = game.getLevel().getBoard().getBoard()[i][j];
 			}
 		}
-
+		
 		for(int i=0; i < e.size();i++){
 			if(e.get(i) instanceof Guard){
 				if(e.get(i) instanceof Drunken){
@@ -133,8 +134,8 @@ public class Board {
 			gamestring+='\n';
 		}
 
-		gamestring += "\n";
-
+		gamestring += '\n';
+		
 		return gamestring;
 
 	}

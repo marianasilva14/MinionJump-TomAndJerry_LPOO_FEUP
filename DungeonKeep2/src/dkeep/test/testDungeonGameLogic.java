@@ -25,6 +25,13 @@ public class testDungeonGameLogic {
 			{'X','X','X','X','X'}
 	};
 
+	char[][] map3 ={
+			{'X','H'},
+			{'I','G'},
+			{'X','k'},
+			{'X',' '}
+	};
+	
 	@Test
 	public void testMoveHeroIntoToFreeCell(){
 		Board board = new Board(map);
@@ -171,10 +178,10 @@ public class testDungeonGameLogic {
 		int x_old = level.getEntities().get(1).getPosx();
 		int y_old = level.getEntities().get(1).getPosy();
 		boolean outcome1=false, outcome2=false, outcome3 = false, outcome4 = false;
-		
+
 		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
 			Random rand2 = new Random();
-			pos_rand2 = rand.nextInt(4);
+			pos_rand2 = rand2.nextInt(4);
 			switch(pos_rand2) {
 			case 0:
 				direction = Direction.UP;
@@ -233,8 +240,8 @@ public class testDungeonGameLogic {
 
 		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
 			Random rand2 = new Random();
-			pos_rand2 = rand.nextInt(4);
-			
+			pos_rand2 = rand2.nextInt(4);
+
 			switch(pos_rand2) {
 			case 0:
 				direction = Direction.UP;
@@ -249,28 +256,29 @@ public class testDungeonGameLogic {
 				direction = Direction.RIGHT;
 				break;
 			}
-			((Ogre)level.getEntities().get(1)).movement(direction, game.getLevel().getBoard(), (Hero)level.getEntities().get(0));
-			((Ogre)level.getEntities().get(1)).club(game.getLevel().getBoard());
-			
-			if(level.getBoard().checkLimits(level.getEntities().get(1))){
-			//cima
-			if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()-1][level.getEntities().get(1).getPosy()] == '*'){
-				outcome1=true;
+			((Ogre)game.getLevel().getEntities().get(1)).movement(direction, game.getLevel().getBoard(), (Hero)game.getLevel().getEntities().get(0));
+			game.cleanClub(game.getLevel().getBoard());	
+			((Ogre)game.getLevel().getEntities().get(1)).club(game.getLevel().getBoard());
+
+			if(game.getLevel().getBoard().checkLimits(game.getLevel().getEntities().get(1))){
+				//cima
+				if(game.getLevel().getBoard().getBoard()[game.getLevel().getEntities().get(1).getPosx()-1][game.getLevel().getEntities().get(1).getPosy()] == '*'){
+					outcome1=true;
+				}
+				//baixo
+				else if(game.getLevel().getBoard().getBoard()[game.getLevel().getEntities().get(1).getPosx()+1][game.getLevel().getEntities().get(1).getPosy()] == '*'){
+					outcome2=true;
+				}
+				//direita
+				else if(game.getLevel().getBoard().getBoard()[game.getLevel().getEntities().get(1).getPosx()][game.getLevel().getEntities().get(1).getPosy()-1] == '*'){
+					outcome3=true;
+				}
+				//esquerda
+				else if(game.getLevel().getBoard().getBoard()[game.getLevel().getEntities().get(1).getPosx()][game.getLevel().getEntities().get(1).getPosy()+1] == '*'){
+					outcome4=true;
+				}
 			}
-			//baixo
-			else if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()+1][level.getEntities().get(1).getPosy()] == '*'){
-				outcome2=true;
-			}
-			//direita
-			else if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()][level.getEntities().get(1).getPosy()-1] == '*'){
-				outcome3=true;
-			}
-			//esquerda
-			else if(level.getBoard().getBoard()[level.getEntities().get(1).getPosx()][level.getEntities().get(1).getPosy()+1] == '*'){
-				outcome4=true;
-			}
-			}
-			
+
 		}
 
 		assertTrue(outcome1);
@@ -286,14 +294,14 @@ public class testDungeonGameLogic {
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(3);
-		
+
 		Entity g=  Guard.raffleGuard(pos_rand,5,5);
 		while(!outcome1 || !outcome2 || !outcome3){
 			rand = new Random();
 			pos_rand = rand.nextInt(3);
-			
-			 g=  Guard.raffleGuard(pos_rand,5,5);
-			 
+
+			g=  Guard.raffleGuard(pos_rand,5,5);
+
 			if(g instanceof Drunken)
 				outcome1=true;
 			else if(g instanceof Rookie)
@@ -301,40 +309,131 @@ public class testDungeonGameLogic {
 			else
 				outcome3=true;
 		}
-		
+
 		assertTrue(outcome1);
 		assertTrue(outcome2);
 		assertTrue(outcome3);
+	}
+
+	@Test
+	public void ogreStun(){
+		Board board= new Board(map2);
+
+		int pos_rand2, pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Direction direction = Direction.UP;
+		Level level = new Level(board, pos_rand);
+		Game game= new Game(level);
+
+		while(game.getLevel().getEntities().get(1).getSymbol() != '8'){
+			Random rand2 = new Random();
+			pos_rand2 = rand2.nextInt(4);
+
+			switch(pos_rand2) {
+			case 0:
+				direction = Direction.UP;
+				break;
+			case 1:
+				direction = Direction.DOWN;
+				break;
+			case 2:
+				direction = Direction.LEFT;
+				break;
+			case 3:
+				direction = Direction.RIGHT;
+				break;
+			}
+			game.getLevel().getEntities().get(0).setSymbol('K');
+			((Ogre)game.getLevel().getEntities().get(1)).movement(direction, game.getLevel().getBoard(), (Hero)game.getLevel().getEntities().get(0));
 		}
-	/*
+		assertEquals('8', game.getLevel().getEntities().get(1).getSymbol());
+	}
+
+
 	@Test
 	public void testMovementGuard(){
 
 		boolean outcome1=false, outcome2=false, outcome3 = false;
+		int pos_rand, pos_rand2;
+
+		Direction direction= Direction.UP;
+		Board board=  new Board(map);
+
+		while(!outcome1 || !outcome2 || !outcome3){
+
+			Random rand = new Random();
+			pos_rand = rand.nextInt(3);
+
+			Entity g = Guard.raffleGuard(pos_rand, 5, 5);
+			Random rand2 = new Random();
+			pos_rand2 = rand2.nextInt(4);
+
+			switch(pos_rand2) {
+			case 0:
+				direction = Direction.UP;
+				break;
+			case 1:
+				direction = Direction.DOWN;
+				break;
+			case 2:
+				direction = Direction.LEFT;
+				break;
+			case 3:
+				direction = Direction.RIGHT;
+				break;
+
+			}
+			if(g instanceof Drunken){
+				outcome1=true;
+				g.movement(direction,board);
+			}
+			else if(g instanceof Rookie){
+				outcome2=true;
+				g.movement(direction, board );
+			}
+			else{
+				outcome3=true;
+				g.movement(direction, board );
+			}
+		}
+
+		assertTrue(outcome1);
+		assertTrue(outcome2);
+		assertTrue(outcome3);
+	}
+
+
+	@Test
+	public void testPrintBoardToString(){
+		
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(3);
 		
-		Entity g =  Guard.raffleGuard(pos_rand,5,5);
-	//	g.movement(direction, level.getBoard().);
-		while(!outcome1 || !outcome2 || !outcome3){
-			rand = new Random();
-			pos_rand = rand.nextInt(3);
-			
-			 g=  Guard.raffleGuard(pos_rand,5,5);
-			 
-			if(g instanceof Drunken)
-				outcome1=true;
-			else if(g instanceof Rookie)
-				outcome2=true;
-			else
-				outcome3=true;
-		}
+		Board board= new Board(map3);
+		Level level= new Level(board, pos_rand);
+		Game game = new Game(level);
+	
 		
-		assertTrue(outcome1);
-		assertTrue(outcome2);
-		assertTrue(outcome3);
-		}
-
-*/
+		Board b= new Board(map3);
+		Level lv= new Level(b, pos_rand);
+		Game game2 = new Game(lv);
+		
+		assertEquals(game.getLevel().getBoard().printBoardToString(game),game2.getLevel().getBoard().printBoardToString(game2));
 	}
+
+	@Test
+	public void checkLimitsBoard(){
+		
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		
+		Board board= new Board(map3);
+		Level level= new Level(board, pos_rand);
+		Game game = new Game(level);
+		
+		assertFalse(game.getLevel().getBoard().checkLimits(game.getLevel().getEntities().get(0)));
+	}
+}
