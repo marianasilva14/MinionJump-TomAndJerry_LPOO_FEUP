@@ -18,11 +18,11 @@ public class Guard extends Entity{
 		
 	public GuardType guardType = GuardType.Rookie;
 	
-	
+	/*
 	public Guard getGuard(){
 		return this;
 	}
-	
+	*/
 	public GuardType getGuardType(){
 		return guardType;
 	}

@@ -34,7 +34,7 @@ public class Drunken extends Guard{
 	public void setStateDrunken(StateDrunken st) {
 		this.state = st;
 	}
-
+/*
 	public Drunken getDrunken(){
 		return this;
 	}
@@ -42,7 +42,7 @@ public class Drunken extends Guard{
 	public void behaviorGuard(){
 
 	}
-
+*/
 	public Direction reverseDrunkenDirection(){
 
 		index--;

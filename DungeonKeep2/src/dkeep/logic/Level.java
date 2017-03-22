@@ -61,6 +61,7 @@ public class Level {
 	public void setLevel(int lv){
 		this.level=lv;
 	}
+
 	public void setBoard(Board board) {
 		this.board = board;
 	}

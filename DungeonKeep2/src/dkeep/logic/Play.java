@@ -5,11 +5,11 @@ import dkeep.cli.UserInteraction;
 import dkeep.logic.Game.Direction;
 
 public class Play{
-
+/*
 	private Game game;
 	private boolean endGame=false;
 
-
+	
 	public Play(Game game) {
 		this.game = game;
 	}
@@ -50,7 +50,7 @@ public class Play{
 					((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
 				else
 					game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard());
-
+/*
 				if (game.getLevel().getLevel() == 2 && game.verifyS(game.getLevel().getEntities().get(0), game.getLevel())) {
 					game.getLevel().getEntities().get(0).setPosx(x);
 					game.getLevel().getEntities().get(0).setPosy(y);
@@ -74,4 +74,5 @@ public class Play{
 	public boolean end() {
 		return endGame;
 	}
+	*/
 }

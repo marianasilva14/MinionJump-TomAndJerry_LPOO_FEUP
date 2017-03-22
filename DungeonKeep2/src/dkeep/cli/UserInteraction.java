@@ -15,9 +15,6 @@ import dkeep.logic.Game.Direction;
 
 public class UserInteraction {
 
-	//public static int level = 0;
-	private static Level[] levels;
-
 	static char[][] level1 = {{'X','X','X','X','X','X','X','X','X','X'},
 			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 			{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -43,6 +40,7 @@ public class UserInteraction {
 
 	public static Game game;
 	public static int numberOfOgres;
+	public boolean endGame;
 
 	public UserInteraction(){		
 
@@ -51,6 +49,7 @@ public class UserInteraction {
 	public static void main(String[] args) {
 
 		initGame();
+		UserInteraction cli = new UserInteraction();
 		
 		// create level 1
 		Board board1 = new Board(level1);
@@ -63,10 +62,10 @@ public class UserInteraction {
 		characters1.add(hero1);
 		characters1.add(guard);
 		Level lv = new Level(board1, characters1, 1);
-		Game game = new Game(lv);
-		Play lv1_play=new Play(game);
-		while(!lv1_play.play());
-		if(lv1_play.end()){
+		game = new Game(lv);
+		//Play lv1_play=new Play(game);
+		while(!cli.play());
+		if(cli.end()){
 			return;//perde no nivel 1
 		};
 		
@@ -84,17 +83,17 @@ public class UserInteraction {
 		lv.setBoard(board2);
 		lv.setLevel(2);		
 		lv.setEntities(characters2);
-		Game game2 = new Game(lv);
-		Play lv2_play=new Play(game2);
-		while(!lv2_play.play());
-		if(lv2_play.end()){
+		game = new Game(lv);
+	//	Play lv2_play=new Play(game);
+		while(!cli.play());
+		if(cli.end()){
 			return;//perde no nivel 1
 		};
 	}
 
 	public Direction readDirection(){
 		char c;
-
+		
 		System.out.println();
 		System.out.println("Please insert a character:");
 		System.out.println("To move down, insert 'd'");
@@ -150,6 +149,67 @@ public class UserInteraction {
 		}
 		
 		numberOfOgres=c;
+	}
+	
+	public boolean play() {
+		// while nao ganhou este nivel
+		boolean alreadychange=false;
+
+		while (!game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1))) {
+			if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
+				if(game.getLevel().getEntities().get(1) instanceof Ogre){
+					System.out.println("You won! Congratulations!");
+				}
+				return true;
+			}
+			if(!alreadychange){
+				if (game.getLevel().getEntities().get(1) instanceof Ogre) {
+					game.getLevel().getEntities().get(0).setSymbol('A');
+					alreadychange=true;
+				}
+			}
+
+			System.out.print(game.getLevel().getBoard().printBoardToString(game));
+
+			UserInteraction user = new UserInteraction();
+			Direction direction = user.readDirection();
+
+			int x = game.getLevel().getEntities().get(0).getPosx();
+			int y = game.getLevel().getEntities().get(0).getPosy();
+
+			game.getLevel().getEntities().get(0).movement(direction, game.getLevel().getBoard());
+			game.cleanClub(game.getLevel().getBoard());	
+
+
+			for(int i=1; i < game.getLevel().getEntities().size();i++){
+
+				if(game.getLevel().getEntities().get(i) instanceof Ogre)
+					((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
+				else
+					game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard());
+/*
+				if (game.getLevel().getLevel() == 2 && game.verifyS(game.getLevel().getEntities().get(0), game.getLevel())) {
+					game.getLevel().getEntities().get(0).setPosx(x);
+					game.getLevel().getEntities().get(0).setPosy(y);
+					game.getLevel().getBoard().getBoard()[1][0] = 'S';
+				}
+*/
+				if(game.getLevel().getEntities().get(i) instanceof Ogre){
+					((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());
+
+				}
+			}
+
+		}
+		System.out.print(game.getLevel().getBoard().printBoardToString(game));
+		System.out.print("You got caught! Game Over!");
+		endGame=true;
+		return true;
+
+	}
+
+	public boolean end() {
+		return endGame;
 	}
 
 }

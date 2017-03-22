@@ -15,11 +15,11 @@ public class Ogre extends Entity{
 		super(posx, posy);
 		symbol = 'O';
 	}
-
+/*
 	public Ogre getOgre(){
 		return this;
 	}
-
+*/
 	public char getSymbol(){
 		return symbol;
 	}
@@ -35,7 +35,7 @@ public class Ogre extends Entity{
 	public void setKey(boolean b){
 		key=b;
 	}
-	
+	/*
 	public int getNrOfMoves(){
 		return nrOfMoves;
 	}
@@ -43,7 +43,7 @@ public class Ogre extends Entity{
 	public void setNrOfMoves(int nr){
 		nrOfMoves=nr;
 	}
-
+*/
 	public void movement(Direction direction, Board b, Hero hero){
 
 		int pos_rand = boardLimits(b);

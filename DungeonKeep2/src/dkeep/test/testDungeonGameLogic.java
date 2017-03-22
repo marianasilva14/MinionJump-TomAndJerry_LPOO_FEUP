@@ -348,6 +348,7 @@ public class testDungeonGameLogic {
 			((Ogre)game.getLevel().getEntities().get(1)).movement(direction, game.getLevel().getBoard(), (Hero)game.getLevel().getEntities().get(0));
 		}
 		assertEquals('8', game.getLevel().getEntities().get(1).getSymbol());
+	
 	}
 
 
@@ -387,14 +388,20 @@ public class testDungeonGameLogic {
 			if(g instanceof Drunken){
 				outcome1=true;
 				g.movement(direction,board);
+				g.movement(direction,board);
+				g.movement(direction,board);
 			}
 			else if(g instanceof Rookie){
 				outcome2=true;
 				g.movement(direction, board );
+				g.movement(direction,board);
+				g.movement(direction,board);
 			}
 			else{
 				outcome3=true;
 				g.movement(direction, board );
+				g.movement(direction,board);
+				g.movement(direction,board);
 			}
 		}
 
@@ -436,4 +443,6 @@ public class testDungeonGameLogic {
 		
 		assertFalse(game.getLevel().getBoard().checkLimits(game.getLevel().getEntities().get(0)));
 	}
+	
+	
 }

@@ -15,14 +15,14 @@ public class Game {
 		this.level=level;
 	}
 
-
+/*
 	public boolean verifyS(Entity e, Level lv){
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
 			return true;
 		else
 			return false;
 	}
-
+*/
 	public void checkLever(Entity e, Level lv){
 
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k')

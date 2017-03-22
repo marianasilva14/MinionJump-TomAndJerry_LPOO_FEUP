@@ -17,11 +17,11 @@ public class Board {
 	public char[][] getBoard(){
 		return map;
 	}
-	
+	/*
 	public char getSymbol(int posx, int posy){
 		return map[posx][posy];
 	}
-
+*/
 	public boolean checkLimits(Entity e){
 
 		int row= map.length-1;
