@@ -68,8 +68,7 @@ public class UserInteraction {
 		if(cli.end()){
 			return;//perde no nivel 1
 		};
-		
-
+	
 		// create level 2
 		Board board2 = new Board(level2);
 		Entity hero2 = new Hero(7, 1);
