@@ -7,7 +7,6 @@ import dkeep.logic.Hero;
 import dkeep.logic.Level;
 import dkeep.logic.Guard;
 import dkeep.logic.Ogre;
-import dkeep.logic.Play;
 import dkeep.logic.Entity;
 import dkeep.logic.Game;
 import dkeep.logic.Game.Direction;
