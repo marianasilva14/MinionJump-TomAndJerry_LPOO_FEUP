@@ -4,16 +4,26 @@ import java.util.ArrayList;
 import dkeep.logic.Guard;
 import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Drunken;
-
+/**
+ * 
+ * Board.java - Class that represents the board of the game
+ *
+ */
 public class Board {
 
 	private char map[][];
 
-
+/**
+ * Constructor of this class
+ * @param board
+ */
 	public Board(char b[][]){
 		map=copy(b);
 	}
 
+	/**
+	 * @return board
+	 */
 	public char[][] getBoard(){
 		return map;
 	}
@@ -22,6 +32,11 @@ public class Board {
 		return map[posx][posy];
 	}
 */
+	/**
+	 * Method that checks the limits of the board
+	 * @param entity
+	 * @return true if all entities respects the limits of the board
+	 */
 	public boolean checkLimits(Entity e){
 
 		int row= map.length-1;
@@ -89,7 +104,11 @@ public class Board {
 	}
 
 */
-
+	/**
+	 * Method that convert board to string
+	 * @param game
+	 * @return string that represents the board
+	 */
 	public String printBoardToString(Game game){
 		String gamestring="";
 		char[][] map = new char[10][10];
@@ -139,7 +158,12 @@ public class Board {
 		return gamestring;
 
 	}
-
+	
+	/**
+	 * Method that makes a copy of board
+	 * @param layout
+	 * @return copy of board
+	 */
 	public char[][] copy(char[][] layout){
 		char[][] copy = new char[layout.length][layout[0].length];
 		for(int i=0;i<layout.length;i++){

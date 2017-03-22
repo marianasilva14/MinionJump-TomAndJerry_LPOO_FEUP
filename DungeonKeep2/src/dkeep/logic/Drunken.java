@@ -3,12 +3,21 @@ package dkeep.logic;
 import java.util.Random;
 import dkeep.logic.Game.Direction;
 
+/**
+ * 
+ * Drunken.java - A Subclass of Guard
+ *
+ */
 public class Drunken extends Guard{
 
 	private int index;
 	private int move = 1;
 
-
+	/**
+	 * Constructor of this class and initializes index of this type of guard
+	 * @param posx
+	 * @param posy
+	 */
 	public Drunken(int posx,int posy) {
 		super(posx,posy);
 		index = 0;
@@ -27,10 +36,17 @@ public class Drunken extends Guard{
 
 	public StateDrunken state = StateDrunken.G;
 
+	/**
+	 * @return state of this guard
+	 */
 	public StateDrunken getState() {
 		return state;
 	}
 
+	/**
+	 * Methods that sets the state of the Drunken
+	 * @param state of the Drunken
+	 */
 	public void setStateDrunken(StateDrunken st) {
 		this.state = st;
 	}
@@ -43,6 +59,10 @@ public class Drunken extends Guard{
 
 	}
 */
+	/**
+	 * Methods that reverses Drunken's direction
+	 * @return Direction of the Drunken
+	 */
 	public Direction reverseDrunkenDirection(){
 
 		index--;
@@ -68,6 +88,12 @@ public class Drunken extends Guard{
 
 		return direction;
 	}
+	
+	/**
+	 * Methods responsible to define the type of the movement's drunken
+	 * @param
+	 * @param
+	 */
 	public void movement(Direction direction, Board b){
 
 		int status_rand;

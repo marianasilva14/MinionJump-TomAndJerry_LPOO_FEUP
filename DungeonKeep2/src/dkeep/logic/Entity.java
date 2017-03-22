@@ -4,7 +4,11 @@ import java.util.Random;
 
 import dkeep.logic.Game.Direction;
 
-
+/**
+ * 
+ * @author Mariana
+ *
+ */
 public abstract class Entity {
 
 	public int posx, posy;
