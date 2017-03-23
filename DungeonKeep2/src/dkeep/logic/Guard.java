@@ -1,5 +1,8 @@
 package dkeep.logic;
 import dkeep.logic.Game.Direction;
+
+import java.util.Random;
+
 import dkeep.logic.Drunken;
 
 /**
@@ -10,6 +13,8 @@ import dkeep.logic.Drunken;
 public class Guard extends Entity{
 
 	private char symbol;
+	private int move = 1;
+	private int index = 0;
 	
 	protected Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
 			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
@@ -107,5 +112,17 @@ public class Guard extends Entity{
 		
 		return g;
 	}
+	
+	public void randDirection(Direction direction){
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(10);
+
+		direction = directions[index];
+		
+		if(pos_rand == 1)
+			move *= -1;
+	}
+	
 	
 }

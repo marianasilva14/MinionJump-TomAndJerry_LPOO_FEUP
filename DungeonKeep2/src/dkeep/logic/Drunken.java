@@ -97,7 +97,7 @@ public class Drunken extends Guard{
 		StateDrunken st = status[status_rand];
 
 		setStateDrunken(st);
-		
+		/*
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(10);
@@ -106,6 +106,9 @@ public class Drunken extends Guard{
 		
 		if(pos_rand == 1)
 			move *= -1;
+		*/
+		
+		randDirection(direction);
 		
 		if(st == StateDrunken.G){
 			setSymbol('G');

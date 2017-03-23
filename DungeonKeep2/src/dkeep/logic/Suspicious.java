@@ -12,7 +12,6 @@ import dkeep.logic.Game.Direction;
 public class Suspicious extends Guard{
 
 	private int index = 0;
-
 	private int move = 1;
 	
 	/**
@@ -66,8 +65,7 @@ public class Suspicious extends Guard{
 	 * @param board
 	 */
 	public void movement(Direction direction, Board b){
- 
-		Guard g = new Guard(index, index);
+ /*
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(10);
@@ -76,7 +74,9 @@ public class Suspicious extends Guard{
 
 		if(pos_rand == 1)
 			move *= -1;
-
+*/
+		randDirection(direction);
+		
 		if(move == 1)
 			direction = reverseSuspiciousDirection();
 		else{
