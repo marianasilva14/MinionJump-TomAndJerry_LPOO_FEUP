@@ -212,13 +212,10 @@ public class LevelEditor extends JFrame{
 				int square_x, square_y;
 				square_y = mouse.getX()/size_x;
 				square_x = mouse.getY()/size_y;
-
 				if(checkIfLevelIsValid(square_x,square_y))
 					drawCharacterSelected(square_x,square_y);
 				else if(square_x !=0 && square_x != board.length-1 && square_y !=0 && square_y != board.length-1)
-					drawCharacterSelected(square_x,square_y);
-			}
-		});
+					drawCharacterSelected(square_x,square_y); } });
 		panel_1.setEnabled(false);
 		panel_1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent mouse) {
@@ -227,14 +224,10 @@ public class LevelEditor extends JFrame{
 				int square_x, square_y;
 				square_x = mouse.getX()/size_x;
 				square_y = mouse.getY()/size_y;
-
 				if(checkIfLevelIsValid(square_x,square_y))
 					drawCharacterSelected(square_x,square_y);
 				else if(square_x !=0 && square_x != board.length-1 && square_y !=0 && square_y != board.length-1)
-					drawCharacterSelected(square_x,square_y);
-			}
-
-		});
+					drawCharacterSelected(square_x,square_y);} });
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setBounds(22, 50, width, height);
 		getContentPane().add(panel_1);

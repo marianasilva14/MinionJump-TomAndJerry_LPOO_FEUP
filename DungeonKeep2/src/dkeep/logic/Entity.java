@@ -164,9 +164,7 @@ public abstract class Entity {
 		case LEFT:
 			if(!conditionsToMove(direction, b, posx, posy-1))
 				return false;
-			break;
-		}
-
+			break; }
 		return true;
 
 	}

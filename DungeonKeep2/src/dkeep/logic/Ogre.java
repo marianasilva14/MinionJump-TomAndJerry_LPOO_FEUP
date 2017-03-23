@@ -148,35 +148,28 @@ public class Ogre extends Entity{
 	 * @return true if the hero is next to the door
 	 */
 	public boolean verifyI(Direction direction, Board b){
-
 		switch(direction) {
 		case UP:{
 			if(b.getBoard()[posx-1][posy] == 'I')
 				return true;
 			else
-				return false;
-		}
+				return false;}
 		case DOWN:{
 			if(b.getBoard()[posx+1][posy] == 'I')
 				return true;
 			else
-				return false;
-		}
+				return false;}
 		case RIGHT:{
 			if(b.getBoard()[posx][posy+1] == 'I')
 				return true;
 			else
-				return false;
-		}
+				return false;}
 		case LEFT:{
 			if(b.getBoard()[posx][posy-1] == 'I')
 				return true;
 			else
-				return false;
-		}
-		}
+				return false;} }
 		return true;
-
 	}
 	
 	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
@@ -203,7 +196,6 @@ public class Ogre extends Entity{
 	 * @param board
 	 */
 	public void club(Board b){
-
 		while(true){
 			int pos_rand;
 			Random rand = new Random();
@@ -213,27 +205,22 @@ public class Ogre extends Entity{
 				if(checkIfClubHasCorrectedPosition(b, posx-1, posy))
 					return;
 				else
-					break;
-			}
+					break;}
 			case 1:{
 				if(checkIfClubHasCorrectedPosition(b, posx, posy+1))
 					return;
 				else
-					break;
-			}
+					break;}
 			case 2:{
 				if(checkIfClubHasCorrectedPosition(b, posx+1, posy))
 					return;
 				else
-					break;
-			}
+					break;}
 			case 3:{
 				if(checkIfClubHasCorrectedPosition(b, posx, posy-1))
 					return;
 				else
-					break;
-			}
-			}
+					break;}}
 		}
 	}
 

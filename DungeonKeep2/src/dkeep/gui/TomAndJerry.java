@@ -107,7 +107,7 @@ public class TomAndJerry {
 		frmDungeonKeep.getContentPane().setLayout(null);
 		frmDungeonKeep.setFocusable(true);		
 	}
-	
+
 	private void frameAddKeyListener(){
 		frmDungeonKeep.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
@@ -145,39 +145,30 @@ public class TomAndJerry {
 			}
 		});
 	}
-	
+
 	public void frameNumberOfOgres(){
 		numberOfOgres = new JTextField();
 		numberOfOgres.addFocusListener(new FocusAdapter() {
-			@Override
 			public void focusLost(FocusEvent arg0) {
-				try{
-					Integer.parseInt(numberOfOgres.getText());
-				}
+				try{Integer.parseInt(numberOfOgres.getText());}
 				catch(NumberFormatException e){
 					e.printStackTrace();
 					numberOfOgres.setText("0");
 					game_graphics.invalidNrOgres();
-					return;
-				}
+					return;}
 				if(Integer.parseInt(numberOfOgres.getText()) > 5){
 					numberOfOgres.setText("5");
-					nrOfOgres = 5;
-				}
+					nrOfOgres = 5;}
 				if(Integer.parseInt(numberOfOgres.getText()) < 1){
 					numberOfOgres.setText("1");
-					nrOfOgres = 1;
-				}
-
-				nrOfOgres = Integer.parseInt(numberOfOgres.getText());
-			}
-		});
+					nrOfOgres = 1;}
+				nrOfOgres = Integer.parseInt(numberOfOgres.getText());} });
 
 		numberOfOgres.setBounds(139, 17, 91, 20);
 		frmDungeonKeep.getContentPane().add(numberOfOgres);
 		numberOfOgres.setColumns(10);
 	}
-	
+
 	public void frameGuardPersonality(){
 		JLabel lblNewLabel = new JLabel("Tom personality");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -194,7 +185,7 @@ public class TomAndJerry {
 		comboBox.setBounds(139, 55, 127, 20);
 		frmDungeonKeep.getContentPane().add(comboBox);
 	}
-	
+
 	public void frameButtonLoadLevel(){
 		btnLoadLevel = new JButton("Load level");
 		btnLoadLevel.addMouseListener(new MouseAdapter() {
@@ -217,7 +208,7 @@ public class TomAndJerry {
 					int cols= Integer.parseInt(input.nextLine());
 					int lvl= Integer.parseInt(input.nextLine());
 					char [][] b = new char[rows][cols];
-					
+
 					for(int i =0; i < rows; i++){
 						line =input.nextLine();
 						char[] line1 = line.toCharArray();
@@ -232,7 +223,7 @@ public class TomAndJerry {
 					checkButtons();
 					commentsLabel.setText("New Game!");
 					game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game),  game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length );
-					
+
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}
@@ -242,7 +233,7 @@ public class TomAndJerry {
 		btnLoadLevel.setBounds(535, 75, 111, 23);
 		frmDungeonKeep.getContentPane().add(btnLoadLevel);
 	}
-	
+
 	public void frameButtonLevelEditor(){
 		btnNewButton = new JButton("Level editor");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -265,19 +256,14 @@ public class TomAndJerry {
 		btnNewButton.setBounds(535, 53, 111, 23);
 		frmDungeonKeep.getContentPane().add(btnNewButton);
 	}
-	
+
 	public void frameButtonNewGame(){
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseEntered(MouseEvent mouse) {
-				btnNewGame.setForeground(SystemColor.activeCaption);
-			}
-			@Override
+				btnNewGame.setForeground(SystemColor.activeCaption);}
 			public void mouseExited(MouseEvent mouse) {
-				btnNewGame.setForeground(Color.BLACK);
-			}
-		});
+				btnNewGame.setForeground(Color.BLACK);} });
 
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -285,45 +271,33 @@ public class TomAndJerry {
 				board = new Board(level1);
 				level= new Level(board, guardType);
 				game = new Game(level);
-
 				checkButtons();
 				commentsLabel.setText("New Game!");
-				game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game), game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length);
-
-			}
-		});
-
+				game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game), game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length);} });
 		btnNewGame.setBounds(310, 54, 102, 23);
 		frmDungeonKeep.getContentPane().add(btnNewGame);
 	}
-	
+
 	public void frameButtonExit(){
 		JButton blbExit = new JButton("Exit");
 		blbExit.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseEntered(MouseEvent e) {
-				blbExit.setForeground(SystemColor.activeCaption);
-			}
-			@Override
+				blbExit.setForeground(SystemColor.activeCaption);}
 			public void mouseExited(MouseEvent e) {
-				blbExit.setForeground(Color.BLACK);
-			}
-		});
+				blbExit.setForeground(Color.BLACK);} });
 		blbExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+				System.exit(0);} });
 		blbExit.setBounds(526, 425, 89, 23);
 		frmDungeonKeep.getContentPane().add(blbExit);
 	}
-	
+
 	public void frameButtonRight(){
 		btnRight = new JButton("Right");
 		btnRight.setEnabled(false);
 		btnRight.setBounds(578, 245, 90, 28);
 		frmDungeonKeep.getContentPane().add(btnRight);
-		
+
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				commentsLabel.setText("Jerry moved right" );
@@ -332,13 +306,13 @@ public class TomAndJerry {
 		});
 
 	}
-	
+
 	public void frameButtonLeft(){
 		btnLeft = new JButton("Left");
 		btnLeft.setEnabled(false);
 		btnLeft.setBounds(465, 245, 90, 28);
 		frmDungeonKeep.getContentPane().add(btnLeft);
-		
+
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commentsLabel.setText("Jerry moved left" );
@@ -346,13 +320,13 @@ public class TomAndJerry {
 			}
 		});
 	}
-	
+
 	public void frameButtonUp(){
 		btnUp = new JButton("Up");
 		btnUp.setEnabled(false);
 		btnUp.setBounds(526, 205, 90, 28);
 		frmDungeonKeep.getContentPane().add(btnUp);
-		
+
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commentsLabel.setText("Jerry moved up" );
@@ -360,7 +334,7 @@ public class TomAndJerry {
 			}
 		});
 	}
-	
+
 	public void frameButtonDown(){
 		btnDown = new JButton("Down");
 		btnDown.setEnabled(false);
@@ -376,7 +350,7 @@ public class TomAndJerry {
 
 
 	}
-	
+
 	public void frameCommentsLabel(){
 		commentsLabel = new JLabel("You can start a new game");
 		commentsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -385,21 +359,21 @@ public class TomAndJerry {
 		frmDungeonKeep.getContentPane().add(commentsLabel);
 
 	}
-	
+
 	public void frameLabelNumberOfOgres(){
 		lblNumberOfOgres = new JLabel("Number of Dogs");
 		lblNumberOfOgres.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNumberOfOgres.setBounds(20, 11, 121, 33);
 		frmDungeonKeep.getContentPane().add(lblNumberOfOgres);
 	}
-	
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frameDungeon();
 		frameAddKeyListener();
-		
+
 		game_graphics = new GameGraphics();
 		game_graphics.setBounds(20,99,360,360);
 		frmDungeonKeep.getContentPane().add(game_graphics);
@@ -417,7 +391,7 @@ public class TomAndJerry {
 		frameButtonLevelEditor();
 		frameButtonLoadLevel();
 	}
-	
+
 	public void move(Direction direction){
 
 		for(int i=0; i < level.getEntities().size();i++){

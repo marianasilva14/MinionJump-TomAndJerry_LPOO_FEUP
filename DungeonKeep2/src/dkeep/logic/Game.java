@@ -20,14 +20,6 @@ public class Game {
 		this.level=level;
 	}
 
-/*
-	public boolean verifyS(Entity e, Level lv){
-		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'I')
-			return true;
-		else
-			return false;
-	}
-*/
 	/**
 	 * Method that changes the doors to stairs when the hero reaches the lever
 	 * @param entity
@@ -73,20 +65,16 @@ public class Game {
 			if(e instanceof Ogre){
 				if(!((Ogre) e).getKey()){
 					e.setSymbol('$');
-					((Ogre) e).setKey(true);
-				}
+					((Ogre) e).setKey(true);}
 				else
-					e.setSymbol('O');
-			}
+					e.setSymbol('O');}
 			else if(e instanceof Hero)
 				e.setSymbol('K');
-			return true;
-		}
+			return true;}
 		
 		else if(e instanceof Ogre){
 			if(((Ogre) e).getKey())
-			e.setSymbol('O');
-		}
+			e.setSymbol('O');}
 		
 		return false;
 	}
@@ -103,8 +91,7 @@ public class Game {
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){
 				if(b.getBoard()[i][j] == '*')
-					b.getBoard()[i][j]=' ';
-			}
+					b.getBoard()[i][j]=' ';}
 		}
 	}
 

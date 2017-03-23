@@ -51,7 +51,6 @@ public class Drunken extends Guard{
 	 * @return Direction of the Drunken
 	 */
 	public Direction reverseDrunkenDirection(){
-
 		index--;
 		if(index < 0)
 			index += directions.length;
@@ -59,20 +58,15 @@ public class Drunken extends Guard{
 		Direction direction = directions[index];
 
 		switch(direction){
-		case UP:
-			direction= direction.DOWN;
+		case UP: direction= direction.DOWN;
 			break;
-		case DOWN:
-			direction= direction.UP;
+		case DOWN: direction= direction.UP;
 			break;
-		case LEFT:
-			direction= direction.RIGHT;
+		case LEFT: direction= direction.RIGHT;
 			break;
-		case RIGHT:
-			direction= direction.LEFT;
+		case RIGHT: direction= direction.LEFT;
 			break;
 		}
-
 		return direction;
 	}
 	

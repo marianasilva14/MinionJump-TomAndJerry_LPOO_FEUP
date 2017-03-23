@@ -36,7 +36,6 @@ public class Level {
 	public Level(Board b, int guard){
 		entities = new ArrayList<Entity>();
 		board=b;
-
 		int row= b.getBoard().length;
 		int col= b.getBoard()[0].length;
 
@@ -45,23 +44,17 @@ public class Level {
 				if(b.getBoard()[i][j] == 'H'){
 					Entity entity_hero= new Hero(i,j);
 					entities.add(entity_hero);
-					b.getBoard()[i][j]= ' ';
-				}
+					b.getBoard()[i][j]= ' ';}
 				else if(b.getBoard()[i][j] == 'G'){
 					level=1;
 					Entity entity_guard=  Guard.raffleGuard(guard,i,j);
 					entities.add(entity_guard);
-					b.getBoard()[i][j]= ' ';
-				}
+					b.getBoard()[i][j]= ' ';}
 				else if(b.getBoard()[i][j] == 'O'){
 					level=2;
 					Entity entity_ogre= new Ogre(i,j);
 					entities.add(entity_ogre);
-					b.getBoard()[i][j]= ' ';
-				}
-
-			}
-		}
+					b.getBoard()[i][j]= ' ';} } }
 	}
 
 	/**
@@ -112,26 +105,17 @@ public class Level {
 		if(board.checkLimits(hero)){
 		if(capture instanceof Drunken){
 			if(((Drunken)capture).getState() == StateDrunken.g)
-				return false;
-		}
+				return false;}
 
 		else if(capture instanceof Ogre){
-		
 			if((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'))
 				return true;
-			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
-					|| (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
-					|| (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) 
-					|| (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
+			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 				return false;
 			
 			return false;
 		}
-
-		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || 
-				(hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || 
-				(hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || 
-				(hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
+		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 			return true;
 		}
 		return false;
