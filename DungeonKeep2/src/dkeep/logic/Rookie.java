@@ -42,21 +42,7 @@ public class Rookie extends Guard{
 		else
 			index++;
 
-		switch(direction) {
-		
-		case UP:
-			posx--;
-			break;
-		case DOWN:
-			posx++;
-			break;
-		case RIGHT:
-			posy++;
-			break;
-		case LEFT:
-			posy--;
-			break;
-		}
+		moveDirection(direction);
 
 	}
 }

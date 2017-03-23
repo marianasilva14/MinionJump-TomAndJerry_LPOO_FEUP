@@ -164,6 +164,10 @@ public class Guard extends Entity{
 		if(index >= directions.length)
 			index -= directions.length;
 		
+		moveDirection(direction);
+	}
+	
+	public void moveDirection(Direction direction){
 		switch(direction) {
 		case UP:
 			posx--;
