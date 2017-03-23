@@ -35,7 +35,7 @@ public class Hero extends Entity{
 	public void setSymbol(char symbol){
 		this.symbol=symbol;
 	}
-	
+
 	/**
 	 * Method responsible to move the hero
 	 * @param direction that specifies the direction of the hero
@@ -49,22 +49,18 @@ public class Hero extends Entity{
 			invalid=true;
 
 		switch(direction) {
-		case UP:
-			if(!invalid)
-				posx--;
-			break;
-		case DOWN:
-			if(!invalid)
-				posx++;
-			break;
-		case RIGHT:
-			if(!invalid)
-				posy++;
-			break;
-		case LEFT:
-			if(!invalid)
-				posy--;
-			break;
+		case UP:if(!invalid)
+			posx--;
+		break;
+		case DOWN:if(!invalid)
+			posx++;
+		break;
+		case RIGHT:if(!invalid)
+			posy++;
+		break;
+		case LEFT:if(!invalid)
+			posy--;
+		break;
 		}
 	}
 }

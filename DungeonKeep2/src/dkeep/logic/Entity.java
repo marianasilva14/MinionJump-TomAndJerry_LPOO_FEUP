@@ -86,25 +86,25 @@ public abstract class Entity {
 			pos_rand = rand.nextInt(4);
 			switch(pos_rand){
 			case 0:{if(posy+1 <= col && posy+1 >= 0 ){
-					if(board.getBoard()[posx][posy+1] != 'X'){
-						valid=true;
-						return pos_rand;}}
-				break;}
+				if(board.getBoard()[posx][posy+1] != 'X'){
+					valid=true;
+					return pos_rand;}}
+			break;}
 			case 1:{if(posy-1 <= col && posy-1 >= 0){
-					if(board.getBoard()[posx][posy-1] != 'X'){
-						valid=true;
-						return pos_rand;}}
-				break;}
+				if(board.getBoard()[posx][posy-1] != 'X'){
+					valid=true;
+					return pos_rand;}}
+			break;}
 			case 2:{if(posx-1 <= row && posx-1 >= 0){
-					if(board.getBoard()[posx-1][posy] != 'X'){
-						valid=true;
-						return pos_rand;}}
-				break;}
+				if(board.getBoard()[posx-1][posy] != 'X'){
+					valid=true;
+					return pos_rand;}}
+			break;}
 			case 3:{if(posx+1 <= row && posx+1 >= 0){
-					if(board.getBoard()[posx+1][posy] != 'X'){
-						valid=true;
-						return pos_rand;}}
-				break;}}}
+				if(board.getBoard()[posx+1][posy] != 'X'){
+					valid=true;
+					return pos_rand;}}
+			break;}}}
 		return 1;
 	}
 
@@ -127,22 +127,18 @@ public abstract class Entity {
 	public boolean checkIfMovementIsValid(Direction direction, Board b){
 
 		switch(direction) {
-		case UP:
-			if(!conditionsToMove(direction, b, posx-1, posy))
-				return false;
-			break;
-		case DOWN:
-			if(!conditionsToMove(direction, b, posx+1, posy))
-				return false;
-			break;
-		case RIGHT:
-			if(!conditionsToMove(direction, b, posx, posy+1))
-				return false;
-			break;
-		case LEFT:
-			if(!conditionsToMove(direction, b, posx, posy-1))
-				return false;
-			break; }
+		case UP:if(!conditionsToMove(direction, b, posx-1, posy))
+			return false;
+		break;
+		case DOWN:if(!conditionsToMove(direction, b, posx+1, posy))
+			return false;
+		break;
+		case RIGHT:if(!conditionsToMove(direction, b, posx, posy+1))
+			return false;
+		break;
+		case LEFT:if(!conditionsToMove(direction, b, posx, posy-1))
+			return false;
+		break; }
 		return true;
 
 	}

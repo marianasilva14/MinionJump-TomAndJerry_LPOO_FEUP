@@ -120,15 +120,10 @@ public class LevelEditor extends JFrame{
 		btnSaveLevel = new JButton("Save level");
 		btnSaveLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("images/level.txt"), "utf-8"));
+				try {fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("images/level.txt"), "utf-8"));
 					createBoardToFile();
-					fw.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}	
-			}
-		});
+					fw.close();} catch (IOException e1) {
+					e1.printStackTrace();}	} });
 		btnSaveLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnSaveLevel.setBounds(520, 427, 112, 29);
 		getContentPane().add(btnSaveLevel);
@@ -292,10 +287,8 @@ public class LevelEditor extends JFrame{
 
 		for(int i=0; i < board.length;i++){
 			for(int j=0; j< board[0].length;j++){
-				fw.write(board[i][j]+"");
-			}
-			fw.newLine();
-		}
+				fw.write(board[i][j]+"");}
+			fw.newLine();}
 	}
 
 	public boolean checkIfLevelIsValid(int x, int y){

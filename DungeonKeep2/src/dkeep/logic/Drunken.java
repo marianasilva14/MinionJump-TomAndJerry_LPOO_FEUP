@@ -65,8 +65,7 @@ public class Drunken extends Guard{
 		case LEFT: direction= direction.RIGHT;
 			break;
 		case RIGHT: direction= direction.LEFT;
-			break;
-		}
+			break;}
 		return direction;
 	}
 	
