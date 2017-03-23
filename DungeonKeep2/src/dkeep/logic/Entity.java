@@ -129,6 +129,17 @@ public abstract class Entity {
 		}
 		return 1;
 	}
+
+	public boolean conditionsToMove(Direction direction, Board b, int x, int y){
+		if((b.getBoard()[x][y] != ' ' )&&
+				(b.getBoard()[x][y] != 'k') &&
+				(b.getBoard()[x][y] != 'S')){
+			return false;
+		}
+		else
+			return true;
+	}
+
 	/**
 	 * Method that checks if movement is valid
 	 * @param direction
@@ -138,42 +149,22 @@ public abstract class Entity {
 	public boolean checkIfMovementIsValid(Direction direction, Board b){
 
 		switch(direction) {
-		case UP:{
-			if((b.getBoard()[posx-1][posy] != ' ' )&&
-					(b.getBoard()[posx-1][posy] != 'k') &&
-					(b.getBoard()[posx-1][posy] != 'S')){
+		case UP:
+			if(!conditionsToMove(direction, b, posx-1, posy))
 				return false;
-			}
-			else
-				return true;
-		}
-		case DOWN:{
-			if((b.getBoard()[posx+1][posy] != ' ' )&&
-					(b.getBoard()[posx+1][posy] != 'k') &&
-					(b.getBoard()[posx+1][posy] != 'S')){
+			break;
+		case DOWN:
+			if(!conditionsToMove(direction, b, posx+1, posy))
 				return false;
-			}
-			else
-				return true;
-		}
-		case RIGHT:{
-			if((b.getBoard()[posx][posy+1] != ' ' )&&
-					(b.getBoard()[posx][posy+1] != 'k') &&
-					(b.getBoard()[posx][posy+1] != 'S')){
+			break;
+		case RIGHT:
+			if(!conditionsToMove(direction, b, posx, posy+1))
 				return false;
-			}
-			else
-				return true;
-		}
-		case LEFT:{
-			if((b.getBoard()[posx][posy-1] != ' ' )&&
-					(b.getBoard()[posx][posy-1] != 'k') &&
-					(b.getBoard()[posx][posy-1] != 'S')){
+			break;
+		case LEFT:
+			if(!conditionsToMove(direction, b, posx, posy-1))
 				return false;
-			}
-			else
-				return true;
-		}
+			break;
 		}
 
 		return true;
