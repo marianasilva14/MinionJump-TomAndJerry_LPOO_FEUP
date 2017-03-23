@@ -111,4 +111,21 @@ public class Guard extends Entity{
 		return g;
 	}
 	
+	public void moveDirection(Direction direction){
+		switch(direction) {
+		case UP:
+			posx--;
+			break;
+		case DOWN:
+			posx++;
+			break;
+		case RIGHT:
+			posy++;
+			break;
+		case LEFT:
+			posy--;
+		}
+	}
+	
+	
 }

@@ -21,6 +21,7 @@ public class Suspicious extends Guard{
 	 */
 	public Suspicious(int posx, int posy) {
 		super(posx,posy);
+		index = 0;
 	}
 	
 	/**
@@ -85,20 +86,7 @@ public class Suspicious extends Guard{
 		if(index >= directions.length)
 			index -= directions.length;
 		
-		switch(direction) {
-		case UP:
-			posx--;
-			break;
-		case DOWN:
-			posx++;
-			break;
-		case RIGHT:
-			posy++;
-			break;
-		case LEFT:
-			posy--;
-			break;
-		}
+		moveDirection(direction);
 
 	}
 

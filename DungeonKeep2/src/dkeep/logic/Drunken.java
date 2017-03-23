@@ -20,6 +20,7 @@ public class Drunken extends Guard{
 	 */
 	public Drunken(int posx,int posy) {
 		super(posx,posy);
+		index = 0;
 	}
 
 	public enum StateDrunken{
@@ -107,7 +108,7 @@ public class Drunken extends Guard{
 
 			if(index >= directions.length)
 				index -= directions.length;
-
+/*
 			switch(direction) {
 			case UP:
 				posx--;
@@ -120,7 +121,9 @@ public class Drunken extends Guard{
 				break;
 			case LEFT:
 				posy--;
-			}
+			}*/
+			
+			moveDirection(direction);
 		}
 	}
 
