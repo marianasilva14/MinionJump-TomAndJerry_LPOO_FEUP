@@ -75,48 +75,32 @@ public class Ogre extends Entity{
 	 * @param hero
 	 */
 	public void movement(Direction direction, Board b, Hero hero){
-
 		int pos_rand = boardLimits(b);
 		boolean invalid=false;
-
 		if(nrOfMoves ==2){
 			symbol='O';
-			nrOfMoves=-1;
-		}
+			nrOfMoves=-1;}
 		if(nrOfMoves >-1)
 			nrOfMoves++;
-
 		if(!checkIfMovementIsValid(direction,b))
 			invalid=true;
-
 		if(verifyI(direction, b))
 			invalid=true;
-
 		if(ogreNextToTheHero(direction,b,hero)){
 			symbol='8';
-			nrOfMoves++;
-		}
+			nrOfMoves++;}
 
 		if(nrOfMoves == -1){
 			if(!invalid){
-
 				switch(pos_rand) {
-				case 0:
-					posy++;
+				case 0: posy++;
 					break;
-				case 1:
-					posy--;
+				case 1: posy--;
 					break;
-				case 2:
-					posx--;
+				case 2: posx--;
 					break;
-				case 3:
-					posx++;
-					break;
-
-				}
-			}
-		}
+				case 3: posx++;
+					break; } } }
 	}
 
 	/**

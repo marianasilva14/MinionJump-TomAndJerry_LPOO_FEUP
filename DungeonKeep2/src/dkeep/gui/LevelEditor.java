@@ -262,8 +262,7 @@ public class LevelEditor extends JFrame{
 	}
 
 	private Image getImage(char c) {
-		try{
-			switch(c){
+		try{ switch(c){
 			case 'H': return ImageIO.read(new File("images/jerryFront.png"));
 			case 'X': return ImageIO.read(new File("images/wall.png"));
 			case 'I': return ImageIO.read(new File("images/door.png"));
@@ -278,11 +277,7 @@ public class LevelEditor extends JFrame{
 			case '8': return ImageIO.read(new File("images/stunned.png"));
 			case ' ': return ImageIO.read(new File("images/floor.png"));
 			case '$': return ImageIO.read(new File("images/cifrao.png"));
-			default: return defaulti;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			default: return defaulti; } } catch (IOException e) { e.printStackTrace(); }
 		return null;
 	}
 

@@ -116,34 +116,23 @@ public class TomAndJerry {
 				case KeyEvent.VK_UP:{ 		
 					if(!checkKeyboardButtons()){
 						commentsLabel.setText("Jerry moved up" );
-						move(Direction.UP);
-					}
-					break;
-				}
+						move(Direction.UP);}
+					break;}
 				case KeyEvent.VK_DOWN: {
 					if(!checkKeyboardButtons()){
 						commentsLabel.setText("Jerry moved down" );
-						move(Direction.DOWN); 
-					}
-					break;
-				}
+						move(Direction.DOWN); }
+					break;}
 				case KeyEvent.VK_RIGHT:{
 					if(!checkKeyboardButtons()){
 						commentsLabel.setText("Jerry moved right" );
-						move(Direction.RIGHT); 
-					}
-					break;
-				}
+						move(Direction.RIGHT); }
+					break;}
 				case KeyEvent.VK_LEFT: {
 					if(!checkKeyboardButtons()){
 						commentsLabel.setText("Jerry moved left" );
-						move(Direction.LEFT);
-					}
-					break;
-				}
-				}
-			}
-		});
+						move(Direction.LEFT);}
+					break;}}} });
 	}
 
 	public void frameNumberOfOgres(){

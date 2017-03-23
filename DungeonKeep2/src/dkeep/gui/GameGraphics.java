@@ -97,35 +97,24 @@ public class GameGraphics extends JPanel{
 		super.paintComponent(g);
 		int x=0;
 		int y=0;
-		if(lose){
-			g.drawImage(hero_lose ,0,0, width,height,null);
+		if(lose){g.drawImage(hero_lose ,0,0, width,height,null);
 			lose=false;
-			return;
-		}
-		if(win){
-			g.drawImage(hero_win ,0,0, width,height,null);
+			return;}
+		if(win){g.drawImage(hero_win ,0,0, width,height,null);
 			win=false;
-			return;
-		}
-		if(invalid_ogres){
-			g.drawImage(invalidOgres ,0,0, width,height,null);
+			return;}
+		if(invalid_ogres){g.drawImage(invalidOgres ,0,0, width,height,null);
 			invalid_ogres=false;
-			return;
-		}
-		if(boardToString == null){
-			g.drawImage(init ,0,0, width,height,null);
-			return;
-		}
+			return;}
+		if(boardToString == null){ g.drawImage(init ,0,0, width,height,null);
+			return;}
 		for(int i =0; i < boardToString.length();i++){
 			if(boardToString.charAt(i)=='\n'){
 				y++;
 				x=0;
-				continue;
-			}
+				continue;}
 			g.drawImage(getImage(boardToString.charAt(i)),x*(width/nrCols),y*(height/nrRows),(width/nrCols),(height/nrRows),null);
-			x++;
-		}
-
+			x++;}
 	}
 
 	public void lose(){

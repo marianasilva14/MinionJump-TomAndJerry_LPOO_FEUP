@@ -91,46 +91,32 @@ public class UserInteraction {
 
 	public Direction readDirection(){
 		char c;
-		
 		System.out.println();
 		System.out.println("Please insert a character:");
 		System.out.println("To move down, insert 'd'");
 		System.out.println("To move up, insert 'u'");
 		System.out.println("To move left, insert 'l'");
 		System.out.println("To move right, insert 'r'");
-
 		Scanner reader = new Scanner(System.in);
 		c = reader.next().charAt(0);
 		c = Character.toLowerCase(c);
-
 		while (c != 'r' && c != 'l' && c != 'd' && c != 'u') {
 			System.out.println("Invalid character. Try again.");
 			c = reader.next().charAt(0);
-			c = Character.toLowerCase(c);
-		}
-
+			c = Character.toLowerCase(c);}
 		Direction direction = Direction.UP;
-
 		switch (c) {
-		case 'u':
-			direction = Direction.UP;
+		case 'u': direction = Direction.UP;
 			break;
-		case 'd':
-			direction = Direction.DOWN;
+		case 'd': direction = Direction.DOWN;
 			break;
-		case 'l':
-			direction = Direction.LEFT;
+		case 'l': direction = Direction.LEFT;
 			break;
-		case 'r':
-			direction = Direction.RIGHT;
+		case 'r': direction = Direction.RIGHT;
 			break;
-		default:
-			System.out.println("Invalid character");
-			break;
-		}
-
+		default:System.out.println("Invalid character");
+			break;}
 		return direction;
-
 	}
 	
 	public static void initGame(){
@@ -150,60 +136,35 @@ public class UserInteraction {
 	}
 	
 	public boolean play() {
-		// while nao ganhou este nivel
 		boolean alreadychange=false;
-
 		while (!game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1))) {
 			if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
 				if(game.getLevel().getEntities().get(1) instanceof Ogre){
-					System.out.println("You won! Congratulations!");
-				}
-				return true;
-			}
+					System.out.println("You won! Congratulations!");}
+				return true;}
 			if(!alreadychange){
 				if (game.getLevel().getEntities().get(1) instanceof Ogre) {
 					game.getLevel().getEntities().get(0).setSymbol('A');
-					alreadychange=true;
-				}
-			}
-
+					alreadychange=true;}}
 			System.out.print(game.getLevel().getBoard().printBoardToString(game));
-
 			UserInteraction user = new UserInteraction();
 			Direction direction = user.readDirection();
-
 			int x = game.getLevel().getEntities().get(0).getPosx();
 			int y = game.getLevel().getEntities().get(0).getPosy();
-
 			game.getLevel().getEntities().get(0).movement(direction, game.getLevel().getBoard());
 			game.cleanClub(game.getLevel().getBoard());	
-
-
 			for(int i=1; i < game.getLevel().getEntities().size();i++){
-
 				if(game.getLevel().getEntities().get(i) instanceof Ogre)
 					((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
 				else
 					game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard());
-/*
-				if (game.getLevel().getLevel() == 2 && game.verifyS(game.getLevel().getEntities().get(0), game.getLevel())) {
-					game.getLevel().getEntities().get(0).setPosx(x);
-					game.getLevel().getEntities().get(0).setPosy(y);
-					game.getLevel().getBoard().getBoard()[1][0] = 'S';
-				}
-*/
+
 				if(game.getLevel().getEntities().get(i) instanceof Ogre){
-					((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());
-
-				}
-			}
-
-		}
+					((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());}}}
 		System.out.print(game.getLevel().getBoard().printBoardToString(game));
 		System.out.print("You got caught! Game Over!");
 		endGame=true;
 		return true;
-
 	}
 
 	public boolean end() {
