@@ -48,12 +48,7 @@ public class LevelEditor extends JFrame{
 	private BufferedWriter fw;
 	private int level;
 
-	public LevelEditor() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(null);
-		setTitle("Level Editor");
-		setBounds(100, 100, 730, 542);
-
+	public void frameButtonJerry(){
 		btnJerry = new JButton("Jerry");
 		btnJerry.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -62,7 +57,9 @@ public class LevelEditor extends JFrame{
 		});
 		btnJerry.setBounds(543, 53, 89, 23);
 		getContentPane().add(btnJerry);
+	}
 
+	public void frameButtonCheese(){
 		btnCheese = new JButton("Cheese");
 		btnCheese.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -71,7 +68,9 @@ public class LevelEditor extends JFrame{
 		});
 		btnCheese.setBounds(543, 87, 89, 23);
 		getContentPane().add(btnCheese);
+	}
 
+	public void frameButtonDog(){
 		btnDog = new JButton("Dog");
 		btnDog.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -80,7 +79,9 @@ public class LevelEditor extends JFrame{
 		});
 		btnDog.setBounds(543, 121, 89, 23);
 		getContentPane().add(btnDog);
+	}
 
+	public void frameButtonFloor(){
 		btnFloor = new JButton("Floor");
 		btnFloor.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -89,7 +90,9 @@ public class LevelEditor extends JFrame{
 		});
 		btnFloor.setBounds(543, 155, 89, 23);
 		getContentPane().add(btnFloor);
+	}
 
+	public void frameButtonDoor(){
 		btnDoor = new JButton("Door");
 		btnDoor.addMouseListener(new MouseAdapter() {
 			@Override
@@ -99,7 +102,9 @@ public class LevelEditor extends JFrame{
 		});
 		btnDoor.setBounds(543, 189, 89, 23);
 		getContentPane().add(btnDoor);
+	}
 
+	public void frameButtonWall(){
 		btnWall = new JButton("Wall");
 		btnWall.addMouseListener(new MouseAdapter() {
 			@Override
@@ -109,22 +114,27 @@ public class LevelEditor extends JFrame{
 		});
 		btnWall.setBounds(543, 223, 89, 23);
 		getContentPane().add(btnWall);
+	}
 
-		panel = new JPanel();
-		panel.setBounds(46, 74, 265, 213);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+	public void frameButtonSaveLevel(){
+		btnSaveLevel = new JButton("Save level");
+		btnSaveLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("images/level.txt"), "utf-8"));
+					createBoardToFile();
+					fw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}	
+			}
+		});
+		btnSaveLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnSaveLevel.setBounds(520, 427, 112, 29);
+		getContentPane().add(btnSaveLevel);
+	}
 
-		comboBox_columns = new JComboBox();
-		comboBox_columns.setBounds(88, 2, 128, 20);
-		panel.add(comboBox_columns);
-		comboBox_columns.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10}));
-
-		lblColumns = new JLabel("Columns");
-		lblColumns.setBounds(0, 0, 78, 20);
-		panel.add(lblColumns);
-		lblColumns.setFont(new Font("Tahoma", Font.PLAIN, 14));
-
+	public void frameToRows(){
 		lblRow = new JLabel("Rows");
 		lblRow.setBounds(0, 59, 78, 20);
 		panel.add(lblRow);
@@ -134,7 +144,21 @@ public class LevelEditor extends JFrame{
 		comboBox_rows.setBounds(88, 61, 128, 20);
 		panel.add(comboBox_rows);
 		comboBox_rows.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10}));
+	}
 
+	public void frameToCols(){
+		comboBox_columns = new JComboBox();
+		comboBox_columns.setBounds(88, 2, 128, 20);
+		panel.add(comboBox_columns);
+		comboBox_columns.setModel(new DefaultComboBoxModel(new Integer[] {5,6,7,8,9,10}));
+
+		lblColumns = new JLabel("Columns");
+		lblColumns.setBounds(0, 0, 78, 20);
+		panel.add(lblColumns);
+		lblColumns.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	}
+
+	public void frameToLevel(){
 		comboBox_level = new JComboBox();
 		comboBox_level.setBounds(88, 138, 128, 20);
 		panel.add(comboBox_level);
@@ -144,7 +168,9 @@ public class LevelEditor extends JFrame{
 		lblLevel.setBounds(0, 136, 78, 20);
 		panel.add(lblLevel);
 		lblLevel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-
+	}
+	
+	public void frameButtonExit(){
 		btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnExit.addActionListener(new ActionListener() {
@@ -154,7 +180,9 @@ public class LevelEditor extends JFrame{
 		});
 		btnExit.setBounds(76, 425, 63, 32);
 		getContentPane().add(btnExit);
-
+	}
+	
+	public void frameButtonStartEditor(){
 		btnStart = new JButton("Start Editor");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -163,23 +191,19 @@ public class LevelEditor extends JFrame{
 				int nRows = Integer.parseInt(comboBox_rows.getSelectedItem().toString());
 				int nCols = Integer.parseInt(comboBox_columns.getSelectedItem().toString());
 				level = Integer.parseInt(comboBox_level.getSelectedItem().toString());
-				
+
 				size_x = width/nRows;
 				size_y = height/nCols;
 
 				board = new char[nRows][nCols];
-				/*try {
-					drawFloor();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}*/
 			}
 		});
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnStart.setBounds(183, 425, 112, 32);
 		getContentPane().add(btnStart);
-
+	}
+	
+	public void frameToEditor(){
 		panel_1 = new JPanel();
 		panel_1.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent mouse) {
@@ -214,22 +238,34 @@ public class LevelEditor extends JFrame{
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setBounds(22, 50, width, height);
 		getContentPane().add(panel_1);
+	}
 
-		btnSaveLevel = new JButton("Save level");
-		btnSaveLevel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("images/level.txt"), "utf-8"));
-					createBoardToFile();
-					fw.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}	
-			}
-		});
-		btnSaveLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnSaveLevel.setBounds(520, 427, 112, 29);
-		getContentPane().add(btnSaveLevel);
+	public LevelEditor() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		setTitle("Level Editor");
+		setBounds(100, 100, 730, 542);
+
+		frameButtonJerry();
+		frameButtonCheese();
+		frameButtonDog();	
+		frameButtonFloor();
+		frameButtonDoor();
+		frameButtonWall();
+
+		panel = new JPanel();
+		panel.setBounds(46, 74, 265, 213);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+
+		frameToCols();
+		frameToRows();
+		frameToLevel();
+		frameButtonExit();
+		frameButtonStartEditor();
+		frameToEditor();
+		frameButtonSaveLevel();
+
 	}
 
 	private Image getImage(char c) {
@@ -258,18 +294,18 @@ public class LevelEditor extends JFrame{
 	}
 
 	public void createBoardToFile() throws IOException{
-		
+
 		String nRows = comboBox_rows.getSelectedItem().toString();
 		String nCols = comboBox_columns.getSelectedItem().toString();
 		String lv = comboBox_level.getSelectedItem().toString();
-		
+
 		fw.write(nRows);
 		fw.newLine();
 		fw.write(nCols);
 		fw.newLine();
 		fw.write(lv);
 		fw.newLine();
-		
+
 		for(int i=0; i < board.length;i++){
 			for(int j=0; j< board[0].length;j++){
 				fw.write(board[i][j]+"");
@@ -277,27 +313,6 @@ public class LevelEditor extends JFrame{
 			fw.newLine();
 		}
 	}
-	/*
-	public void drawFloor() throws IOException{
-		
-		String nRows = comboBox_rows.getSelectedItem().toString();
-		String nCols = comboBox_columns.getSelectedItem().toString();
-		String lv = comboBox_level.getSelectedItem().toString();
-		
-		fw.write(nRows);
-		fw.newLine();
-		fw.write(nCols);
-		fw.newLine();
-		fw.write(lv);
-		fw.newLine();
-		
-		for(int i=0; i < board.length;i++){
-			for(int j=0; j< board[0].length;j++){
-				fw.write(" ");
-			}
-			fw.newLine();
-		}
-	}*/
 
 	public boolean checkIfLevelIsValid(int x, int y){
 
@@ -338,6 +353,6 @@ public class LevelEditor extends JFrame{
 		}
 		revalidate();
 	}
-	
+
 
 }
