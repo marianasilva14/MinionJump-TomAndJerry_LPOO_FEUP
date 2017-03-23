@@ -168,12 +168,12 @@ public class LevelEditor extends JFrame{
 				size_y = height/nCols;
 
 				board = new char[nRows][nCols];
-				try {
+				/*try {
 					drawFloor();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				}*/
 			}
 		});
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -277,7 +277,7 @@ public class LevelEditor extends JFrame{
 			fw.newLine();
 		}
 	}
-	
+	/*
 	public void drawFloor() throws IOException{
 		
 		String nRows = comboBox_rows.getSelectedItem().toString();
@@ -297,7 +297,7 @@ public class LevelEditor extends JFrame{
 			}
 			fw.newLine();
 		}
-	}
+	}*/
 
 	public boolean checkIfLevelIsValid(int x, int y){
 
