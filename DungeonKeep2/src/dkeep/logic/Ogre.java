@@ -3,7 +3,11 @@ import dkeep.logic.Entity;
 import dkeep.logic.Game.Direction;
 import java.util.Random;
 
-
+/**
+ * 
+ * Ogre.java - A subclass of Entity
+ *
+ */
 public class Ogre extends Entity{
 
 	private char symbol;
@@ -11,27 +15,47 @@ public class Ogre extends Entity{
 	private boolean key=false;
 	private int nrOfMoves=-1;
 
+	/**
+	 * Constructor of this class and initialize the symbol that represents the Ogre
+	 * @param posx represents the coordinate x of the position of the Ogre
+	 * @param posy represents the coordinate y of the position of the Ogre
+	 *
+	 */
 	public Ogre(int posx, int posy) {
 		super(posx, posy);
 		symbol = 'O';
 	}
-/*
+	/*
 	public Ogre getOgre(){
 		return this;
 	}
-*/
+	 */
+	/**
+	 * @return symbol that represents the Ogre
+	 */
 	public char getSymbol(){
 		return symbol;
 	}
 
+	/**
+	 * Sets the symbol of the hero
+	 * @param symbol
+	 */
 	public void setSymbol(char symbol){
 		this.symbol=symbol;
 	}
 
+	/**
+	 * @return key
+	 */
 	public boolean getKey(){
 		return key;
 	}
 
+	/**
+	 * Method that sets the key
+	 * @param b
+	 */
 	public void setKey(boolean b){
 		key=b;
 	}
@@ -39,16 +63,22 @@ public class Ogre extends Entity{
 	public int getNrOfMoves(){
 		return nrOfMoves;
 	}
-	
+
 	public void setNrOfMoves(int nr){
 		nrOfMoves=nr;
 	}
-*/
+	 */
+	/**
+	 * Method responsible to move the ogres and stun them (they stop moving for two turns)
+	 * @param direction
+	 * @param board
+	 * @param hero
+	 */
 	public void movement(Direction direction, Board b, Hero hero){
 
 		int pos_rand = boardLimits(b);
 		boolean invalid=false;
-		
+
 		if(nrOfMoves ==2){
 			symbol='O';
 			nrOfMoves=-1;
@@ -61,49 +91,62 @@ public class Ogre extends Entity{
 
 		if(verifyI(direction, b))
 			invalid=true;
-		
+
 		if(ogreNextToTheHero(direction,b,hero)){
 			symbol='8';
 			nrOfMoves++;
 		}
 
 		if(nrOfMoves == -1){
-		if(!invalid){
+			if(!invalid){
 
-			switch(pos_rand) {
-			case 0:
-				posy++;
-				break;
-			case 1:
-				posy--;
-				break;
-			case 2:
-				posx--;
-				break;
-			case 3:
-				posx++;
-				break;
+				switch(pos_rand) {
+				case 0:
+					posy++;
+					break;
+				case 1:
+					posy--;
+					break;
+				case 2:
+					posx--;
+					break;
+				case 3:
+					posx++;
+					break;
 
+				}
 			}
 		}
-		}
 	}
-	
+
+	/**
+	 * Method that checks if the ogre is next to the hero
+	 * @param direction
+	 * @param board
+	 * @param hero
+	 * @return true if the ogre is next to the hero
+	 */
 	public boolean ogreNextToTheHero(Direction direction, Board b, Hero hero){
-		
+
 		if(hero.getSymbol()=='K'){
-		if( (posx-1 == hero.getPosx() && posy == hero.getPosy()) || 
-				(posx+1 == hero.getPosx() && posy == hero.getPosy()) ||
-				(posx == hero.getPosx() && posy+1 == hero.getPosy()) ||
-				(posx == hero.getPosx() && posy-1== hero.getPosy()))
-			return true;
-		else
-			return false;
+			if( (posx-1 == hero.getPosx() && posy == hero.getPosy()) || 
+					(posx+1 == hero.getPosx() && posy == hero.getPosy()) ||
+					(posx == hero.getPosx() && posy+1 == hero.getPosy()) ||
+					(posx == hero.getPosx() && posy-1== hero.getPosy()))
+				return true;
+			else
+				return false;
 		}
 		else
 			return false;
 	}
 
+	/**
+	 * Method that verifies if the hero is next to the door
+	 * @param direction
+	 * @param board
+	 * @return true if the hero is next to the door
+	 */
 	public boolean verifyI(Direction direction, Board b){
 
 		switch(direction) {
@@ -134,95 +177,102 @@ public class Ogre extends Entity{
 		}
 		return true;
 
-		}
+	}
 
-		public void club(Board b){
+	/**
+	 * Method responsible to move club
+	 * @param board
+	 */
+	public void club(Board b){
 
-			while(true){
-				int pos_rand;
-				Random rand = new Random();
-				pos_rand = rand.nextInt(4);
-				switch(pos_rand) {
-				case 0:{
-					if (b.getBoard()[posx-1][posy] == 'X' ||  b.getBoard()[posx-1][posy] == 'I')
-						break;
-					else if(b.getBoard()[posx-1][posy] == 'k')
-					{
-						pos_club[0]=posx-1;
-						pos_club[1]=posy;
-						return;
-					}
-					else if(b.getBoard()[posx-1][posy] != 'A' && b.getBoard()[posx-1][posy] != ' ')
-						break;
-					else{
-						b.getBoard()[posx-1][posy]= '*';
-						pos_club[0]=posx-1;
-						pos_club[1]=posy;
-						return;
-					}
+		while(true){
+			int pos_rand;
+			Random rand = new Random();
+			pos_rand = rand.nextInt(4);
+			switch(pos_rand) {
+			case 0:{
+				if (b.getBoard()[posx-1][posy] == 'X' ||  b.getBoard()[posx-1][posy] == 'I')
+					break;
+				else if(b.getBoard()[posx-1][posy] == 'k')
+				{
+					pos_club[0]=posx-1;
+					pos_club[1]=posy;
+					return;
 				}
-				case 1:{
-					if(b.getBoard()[posx][posy+1] == 'X' || b.getBoard()[posx][posy+1] == 'I')
-						break;
-					else if( b.getBoard()[posx][posy+1] == 'k'){
-						{
-							pos_club[0]=posx;
-							pos_club[1]=posy+1;
-							return;
-						}
-					}
-					else if(b.getBoard()[posx][posy+1] != 'A' && b.getBoard()[posx][posy+1] != ' ')
-						break;
-					else{
-						b.getBoard()[posx][posy+1]= '*';
+				else if(b.getBoard()[posx-1][posy] != 'A' && b.getBoard()[posx-1][posy] != ' ')
+					break;
+				else{
+					b.getBoard()[posx-1][posy]= '*';
+					pos_club[0]=posx-1;
+					pos_club[1]=posy;
+					return;
+				}
+			}
+			case 1:{
+				if(b.getBoard()[posx][posy+1] == 'X' || b.getBoard()[posx][posy+1] == 'I')
+					break;
+				else if( b.getBoard()[posx][posy+1] == 'k'){
+					{
 						pos_club[0]=posx;
 						pos_club[1]=posy+1;
 						return;
 					}
 				}
-				case 2:{
-					if(b.getBoard()[posx+1][posy] == 'X'|| b.getBoard()[posx+1][posy] == 'I')
-						break;
-					else if(b.getBoard()[posx+1][posy] == 'k'){
-						pos_club[0]=posx+1;
-						pos_club[1]=posy;
-						return;
-					}
-					else if(b.getBoard()[posx+1][posy] != 'A' && b.getBoard()[posx+1][posy] != ' ')
-						break;
-					else{
-						b.getBoard()[posx+1][posy]= '*';
-						pos_club[0]=posx+1;
-						pos_club[1]=posy;
-						return;
-					}
-				}
-				case 3:{
-					if( b.getBoard()[posx][posy-1] == 'X' || b.getBoard()[posx][posy-1] == 'I')
-						break;
-					else if(b.getBoard()[posx][posy-1] == 'k'){
-						pos_club[0]=posx;
-						pos_club[1]=posy-1;
-						return;
-					}
-					else if(b.getBoard()[posx][posy-1] != 'A' && b.getBoard()[posx][posy-1] != ' ')
-						break;
-					else{
-						b.getBoard()[posx][posy-1]= '*';
-						pos_club[0]=posx;
-						pos_club[1]=posy-1;
-						return;
-					}
-				}
+				else if(b.getBoard()[posx][posy+1] != 'A' && b.getBoard()[posx][posy+1] != ' ')
+					break;
+				else{
+					b.getBoard()[posx][posy+1]= '*';
+					pos_club[0]=posx;
+					pos_club[1]=posy+1;
+					return;
 				}
 			}
+			case 2:{
+				if(b.getBoard()[posx+1][posy] == 'X'|| b.getBoard()[posx+1][posy] == 'I')
+					break;
+				else if(b.getBoard()[posx+1][posy] == 'k'){
+					pos_club[0]=posx+1;
+					pos_club[1]=posy;
+					return;
+				}
+				else if(b.getBoard()[posx+1][posy] != 'A' && b.getBoard()[posx+1][posy] != ' ')
+					break;
+				else{
+					b.getBoard()[posx+1][posy]= '*';
+					pos_club[0]=posx+1;
+					pos_club[1]=posy;
+					return;
+				}
+			}
+			case 3:{
+				if( b.getBoard()[posx][posy-1] == 'X' || b.getBoard()[posx][posy-1] == 'I')
+					break;
+				else if(b.getBoard()[posx][posy-1] == 'k'){
+					pos_club[0]=posx;
+					pos_club[1]=posy-1;
+					return;
+				}
+				else if(b.getBoard()[posx][posy-1] != 'A' && b.getBoard()[posx][posy-1] != ' ')
+					break;
+				else{
+					b.getBoard()[posx][posy-1]= '*';
+					pos_club[0]=posx;
+					pos_club[1]=posy-1;
+					return;
+				}
+			}
+			}
 		}
+	}
 
-
-		public void movement(Direction direction, Board b) {
-			
-		}
-
+	/**
+	 * @param direction
+	 * @param board
+	 */
+	public void movement(Direction direction, Board b) {
 
 	}
+
+
+}
 

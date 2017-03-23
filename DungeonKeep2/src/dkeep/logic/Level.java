@@ -4,13 +4,23 @@ import java.util.ArrayList;
 
 import dkeep.logic.Drunken.StateDrunken;
 
+/**
+ * 
+ * Level.java - Class that represents level of the game
+ *
+ */
 public class Level {
 
 	private Board board;
 	private int level;
 	private ArrayList<Entity> entities;
 
-
+	/**
+	 * Constructor of this class
+	 * @param board
+	 * @param entities
+	 * @param level
+	 */
 	public Level(Board b, ArrayList<Entity> entities, int l){
 		this.board=b;
 		this.level=l;
@@ -18,6 +28,11 @@ public class Level {
 
 	}
 
+	/**
+	 * Constructor of this class
+	 * @param board
+	 * @param guard
+	 */
 	public Level(Board b, int guard){
 		entities = new ArrayList<Entity>();
 		board=b;
@@ -49,27 +64,49 @@ public class Level {
 		}
 	}
 
-
+	/**
+	 * @return board of the level
+	 */
 	public Board getBoard(){
 		return board;
 	}
 
+	/**
+	 * @return level
+	 */
 	public int getLevel(){
 		return level;
 	}
 
+	/**
+	 * Method that sets the level
+	 * @param level
+	 */
 	public void setLevel(int lv){
 		this.level=lv;
 	}
 
+	/**
+	 * Method that sets the board
+	 * @param board
+	 */
 	public void setBoard(Board board) {
 		this.board = board;
 	}
 
+	/**
+	 * @return entities Array that includes all game's entities
+	 */
 	public ArrayList<Entity> getEntities(){
 		return entities;
 	}
 
+	/**
+	 * Method that checks if the game is over
+	 * @param hero
+	 * @param capture
+	 * @return true if the game is over
+	 */
 	public boolean checkIfEnds(Entity hero, Entity capture){
 
 		if(board.checkLimits(hero)){
@@ -100,6 +137,10 @@ public class Level {
 		return false;
 	}
 
+	/**
+	 * Method that sets entities
+	 * @param entities
+	 */
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities=entities;
 	}

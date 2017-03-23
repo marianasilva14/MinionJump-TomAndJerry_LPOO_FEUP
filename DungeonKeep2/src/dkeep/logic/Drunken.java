@@ -91,8 +91,8 @@ public class Drunken extends Guard{
 	
 	/**
 	 * Methods responsible to define the type of the movement's drunken
-	 * @param
-	 * @param
+	 * @param direction
+	 * @param board
 	 */
 	public void movement(Direction direction, Board b){
 

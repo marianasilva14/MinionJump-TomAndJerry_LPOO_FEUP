@@ -2,6 +2,11 @@ package dkeep.logic;
 
 import dkeep.cli.UserInteraction;
 
+/**
+ * 
+ * Game.java - Class that includes rules of the game
+ *
+ */
 public class Game {
 
 	public UserInteraction cli;
@@ -23,6 +28,11 @@ public class Game {
 			return false;
 	}
 */
+	/**
+	 * Method that changes the doors to stairs when the hero reaches the lever
+	 * @param entity
+	 * @param level
+	 */
 	public void checkLever(Entity e, Level lv){
 
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k')
@@ -43,6 +53,11 @@ public class Game {
 		}	
 	}
 	
+	/**
+	 * @param entity
+	 * @param level
+	 * @return true if entity's position is in the place of the stairs
+	 */
 	public boolean changeLevel(Entity e, Level lv){
 
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'S')
@@ -76,6 +91,10 @@ public class Game {
 		return false;
 	}
 
+	/**
+	 * Method that clean the old club's position
+	 * @param board
+	 */
 	public void cleanClub(Board b){
 		
 		int row= b.getBoard().length;
@@ -89,7 +108,9 @@ public class Game {
 		}
 	}
 
-	
+	/**
+	 * @return level
+	 */
 	public Level getLevel() {
 		return level;
 	}
