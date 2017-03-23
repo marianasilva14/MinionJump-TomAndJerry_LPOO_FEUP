@@ -94,13 +94,13 @@ public class Ogre extends Entity{
 			if(!invalid){
 				switch(pos_rand) {
 				case 0: posy++;
-					break;
+				break;
 				case 1: posy--;
-					break;
+				break;
 				case 2: posx--;
-					break;
+				break;
 				case 3: posx++;
-					break; } } }
+				break; } } }
 	}
 
 	/**
@@ -133,29 +133,25 @@ public class Ogre extends Entity{
 	 */
 	public boolean verifyI(Direction direction, Board b){
 		switch(direction) {
-		case UP:{
-			if(b.getBoard()[posx-1][posy] == 'I')
-				return true;
-			else
-				return false;}
-		case DOWN:{
-			if(b.getBoard()[posx+1][posy] == 'I')
-				return true;
-			else
-				return false;}
-		case RIGHT:{
-			if(b.getBoard()[posx][posy+1] == 'I')
-				return true;
-			else
-				return false;}
-		case LEFT:{
-			if(b.getBoard()[posx][posy-1] == 'I')
-				return true;
-			else
-				return false;} }
+		case UP:{if(b.getBoard()[posx-1][posy] == 'I')
+			return true;
+		else
+			return false;}
+		case DOWN:{if(b.getBoard()[posx+1][posy] == 'I')
+			return true;
+		else
+			return false;}
+		case RIGHT:{if(b.getBoard()[posx][posy+1] == 'I')
+			return true;
+		else
+			return false;}
+		case LEFT:{if(b.getBoard()[posx][posy-1] == 'I')
+			return true;
+		else
+			return false;} }
 		return true;
 	}
-	
+
 	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
 		if (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I')
 			return false;
@@ -166,9 +162,9 @@ public class Ogre extends Entity{
 		else if(b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ')
 			return false;
 		else{b.getBoard()[x][y]= '*';
-			pos_club[0]=x;
-			pos_club[1]=y;
-			return true;}
+		pos_club[0]=x;
+		pos_club[1]=y;
+		return true;}
 	}
 
 	/**

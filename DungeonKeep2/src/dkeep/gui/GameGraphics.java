@@ -41,8 +41,7 @@ public class GameGraphics extends JPanel{
 	
 	public GameGraphics(){
 		super();
-		try {
-			hero =  ImageIO.read(new File("images/jerryFront.png"));
+		try {hero =  ImageIO.read(new File("images/jerryFront.png"));
 			floor =  ImageIO.read(new File("images/floor.png"));
 			wall =  ImageIO.read(new File("images/wall.png"));
 			guard =  ImageIO.read(new File("images/tomFront.png"));
@@ -59,15 +58,11 @@ public class GameGraphics extends JPanel{
 			ogre_lever =  ImageIO.read(new File("images/cifrao.png"));
 			init =  ImageIO.read(new File("images/menu.png"));
 			invalidOgres =  ImageIO.read(new File("images/invalidNumberOfOgres.png"));
-			stun =  ImageIO.read(new File("images/stunned.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			stun =  ImageIO.read(new File("images/stunned.png"));} catch (IOException e) { e.printStackTrace();}
 	}
 
 	private Image getImage(char c) {
-		switch(c){
-		case 'H': return hero;
+		switch(c){case 'H': return hero;
 		case 'X': return wall;
 		case 'I': return door;
 		case 'S': return open_door;
@@ -81,8 +76,7 @@ public class GameGraphics extends JPanel{
 		case '8': return stun;
 		case ' ': return floor;
 		case '$': return ogre_lever;
-		default: return defaulti;
-		}
+		default: return defaulti;}
 	}
 
 	public void updateGame(String string, int Rows, int Cols){

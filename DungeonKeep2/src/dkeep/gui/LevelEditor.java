@@ -309,27 +309,17 @@ public class LevelEditor extends JFrame{
 			if(!jerry_placed){
 				panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
 				board[square_x][square_y]=character_selected;
-				jerry_placed= true;
-			}
-		}
+				jerry_placed= true;} }
 		else if(character_selected == 'k'){
 			if(!cheese_placed){
 				panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
 				board[square_x][square_y]=character_selected;
-				cheese_placed= true;
-			}
-		}
-		else if(character_selected == 'O' && level == 2)
-		{
+				cheese_placed= true;} }
+		else if(character_selected == 'O' && level == 2){
 			panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
-			board[square_x][square_y]=character_selected;
-		}
+			board[square_x][square_y]=character_selected;}
 		else if(character_selected != 'O'){
 			panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
-			board[square_x][square_y]=character_selected;
-		}
-		revalidate();
-	}
-
-
+			board[square_x][square_y]=character_selected;}
+		revalidate();}
 }

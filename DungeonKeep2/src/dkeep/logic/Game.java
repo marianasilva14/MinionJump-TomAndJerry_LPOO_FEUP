@@ -26,23 +26,15 @@ public class Game {
 	 * @param level
 	 */
 	public void checkLever(Entity e, Level lv){
-
-		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k')
-		{
+		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k'){
 			e.setSymbol('K');
 			int row_aux = lv.getBoard().getBoard().length;
 			int col_aux = lv.getBoard().getBoard()[0].length;
-
-			for(int i = 0; i < row_aux; i++)
-			{
-				for(int j = 0; j < col_aux; j++)
-				{
+			for(int i = 0; i < row_aux; i++){
+				for(int j = 0; j < col_aux; j++){
 					if(j == lv.getBoard().getBoard().length || j == 0 || i == lv.getBoard().getBoard().length || i == 0)
 					if(lv.getBoard().getBoard()[i][j] == 'I')
-						lv.getBoard().getBoard()[i][j] = 'S';
-				}
-			}
-		}	
+						lv.getBoard().getBoard()[i][j] = 'S';}} }	
 	}
 	
 	/**
