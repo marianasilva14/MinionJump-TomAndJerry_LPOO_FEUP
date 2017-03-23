@@ -33,7 +33,7 @@ public class Suspicious extends Guard{
 	 * Method responsible to reverse Suspicious's direction
 	 * @return direction
 	 */
-	public Direction reverseSuspiciousDirection(){
+/*	public Direction reverseSuspiciousDirection(){
 
 		index--;
 		if(index < 0)
@@ -58,27 +58,18 @@ public class Suspicious extends Guard{
 		
 		return direction;
 	}
-
+*/
 	/**
 	 * Methods responsible to define the type of the movement's Suspicious
 	 * @param direction
 	 * @param board
 	 */
 	public void movement(Direction direction, Board b){
- /*
-		int pos_rand;
-		Random rand = new Random();
-		pos_rand = rand.nextInt(10);
 
-		direction = directions[index];
-
-		if(pos_rand == 1)
-			move *= -1;
-*/
 		randDirection(direction);
 		
 		if(move == 1)
-			direction = reverseSuspiciousDirection();
+			direction = reverseGuardDirection();
 		else{
 			index++;
 		}

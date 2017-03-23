@@ -124,5 +124,35 @@ public class Guard extends Entity{
 			move *= -1;
 	}
 	
+	/**
+	 * Methods that reverses Guard's direction
+	 * @return Direction of the Drunken
+	 */
+	public Direction reverseGuardDirection(){
+
+		index--;
+		if(index < 0)
+			index += directions.length;
+
+		Direction direction = directions[index];
+
+		switch(direction){
+		case UP:
+			direction= direction.DOWN;
+			break;
+		case DOWN:
+			direction= direction.UP;
+			break;
+		case LEFT:
+			direction= direction.RIGHT;
+			break;
+		case RIGHT:
+			direction= direction.LEFT;
+			break;
+		}
+
+		return direction;
+	}
+	
 	
 }

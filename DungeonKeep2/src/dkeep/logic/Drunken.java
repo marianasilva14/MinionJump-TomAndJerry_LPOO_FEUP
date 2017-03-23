@@ -54,11 +54,12 @@ public class Drunken extends Guard{
 
 	}
 */
+	
 	/**
 	 * Methods that reverses Drunken's direction
 	 * @return Direction of the Drunken
 	 */
-	public Direction reverseDrunkenDirection(){
+	/*public Direction reverseDrunkenDirection(){
 
 		index--;
 		if(index < 0)
@@ -83,7 +84,7 @@ public class Drunken extends Guard{
 
 		return direction;
 	}
-	
+	*/
 	/**
 	 * Methods responsible to define the type of the movement's drunken
 	 * @param direction
@@ -97,23 +98,13 @@ public class Drunken extends Guard{
 		StateDrunken st = status[status_rand];
 
 		setStateDrunken(st);
-		/*
-		int pos_rand;
-		Random rand = new Random();
-		pos_rand = rand.nextInt(10);
-
-		direction = directions[index];
-		
-		if(pos_rand == 1)
-			move *= -1;
-		*/
 		
 		randDirection(direction);
 		
 		if(st == StateDrunken.G){
 			setSymbol('G');
 			if(move == 1)
-				direction = reverseDrunkenDirection();
+				direction = reverseGuardDirection();
 			else
 				index++;
 
