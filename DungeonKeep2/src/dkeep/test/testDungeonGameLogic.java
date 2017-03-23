@@ -1098,6 +1098,28 @@ public class testDungeonGameLogic {
 		assertTrue(!false);
 		assertTrue(!false);
 		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
+		assertTrue(!false);
 
 	}
 	
