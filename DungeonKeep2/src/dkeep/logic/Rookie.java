@@ -19,7 +19,13 @@ public class Rookie extends Guard{
 	 */
 	public Rookie(int posx, int posy) {
 		super(posx,posy);
+		index=0;
 	}
+
+	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
+			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
+			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
+			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
 
 	/**
 	 * @return Rookie
@@ -42,7 +48,21 @@ public class Rookie extends Guard{
 		else
 			index++;
 
-		moveDirection(direction);
+		switch(direction) {
+		
+		case UP:
+			posx--;
+			break;
+		case DOWN:
+			posx++;
+			break;
+		case RIGHT:
+			posy++;
+			break;
+		case LEFT:
+			posy--;
+			break;
+		}
 
 	}
 }
