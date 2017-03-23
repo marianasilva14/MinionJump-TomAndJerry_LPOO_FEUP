@@ -45,46 +45,7 @@ public class Drunken extends Guard{
 	public void setStateDrunken(StateDrunken st) {
 		this.state = st;
 	}
-/*
-	public Drunken getDrunken(){
-		return this;
-	}
 
-	public void behaviorGuard(){
-
-	}
-*/
-	
-	/**
-	 * Methods that reverses Drunken's direction
-	 * @return Direction of the Drunken
-	 */
-	/*public Direction reverseDrunkenDirection(){
-
-		index--;
-		if(index < 0)
-			index += directions.length;
-
-		Direction direction = directions[index];
-
-		switch(direction){
-		case UP:
-			direction= direction.DOWN;
-			break;
-		case DOWN:
-			direction= direction.UP;
-			break;
-		case LEFT:
-			direction= direction.RIGHT;
-			break;
-		case RIGHT:
-			direction= direction.LEFT;
-			break;
-		}
-
-		return direction;
-	}
-	*/
 	/**
 	 * Methods responsible to define the type of the movement's drunken
 	 * @param direction
@@ -103,27 +64,7 @@ public class Drunken extends Guard{
 		
 		if(st == StateDrunken.G){
 			setSymbol('G');
-			if(move == 1)
-				direction = reverseGuardDirection();
-			else
-				index++;
-
-			if(index >= directions.length)
-				index -= directions.length;
-
-			switch(direction) {
-			case UP:
-				posx--;
-				break;
-			case DOWN:
-				posx++;
-				break;
-			case RIGHT:
-				posy++;
-				break;
-			case LEFT:
-				posy--;
-			}
+			movementGuard(direction);
 		}
 	}
 

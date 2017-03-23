@@ -154,5 +154,31 @@ public class Guard extends Entity{
 		return direction;
 	}
 	
+	public void movementGuard(Direction direction){
+		if(move == 1)
+			direction = reverseGuardDirection();
+		else{
+			index++;
+		}
+		
+		if(index >= directions.length)
+			index -= directions.length;
+		
+		switch(direction) {
+		case UP:
+			posx--;
+			break;
+		case DOWN:
+			posx++;
+			break;
+		case RIGHT:
+			posy++;
+			break;
+		case LEFT:
+			posy--;
+			break;
+		}
+	}
+	
 	
 }

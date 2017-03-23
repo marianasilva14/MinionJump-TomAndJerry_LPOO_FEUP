@@ -29,36 +29,7 @@ public class Suspicious extends Guard{
 		return this;
 	}
 
-	/**
-	 * Method responsible to reverse Suspicious's direction
-	 * @return direction
-	 */
-/*	public Direction reverseSuspiciousDirection(){
 
-		index--;
-		if(index < 0)
-			index += directions.length;
-		
-		Direction direction = directions[index];
-		
-		switch(direction){
-		case UP:
-			direction= direction.DOWN;
-			break;
-		case DOWN:
-			direction= direction.UP;
-			break;
-		case LEFT:
-			direction= direction.RIGHT;
-			break;
-		case RIGHT:
-			direction= direction.LEFT;
-			break;
-		}
-		
-		return direction;
-	}
-*/
 	/**
 	 * Methods responsible to define the type of the movement's Suspicious
 	 * @param direction
@@ -68,30 +39,7 @@ public class Suspicious extends Guard{
 
 		randDirection(direction);
 		
-		if(move == 1)
-			direction = reverseGuardDirection();
-		else{
-			index++;
-		}
-		
-		if(index >= directions.length)
-			index -= directions.length;
-		
-		switch(direction) {
-		case UP:
-			posx--;
-			break;
-		case DOWN:
-			posx++;
-			break;
-		case RIGHT:
-			posy++;
-			break;
-		case LEFT:
-			posy--;
-			break;
-		}
-
+		movementGuard(direction);
 	}
 
 }
