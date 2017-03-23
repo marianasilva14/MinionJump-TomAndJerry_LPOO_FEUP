@@ -22,14 +22,14 @@ public class Suspicious extends Guard{
 	 */
 	public Suspicious(int posx, int posy) {
 		super(posx,posy);
-		index=0;
+		//index=0;
 	}
-	
+/*	
 	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
 			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
 			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
 			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
-
+*/
 	/**
 	 * @return Suspicious
 	 */
@@ -74,6 +74,7 @@ public class Suspicious extends Guard{
 	 */
 	public void movement(Direction direction, Board b){
  
+		Guard g = new Guard(index, index);
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(10);

@@ -11,6 +11,11 @@ public class Guard extends Entity{
 
 	private char symbol;
 	
+	protected Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
+			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
+			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
+			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
+	
 	/**
 	 * Constructor of this class and initialize the symbol that represents the Guard
 	 * @param posx represents the coordinate x of the position of the Guard
