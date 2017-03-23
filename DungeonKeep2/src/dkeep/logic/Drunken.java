@@ -20,13 +20,7 @@ public class Drunken extends Guard{
 	 */
 	public Drunken(int posx,int posy) {
 		super(posx,posy);
-		index = 0;
 	}
-
-	private Direction directions[] = {Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN, 
-			Direction.LEFT,Direction.LEFT, Direction.LEFT,Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN,
-			Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT,Direction.RIGHT, 
-			Direction.RIGHT, Direction.UP,  Direction.UP, Direction.UP, Direction.UP, Direction.UP};
 
 	public enum StateDrunken{
 		G,g;
@@ -50,15 +44,7 @@ public class Drunken extends Guard{
 	public void setStateDrunken(StateDrunken st) {
 		this.state = st;
 	}
-/*
-	public Drunken getDrunken(){
-		return this;
-	}
-
-	public void behaviorGuard(){
-
-	}
-*/
+	
 	/**
 	 * Methods that reverses Drunken's direction
 	 * @return Direction of the Drunken
