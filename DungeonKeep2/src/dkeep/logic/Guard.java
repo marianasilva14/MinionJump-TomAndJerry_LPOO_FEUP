@@ -36,12 +36,6 @@ public class Guard extends Entity{
 		
 	public GuardType guardType = GuardType.Rookie;
 	
-	/*
-	public Guard getGuard(){
-		return this;
-	}
-	*/
-	
 	/**
 	 * Method that returns guard's type: Drunken, Suspicious or Drunken
 	 * @return guardType

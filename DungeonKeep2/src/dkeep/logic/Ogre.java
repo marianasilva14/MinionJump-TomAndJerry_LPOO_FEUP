@@ -178,6 +178,25 @@ public class Ogre extends Entity{
 		return true;
 
 	}
+	
+	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
+		if (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I')
+			return false;
+		else if(b.getBoard()[x][y] == 'k')
+		{
+			pos_club[0]=x;
+			pos_club[1]=y;
+			return true;
+		}
+		else if(b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ')
+			return false;
+		else{
+			b.getBoard()[x][y]= '*';
+			pos_club[0]=x;
+			pos_club[1]=y;
+			return true;
+		}
+	}
 
 	/**
 	 * Method responsible to move club
@@ -191,75 +210,28 @@ public class Ogre extends Entity{
 			pos_rand = rand.nextInt(4);
 			switch(pos_rand) {
 			case 0:{
-				if (b.getBoard()[posx-1][posy] == 'X' ||  b.getBoard()[posx-1][posy] == 'I')
-					break;
-				else if(b.getBoard()[posx-1][posy] == 'k')
-				{
-					pos_club[0]=posx-1;
-					pos_club[1]=posy;
+				if(checkIfClubHasCorrectedPosition(b, posx-1, posy))
 					return;
-				}
-				else if(b.getBoard()[posx-1][posy] != 'A' && b.getBoard()[posx-1][posy] != ' ')
+				else
 					break;
-				else{
-					b.getBoard()[posx-1][posy]= '*';
-					pos_club[0]=posx-1;
-					pos_club[1]=posy;
-					return;
-				}
 			}
 			case 1:{
-				if(b.getBoard()[posx][posy+1] == 'X' || b.getBoard()[posx][posy+1] == 'I')
-					break;
-				else if( b.getBoard()[posx][posy+1] == 'k'){
-					{
-						pos_club[0]=posx;
-						pos_club[1]=posy+1;
-						return;
-					}
-				}
-				else if(b.getBoard()[posx][posy+1] != 'A' && b.getBoard()[posx][posy+1] != ' ')
-					break;
-				else{
-					b.getBoard()[posx][posy+1]= '*';
-					pos_club[0]=posx;
-					pos_club[1]=posy+1;
+				if(checkIfClubHasCorrectedPosition(b, posx, posy+1))
 					return;
-				}
+				else
+					break;
 			}
 			case 2:{
-				if(b.getBoard()[posx+1][posy] == 'X'|| b.getBoard()[posx+1][posy] == 'I')
-					break;
-				else if(b.getBoard()[posx+1][posy] == 'k'){
-					pos_club[0]=posx+1;
-					pos_club[1]=posy;
+				if(checkIfClubHasCorrectedPosition(b, posx+1, posy))
 					return;
-				}
-				else if(b.getBoard()[posx+1][posy] != 'A' && b.getBoard()[posx+1][posy] != ' ')
+				else
 					break;
-				else{
-					b.getBoard()[posx+1][posy]= '*';
-					pos_club[0]=posx+1;
-					pos_club[1]=posy;
-					return;
-				}
 			}
 			case 3:{
-				if( b.getBoard()[posx][posy-1] == 'X' || b.getBoard()[posx][posy-1] == 'I')
-					break;
-				else if(b.getBoard()[posx][posy-1] == 'k'){
-					pos_club[0]=posx;
-					pos_club[1]=posy-1;
+				if(checkIfClubHasCorrectedPosition(b, posx, posy-1))
 					return;
-				}
-				else if(b.getBoard()[posx][posy-1] != 'A' && b.getBoard()[posx][posy-1] != ' ')
+				else
 					break;
-				else{
-					b.getBoard()[posx][posy-1]= '*';
-					pos_club[0]=posx;
-					pos_club[1]=posy-1;
-					return;
-				}
 			}
 			}
 		}
