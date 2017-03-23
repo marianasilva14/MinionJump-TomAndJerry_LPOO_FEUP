@@ -191,13 +191,9 @@ public class LevelEditor extends JFrame{
 				int nRows = Integer.parseInt(comboBox_rows.getSelectedItem().toString());
 				int nCols = Integer.parseInt(comboBox_columns.getSelectedItem().toString());
 				level = Integer.parseInt(comboBox_level.getSelectedItem().toString());
-
 				size_x = width/nRows;
 				size_y = height/nCols;
-
-				board = new char[nRows][nCols];
-			}
-		});
+				board = new char[nRows][nCols];}});
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnStart.setBounds(183, 425, 112, 32);
 		getContentPane().add(btnStart);

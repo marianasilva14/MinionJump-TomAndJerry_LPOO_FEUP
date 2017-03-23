@@ -159,20 +159,16 @@ public class Ogre extends Entity{
 	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
 		if (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I')
 			return false;
-		else if(b.getBoard()[x][y] == 'k')
-		{
+		else if(b.getBoard()[x][y] == 'k'){
 			pos_club[0]=x;
 			pos_club[1]=y;
-			return true;
-		}
+			return true;}
 		else if(b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ')
 			return false;
-		else{
-			b.getBoard()[x][y]= '*';
+		else{b.getBoard()[x][y]= '*';
 			pos_club[0]=x;
 			pos_club[1]=y;
-			return true;
-		}
+			return true;}
 	}
 
 	/**

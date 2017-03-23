@@ -84,24 +84,17 @@ public class Guard extends Entity{
 	 * @return guard's type
 	 */
 	public static Guard raffleGuard(int button, int posx, int posy){
-	
 		Guard g;
-		
 		switch(button) {
-		case 0:
-			g = new Suspicious(posx,posy);
+		case 0: g = new Suspicious(posx,posy);
 			break;
-		case 1:
-			g = new Drunken(posx,posy);
+		case 1: g = new Drunken(posx,posy);
 			break;
-		case 2:
-			g = new Rookie(posx,posy);
+		case 2: g = new Rookie(posx,posy);
 			break;
-		default:
-			g = new Rookie(posx,posy);
+		default: g = new Rookie(posx,posy);
 		break;
-		}
-		
+		}	
 		return g;
 	}
 	

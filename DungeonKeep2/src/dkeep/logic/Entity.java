@@ -79,54 +79,32 @@ public abstract class Entity {
 	public int boardLimits(Board board){
 		int row= board.getBoard().length-1;
 		int col= board.getBoard()[0].length-1;
-
 		boolean valid=false;
-
 		while(!valid){
-
 			int pos_rand;
 			Random rand = new Random();
 			pos_rand = rand.nextInt(4);
-
 			switch(pos_rand){
-			case 0:{
-				if(posy+1 <= col && posy+1 >= 0 ){
+			case 0:{if(posy+1 <= col && posy+1 >= 0 ){
 					if(board.getBoard()[posx][posy+1] != 'X'){
 						valid=true;
-						return pos_rand;
-					}
-				}
-				break;
-			}
-			case 1:{
-				if(posy-1 <= col && posy-1 >= 0){
+						return pos_rand;}}
+				break;}
+			case 1:{if(posy-1 <= col && posy-1 >= 0){
 					if(board.getBoard()[posx][posy-1] != 'X'){
 						valid=true;
-						return pos_rand;
-					}
-				}
-				break;
-			}
-			case 2:{
-				if(posx-1 <= row && posx-1 >= 0){
+						return pos_rand;}}
+				break;}
+			case 2:{if(posx-1 <= row && posx-1 >= 0){
 					if(board.getBoard()[posx-1][posy] != 'X'){
 						valid=true;
-						return pos_rand;
-					}
-				}
-				break;
-			}
-			case 3:{
-				if(posx+1 <= row && posx+1 >= 0){
+						return pos_rand;}}
+				break;}
+			case 3:{if(posx+1 <= row && posx+1 >= 0){
 					if(board.getBoard()[posx+1][posy] != 'X'){
 						valid=true;
-						return pos_rand;
-					}
-				}
-				break;
-			}
-			}
-		}
+						return pos_rand;}}
+				break;}}}
 		return 1;
 	}
 

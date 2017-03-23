@@ -81,15 +81,12 @@ public class Drunken extends Guard{
 		Random rand2 = new Random();
 		status_rand = rand2.nextInt(2);
 		StateDrunken st = status[status_rand];
-
 		setStateDrunken(st);
 		
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(10);
-
-		direction = directions[index];
-		
+		direction = directions[index];		
 		if(pos_rand == 1)
 			move *= -1;
 		
@@ -102,23 +99,6 @@ public class Drunken extends Guard{
 
 			if(index >= directions.length)
 				index -= directions.length;
-/*
-			switch(direction) {
-			case UP:
-				posx--;
-				break;
-			case DOWN:
-				posx++;
-				break;
-			case RIGHT:
-				posy++;
-				break;
-			case LEFT:
-				posy--;
-			}*/
 			
-			moveDirection(direction);
-		}
-	}
-
+			moveDirection(direction);}}
 }
