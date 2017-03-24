@@ -2,7 +2,7 @@
 5
 1
 IIIII
-X   I
-Xk  I
-X  HI
-IIIII
+I  HI
+I   I
+I  kI
+IIIXX

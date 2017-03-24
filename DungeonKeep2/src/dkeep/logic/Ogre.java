@@ -25,11 +25,7 @@ public class Ogre extends Entity{
 		super(posx, posy);
 		symbol = 'O';
 	}
-	/*
-	public Ogre getOgre(){
-		return this;
-	}
-	 */
+
 	/**
 	 * @return symbol that represents the Ogre
 	 */
@@ -59,15 +55,7 @@ public class Ogre extends Entity{
 	public void setKey(boolean b){
 		key=b;
 	}
-	/*
-	public int getNrOfMoves(){
-		return nrOfMoves;
-	}
-
-	public void setNrOfMoves(int nr){
-		nrOfMoves=nr;
-	}
-	 */
+	
 	/**
 	 * Method responsible to move the ogres and stun them (they stop moving for two turns)
 	 * @param direction
@@ -147,15 +135,23 @@ public class Ogre extends Entity{
 		else return false;} }
 		return true;
 	}
+	
+	public boolean ogreNextToTheDoorAndWall(Board b, int x, int y){
+		return (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I');
+	}
+	
+	public boolean ogreNextToTheFloorAndHero(Board b, int x, int y){
+		return (b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ');
+	}
 
 	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
-		if (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I')
+		if(ogreNextToTheDoorAndWall(b,x,y))
 			return false;
 		else if(b.getBoard()[x][y] == 'k'){
 			pos_club[0]=x;
 			pos_club[1]=y;
 			return true;}
-		else if(b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ')
+		else if(ogreNextToTheFloorAndHero(b,x,y))
 			return false;
 		else{b.getBoard()[x][y]= '*';
 		pos_club[0]=x;

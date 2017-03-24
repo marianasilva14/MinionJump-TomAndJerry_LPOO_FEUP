@@ -45,16 +45,16 @@ public class Hero extends Entity{
 		boolean invalid=false;
 		if(!checkIfMovementIsValid(direction,b))
 			invalid=true;
-		switch(direction) { case UP:if(!invalid)
+		if(!invalid){switch(direction) { case UP:
 			posx--;
 		break;
-		case DOWN:if(!invalid)
+		case DOWN:
 			posx++;
 		break;
-		case RIGHT:if(!invalid)
+		case RIGHT:
 			posy++;
 		break;
-		case LEFT:if(!invalid)
+		case LEFT:
 			posy--;
-		break;} }
+		break;} } }
 }

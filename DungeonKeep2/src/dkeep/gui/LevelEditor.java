@@ -292,11 +292,15 @@ public class LevelEditor extends JFrame{
 				fw.write(board[i][j]+"");}
 			fw.newLine();}
 	}
+	
+	public boolean checkCharacterSelected(){
+		return (character_selected == 'X' || character_selected== 'I');
+	}
 
 	public boolean checkIfLevelIsValid(int x, int y){
 
 		if(x == 0 || x == board.length-1 || y == 0 || y == board.length-1){
-			if(character_selected == 'X' || character_selected== 'I')
+			if(checkCharacterSelected())
 				return true;
 			else
 				return false;
