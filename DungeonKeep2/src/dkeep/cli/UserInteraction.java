@@ -134,7 +134,7 @@ public class UserInteraction {
 		
 		numberOfOgres=c;
 	}
-	
+		
 	public boolean play() {
 		boolean alreadychange=false;
 		while (!game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1))) {
@@ -145,7 +145,7 @@ public class UserInteraction {
 			if(!alreadychange){
 				if (game.getLevel().getEntities().get(1) instanceof Ogre) {
 					game.getLevel().getEntities().get(0).setSymbol('A');
-					alreadychange=true;}}
+					alreadychange=true;} }
 			System.out.print(game.getLevel().getBoard().printBoardToString(game));
 			UserInteraction user = new UserInteraction();
 			Direction direction = user.readDirection();

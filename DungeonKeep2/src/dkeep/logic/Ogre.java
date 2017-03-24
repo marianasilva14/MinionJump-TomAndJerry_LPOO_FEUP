@@ -25,7 +25,6 @@ public class Ogre extends Entity{
 		super(posx, posy);
 		symbol = 'O';
 	}
-
 	/**
 	 * @return symbol that represents the Ogre
 	 */
@@ -55,7 +54,7 @@ public class Ogre extends Entity{
 	public void setKey(boolean b){
 		key=b;
 	}
-	
+
 	/**
 	 * Method responsible to move the ogres and stun them (they stop moving for two turns)
 	 * @param direction
@@ -68,8 +67,7 @@ public class Ogre extends Entity{
 		if(nrOfMoves ==2){
 			symbol='O';
 			nrOfMoves=-1;}
-		if(nrOfMoves >-1)
-			nrOfMoves++;
+		if(nrOfMoves >-1) nrOfMoves++;
 		if(!checkIfMovementIsValid(direction,b))
 			invalid=true;
 		if(verifyI(direction, b))
@@ -77,18 +75,17 @@ public class Ogre extends Entity{
 		if(ogreNextToTheHero(direction,b,hero)){
 			symbol='8';
 			nrOfMoves++;}
-
 		if(nrOfMoves == -1){
 			if(!invalid){
 				switch(pos_rand) {
 				case 0: posy++;
-				break;
+					break;
 				case 1: posy--;
-				break;
+					break;
 				case 2: posx--;
-				break;
+					break;
 				case 3: posx++;
-				break; } } }
+					break;} } }
 	}
 
 	/**
@@ -107,8 +104,7 @@ public class Ogre extends Entity{
 					(posx == hero.getPosx() && posy-1== hero.getPosy()))
 				return true;
 			else
-				return false;
-		}
+				return false;}
 		else
 			return false;
 	}
@@ -120,43 +116,36 @@ public class Ogre extends Entity{
 	 * @return true if the hero is next to the door
 	 */
 	public boolean verifyI(Direction direction, Board b){
+
 		switch(direction) {
 		case UP:{if(b.getBoard()[posx-1][posy] == 'I')
-			return true;
-		else return false;}
-		case DOWN:{if(b.getBoard()[posx+1][posy] == 'I')
-			return true;
-		else return false;}
-		case RIGHT:{if(b.getBoard()[posx][posy+1] == 'I')
-			return true;
-		else return false;}
-		case LEFT:{if(b.getBoard()[posx][posy-1] == 'I')
-			return true;
-		else return false;} }
+				return true;
+			else return false;}
+		case DOWN:{ if(b.getBoard()[posx+1][posy] == 'I')
+				return true;
+			else return false; }
+		case RIGHT:{ if(b.getBoard()[posx][posy+1] == 'I')
+				return true;
+			else return false; }
+		case LEFT:{ if(b.getBoard()[posx][posy-1] == 'I')
+				return true;
+			else return false; } }
 		return true;
 	}
 	
-	public boolean ogreNextToTheDoorAndWall(Board b, int x, int y){
-		return (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I');
-	}
-	
-	public boolean ogreNextToTheFloorAndHero(Board b, int x, int y){
-		return (b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ');
-	}
-
 	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
-		if(ogreNextToTheDoorAndWall(b,x,y))
+		if (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I')
 			return false;
 		else if(b.getBoard()[x][y] == 'k'){
 			pos_club[0]=x;
 			pos_club[1]=y;
 			return true;}
-		else if(ogreNextToTheFloorAndHero(b,x,y))
+		else if(b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ')
 			return false;
 		else{b.getBoard()[x][y]= '*';
-		pos_club[0]=x;
-		pos_club[1]=y;
-		return true;}
+			pos_club[0]=x;
+			pos_club[1]=y;
+			return true;}
 	}
 
 	/**
@@ -188,8 +177,7 @@ public class Ogre extends Entity{
 				if(checkIfClubHasCorrectedPosition(b, posx, posy-1))
 					return;
 				else
-					break;}}
-		}
+					break;} } }
 	}
 
 	/**
