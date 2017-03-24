@@ -1,8 +1,8 @@
 5
 5
 1
-IIIII
-I  HI
-I   I
-I  kI
-IIIXX
+XXXXX
+X  HX
+X  kI
+X   X
+XXIIX

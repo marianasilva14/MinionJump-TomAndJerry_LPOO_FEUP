@@ -93,6 +93,20 @@ public class Level {
 		return entities;
 	}
 
+	public boolean checkIfIsNextClub(Entity hero, Entity capture){
+		return ((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'));
+	}
+
+	public boolean checkOgreX(Entity hero, Entity capture){
+		return (hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) 
+				|| (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy());
+	}
+
+	public boolean checkOgreY(Entity hero, Entity capture){
+		return (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy())
+				|| (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy());
+	}
+
 	/**
 	 * Method that checks if the game is over
 	 * @param hero
@@ -100,21 +114,20 @@ public class Level {
 	 * @return true if the game is over
 	 */
 	public boolean checkIfEnds(Entity hero, Entity capture){
-
 		if(board.checkLimits(hero)){
-		if(capture instanceof Drunken){
-			if(((Drunken)capture).getState() == StateDrunken.g)
-				return false;}
+			if(capture instanceof Drunken){
+				if(((Drunken)capture).getState() == StateDrunken.g)
+					return false;}
 
-		else if(capture instanceof Ogre){
-			if((board.getBoard()[hero.getPosx()-1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()+1][hero.getPosy()] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()-1] == '*') || (board.getBoard()[hero.getPosx()][hero.getPosy()+1] == '*'))
-				return true;
-			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
-				return false;
-			
-			return false;}
-		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
-			return true;}
+			else if(capture instanceof Ogre){
+				if(checkIfIsNextClub(hero, capture))
+					return true;
+				else if(checkOgreX(hero,capture) || checkOgreY(hero, capture))
+					return false;
+
+				return false;}
+			if(checkOgreX(hero,capture) || checkOgreY(hero, capture))
+				return true;}
 		return false;
 	}
 
