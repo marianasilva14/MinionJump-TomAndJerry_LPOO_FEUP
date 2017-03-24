@@ -42,14 +42,10 @@ public class Hero extends Entity{
 	 * @param board
 	 */
 	public void movement(Direction direction, Board b){
-
 		boolean invalid=false;
-
 		if(!checkIfMovementIsValid(direction,b))
 			invalid=true;
-
-		switch(direction) {
-		case UP:if(!invalid)
+		switch(direction) { case UP:if(!invalid)
 			posx--;
 		break;
 		case DOWN:if(!invalid)
@@ -60,7 +56,5 @@ public class Hero extends Entity{
 		break;
 		case LEFT:if(!invalid)
 			posy--;
-		break;
-		}
-	}
+		break;} }
 }

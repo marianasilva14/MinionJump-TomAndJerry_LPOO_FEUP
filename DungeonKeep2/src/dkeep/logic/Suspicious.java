@@ -42,16 +42,14 @@ public class Suspicious extends Guard{
 		
 		Direction direction = directions[index];
 		
-		switch(direction){
-		case UP: direction= direction.DOWN;
+		switch(direction){ case UP: direction= direction.DOWN;
 			break;
 		case DOWN: direction= direction.UP;
 			break;
 		case LEFT: direction= direction.RIGHT;
 			break;
 		case RIGHT: direction= direction.LEFT;
-			break;
-		}
+			break;}
 		return direction;
 	}
 

@@ -135,20 +135,16 @@ public class Ogre extends Entity{
 		switch(direction) {
 		case UP:{if(b.getBoard()[posx-1][posy] == 'I')
 			return true;
-		else
-			return false;}
+		else return false;}
 		case DOWN:{if(b.getBoard()[posx+1][posy] == 'I')
 			return true;
-		else
-			return false;}
+		else return false;}
 		case RIGHT:{if(b.getBoard()[posx][posy+1] == 'I')
 			return true;
-		else
-			return false;}
+		else return false;}
 		case LEFT:{if(b.getBoard()[posx][posy-1] == 'I')
 			return true;
-		else
-			return false;} }
+		else return false;} }
 		return true;
 	}
 

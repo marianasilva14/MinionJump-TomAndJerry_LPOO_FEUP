@@ -109,30 +109,28 @@ public class TomAndJerry {
 	}
 
 	private void frameAddKeyListener(){
-		frmDungeonKeep.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				int keyCode = e.getKeyCode();
-				switch( keyCode ) { 
-				case KeyEvent.VK_UP:{ 		
-					if(!checkKeyboardButtons()){
-						commentsLabel.setText("Jerry moved up" );
-						move(Direction.UP);}
-					break;}
+		frmDungeonKeep.addKeyListener(new KeyAdapter() { public void keyPressed(KeyEvent e) { int keyCode = e.getKeyCode();
+				switch( keyCode ) {  case KeyEvent.VK_UP:{ 		
+					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved up" );
+						move(Direction.UP);} break;}
 				case KeyEvent.VK_DOWN: {
-					if(!checkKeyboardButtons()){
-						commentsLabel.setText("Jerry moved down" );
-						move(Direction.DOWN); }
-					break;}
+					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved down" );
+						move(Direction.DOWN); } break;}
 				case KeyEvent.VK_RIGHT:{
-					if(!checkKeyboardButtons()){
-						commentsLabel.setText("Jerry moved right" );
-						move(Direction.RIGHT); }
-					break;}
+					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved right" );
+						move(Direction.RIGHT); } break;}
 				case KeyEvent.VK_LEFT: {
-					if(!checkKeyboardButtons()){
-						commentsLabel.setText("Jerry moved left" );
-						move(Direction.LEFT);}
-					break;}}} });
+					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved left" );
+					move(Direction.LEFT);} break;}}} });
+	}
+	
+	public void conditionsButtonNumberOfOgres(){
+		if(Integer.parseInt(numberOfOgres.getText()) > 5){
+			numberOfOgres.setText("5");
+			nrOfOgres = 5;}
+		if(Integer.parseInt(numberOfOgres.getText()) < 1){
+			numberOfOgres.setText("1");
+			nrOfOgres = 1;}
 	}
 
 	public void frameNumberOfOgres(){
@@ -140,17 +138,11 @@ public class TomAndJerry {
 		numberOfOgres.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent arg0) {
 				try{Integer.parseInt(numberOfOgres.getText());}
-				catch(NumberFormatException e){
-					e.printStackTrace();
+				catch(NumberFormatException e){ e.printStackTrace();
 					numberOfOgres.setText("0");
 					game_graphics.invalidNrOgres();
 					return;}
-				if(Integer.parseInt(numberOfOgres.getText()) > 5){
-					numberOfOgres.setText("5");
-					nrOfOgres = 5;}
-				if(Integer.parseInt(numberOfOgres.getText()) < 1){
-					numberOfOgres.setText("1");
-					nrOfOgres = 1;}
+				conditionsButtonNumberOfOgres();
 				nrOfOgres = Integer.parseInt(numberOfOgres.getText());} });
 
 		numberOfOgres.setBounds(139, 17, 91, 20);
@@ -212,41 +204,36 @@ public class TomAndJerry {
 	public void frameButtonLevelEditor(){
 		btnNewButton = new JButton("Level editor");
 		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnNewButton.setForeground(SystemColor.activeCaption);
-			}
-			@Override
+				btnNewButton.setForeground(SystemColor.activeCaption);}
 			public void mouseExited(MouseEvent e) {
-				btnNewButton.setForeground(Color.BLACK);
-			}
-		});
+				btnNewButton.setForeground(Color.BLACK);} });
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LevelEditor levelEditor = new LevelEditor();
-				levelEditor.setVisible(true);
-			}
-		});
+				levelEditor.setVisible(true); } });
 		btnNewButton.setBounds(535, 53, 111, 23);
 		frmDungeonKeep.getContentPane().add(btnNewButton);
+	}
+	
+	public void initializeNewGame(){
+		board = new Board(level1);
+		level= new Level(board, guardType);
+		game = new Game(level);
+		checkButtons();
 	}
 
 	public void frameButtonNewGame(){
 		JButton btnNewGame = new JButton("New Game");
-		btnNewGame.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent mouse) {
-				btnNewGame.setForeground(SystemColor.activeCaption);}
-			public void mouseExited(MouseEvent mouse) {
-				btnNewGame.setForeground(Color.BLACK);} });
+		btnNewGame.addMouseListener(new MouseAdapter() { 
+			public void mouseEntered(MouseEvent mouse) { btnNewGame.setForeground(SystemColor.activeCaption);}
+			public void mouseExited(MouseEvent mouse) { btnNewGame.setForeground(Color.BLACK);} });
 
 		btnNewGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) { 
 				frmDungeonKeep.requestFocusInWindow ();
-				board = new Board(level1);
-				level= new Level(board, guardType);
-				game = new Game(level);
-				checkButtons();
+				initializeNewGame();
 				commentsLabel.setText("New Game!");
 				game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game), game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length);} });
 		btnNewGame.setBounds(310, 54, 102, 23);
@@ -341,16 +328,20 @@ public class TomAndJerry {
 		lblNumberOfOgres.setBounds(20, 11, 121, 33);
 		frmDungeonKeep.getContentPane().add(lblNumberOfOgres);
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
+	public void addGameGraphics(){
 		frameDungeon();
 		frameAddKeyListener();
 		game_graphics = new GameGraphics();
 		game_graphics.setBounds(20,99,360,360);
 		frmDungeonKeep.getContentPane().add(game_graphics);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		addGameGraphics();
 		frameLabelNumberOfOgres();
 		frameNumberOfOgres();	
 		frameGuardPersonality();
@@ -380,33 +371,25 @@ public class TomAndJerry {
 		gameLogic();
 	}
 	public void checkButtons(){
-
 		Entity hero = game.getLevel().getEntities().get(0);
 		Hero h = (Hero)hero;
 
 		if(game.getLevel().getBoard().checkLimits(h)){
-
 			if(!h.checkIfMovementIsValid(Direction.UP, game.getLevel().getBoard()))
 				btnUp.setEnabled(false);
-			else
-				btnUp.setEnabled(true);
+			else btnUp.setEnabled(true);
 
 			if(!h.checkIfMovementIsValid(Direction.DOWN, game.getLevel().getBoard()))
 				btnDown.setEnabled(false);
-			else
-				btnDown.setEnabled(true);
+			else btnDown.setEnabled(true);
 
 			if(!h.checkIfMovementIsValid(Direction.LEFT, game.getLevel().getBoard()))
 				btnLeft.setEnabled(false);
-			else
-				btnLeft.setEnabled(true);
+			else btnLeft.setEnabled(true);
 
 			if(!h.checkIfMovementIsValid(Direction.RIGHT, game.getLevel().getBoard()))
 				btnRight.setEnabled(false);
-			else
-				btnRight.setEnabled(true);
-		}
-
+			else btnRight.setEnabled(true); }
 	}
 
 	public void gameLogic(){

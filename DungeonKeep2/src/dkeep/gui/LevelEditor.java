@@ -180,8 +180,7 @@ public class LevelEditor extends JFrame{
 	public void frameButtonStartEditor(){
 		btnStart = new JButton("Start Editor");
 		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel_1.setEnabled(true);
+			public void actionPerformed(ActionEvent e) {panel_1.setEnabled(true);
 				panel.setVisible(false);
 				int nRows = Integer.parseInt(comboBox_rows.getSelectedItem().toString());
 				int nCols = Integer.parseInt(comboBox_columns.getSelectedItem().toString());
@@ -223,13 +222,16 @@ public class LevelEditor extends JFrame{
 		panel_1.setBounds(22, 50, width, height);
 		getContentPane().add(panel_1);
 	}
-
-	public LevelEditor() {
+	
+	public void frameTitle(){
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setTitle("Level Editor");
 		setBounds(100, 100, 730, 542);
+	}
 
+	public LevelEditor() {
+		frameTitle();
 		frameButtonJerry();
 		frameButtonCheese();
 		frameButtonDog();	
@@ -306,20 +308,17 @@ public class LevelEditor extends JFrame{
 
 	public void drawCharacterSelected(int square_x, int square_y){
 		if(character_selected == 'H'){
-			if(!jerry_placed){
-				panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+			if(!jerry_placed){ panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
 				board[square_x][square_y]=character_selected;
 				jerry_placed= true;} }
 		else if(character_selected == 'k'){
-			if(!cheese_placed){
-				panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+			if(!cheese_placed){ panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
 				board[square_x][square_y]=character_selected;
 				cheese_placed= true;} }
 		else if(character_selected == 'O' && level == 2){
 			panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
 			board[square_x][square_y]=character_selected;}
-		else if(character_selected != 'O'){
-			panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
+		else if(character_selected != 'O'){ panel_1.getGraphics().drawImage(getImage(character_selected), square_x*size_x, square_y*size_y, size_x, size_y, null);
 			board[square_x][square_y]=character_selected;}
 		revalidate();}
 }

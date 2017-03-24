@@ -38,7 +38,6 @@ public class Level {
 		board=b;
 		int row= b.getBoard().length;
 		int col= b.getBoard()[0].length;
-
 		for(int i=0; i < row; i++){
 			for(int j=0; j < col; j++){
 				if(b.getBoard()[i][j] == 'H'){
@@ -113,11 +112,9 @@ public class Level {
 			else if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
 				return false;
 			
-			return false;
-		}
+			return false;}
 		if((hero.getPosx()-1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx()+1 == capture.getPosx() && hero.getPosy()== capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()-1 == capture.getPosy()) || (hero.getPosx() == capture.getPosx() && hero.getPosy()+1 == capture.getPosy()))
-			return true;
-		}
+			return true;}
 		return false;
 	}
 
