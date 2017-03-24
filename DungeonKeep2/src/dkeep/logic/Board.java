@@ -27,11 +27,14 @@ public class Board {
 	public char[][] getBoard(){
 		return map;
 	}
-	/*
-	public char getSymbol(int posx, int posy){
-		return map[posx][posy];
+	
+	public boolean conditionEntity(Entity e, int row, int col){
+		return (e.getPosy()+1 <= col && e.getPosy()+1 >= 0)
+				&& (e.getPosy()-1 <= col && e.getPosy()-1 >= 0)
+				&& (e.getPosx()-1 <= row && e.getPosx()-1 >= 0)
+				&& (e.getPosx()+1 <= row && e.getPosx()+1 >= 0);
 	}
-*/
+	
 	/**
 	 * Method that checks the limits of the board
 	 * @param entity
@@ -42,18 +45,22 @@ public class Board {
 		int row= map.length-1;
 		int col= map[0].length-1;
 
-
 		if (e.getPosy() == col || e.getPosy() == 0
 				|| e.getPosx() == row || e.getPosx() == 0)
 			return false;
-		else if ((e.getPosy()+1 <= col && e.getPosy()+1 >= 0)
-				&& (e.getPosy()-1 <= col && e.getPosy()-1 >= 0)
-				&& (e.getPosx()-1 <= row && e.getPosx()-1 >= 0)
-				&& (e.getPosx()+1 <= row && e.getPosx()+1 >= 0))
+		else if (conditionEntity(e, row,col))
 			return true;
 
 		else
 			return false;
+	}
+	
+	public void prepareBoard(Game game){
+		ArrayList<Entity> e = game.getLevel().getEntities();
+		if(game.getLevel().getBoard().checkLimits(e.get(0)))
+			game.checkLever(e.get(0), game.getLevel());
+		for(int i=0; i < e.size(); i++)
+			game.entityLever(e.get(i), game.getLevel());
 	}
 
 	/**
@@ -67,10 +74,7 @@ public class Board {
 		int row = game.getLevel().getBoard().getBoard().length;
 		int col = game.getLevel().getBoard().getBoard()[0].length;
 		ArrayList<Entity> e = game.getLevel().getEntities();
-		if(game.getLevel().getBoard().checkLimits(e.get(0)))
-			game.checkLever(e.get(0), game.getLevel());
-		for(int i=0; i < e.size(); i++)
-			game.entityLever(e.get(i), game.getLevel());
+		prepareBoard(game);
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){
 				map[i][j] = game.getLevel().getBoard().getBoard()[i][j];} }	

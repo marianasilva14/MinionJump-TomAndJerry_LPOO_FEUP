@@ -370,26 +370,33 @@ public class TomAndJerry {
 
 		gameLogic();
 	}
+	
+	public void checkEnableButtons(){
+		Entity hero = game.getLevel().getEntities().get(0);
+		Hero h = (Hero)hero;
+		
+		if(!h.checkIfMovementIsValid(Direction.UP, game.getLevel().getBoard()))
+			btnUp.setEnabled(false);
+		else btnUp.setEnabled(true);
+
+		if(!h.checkIfMovementIsValid(Direction.DOWN, game.getLevel().getBoard()))
+			btnDown.setEnabled(false);
+		else btnDown.setEnabled(true);
+
+		if(!h.checkIfMovementIsValid(Direction.LEFT, game.getLevel().getBoard()))
+			btnLeft.setEnabled(false);
+		else btnLeft.setEnabled(true);
+
+		if(!h.checkIfMovementIsValid(Direction.RIGHT, game.getLevel().getBoard()))
+			btnRight.setEnabled(false);
+		else btnRight.setEnabled(true);
+	}
 	public void checkButtons(){
 		Entity hero = game.getLevel().getEntities().get(0);
 		Hero h = (Hero)hero;
 
 		if(game.getLevel().getBoard().checkLimits(h)){
-			if(!h.checkIfMovementIsValid(Direction.UP, game.getLevel().getBoard()))
-				btnUp.setEnabled(false);
-			else btnUp.setEnabled(true);
-
-			if(!h.checkIfMovementIsValid(Direction.DOWN, game.getLevel().getBoard()))
-				btnDown.setEnabled(false);
-			else btnDown.setEnabled(true);
-
-			if(!h.checkIfMovementIsValid(Direction.LEFT, game.getLevel().getBoard()))
-				btnLeft.setEnabled(false);
-			else btnLeft.setEnabled(true);
-
-			if(!h.checkIfMovementIsValid(Direction.RIGHT, game.getLevel().getBoard()))
-				btnRight.setEnabled(false);
-			else btnRight.setEnabled(true); }
+			checkEnableButtons();}
 	}
 
 	public void gameLogic(){
