@@ -134,14 +134,29 @@ public class UserInteraction {
 		
 		numberOfOgres=c;
 	}
+	
+	public void moveEntities(Direction direction){
+		for(int i=1; i < game.getLevel().getEntities().size();i++){
+			if(game.getLevel().getEntities().get(i) instanceof Ogre){
+				((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
+				((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());}
+			else
+				game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard()); }
+	}
+	
+	public boolean changeLevelOrWin(Game game){
+		if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
+			if(game.getLevel().getEntities().get(1) instanceof Ogre){
+				System.out.println("You won! Congratulations!");}
+			return true;}
+		else return false;
+	}
 		
 	public boolean play() {
 		boolean alreadychange=false;
 		while (!game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1))) {
-			if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
-				if(game.getLevel().getEntities().get(1) instanceof Ogre){
-					System.out.println("You won! Congratulations!");}
-				return true;}
+			if(changeLevelOrWin(game))
+				return true;
 			if(!alreadychange){
 				if (game.getLevel().getEntities().get(1) instanceof Ogre) {
 					game.getLevel().getEntities().get(0).setSymbol('A');
@@ -153,12 +168,7 @@ public class UserInteraction {
 			int y = game.getLevel().getEntities().get(0).getPosy();
 			game.getLevel().getEntities().get(0).movement(direction, game.getLevel().getBoard());
 			game.cleanClub(game.getLevel().getBoard());	
-			for(int i=1; i < game.getLevel().getEntities().size();i++){
-				if(game.getLevel().getEntities().get(i) instanceof Ogre){
-					((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
-					((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());}
-				else
-					game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard()); } }
+			moveEntities(direction); }
 		System.out.print(game.getLevel().getBoard().printBoardToString(game));
 		System.out.print("You got caught! Game Over!");
 		endGame=true;
