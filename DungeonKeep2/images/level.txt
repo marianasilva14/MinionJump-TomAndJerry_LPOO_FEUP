@@ -3,6 +3,6 @@
 1
 XXXXX
 X   X
-X   X
-IHk X
+IH  X
+Xk  X
 XXXXX

@@ -154,13 +154,11 @@ public class UserInteraction {
 			game.getLevel().getEntities().get(0).movement(direction, game.getLevel().getBoard());
 			game.cleanClub(game.getLevel().getBoard());	
 			for(int i=1; i < game.getLevel().getEntities().size();i++){
-				if(game.getLevel().getEntities().get(i) instanceof Ogre)
-					((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
-				else
-					game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard());
-
 				if(game.getLevel().getEntities().get(i) instanceof Ogre){
-					((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());}}}
+					((Ogre)game.getLevel().getEntities().get(i)).movement(direction, game.getLevel().getBoard(),(Hero)game.getLevel().getEntities().get(0));
+					((Ogre)game.getLevel().getEntities().get(i)).club(game.getLevel().getBoard());}
+				else
+					game.getLevel().getEntities().get(i).movement(direction, game.getLevel().getBoard()); } }
 		System.out.print(game.getLevel().getBoard().printBoardToString(game));
 		System.out.print("You got caught! Game Over!");
 		endGame=true;

@@ -398,19 +398,8 @@ public class TomAndJerry {
 		if(game.getLevel().getBoard().checkLimits(h)){
 			checkEnableButtons();}
 	}
-
-	public void gameLogic(){
-		game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game), game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length);
-		for(int i=1; i < game.getLevel().getEntities().size();i++){
-			if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(i))){
-				btnUp.setEnabled(false);
-				btnDown.setEnabled(false);
-				btnRight.setEnabled(false);
-				btnLeft.setEnabled(false);
-				commentsLabel.setText("Jerry lost!" );
-				game_graphics.lose();
-				return;}}
-		game.cleanClub(game.getLevel().getBoard());	
+	
+	public void buttonsWhenChangeLevel(){
 		if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
 			int ogres=1;
 			if(game.getLevel().getLevel() == 1){
@@ -431,6 +420,21 @@ public class TomAndJerry {
 				return;}}
 		else
 			checkButtons();
+	}
+	
+	public void gameLogic(){
+		game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game), game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length);
+		for(int i=1; i < game.getLevel().getEntities().size();i++){
+			if(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(i))){
+				btnUp.setEnabled(false);
+				btnDown.setEnabled(false);
+				btnRight.setEnabled(false);
+				btnLeft.setEnabled(false);
+				commentsLabel.setText("Jerry lost!" );
+				game_graphics.lose();
+				return;}}
+		game.cleanClub(game.getLevel().getBoard());	
+		buttonsWhenChangeLevel();
 	}
 
 	public boolean checkKeyboardButtons(){

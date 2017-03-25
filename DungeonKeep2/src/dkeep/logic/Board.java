@@ -69,6 +69,24 @@ public class Board {
 		for(int i=0; i < e.size(); i++)
 			game.entityLever(e.get(i), game.getLevel());
 	}
+	
+	public void printInit(){
+		
+	}
+	
+	public void printEntities(Game game, char[][] map, ArrayList<Entity> e){
+		for(int i=0; i < e.size();i++){
+			if(e.get(i) instanceof Guard){
+				if(e.get(i) instanceof Drunken){
+					if(((Drunken)e.get(i)).getState() == StateDrunken.G)
+						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
+					else{ game.getLevel().getEntities().get(i).setSymbol('g');
+						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();} }
+				else
+					map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();}
+			else
+				map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol(); }
+	}
 
 	/**
 	 * Method that convert board to string
@@ -85,18 +103,7 @@ public class Board {
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){
 				map[i][j] = game.getLevel().getBoard().getBoard()[i][j];} }	
-		for(int i=0; i < e.size();i++){
-			if(e.get(i) instanceof Guard){
-				if(e.get(i) instanceof Drunken){
-					if(((Drunken)e.get(i)).getState() == StateDrunken.G)
-						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();
-					else{ game.getLevel().getEntities().get(i).setSymbol('g');
-						map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();} }
-				else
-					map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol();}
-			else
-				map[e.get(i).getPosx()][e.get(i).getPosy()]=e.get(i).getSymbol(); }
-
+		printEntities(game, map, e);
 		for(int i=0; i< map.length;i++){
 			for(int j=0; j < map[0].length;j++){
 				gamestring+=map[i][j];}
