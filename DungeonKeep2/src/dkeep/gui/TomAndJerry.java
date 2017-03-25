@@ -110,18 +110,18 @@ public class TomAndJerry {
 
 	private void frameAddKeyListener(){
 		frmDungeonKeep.addKeyListener(new KeyAdapter() { public void keyPressed(KeyEvent e) { int keyCode = e.getKeyCode();
-				switch( keyCode ) {  case KeyEvent.VK_UP:{ 		
-					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved up" );
+		if(!checkKeyboardButtons()){ switch( keyCode ) {  case KeyEvent.VK_UP:{ 		
+					{ commentsLabel.setText("Jerry moved up" );
 						move(Direction.UP);} break;}
 				case KeyEvent.VK_DOWN: {
-					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved down" );
+					{ commentsLabel.setText("Jerry moved down" );
 						move(Direction.DOWN); } break;}
 				case KeyEvent.VK_RIGHT:{
-					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved right" );
+					{ commentsLabel.setText("Jerry moved right" );
 						move(Direction.RIGHT); } break;}
 				case KeyEvent.VK_LEFT: {
-					if(!checkKeyboardButtons()){ commentsLabel.setText("Jerry moved left" );
-					move(Direction.LEFT);} break;}}} });
+					{ commentsLabel.setText("Jerry moved left" );
+					move(Direction.LEFT);} break;}}} }});
 	}
 	
 	public void conditionsButtonNumberOfOgres(){
