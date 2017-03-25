@@ -50,18 +50,22 @@ public class Game {
 			return false;
 
 	}
+	
+	public void changeOfSymbol(Entity e, Level lv){
+		if(e instanceof Ogre){
+			if(!((Ogre) e).getKey()){
+				e.setSymbol('$');
+				((Ogre) e).setKey(true);}
+			else
+				e.setSymbol('O');}
+		else if(e instanceof Hero)
+			e.setSymbol('K');
+	}
 
 	public boolean entityLever(Entity e, Level lv){
 
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k'){
-			if(e instanceof Ogre){
-				if(!((Ogre) e).getKey()){
-					e.setSymbol('$');
-					((Ogre) e).setKey(true);}
-				else
-					e.setSymbol('O');}
-			else if(e instanceof Hero)
-				e.setSymbol('K');
+			changeOfSymbol(e, lv);
 			return true;}
 		
 		else if(e instanceof Ogre){

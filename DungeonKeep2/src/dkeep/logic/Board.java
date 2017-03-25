@@ -28,11 +28,14 @@ public class Board {
 		return map;
 	}
 	
-	public boolean conditionAdjacentEntity(Entity e, int row, int col){
-		return (e.getPosy()+1 <= col && e.getPosy()+1 >= 0)
-				&& (e.getPosy()-1 <= col && e.getPosy()-1 >= 0)
-				&& (e.getPosx()-1 <= row && e.getPosx()-1 >= 0)
+	public boolean conditionAdjacentEntityX(Entity e, int row, int col){
+		return (e.getPosx()-1 <= row && e.getPosx()-1 >= 0)
 				&& (e.getPosx()+1 <= row && e.getPosx()+1 >= 0);
+	}
+	
+	public boolean conditionAdjacentEntityY(Entity e, int row, int col){
+		return (e.getPosy()+1 <= col && e.getPosy()+1 >= 0)
+				&& (e.getPosy()-1 <= col && e.getPosy()-1 >= 0);
 	}
 	
 	public boolean conditionEntity(Entity e, int row, int col){
@@ -52,7 +55,7 @@ public class Board {
 
 		if (conditionEntity(e, row, col))
 			return false;
-		else if (conditionAdjacentEntity(e, row,col))
+		else if (conditionAdjacentEntityX(e, row,col) && conditionAdjacentEntityY(e, row,col))
 			return true;
 
 		else

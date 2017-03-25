@@ -87,6 +87,16 @@ public class Ogre extends Entity{
 				case 3: posx++;
 					break;} } }
 	}
+	
+	public boolean ogreNextToTheHeroX(Direction direction, Board b, Hero hero){
+		return ((posx-1 == hero.getPosx() && posy == hero.getPosy()) || 
+				(posx+1 == hero.getPosx() && posy == hero.getPosy()));
+	}
+	
+	public boolean ogreNextToTheHeroY(Direction direction, Board b, Hero hero){
+		return ((posx == hero.getPosx() && posy+1 == hero.getPosy()) ||
+				(posx == hero.getPosx() && posy-1== hero.getPosy()));
+	}
 
 	/**
 	 * Method that checks if the ogre is next to the hero
@@ -98,10 +108,7 @@ public class Ogre extends Entity{
 	public boolean ogreNextToTheHero(Direction direction, Board b, Hero hero){
 
 		if(hero.getSymbol()=='K'){
-			if( (posx-1 == hero.getPosx() && posy == hero.getPosy()) || 
-					(posx+1 == hero.getPosx() && posy == hero.getPosy()) ||
-					(posx == hero.getPosx() && posy+1 == hero.getPosy()) ||
-					(posx == hero.getPosx() && posy-1== hero.getPosy()))
+			if(ogreNextToTheHeroX(direction, b, hero) || ogreNextToTheHeroY(direction, b, hero))
 				return true;
 			else
 				return false;}
@@ -133,14 +140,22 @@ public class Ogre extends Entity{
 		return true;
 	}
 	
+	public boolean checkClubNextWallAndDoor(Board b, int x, int y){
+		return (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I');
+	}
+	
+	public boolean checkClubNextHeroAndFloor(Board b, int x, int y){
+		return (b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ');
+	}
+	
 	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
-		if (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I')
+		if(checkClubNextWallAndDoor(b, x, y))
 			return false;
 		else if(b.getBoard()[x][y] == 'k'){
 			pos_club[0]=x;
 			pos_club[1]=y;
 			return true;}
-		else if(b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ')
+		else if(checkClubNextHeroAndFloor(b, x, y))
 			return false;
 		else{b.getBoard()[x][y]= '*';
 			pos_club[0]=x;
