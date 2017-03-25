@@ -14,8 +14,9 @@ public class Board {
 	private char map[][];
 
 /**
- * Constructor of this class
- * @param board
+ * Constructs board
+ * @param b
+ * 				game board
  */
 	public Board(char b[][]){
 		map=copy(b);
@@ -28,16 +29,46 @@ public class Board {
 		return map;
 	}
 	
+	/**
+	 * Method that checks whether an entity is within the limits of lines
+	 * @param e
+	 * 			entity to check
+	 * @param row
+	 * 				row of board
+	 * @param col
+	 * 				column of board
+	 * @return true if an entity is within the limits of lines
+	 */
 	public boolean conditionAdjacentEntityX(Entity e, int row, int col){
 		return (e.getPosx()-1 <= row && e.getPosx()-1 >= 0)
 				&& (e.getPosx()+1 <= row && e.getPosx()+1 >= 0);
 	}
 	
+	/**
+	 * Method that checks whether an entity is within the limits of columns
+	 * @param e
+	 * 			entity to check
+	 * @param row
+	 * 				row of board
+	 * @param col
+	 * 				column of board
+	 * @return true if an entity is within the limits of columns
+	 */
 	public boolean conditionAdjacentEntityY(Entity e, int row, int col){
 		return (e.getPosy()+1 <= col && e.getPosy()+1 >= 0)
 				&& (e.getPosy()-1 <= col && e.getPosy()-1 >= 0);
 	}
 	
+	/**
+	 * Method that checks whether any entity is within the boundaries of the board
+	 * @param e
+	 * 			entity to check
+	 * @param row
+	 * 				row of board
+	 * @param col
+	 * 				column of board
+	 * @return true if an entity is within the boundaries of the board
+	 */
 	public boolean conditionEntity(Entity e, int row, int col){
 		return (e.getPosy() == col || e.getPosy() == 0
 				|| e.getPosx() == row || e.getPosx() == 0);
@@ -45,7 +76,8 @@ public class Board {
 	
 	/**
 	 * Method that checks the limits of the board
-	 * @param entity
+	 * @param e
+	 * 			entity to check
 	 * @return true if all entities respects the limits of the board
 	 */
 	public boolean checkLimits(Entity e){
@@ -62,6 +94,11 @@ public class Board {
 			return false;
 	}
 	
+	/**
+	 * Method that prints on the board the change of the symbol of the entities 
+	 * when they are in the same position of the lever
+	 * @param game
+	 */
 	public void prepareBoard(Game game){
 		ArrayList<Entity> e = game.getLevel().getEntities();
 		if(game.getLevel().getBoard().checkLimits(e.get(0)))
@@ -70,10 +107,14 @@ public class Board {
 			game.entityLever(e.get(i), game.getLevel());
 	}
 	
-	public void printInit(){
-		
-	}
-	
+	/**
+	 * Method that prints on the board all entities
+	 * @param game
+	 * @param map
+	 * 				board where print
+	 * @param e
+	 * 			array list where are all entities
+	 */
 	public void printEntities(Game game, char[][] map, ArrayList<Entity> e){
 		for(int i=0; i < e.size();i++){
 			if(e.get(i) instanceof Guard){

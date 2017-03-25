@@ -11,9 +11,11 @@ public class Hero extends Entity{
 
 	private char symbol;
 	/**
-	 * Constructor of this class and initialize the symbol that represents the hero
-	 * @param posx represents the coordinate x of the position of the Hero
-	 * @param posy represents the coordinate y of the position of the Hero
+	 * Constructs and initialize the symbol that represents the hero
+	 * @param posx 
+	 * 				represents the coordinate x of the position of the Hero
+	 * @param posy
+	 * 				represents the coordinate y of the position of the Hero
 	 *
 	 */
 	public Hero(int posx, int posy) {
@@ -31,11 +33,16 @@ public class Hero extends Entity{
 	/**
 	 * Sets the symbol of the hero
 	 * @param symbol
+	 * 				symbol of the hero
 	 */
 	public void setSymbol(char symbol){
 		this.symbol=symbol;
 	}
 	
+	/**
+	 * Method responsible to move guard in different directions
+	 * @param direction
+	 */
 	public void moveHero(Direction direction){
 		switch(direction) { case UP:
 			posx--;
@@ -53,8 +60,10 @@ public class Hero extends Entity{
 
 	/**
 	 * Method responsible to move the hero
-	 * @param direction that specifies the direction of the hero
-	 * @param board
+	 * @param direction
+	 * 					that specifies the direction of the hero
+	 * @param b
+	 * 			board where the Hero moves
 	 */
 	public void movement(Direction direction, Board b){
 		boolean invalid=false;

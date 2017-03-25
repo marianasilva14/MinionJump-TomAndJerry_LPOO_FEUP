@@ -15,15 +15,22 @@ public class Game {
 	public enum Direction{
 		RIGHT,LEFT,UP,DOWN
 	}
-
+	
+	/**
+	 * Constructs game
+	 * @param level
+	 * 				level of the game
+	 */
 	public Game(Level level){
 		this.level=level;
 	}
 
 	/**
 	 * Method that changes the doors to stairs when the hero reaches the lever
-	 * @param entity
-	 * @param level
+	 * @param e
+	 * 			entity
+	 * @param lv
+	 * 			level of the game
 	 */
 	public void checkLever(Entity e, Level lv){
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k'){
@@ -38,8 +45,11 @@ public class Game {
 	}
 	
 	/**
-	 * @param entity
-	 * @param level
+	 * Method that checks if entity's position is in the place of the stairs
+	 * @param e
+	 * 			entity
+	 * @param lv
+	 * 			level of the game
 	 * @return true if entity's position is in the place of the stairs
 	 */
 	public boolean changeLevel(Entity e, Level lv){
@@ -51,6 +61,13 @@ public class Game {
 
 	}
 	
+	/**
+	 * Method responsible for changing the entity symbol when moving to the lever
+	 * @param e
+	 * 			entity
+	 * @param lv
+	 * 			level of the game
+	 */
 	public void changeOfSymbol(Entity e, Level lv){
 		if(e instanceof Ogre){
 			if(!((Ogre) e).getKey()){
@@ -62,8 +79,15 @@ public class Game {
 			e.setSymbol('K');
 	}
 
+	/**
+	 *  Method that checks if entity's position is in the place of the stairs
+	 * @param e
+	 * 			entity
+	 * @param lv
+	 * 			level
+	 * @return true if if entity's position is in the place of the stairs
+	 */
 	public boolean entityLever(Entity e, Level lv){
-
 		if(lv.getBoard().getBoard()[e.getPosx()][e.getPosy()] == 'k'){
 			changeOfSymbol(e, lv);
 			return true;}
@@ -77,7 +101,8 @@ public class Game {
 
 	/**
 	 * Method that clean the old club's position
-	 * @param board
+	 * @param b
+	 * 			board
 	 */
 	public void cleanClub(Board b){
 		

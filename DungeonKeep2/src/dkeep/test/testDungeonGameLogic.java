@@ -167,7 +167,6 @@ public class testDungeonGameLogic {
 	@Test(timeout=1000)
 	public void testSomeRandomBehavior(){
 		Board board= new Board(map2);
-		//Hero hero = new Hero(level.getEntities().get(0).getPosx(), level.getEntities().get(1).getPosy());
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(3);

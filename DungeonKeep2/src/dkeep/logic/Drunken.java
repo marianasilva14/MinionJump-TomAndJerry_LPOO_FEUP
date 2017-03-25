@@ -14,9 +14,11 @@ public class Drunken extends Guard{
 	private int move = 1;
 
 	/**
-	 * Constructor of this class and initializes index of this type of guard
+	 * Constructs and initializes index of this type of guard
 	 * @param posx
+	 * 				Drunken x position
 	 * @param posy
+	 * 				Drunken y position
 	 */
 	public Drunken(int posx,int posy) {
 		super(posx,posy);
@@ -40,7 +42,8 @@ public class Drunken extends Guard{
 
 	/**
 	 * Methods that sets the state of the Drunken
-	 * @param state of the Drunken
+	 * @param st
+	 * 			state of the Drunken
 	 */
 	public void setStateDrunken(StateDrunken st) {
 		this.state = st;
@@ -71,7 +74,9 @@ public class Drunken extends Guard{
 	/**
 	 * Methods responsible to define the type of the movement's drunken
 	 * @param direction
-	 * @param board
+	 * 					direction in which guard should move
+	 * @param b
+	 * 			board where the Drunken moves
 	 */
 	public void movement(Direction direction, Board b){
 		int status_rand, pos_rand;

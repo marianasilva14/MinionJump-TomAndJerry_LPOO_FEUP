@@ -20,9 +20,11 @@ public class Guard extends Entity{
 	private char symbol;
 	
 	/**
-	 * Constructor of this class and initialize the symbol that represents the Guard
-	 * @param posx represents the coordinate x of the position of the Guard
-	 * @param posy represents the coordinate y of the position of the Guard
+	 * Constructs and initializes the symbol that represents the Guard
+	 * @param posx
+	 * 				represents the coordinate x of the position of the Guard
+	 * @param posy
+	 * 				represents the coordinate y of the position of the Guard
 	 *
 	 */
 	public Guard(int posx, int posy) {
@@ -46,7 +48,8 @@ public class Guard extends Entity{
 	
 	/**
 	 * Method that sets guard's type
-	 * @param guardType
+	 * @param g
+	 * 			guard's type
 	 */
 	public void setGuardType(GuardType g) {
 		this.guardType = g;
@@ -61,7 +64,8 @@ public class Guard extends Entity{
 	
 	/**
 	 * Method that sets guard's symbol
-	 * @param guardType
+	 * @param symbol
+	 * 				symbol of the guard
 	 */
 	public void setSymbol(char symbol){
 		this.symbol=symbol;
@@ -69,8 +73,10 @@ public class Guard extends Entity{
 	
 	/**
 	 * Method responsible to move guard
-	 * @param
-	 * @param
+	 * @param direction
+	 * 					direction in which guard should move
+	 * @param b
+	 * 			board where the Guard moves
 	 */
 	public void movement(Direction direction, Board b){
 		
@@ -80,7 +86,9 @@ public class Guard extends Entity{
 	 * Method that chooses type of guard
 	 * @param button
 	 * @param posx
+	 * 				guard x position
 	 * @param posy
+	 * 				guard y position
 	 * @return guard's type
 	 */
 	public static Guard raffleGuard(int button, int posx, int posy){
@@ -98,6 +106,10 @@ public class Guard extends Entity{
 		return g;
 	}
 	
+	/**
+	 * Method responsible to move guard in different directions
+	 * @param direction
+	 */
 	public void moveDirection(Direction direction){
 		switch(direction) {
 		case UP:

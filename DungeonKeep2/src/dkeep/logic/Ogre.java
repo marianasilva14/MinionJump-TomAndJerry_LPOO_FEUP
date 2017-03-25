@@ -16,9 +16,11 @@ public class Ogre extends Entity{
 	private int nrOfMoves=-1;
 
 	/**
-	 * Constructor of this class and initialize the symbol that represents the Ogre
-	 * @param posx represents the coordinate x of the position of the Ogre
-	 * @param posy represents the coordinate y of the position of the Ogre
+	 * Constructs and initialize the symbol that represents the Ogre
+	 * @param posx 
+	 * 				represents the coordinate x of the position of the Ogre
+	 * @param posy 
+	 * 				represents the coordinate y of the position of the Ogre
 	 *
 	 */
 	public Ogre(int posx, int posy) {
@@ -33,8 +35,9 @@ public class Ogre extends Entity{
 	}
 
 	/**
-	 * Sets the symbol of the hero
+	 * Sets the symbol of the ogre
 	 * @param symbol
+	 * 				symbol of the ogre
 	 */
 	public void setSymbol(char symbol){
 		this.symbol=symbol;
@@ -50,6 +53,7 @@ public class Ogre extends Entity{
 	/**
 	 * Method that sets the key
 	 * @param b
+	 * 			key
 	 */
 	public void setKey(boolean b){
 		key=b;
@@ -58,7 +62,9 @@ public class Ogre extends Entity{
 	/**
 	 * Method responsible to move the ogres and stun them (they stop moving for two turns)
 	 * @param direction
-	 * @param board
+	 * 					direction in which ogre should move
+	 * @param b
+	 * 			board where the ogre moves
 	 * @param hero
 	 */
 	public void movement(Direction direction, Board b, Hero hero){
@@ -88,11 +94,29 @@ public class Ogre extends Entity{
 					break;} } }
 	}
 	
+	/**
+	 * Method responsible for checking that the hero is in an adjacent position on the ogre's x
+	 * @param direction
+	 * 					direction in which ogre should move
+	 * @param b
+	 * 			board where the ogre moves
+	 * @param hero
+	 * @return true if the hero is in an adjacent position on the ogre's x
+	 */
 	public boolean ogreNextToTheHeroX(Direction direction, Board b, Hero hero){
 		return ((posx-1 == hero.getPosx() && posy == hero.getPosy()) || 
 				(posx+1 == hero.getPosx() && posy == hero.getPosy()));
 	}
 	
+	/**
+	 * Method responsible for checking that the hero is in an adjacent position on the ogre's y
+	 * @param direction
+	 * 					direction in which ogre should move
+	 * @param b
+	 * 			board where the ogre moves
+	 * @param hero
+	 * @return true if the hero is in an adjacent position on the ogre's y
+	 */
 	public boolean ogreNextToTheHeroY(Direction direction, Board b, Hero hero){
 		return ((posx == hero.getPosx() && posy+1 == hero.getPosy()) ||
 				(posx == hero.getPosx() && posy-1== hero.getPosy()));
@@ -101,6 +125,7 @@ public class Ogre extends Entity{
 	/**
 	 * Method that checks if the ogre is next to the hero
 	 * @param direction
+	 * 					direction in which ogre should move
 	 * @param board
 	 * @param hero
 	 * @return true if the ogre is next to the hero
@@ -119,6 +144,7 @@ public class Ogre extends Entity{
 	/**
 	 * Method that verifies if the hero is next to the door
 	 * @param direction
+	 * 					direction in which ogre should move
 	 * @param board
 	 * @return true if the hero is next to the door
 	 */
@@ -140,14 +166,44 @@ public class Ogre extends Entity{
 		return true;
 	}
 	
+	/**
+	 * Method that checks if club is next to the wall and door
+	 * @param b
+	 * 			board where the club moves
+	 * @param x
+	 * 			club x position
+	 * @param y
+	 * 			club x position
+	 * @return if club is next to the wall and door
+	 */
 	public boolean checkClubNextWallAndDoor(Board b, int x, int y){
 		return (b.getBoard()[x][y] == 'X' ||  b.getBoard()[x][y] == 'I');
 	}
 	
+	/**
+	 * Method that checks if club is next to the hero and floor
+	 * @param b
+	 * 			board where the club moves
+	 * @param x
+	 * 			club x position
+	 * @param y
+	 * 			club x position
+	 * @return if club is next to the hero and floor
+	 */
 	public boolean checkClubNextHeroAndFloor(Board b, int x, int y){
 		return (b.getBoard()[x][y] != 'A' && b.getBoard()[x][y] != ' ');
 	}
 	
+	/**
+	 *  Method that checks if club has corrected position
+	 * @param b
+	 * 			board where the club moves
+	 * @param x
+	 * 			club x position
+	 * @param y
+	 * 			club y position
+	 * @return true if club has corrected position
+	 */
 	public boolean checkIfClubHasCorrectedPosition(Board b, int x, int y){
 		if(checkClubNextWallAndDoor(b, x, y))
 			return false;
@@ -165,7 +221,8 @@ public class Ogre extends Entity{
 
 	/**
 	 * Method responsible to move club
-	 * @param board
+	 * @param b
+	 * 			board where the club moves
 	 */
 	public void club(Board b){
 		while(true){
@@ -197,7 +254,8 @@ public class Ogre extends Entity{
 
 	/**
 	 * @param direction
-	 * @param board
+	 * @param b
+	 * 			board
 	 */
 	public void movement(Direction direction, Board b) {
 

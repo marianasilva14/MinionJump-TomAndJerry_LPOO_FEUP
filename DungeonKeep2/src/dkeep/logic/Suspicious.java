@@ -15,9 +15,11 @@ public class Suspicious extends Guard{
 	private int move = 1;
 	
 	/**
-	 * Constructor of this class and initializes index of this type of guard
+	 * Constructs and initializes index of this type of guard
 	 * @param posx
+	 * 				represents the coordinate x of the position of the Suspicious
 	 * @param posy
+	 * 				represents the coordinate x of the position of the Suspicious
 	 */
 	public Suspicious(int posx, int posy) {
 		super(posx,posy);
@@ -34,6 +36,7 @@ public class Suspicious extends Guard{
 	/**
 	 * Method responsible to reverse Suspicious's direction
 	 * @return direction
+	 * 					direction in which Suspicious should move
 	 */
 	public Direction reverseSuspiciousDirection(){
 		index--;
@@ -56,7 +59,9 @@ public class Suspicious extends Guard{
 	/**
 	 * Methods responsible to define the type of the movement's Suspicious
 	 * @param direction
-	 * @param board
+	 * 					direction in which Suspicious should move
+	 * @param b
+	 * 			where the Suspicious moves
 	 */
 	public void movement(Direction direction, Board b){
  

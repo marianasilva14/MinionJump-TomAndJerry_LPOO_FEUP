@@ -13,9 +13,11 @@ public class Rookie extends Guard{
 	private int index = 0;
 
 	/**
-	 * Constructor of this class and initializes index of this type of guard
+	 * Constructs and initializes index of this type of guard
 	 * @param posx
+	 * 				represents the coordinate x of the position of the Rookie
 	 * @param posy
+	 * 				represents the coordinate y of the position of the Rookie
 	 */
 	public Rookie(int posx, int posy) {
 		super(posx,posy);
@@ -30,7 +32,9 @@ public class Rookie extends Guard{
 	/**
 	 * Methods responsible to define the type of the movement's Rookie
 	 * @param direction
-	 * @param board
+	 * 					direction in which Rookie should move
+	 * @param b
+	 * 			board where the Rookie moves
 	 */
 	public void movement(Direction direction, Board b){
 

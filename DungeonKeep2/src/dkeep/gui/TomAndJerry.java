@@ -111,19 +111,19 @@ public class TomAndJerry {
 	private void frameAddKeyListener(){
 		frmDungeonKeep.addKeyListener(new KeyAdapter() { public void keyPressed(KeyEvent e) { int keyCode = e.getKeyCode();
 		if(!checkKeyboardButtons()){ switch( keyCode ) {  case KeyEvent.VK_UP:{ 		
-					{ commentsLabel.setText("Jerry moved up" );
-						move(Direction.UP);} break;}
-				case KeyEvent.VK_DOWN: {
-					{ commentsLabel.setText("Jerry moved down" );
-						move(Direction.DOWN); } break;}
-				case KeyEvent.VK_RIGHT:{
-					{ commentsLabel.setText("Jerry moved right" );
-						move(Direction.RIGHT); } break;}
-				case KeyEvent.VK_LEFT: {
-					{ commentsLabel.setText("Jerry moved left" );
-					move(Direction.LEFT);} break;}}} }});
+			{ commentsLabel.setText("Jerry moved up" );
+			move(Direction.UP);} break;}
+		case KeyEvent.VK_DOWN: {
+			{ commentsLabel.setText("Jerry moved down" );
+			move(Direction.DOWN); } break;}
+		case KeyEvent.VK_RIGHT:{
+			{ commentsLabel.setText("Jerry moved right" );
+			move(Direction.RIGHT); } break;}
+		case KeyEvent.VK_LEFT: {
+			{ commentsLabel.setText("Jerry moved left" );
+			move(Direction.LEFT);} break;}}} }});
 	}
-	
+
 	public void conditionsButtonNumberOfOgres(){
 		if(Integer.parseInt(numberOfOgres.getText()) > 5){
 			numberOfOgres.setText("5");
@@ -139,9 +139,10 @@ public class TomAndJerry {
 			public void focusLost(FocusEvent arg0) {
 				try{Integer.parseInt(numberOfOgres.getText());}
 				catch(NumberFormatException e){ e.printStackTrace();
-					numberOfOgres.setText("0");
-					game_graphics.invalidNrOgres();
-					return;}
+				game_graphics.invalidNrOgres();
+				numberOfOgres.setText("1");
+				nrOfOgres = 1;
+				return;}
 				conditionsButtonNumberOfOgres();
 				nrOfOgres = Integer.parseInt(numberOfOgres.getText());} });
 
@@ -178,23 +179,23 @@ public class TomAndJerry {
 			public void actionPerformed(ActionEvent e) {
 				Scanner input;
 				try {String line;
-					input = new Scanner(new File("images/level.txt"));
-					int rows= Integer.parseInt(input.nextLine());
-					int cols= Integer.parseInt(input.nextLine());
-					int lvl= Integer.parseInt(input.nextLine());
-					char [][] b = new char[rows][cols];
-					for(int i =0; i < rows; i++){
-						line =input.nextLine();
-						char[] line1 = line.toCharArray();
-						for(int j=0; j < cols; j++){
-							b[i][j]= line1[j];}}				
-					frmDungeonKeep.requestFocusInWindow();
-					board = new Board(b);
-					level = new Level(board,lvl);
-					game = new Game(level);
-					checkButtons();
-					commentsLabel.setText("New Game!");
-					game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game),  game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length );
+				input = new Scanner(new File("images/level.txt"));
+				int rows= Integer.parseInt(input.nextLine());
+				int cols= Integer.parseInt(input.nextLine());
+				int lvl= Integer.parseInt(input.nextLine());
+				char [][] b = new char[rows][cols];
+				for(int i =0; i < rows; i++){
+					line =input.nextLine();
+					char[] line1 = line.toCharArray();
+					for(int j=0; j < cols; j++){
+						b[i][j]= line1[j];}}				
+				frmDungeonKeep.requestFocusInWindow();
+				board = new Board(b);
+				level = new Level(board,lvl);
+				game = new Game(level);
+				checkButtons();
+				commentsLabel.setText("New Game!");
+				game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game),  game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length );
 				} catch (FileNotFoundException e1) {e1.printStackTrace();}}});
 		btnLoadLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnLoadLevel.setBounds(535, 75, 111, 23);
@@ -216,7 +217,7 @@ public class TomAndJerry {
 		btnNewButton.setBounds(535, 53, 111, 23);
 		frmDungeonKeep.getContentPane().add(btnNewButton);
 	}
-	
+
 	public void initializeNewGame(){
 		board = new Board(level1);
 		level= new Level(board, guardType);
@@ -328,7 +329,7 @@ public class TomAndJerry {
 		lblNumberOfOgres.setBounds(20, 11, 121, 33);
 		frmDungeonKeep.getContentPane().add(lblNumberOfOgres);
 	}
-	
+
 	public void addGameGraphics(){
 		frameDungeon();
 		frameAddKeyListener();
@@ -370,11 +371,11 @@ public class TomAndJerry {
 
 		gameLogic();
 	}
-	
+
 	public void checkEnableButtons(){
 		Entity hero = game.getLevel().getEntities().get(0);
 		Hero h = (Hero)hero;
-		
+
 		if(!h.checkIfMovementIsValid(Direction.UP, game.getLevel().getBoard()))
 			btnUp.setEnabled(false);
 		else btnUp.setEnabled(true);
@@ -398,7 +399,7 @@ public class TomAndJerry {
 		if(game.getLevel().getBoard().checkLimits(h)){
 			checkEnableButtons();}
 	}
-	
+
 	public void buttonsWhenChangeLevel(){
 		if(game.changeLevel(game.getLevel().getEntities().get(0), game.getLevel())){
 			int ogres=1;
@@ -412,16 +413,16 @@ public class TomAndJerry {
 					game.getLevel().getEntities().add(o);
 					ogres++;} }
 			else{btnUp.setEnabled(false);
-				btnDown.setEnabled(false);
-				btnRight.setEnabled(false);
-				btnLeft.setEnabled(false);
-				commentsLabel.setText("Jerry won!" );
-				game_graphics.win();
-				return;}}
+			btnDown.setEnabled(false);
+			btnRight.setEnabled(false);
+			btnLeft.setEnabled(false);
+			commentsLabel.setText("Jerry won!" );
+			game_graphics.win();
+			return;}}
 		else
 			checkButtons();
 	}
-	
+
 	public void gameLogic(){
 		game_graphics.updateGame(game.getLevel().getBoard().printBoardToString(game), game.getLevel().getBoard().getBoard().length, game.getLevel().getBoard().getBoard()[0].length);
 		for(int i=1; i < game.getLevel().getEntities().size();i++){

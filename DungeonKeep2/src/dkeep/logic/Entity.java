@@ -16,8 +16,10 @@ public abstract class Entity {
 
 	/**
 	 * Constructor of this class
-	 * @param x represents the coordinate x of the position of the entity
-	 * @param y represents the coordinate y of the position of the entity
+	 * @param x 
+	 * 			represents the coordinate x of the position of the entity
+	 * @param y 
+	 * 			represents the coordinate y of the position of the entity
 	 */
 	Entity(int x,int y){
 		posx = x;
@@ -27,14 +29,14 @@ public abstract class Entity {
 	}
 
 	/**
-	 * @return posy of entity
+	 * @return entity y position
 	 */
 	public int getPosy(){
 		return posy;
 	}
 
 	/**
-	 * @return posx of entity
+	 * @return entity x position
 	 */
 	public int getPosx(){
 		return posx;
@@ -50,6 +52,7 @@ public abstract class Entity {
 	/**
 	 * Method that sets the symbol of entity
 	 * @param symbol
+	 * 				symbol of entity
 	 */
 	public void setSymbol(char symbol){
 		this.symbol=symbol;
@@ -58,6 +61,7 @@ public abstract class Entity {
 	/**
 	 * Method that sets position x of entity
 	 * @param posx
+	 * 				Entity x position
 	 */
 	public void setPosx(int posx){
 		this.posx = posx;
@@ -65,7 +69,8 @@ public abstract class Entity {
 
 	/**
 	 * Method that sets position y of entity
-	 * @param posx
+	 * @param posy
+	 * 				Entity y position
 	 */
 	public void setPosy(int posy){
 		this.posy = posy;
@@ -108,6 +113,19 @@ public abstract class Entity {
 		return 1;
 	}
 
+	/**
+	 * Method that checks if the entity can moves. It can only move in positions 
+	 * like floor, lever and stairs
+	 * @param direction
+	 * 					direction in which entity should move
+	 * @param b
+	 * 			board where the Entity moves
+	 * @param x
+	 * 			Entity x position
+	 * @param y
+	 * 			Entity x position
+	 * @return
+	 */
 	public boolean conditionsToMove(Direction direction, Board b, int x, int y){
 		if((b.getBoard()[x][y] != ' ' )&&
 				(b.getBoard()[x][y] != 'k') &&
@@ -121,7 +139,9 @@ public abstract class Entity {
 	/**
 	 * Method that checks if movement is valid
 	 * @param direction
-	 * @param board
+	 * 					direction in which entity should move
+	 * @param b
+	 * 			board where the Entity moves
 	 * @return true if movement is valid
 	 */
 	public boolean checkIfMovementIsValid(Direction direction, Board b){
@@ -145,7 +165,10 @@ public abstract class Entity {
 	/**
 	 * Abstract method responsible to move entities
 	 * @param direction
-	 * @param board
+	 * 					direction in which entity should move
+	 * @param b
+	 * 			board where the Entity moves
+	 * 			
 	 */
 	public abstract void movement(Direction direction, Board b);
 

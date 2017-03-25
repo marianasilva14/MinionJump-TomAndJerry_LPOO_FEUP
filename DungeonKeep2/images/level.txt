@@ -2,7 +2,7 @@
 5
 1
 XXXXX
-X   X
-IH  X
 Xk  X
+XH  X
+XI  X
 XXXXX
