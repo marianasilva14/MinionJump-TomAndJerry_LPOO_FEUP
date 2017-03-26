@@ -11,4 +11,5 @@
 [Documentation](DungeonKeep2/doc)
 
 ![Screenshot](Coverage.PNG)
+![Screenshot](PitMutation.PNG)
 
