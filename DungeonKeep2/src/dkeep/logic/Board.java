@@ -39,10 +39,12 @@ public class Board {
 	 * 				column of board
 	 * @return true if an entity is within the limits of lines
 	 */
+	
 	public boolean conditionAdjacentEntityX(Entity e, int row, int col){
 		return (e.getPosx()-1 <= row && e.getPosx()-1 >= 0)
 				&& (e.getPosx()+1 <= row && e.getPosx()+1 >= 0);
 	}
+	
 	
 	/**
 	 * Method that checks whether an entity is within the limits of columns
