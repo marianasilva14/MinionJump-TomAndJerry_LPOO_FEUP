@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import java.util.Random;
 
 import dkeep.logic.*;
+import dkeep.logic.Drunken.StateDrunken;
 import dkeep.logic.Game.Direction;
+import dkeep.logic.Guard.GuardType;
 
 public class testDungeonGameLogic {
 
@@ -31,7 +33,31 @@ public class testDungeonGameLogic {
 			{'X','k'},
 			{'X',' '}
 	};
-	
+
+	char[][] map4 ={ 
+			{'X','X','X','X','X'},
+			{'X','H',' ','*','X'},
+			{'I',' ',' ','O','X'},
+			{'I','k',' ',' ','X'},
+			{'X','X','X','X','X'}
+	};
+
+	char[][] map5 ={ 
+			{'X','X','X','X','X'},
+			{'X',' ',' ','*','X'},
+			{'I',' ',' ','O','X'},
+			{'I','k',' ',' ','X'},
+			{'X','X','X','X','X'}
+	};
+
+	char[][] map6 = {
+			{'X','X','X','X','X'},
+			{'X','H',' ','g','X'},
+			{'I',' ',' ',' ','X'},
+			{'I','k',' ',' ','X'},
+			{'X','X','X','X','X'}
+	};
+
 	@Test
 	public void testMoveHeroIntoToFreeCell(){
 		Board board = new Board(map);
@@ -55,12 +81,32 @@ public class testDungeonGameLogic {
 		pos_rand = rand.nextInt(3);
 		Level level = new Level(board, pos_rand);
 		Game game= new Game(level);
-		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
+		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
 		Direction direction = Direction.RIGHT;
 		game.getLevel().getEntities().get(0).movement(direction,board);
-		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1) ));
-
+		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
+		direction = Direction.RIGHT;
+		game.getLevel().getEntities().get(0).movement(direction,board);
+		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
 	}
+
+	@Test
+	public void testHeroIsCapturedByClub(){
+		Board board= new Board(map4);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
+		Game game= new Game(level);
+		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
+		Direction direction = Direction.RIGHT;
+		game.getLevel().getEntities().get(0).movement(direction,board);
+		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
+		direction = Direction.RIGHT;
+		game.getLevel().getEntities().get(0).movement(direction,board);
+		assertTrue(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
+	}
+
 
 	@Test
 	public void testAdjacentPositionOgre(){
@@ -72,6 +118,9 @@ public class testDungeonGameLogic {
 		Game game= new Game(level);
 		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
 		Direction direction = Direction.RIGHT;
+		game.getLevel().getEntities().get(0).movement(direction,board);
+		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
+		direction = Direction.RIGHT;
 		game.getLevel().getEntities().get(0).movement(direction,board);
 		assertFalse(game.getLevel().checkIfEnds(game.getLevel().getEntities().get(0),game.getLevel().getEntities().get(1)));
 	}
@@ -125,6 +174,22 @@ public class testDungeonGameLogic {
 		assertEquals('K', game.getLevel().getEntities().get(0).getSymbol());
 		game.checkLever(game.getLevel().getEntities().get(0), game.getLevel());
 		assertEquals('S', game.getLevel().getBoard().getBoard()[3][0]);
+	}
+
+	@Test
+	public void testPrepareBoard(){
+		Board board= new Board(map);
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+		Level level = new Level(board, pos_rand);
+		Game game= new Game(level);
+		Direction direction = Direction.DOWN;
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
+		direction = Direction.DOWN;
+		game.getLevel().getEntities().get(0).movement(direction,game.getLevel().getBoard());
+		assertTrue(game.getLevel().getBoard().checkLimits(game.getLevel().getEntities().get(0)));
+		game.getLevel().getBoard().prepareBoard(game);
 	}
 
 	@Test
@@ -347,7 +412,7 @@ public class testDungeonGameLogic {
 			((Ogre)game.getLevel().getEntities().get(1)).movement(direction, game.getLevel().getBoard(), (Hero)game.getLevel().getEntities().get(0));
 		}
 		assertEquals('8', game.getLevel().getEntities().get(1).getSymbol());
-	
+
 	}
 
 
@@ -412,35 +477,81 @@ public class testDungeonGameLogic {
 
 	@Test
 	public void testPrintBoardToString(){
-		
+
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(3);
-		
+
 		Board board= new Board(map3);
 		Level level= new Level(board, pos_rand);
 		Game game = new Game(level);
-	
-		
+
+
 		Board b= new Board(map3);
 		Level lv= new Level(b, pos_rand);
 		Game game2 = new Game(lv);
-		
+
 		assertEquals(game.getLevel().getBoard().printBoardToString(game),game2.getLevel().getBoard().printBoardToString(game2));
 	}
 
 	@Test
 	public void checkLimitsBoard(){
-		
+
 		int pos_rand;
 		Random rand = new Random();
 		pos_rand = rand.nextInt(3);
-		
+
 		Board board= new Board(map3);
 		Level level= new Level(board, pos_rand);
 		Game game = new Game(level);
-		
+
 		assertFalse(game.getLevel().getBoard().checkLimits(game.getLevel().getEntities().get(0)));
 	}
+
+	@Test
+	public void testIfAdjacentPosition(){
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+
+		Board board= new Board(map);
+		Level level= new Level(board, pos_rand);
+		Game game = new Game(level);
+
+		assertTrue(game.getLevel().getBoard().conditionAdjacentEntityX(game.getLevel().getEntities().get(0), game.getLevel().getBoard().getBoard().length-1, game.getLevel().getBoard().getBoard()[0].length-1));
+		assertTrue(game.getLevel().getBoard().conditionAdjacentEntityY(game.getLevel().getEntities().get(0), game.getLevel().getBoard().getBoard().length-1, game.getLevel().getBoard().getBoard()[0].length-1));
+	}
+
+	@Test
+	public void testDrunkenBoard(){
+		int pos_rand;
+		Random rand = new Random();
+		pos_rand = rand.nextInt(3);
+
+		Board board= new Board(map6);
+		Level level= new Level(board, pos_rand);
+		Game game = new Game(level);
+
+
+		Board b= new Board(map6);
+		Level lv= new Level(b, pos_rand);
+		Game game2 = new Game(lv);
+
+		assertEquals(game.getLevel().getBoard().printBoardToString(game),game2.getLevel().getBoard().printBoardToString(game2));
+
+	}
+	@Test
+	public void testGuardTypeAndLevel(){
+		Guard g = new Guard(0, 0);
+
+		g.setGuardType(g.guardType.Rookie);
+		assertEquals(g.guardType.Rookie, g.getGuardType());
+
+		Level l = new Level(null, null, 0);
+
+		l.setLevel(1);
+		assertEquals(1, l.getLevel());
+	}
+
 	
 }
