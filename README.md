@@ -1,6 +1,6 @@
 # LPOO1617_T6G6
 
-## GUI mock-ups
+### GUI mock-ups
 Main Menu
 
 ![](https://cloud.githubusercontent.com/assets/22835568/25439439/59d48f04-2a94-11e7-92d7-6bc9f04f4fe6.png)
