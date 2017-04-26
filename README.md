@@ -16,7 +16,7 @@
 
 # GUI Design
 ## Identification of the main functionalities
-1. The game will be playable in Single Player or against another player.
+1. The game will be playable in Single Player.
 2. The game keeps scores of single player game runs.
 3. The settings of the game will allow for a player to turn off the sound in the game.
 4. The game will be able to share a post on Facebook upon player's request.
@@ -40,10 +40,8 @@ Game Mode
 
 # Test Design
 ## Listing of the expected final test cases
-1. Test to the movement of the user throughout the level.
-2. Test randomness of the generated level.
+1. Test to the movement of the minion.
+2. Test randomness of the platform.
 3. Test out-of-bounds behaviour.
 4. Test player losing.
 5. Test highscore saving.
- # Architecture Design:
-
