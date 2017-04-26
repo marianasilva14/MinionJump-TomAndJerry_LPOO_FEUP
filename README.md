@@ -1,5 +1,5 @@
 # LPOO1617_T6G6
 
-# GUI mock-ups
+## GUI mock-ups
 
-## Main Menu
+### Main Menu
