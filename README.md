@@ -1,26 +1,26 @@
 # LPOO1617_T6G6
 
-#### Members
+#### Group members
 
 - Francisca Leão Cerquinho Ribeiro da Fonseca - up201505791
-- Mariana Lopes Silva- up201506197
+- Mariana Lopes Silva - up201506197
 
-# Architecture Design:
+# Architecture Design
 
-## Package and class diagram (UML), documenting (describing) each class' responsibility
+## Package and class diagram (UML), documenting (describing) each class' responsibility:
+
+## Design of behavioural aspects:
 -Some things.
-## Design of behavioural aspects
--Some things.
-## Design Patterns to use
+## Design Patterns:
 1. Singleton - for the main game class (provisory).
 
 # GUI Design
-## Identification of the main functionalities
+## Listing of the main functionalities:
 1. The game will be playable in Single Player.
 2. The game keeps scores of single player game runs.
 3. The settings of the game will allow for a player to turn off the sound in the game.
 4. The game will be able to share a post on Facebook upon player's request.
-## GUI mock-ups
+## GUI mock-ups:
 <p>
 Main Menu
 
@@ -39,9 +39,10 @@ Game Mode
 ![](https://cloud.githubusercontent.com/assets/22835568/25439438/59d41e52-2a94-11e7-8ede-7ec5f65f76a0.png "Game Mode")
 
 # Test Design
-## Listing of the expected final test cases
+## Listing of the expected final test cases:
 1. Test to the movement of the minion.
 2. Test randomness of the platform.
 3. Test out-of-bounds behaviour.
 4. Test player losing.
+5. Test randomness movement of the villain.
 5. Test highscore saving.
