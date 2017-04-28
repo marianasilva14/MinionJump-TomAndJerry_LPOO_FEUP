@@ -11,7 +11,7 @@
 ![](https://cloud.githubusercontent.com/assets/22794956/25520109/933d085c-2bf2-11e7-935c-415f296f68ed.png)
 
 ## Design of behavioural aspects:
--Some things.
+![](https://cloud.githubusercontent.com/assets/22794956/25520108/933c2752-2bf2-11e7-969d-e11f7be1f61e.png)
 ## Design Patterns:
 1. Singleton - for the main game class (provisory).
 
