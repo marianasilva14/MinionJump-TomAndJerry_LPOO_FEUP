@@ -16,6 +16,7 @@ Encharge of game logic. This is the main class.
 
 
 
+
 ## Design of behavioural aspects:
 ![](https://cloud.githubusercontent.com/assets/22794956/25520108/933c2752-2bf2-11e7-969d-e11f7be1f61e.png)
 ## Design Patterns:
