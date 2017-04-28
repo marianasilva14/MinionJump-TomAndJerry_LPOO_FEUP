@@ -19,6 +19,7 @@ Encharge of game logic. This is the main class.
 
 ## Design of behavioural aspects:
 ![](https://cloud.githubusercontent.com/assets/22794956/25520108/933c2752-2bf2-11e7-969d-e11f7be1f61e.png)
+![](https://cloud.githubusercontent.com/assets/22794956/25525800/806606dc-2c08-11e7-9685-2b2fae864ea7.png)
 ## Design Patterns:
 1. Singleton - for the main game class (provisory).
 
