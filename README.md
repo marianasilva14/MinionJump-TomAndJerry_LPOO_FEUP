@@ -12,8 +12,9 @@
 
 - ### Minion Jump
 <p>
-Encharge of game logic. This is the main class
-- ### Entity 
+  Encharge of game logic. This is the main class
+- ### Entity
+<p>
 
 
 ## Design of behavioural aspects:
