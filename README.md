@@ -10,6 +10,11 @@
 ## Package and class diagram (UML), documenting (describing) each class' responsibility:
 ![](https://cloud.githubusercontent.com/assets/22794956/25520109/933d085c-2bf2-11e7-935c-415f296f68ed.png)
 
+- Minion Jump
+Encharge of game logic. This is the main class
+- Entity 
+
+
 ## Design of behavioural aspects:
 ![](https://cloud.githubusercontent.com/assets/22794956/25520108/933c2752-2bf2-11e7-969d-e11f7be1f61e.png)
 ## Design Patterns:
@@ -41,9 +46,8 @@ Game Mode
 
 # Test Design
 ## Listing of the expected final test cases:
-1. Test to the movement of the minion.
-2. Test randomness of the platform.
-3. Test out-of-bounds behaviour.
-4. Test player losing.
-5. Test randomness movement of the villain.
+1. Test randomness of the platform.
+2. Test out-of-bounds behaviour.
+3. Test player losing.
+4. Test randomness movement of the villain.
 5. Test highscore saving.
