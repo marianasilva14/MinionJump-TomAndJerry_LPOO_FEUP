@@ -10,9 +10,10 @@
 ## Package and class diagram (UML), documenting (describing) each class' responsibility:
 ![](https://cloud.githubusercontent.com/assets/22794956/25520109/933d085c-2bf2-11e7-935c-415f296f68ed.png)
 
-- Minion Jump
+## - Minion Jump
+<p>
 Encharge of game logic. This is the main class
-- Entity 
+## - Entity 
 
 
 ## Design of behavioural aspects:
