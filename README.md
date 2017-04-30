@@ -8,7 +8,7 @@
 # Architecture Design
 
 ## Package and class diagram (UML), documenting (describing) each class' responsibility:
-![](https://cloud.githubusercontent.com/assets/22835568/25563546/e6f2741a-2d95-11e7-8320-9f0709b40330.png)
+![](https://cloud.githubusercontent.com/assets/22835568/25567109/8f3a4c4a-2dde-11e7-8ac0-c9cb16f14368.png)
 
 - ### Minion Jump
 Encharge of game logic. This is the main class.
