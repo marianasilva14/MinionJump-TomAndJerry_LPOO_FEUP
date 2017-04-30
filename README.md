@@ -33,7 +33,7 @@ Class responsible for platforms with rockets. This type of platform is where min
 
 ## Design of behavioural aspects:
 ![](https://cloud.githubusercontent.com/assets/22835568/25565858/a254a418-2dc7-11e7-8385-bae2c8e49209.png)
-![](https://cloud.githubusercontent.com/assets/22835568/25566466/fe9dce80-2dd0-11e7-84d5-3fea5153644d.png)
+![](https://cloud.githubusercontent.com/assets/22835568/25567332/1359a922-2de3-11e7-8ce6-8d0f210aa065.png)
 
 ## Design Patterns:
 1. Singleton - for the main game class.
