@@ -21,19 +21,20 @@ This class defines the behavior of the minion (character moved by the user).
 - ### Platform
 This class define platforms where minion walks.
 
-
 ## Design of behavioural aspects:
 ![](https://cloud.githubusercontent.com/assets/22835568/25565858/a254a418-2dc7-11e7-8385-bae2c8e49209.png)
 ![](https://cloud.githubusercontent.com/assets/22835568/25563546/e6f2741a-2d95-11e7-8320-9f0709b40330.png)
+
 ## Design Patterns:
-1. Singleton - for the main game class (provisory).
+1. Singleton - for the main game class.
+2. State - for the different types of platforms: platform with spring, with rocket or normal and split platform.
 
 # GUI Design
 ## Listing of the main functionalities:
 1. The game will be playable in Single Player.
 2. The game keeps scores of single player game runs.
 3. The settings of the game will allow for a player to turn off the sound in the game.
-4. The game will be able to share a post on Facebook upon player's request.
+
 ## GUI mock-ups:
 <p>
 Main Menu
@@ -55,7 +56,6 @@ Game Mode
 Game Over
 
 ![](https://cloud.githubusercontent.com/assets/22835568/25565939/d3bf3d5a-2dc8-11e7-9fff-ac54be19d603.png "Game over")
-
 
 # Test Design
 ## Listing of the expected final test cases:
