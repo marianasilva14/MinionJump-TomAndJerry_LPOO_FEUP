@@ -10,25 +10,25 @@
 ## Package and class diagram (UML), documenting (describing) each class' responsibility:
 ![](https://cloud.githubusercontent.com/assets/22835568/25567109/8f3a4c4a-2dde-11e7-8ac0-c9cb16f14368.png)
 
-- ## Minion Jump
+- #### Minion Jump
 Encharge of game logic. This is the main class.
-- ##### Entity
+- #### Entity
 This class defines all the characteristics common to all entities of the game.
-- ##### Villain
+- #### Villain
 This class defines the behavior of the villain.
-- ##### Minion
+- #### Minion
 This class defines the behavior of the minion (character moved by the user).
-- ##### Platform
+- #### Platform
 This class define platforms where minion walks.
-- ##### PlatformBehavior
+- #### PlatformBehavior
 Responsible to behavior of the platform.
-- ##### NormalPlatform
+- #### NormalPlatform
 Class responsible for normals platforms.
-- ##### SpringPlatform
+- #### SpringPlatform
 Class responsible for platforms with springs. This type of platform is where minion achieve more height with help of spring.
-- ##### SplitPlatform
+- #### SplitPlatform
 Class responsible for split platforms. This type of platform breaks down and the minion ends up falling.
-- ##### RocketPlatform
+- #### RocketPlatform
 Class responsible for platforms with rockets. This type of platform is where minion achieve more height than platform with spring, with help of rocket.
 
 ## Design of behavioural aspects:
