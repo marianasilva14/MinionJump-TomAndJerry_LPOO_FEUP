@@ -20,6 +20,15 @@ This class defines the behavior of the villain.
 This class defines the behavior of the minion (character moved by the user).
 - ### Platform
 This class define platforms where minion walks.
+- ### PlatformBehavior
+Responsible to behavior of the platform.
+- ### Normal Platform
+- ### SpringPlatform
+This type of platform is where minion achieve more height with help of spring.
+- ### SplitPlatform
+This type of platform breaks down and the minion ends up falling.
+- ### RocketPlatform
+This type of platform is where minion achieve more height than platform with spring, with help of rocket.
 
 ## Design of behavioural aspects:
 ![](https://cloud.githubusercontent.com/assets/22835568/25565858/a254a418-2dc7-11e7-8385-bae2c8e49209.png)
