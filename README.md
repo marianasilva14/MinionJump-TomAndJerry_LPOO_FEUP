@@ -13,8 +13,11 @@
 - ### Minion Jump
 Encharge of game logic. This is the main class.
 - ### Entity
-
-
+This class defines all the characteristics common to all entities of the game.
+- ### Villain
+This class defines the behavior of the villain.
+- ### Minion
+- ### Platform
 
 
 ## Design of behavioural aspects:
