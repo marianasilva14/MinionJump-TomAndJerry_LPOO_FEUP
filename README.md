@@ -51,9 +51,12 @@ Settings Menu
 Game Mode
 
 ![](https://cloud.githubusercontent.com/assets/22835568/25562911/32b5f5dc-2d89-11e7-8443-aa50e5ef65b3.png "Game Mode")
-
+<p>
 Game Over
+
 ![](https://cloud.githubusercontent.com/assets/22835568/25565939/d3bf3d5a-2dc8-11e7-9fff-ac54be19d603.png "Game over")
+
+
 # Test Design
 ## Listing of the expected final test cases:
 1. Test randomness of the platform.
