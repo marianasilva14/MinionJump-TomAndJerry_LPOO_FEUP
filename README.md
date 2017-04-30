@@ -23,7 +23,7 @@ This class define platforms where minion walks.
 
 
 ## Design of behavioural aspects:
-![](https://cloud.githubusercontent.com/assets/22794956/25520108/933c2752-2bf2-11e7-969d-e11f7be1f61e.png)
+![](https://cloud.githubusercontent.com/assets/22835568/25565858/a254a418-2dc7-11e7-8385-bae2c8e49209.png)
 ![](https://cloud.githubusercontent.com/assets/22835568/25563546/e6f2741a-2d95-11e7-8320-9f0709b40330.png)
 ## Design Patterns:
 1. Singleton - for the main game class (provisory).
