@@ -27,7 +27,7 @@ This class define platforms where minion walks.
 
 ## Design Patterns:
 1. Singleton - for the main game class.
-2. State - for the different types of platforms: platform with spring, with rocket or normal and split platform.
+2. Strategy - for the different types of platforms: platform with spring, with rocket or normal and split platform.
 
 # GUI Design
 ## Listing of the main functionalities:
