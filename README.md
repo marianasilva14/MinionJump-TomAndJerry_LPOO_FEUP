@@ -17,7 +17,9 @@ This class defines all the characteristics common to all entities of the game.
 - ### Villain
 This class defines the behavior of the villain.
 - ### Minion
+This class defines the behavior of the minion (character moved by the user).
 - ### Platform
+This class define platforms where minion walks.
 
 
 ## Design of behavioural aspects:
