@@ -5,5 +5,5 @@ package com.minionjump.game.controller.entities;
  */
 
 public class EntityBody {
-
+    s
 }
