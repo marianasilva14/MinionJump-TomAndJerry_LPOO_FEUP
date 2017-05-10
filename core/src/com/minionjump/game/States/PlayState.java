@@ -44,7 +44,7 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
         minion.update(dt);
-        cam.position.x = minion.getPosition().x + 80;
+        cam.position.y = minion.getPosition().y + 80;
 
         for(Platform platform : platforms){
             if(cam.position.x - (cam.viewportWidth / 2) > platform.getPosNormalPlatform().x + platform.getNormalPlatform().getWidth())

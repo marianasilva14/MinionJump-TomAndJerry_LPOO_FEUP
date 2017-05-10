@@ -13,8 +13,8 @@ public class Platform {
     public static final int PLATFORM_HEIGHT = 52;
 
     private static final int FLUCTUATION = 130;
-    private static final int PLATFORM_GAP = 100;
-    private static final int LOWEST_OPENING = 120;
+    private static final int PLATFORM_GAP = 40;
+    private static final int LOWEST_OPENING = 190;
     private Texture splitPlatform, normalPlatform;
     private Vector2 posSplitPlatform, posNormalPlatform;
     private Random rand;
