@@ -1,6 +1,7 @@
 package com.minionjump.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
@@ -14,9 +15,10 @@ public class Platform {
 
     private static final int FLUCTUATION = 130;
     private static final int PLATFORM_GAP = 40;
-    private static final int LOWEST_OPENING = 190;
+    private static final int LOWEST_OPENING = 200;
     private Texture splitPlatform, normalPlatform;
     private Vector2 posSplitPlatform, posNormalPlatform;
+    private Rectangle boundsPlatform;
     private Random rand;
 
     public Platform(float y){
@@ -26,6 +28,8 @@ public class Platform {
 
         posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) + PLATFORM_GAP + LOWEST_OPENING, y);
         posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) + PLATFORM_GAP, y);
+
+        boundsPlatform = new Rectangle(posNormalPlatform.x, posNormalPlatform.y, normalPlatform.getWidth(), normalPlatform.getHeight());
     }
 
     public Texture getSplitPlatform() {
@@ -48,6 +52,16 @@ public class Platform {
         posNormalPlatform.set(rand.nextInt(FLUCTUATION) + PLATFORM_GAP, y);
         posSplitPlatform.set(rand.nextInt(FLUCTUATION) + PLATFORM_GAP + LOWEST_OPENING, y);
 
+        boundsPlatform.setPosition(posNormalPlatform.x, posNormalPlatform.y);
+    }
+
+    public boolean collides(Rectangle player) {
+        return player.overlaps(boundsPlatform);
+    }
+
+    public void dispose(){
+        normalPlatform.dispose();
+        splitPlatform.dispose();
     }
 
 }

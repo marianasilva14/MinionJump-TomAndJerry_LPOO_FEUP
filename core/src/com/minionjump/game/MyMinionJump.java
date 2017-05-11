@@ -2,12 +2,10 @@ package com.minionjump.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.minionjump.game.States.GameStateManager;
-import com.minionjump.game.States.MenuState;
+import com.minionjump.game.view.GameStateManager;
+import com.minionjump.game.view.MainMenu;
 
 public class MyMinionJump extends ApplicationAdapter {
 	public static final int HEIGHT = 800;
@@ -22,7 +20,7 @@ public class MyMinionJump extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gam = new GameStateManager();
 		Gdx.gl.glClearColor(1,0,0,1);
-		gam.push(new MenuState(gam));
+		gam.push(new MainMenu(gam));
 	}
 
 	public void render(){

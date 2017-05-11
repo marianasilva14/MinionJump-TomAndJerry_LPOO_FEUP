@@ -1,4 +1,4 @@
-package com.minionjump.game.States;
+package com.minionjump.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,7 +13,7 @@ import com.minionjump.game.model.Platform;
  */
 
 public class PlayState extends State {
-    private static final int PLATFORM_SPACING = 125;
+    private static final int PLATFORM_SPACING = 100;
     private static final int PLATFORM_COUNT = 6;
 
     private Minion minion;
@@ -23,7 +23,7 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager gam) {
         super(gam);
-        minion = new Minion(50, 300);
+        minion = new Minion(150, 300);
         cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
         bg = new Texture("background.png");
 
@@ -46,9 +46,14 @@ public class PlayState extends State {
         minion.update(dt);
         cam.position.y = minion.getPosition().y + 80;
 
-        for(Platform platform : platforms){
+        for(int i = 0; i < platforms.size; i++){
+            Platform platform = platforms.get(i);
+
             if(cam.position.x - (cam.viewportWidth / 2) > platform.getPosNormalPlatform().x + platform.getNormalPlatform().getWidth())
                 platform.reposition(platform.getPosNormalPlatform().x + ((Platform.PLATFORM_HEIGHT + PLATFORM_SPACING) * PLATFORM_COUNT));
+
+            if(platform.collides(minion.getBounds()))
+                minion.jump();
         }
         cam.update();
     }
@@ -68,6 +73,10 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        minion.dispose();
+        for(Platform platform : platforms)
+            platform.dispose();
+        System.out.println("Play State Disposed");
     }
 }

@@ -1,6 +1,7 @@
 package com.minionjump.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 /**
@@ -12,6 +13,7 @@ public class Minion {
     private static  final int MOVEMENT = 100;
     private Vector3 position;
     private Vector3 velocity;
+    private Rectangle bounds;
 
     private Texture minion;
 
@@ -19,6 +21,7 @@ public class Minion {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
         minion = new Texture("minion.png");
+        bounds = new Rectangle(x, y, minion.getWidth(), minion.getHeight());
     }
 
     public void update(float dt){
@@ -30,6 +33,7 @@ public class Minion {
             position.y = 0;
 
         velocity.scl(1/dt);
+        bounds.setPosition(position.x, position.y);
     }
 
     public Vector3 getPosition() {
@@ -42,5 +46,13 @@ public class Minion {
 
     public void jump(){
         velocity.y = 250;
+    }
+
+    public Rectangle getBounds(){
+        return bounds;
+    }
+
+    public void dispose() {
+        minion.dispose();
     }
 }

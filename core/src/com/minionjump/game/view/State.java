@@ -1,4 +1,4 @@
-package com.minionjump.game.States;
+package com.minionjump.game.view;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
