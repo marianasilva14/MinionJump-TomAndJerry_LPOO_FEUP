@@ -11,8 +11,8 @@ public class MyMinionJump extends ApplicationAdapter {
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 480;
 
-	private SpriteBatch batch;
-	private GameStateManager gam;
+	public SpriteBatch batch;
+	public GameStateManager gam;
 	public static final String TITLE = "Minion Jump";
 	
 	@Override
