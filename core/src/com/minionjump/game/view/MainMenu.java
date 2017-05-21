@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -28,8 +28,7 @@ public class MainMenu extends State {
     private Texture playBtn;
     private Texture scoresBtn;
     private Texture optionsBtn;
-    private TextButton playButton,scoresButton, optionsButton;
-    private ImageButton testeBut;
+    private Button playBut,scoresBut,optionsBut;
     private PlayState play;
     private Stage stage;
     private MyMinionJump minionJump;
@@ -42,62 +41,40 @@ public class MainMenu extends State {
         scoresBtn = new Texture("scores.png");
         optionsBtn = new Texture("options.png");
         stage = new Stage();
-/*
-        gamePort=new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        gamePort.apply();
-        stage = new Stage(gamePort, minionJump.batch);
-
-        //PLAY BUTTON
-
-        float xPlayButton = Gdx.graphics.getWidth();
-        float yPlayButton = Gdx.graphics.getHeight();
-        float wPlayButton = Gdx.graphics.getWidth();
-        float hPlayButton= Gdx.graphics.getHeight();
-
-        playButton=new Image(playBtn);
-        playButton.setWidth(wPlayButton);
-        playButton.setHeight(hPlayButton);
-        playButton.setPosition(xPlayButton,yPlayButton);
         Gdx.input.setInputProcessor(stage);
-        stage.addActor(playButton);
-*/
+
 
         Drawable buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(playBtn));
-        testeBut = new ImageButton(buttonDrawableSha);
-        testeBut.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/9);
-        testeBut.setPosition(Gdx.graphics.getWidth()/2-testeBut.getWidth()/2,Gdx.graphics.getHeight()/2-testeBut.getHeight()/2);
+        playBut = new ImageButton(buttonDrawableSha);
+        playBut.setSize(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/9);
+        playBut.setPosition(Gdx.graphics.getWidth()/2- 3*playBut.getWidth()/4,Gdx.graphics.getHeight()/2- playBut.getHeight());
 
+        stage.addActor( playBut);
 
+        buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(scoresBtn));
+        scoresBut = new ImageButton(buttonDrawableSha);
+        scoresBut.setSize(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/5);
+        scoresBut.setPosition(Gdx.graphics.getWidth()- 3*Gdx.graphics.getWidth()/5,0);
 
-        testeBut.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x,float y){
+        stage.addActor(scoresBut);
 
-               // gam.set(new PlayState(gam));
-                System.out.println("Button Pressed");
-            }
-        });
+        buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(optionsBtn));
+        optionsBut = new ImageButton(buttonDrawableSha);
+        optionsBut.setSize(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/5);
+        optionsBut.setPosition(Gdx.graphics.getWidth()/2- 3*optionsBut.getWidth()/5+scoresBut.getWidth()+10,0);
 
+        stage.addActor(optionsBut);
 
-        stage.addActor(testeBut);
     }
 
     @Override
 
     public void handleInput() {
 
-//       if(Gdx.input.justTouched()){
-//            gam.set(new PlayState(gam));
-//        }
-//        while(!testeBut.getClickListener().isPressed()){
-//
-//        }
-
     }
 
     @Override
     public void update(float dt) {
-       // handleInput();
     }
 
     @Override
@@ -105,12 +82,22 @@ public class MainMenu extends State {
 
         sb.begin();
         sb.draw(background,0,0, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
-        sb.draw(playBtn, (MyMinionJump.WIDTH/4)-(playBtn.getWidth()/3), MyMinionJump.HEIGHT/3);
-        sb.draw(scoresBtn, (MyMinionJump.WIDTH) - (optionsBtn.getWidth()), scoresBtn.getHeight() - (scoresBtn.getHeight()-1));
-        sb.draw(optionsBtn, (MyMinionJump.WIDTH/2) - (scoresBtn.getWidth()/5), (optionsBtn.getHeight()-5) - (optionsBtn.getHeight()));
         sb.end();
         stage.act();
         stage.draw();
+
+        if(playBut.isPressed())
+            gam.set(new PlayState(gam));
+
+        if(scoresBut.isPressed()) {
+            System.out.println("scores pressed");
+            //gam.set(new PlayState(gam));
+        }
+        if(optionsBut.isPressed()) {
+            System.out.println("options pressed");
+            //gam.set(new PlayState(gam));
+        }
+
     }
 
     @Override

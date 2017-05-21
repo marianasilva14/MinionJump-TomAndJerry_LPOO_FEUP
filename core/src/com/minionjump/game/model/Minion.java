@@ -12,6 +12,11 @@ public class Minion {
     private static  final int GRAVITY = -15;
     private static  final int MOVEMENT = 100;
     private Vector3 position;
+
+    public Vector3 getVelocity() {
+        return velocity;
+    }
+
     private Vector3 velocity;
     private Rectangle bounds;
 
@@ -45,7 +50,7 @@ public class Minion {
     }
 
     public void jump(){
-        velocity.y = 250;
+        velocity.y = 750;
     }
 
     public Rectangle getBounds(){
