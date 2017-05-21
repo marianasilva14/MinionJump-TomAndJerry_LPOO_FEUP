@@ -13,8 +13,8 @@ import com.minionjump.game.model.Platform;
  */
 
 public class PlayState extends State {
-    private static final int PLATFORM_SPACING = 100;
-    private static final int PLATFORM_COUNT = 6;
+    private static final int PLATFORM_SPACING = 125;
+    private static final int PLATFORM_COUNT = 5;
 
     private Minion minion;
     private Texture bg;
@@ -36,8 +36,12 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
+        /*
         if(Gdx.input.justTouched())
             minion.jump();
+            */
+
+        //Gdx.input.getAccelerometerX();
     }
 
     @Override
@@ -49,11 +53,13 @@ public class PlayState extends State {
         for(int i = 0; i < platforms.size; i++){
             Platform platform = platforms.get(i);
 
-            if(cam.position.x - (cam.viewportWidth / 2) > platform.getPosNormalPlatform().x + platform.getNormalPlatform().getWidth())
-                platform.reposition(platform.getPosNormalPlatform().x + ((Platform.PLATFORM_HEIGHT + PLATFORM_SPACING) * PLATFORM_COUNT));
+            if(cam.position.y - (cam.viewportHeight / 2) > platform.getPosNormalPlatform().y + platform.getNormalPlatform().getHeight())
+                platform.reposition(platform.getPosNormalPlatform().y + ((Platform.PLATFORM_HEIGHT + PLATFORM_SPACING) * PLATFORM_COUNT));
 
-            if(platform.collides(minion.getBounds()))
-                minion.jump();
+           if(platform.collides(minion.getBounds())) {
+               if (minion.getVelocity().y < 0)
+                   minion.jump();
+           }
         }
         cam.update();
     }
