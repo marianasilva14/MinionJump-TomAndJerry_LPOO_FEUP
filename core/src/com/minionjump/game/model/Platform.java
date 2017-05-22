@@ -11,9 +11,9 @@ import java.util.Random;
  */
 
 public class Platform {
-    public static final int PLATFORM_HEIGHT = 52;
+    public static final int PLATFORM_HEIGHT = 40;
     private static final int FLUCTUATION = 130;
-    private static final int PLATFORM_GAP = 30;
+    private static final int PLATFORM_GAP = 40;
     private static final int LOWEST_OPENING = 200;
     private Texture splitPlatform, normalPlatform;
     private Vector2 posSplitPlatform, posNormalPlatform;
@@ -29,17 +29,17 @@ public class Platform {
         platform= rand.nextInt(2);
 
         if(firstTime){
-            posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING+PLATFORM_GAP, y);
+            posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) +PLATFORM_GAP+LOWEST_OPENING, y);
             posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) , y+PLATFORM_GAP);
 
             firstTime=false;
         }
         else {
             if (platform == 0) {
-                posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING+PLATFORM_GAP, y);
+                posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) +LOWEST_OPENING +PLATFORM_GAP, y );
                 posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION), y+PLATFORM_GAP);
             } else {
-                posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING, y+PLATFORM_GAP);
+                posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) +LOWEST_OPENING , y+PLATFORM_GAP);
                 posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION), y);
             }
         }
@@ -79,10 +79,10 @@ public class Platform {
         platform= rand.nextInt(2);
 
         if (platform == 0) {
-            posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING+PLATFORM_GAP, y);
+            posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) +LOWEST_OPENING +PLATFORM_GAP, y );
             posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION), y+PLATFORM_GAP);
         } else {
-            posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING, y+PLATFORM_GAP);
+            posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING, y + PLATFORM_GAP);
             posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION), y);
         }
 

@@ -13,7 +13,7 @@ import com.minionjump.game.model.Platform;
  */
 
 public class PlayState extends State {
-    private static final int PLATFORM_SPACING = 75;
+    private static final int PLATFORM_SPACING = 100;
     private static final int PLATFORM_COUNT = 5;
 
     private Minion minion;

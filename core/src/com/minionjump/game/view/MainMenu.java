@@ -37,7 +37,7 @@ public class MainMenu extends State {
     public MainMenu(GameStateManager game) {
         super(game);
         cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
-        background = new Texture("mainmenu.png");
+        background = new Texture("MainMenu.png");
         playBtn = new Texture("btnplay.png");
         scoresBtn = new Texture("scores.png");
         optionsBtn = new Texture("options.png");
