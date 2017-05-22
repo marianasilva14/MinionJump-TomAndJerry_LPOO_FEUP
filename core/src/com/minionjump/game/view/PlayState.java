@@ -8,15 +8,21 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.minionjump.game.MyMinionJump;
 import com.minionjump.game.model.Minion;
+import com.minionjump.game.model.NormalPlatform;
 import com.minionjump.game.model.Platform;
+import com.minionjump.game.model.RocketPlatform;
+import com.minionjump.game.model.SplitPlatform;
+import com.minionjump.game.model.SpringPlatform;
+
+import java.util.Random;
 
 /**
  * Created by Mariana on 10/05/2017.
  */
 
 public class PlayState extends State {
-    private static final int PLATFORM_SPACING = 100;
-    private static final int PLATFORM_COUNT = 5;
+    private static final int PLATFORM_SPACING = 250;
+    private static final int PLATFORM_COUNT = 100;
 
     private Minion minion;
     private Texture bg;
@@ -28,11 +34,28 @@ public class PlayState extends State {
         minion = new Minion(150, 300,gam);
         cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
         bg = new Texture("background.png");
-
+        Random rand = new Random();
         platforms = new Array<Platform>();
+        int deltaX = MyMinionJump.WIDTH/2 - 150;
+        for(int i = 0; i < PLATFORM_COUNT/2; i++){
+            for(int j = 0; j < 2; j++){
+                int platformType= rand.nextInt(4);
 
-        for(int i = 1; i < PLATFORM_COUNT; i++){
-            platforms.add(new Platform(i * (PLATFORM_SPACING + Platform.PLATFORM_HEIGHT)));
+                switch (platformType){
+                    case 0:
+                        platforms.add(new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        break;
+                    case 1:
+                        platforms.add(new SplitPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        break;
+                    case 2:
+                        platforms.add(new RocketPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        break;
+                    case 3:
+                        platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        break;
+                }
+            }
         }
     }
 
@@ -82,13 +105,29 @@ public class PlayState extends State {
         for(int i = 0; i < platforms.size; i++){
             Platform platform = platforms.get(i);
 
-            if(cam.position.y - (cam.viewportHeight / 2) > platform.getPosNormalPlatform().y + platform.getNormalPlatform().getHeight())
-                platform.reposition(platform.getPosNormalPlatform().y + ((Platform.PLATFORM_HEIGHT + PLATFORM_SPACING) * PLATFORM_COUNT));
+            if(cam.position.y - (cam.viewportHeight / 2) > platform.getPositionPlatform().y + platform.getTextPlatform().getHeight())
+                platform.reposition(platform.getPositionPlatform().y + ((Platform.PLATFORM_HEIGHT + PLATFORM_SPACING) * PLATFORM_COUNT));
 
-           if(platform.collides(minion.getBounds())) {
-               if (minion.getVelocity().y < 0)
-                   minion.jump();
-           }
+            if((platforms.get(i) instanceof NormalPlatform)) {
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0)
+                        minion.jump(750);
+                }
+            }
+
+            else if((platforms.get(i) instanceof SpringPlatform)) {
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0)
+                        minion.jump(1000);
+                }
+            }
+
+            else if((platforms.get(i) instanceof RocketPlatform)) {
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0)
+                        minion.jump(1500);
+                }
+            }
         }
         cam.update();
     }
@@ -100,8 +139,7 @@ public class PlayState extends State {
         sb.draw(bg, 0, cam.position.y - (cam.viewportHeight / 2));
         sb.draw(minion.getTexture(), minion.getPosition().x, minion.getPosition().y);
         for(Platform platform : platforms) {
-            sb.draw(platform.getNormalPlatform(), platform.getPosNormalPlatform().x, platform.getPosNormalPlatform().y);
-            sb.draw(platform.getSplitPlatform(), platform.getPosSplitPlatform().x, platform.getPosSplitPlatform().y);
+            sb.draw(platform.getTextPlatform(), platform.getPositionPlatform().x, platform.getPositionPlatform().y);
         }
         sb.end();
     }

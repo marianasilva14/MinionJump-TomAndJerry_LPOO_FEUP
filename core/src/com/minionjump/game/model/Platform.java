@@ -4,98 +4,40 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.Random;
-
 /**
  * Created by Mariana on 10/05/2017.
  */
 
-public class Platform {
+public abstract class Platform {
     public static final int PLATFORM_HEIGHT = 40;
-    private static final int FLUCTUATION = 130;
-    private static final int PLATFORM_GAP = 40;
-    private static final int LOWEST_OPENING = 200;
-    private Texture splitPlatform, normalPlatform;
-    private Vector2 posSplitPlatform, posNormalPlatform;
-    private Rectangle boundsPlatform;
-    private Random rand;
-    private int platform;
-    private boolean firstTime=true;
-
-    public Platform(float y){
-        splitPlatform = new Texture("splitplatform.png");
-        normalPlatform = new Texture("platform.png");
-        rand = new Random();
-        platform= rand.nextInt(2);
-
-        if(firstTime){
-            posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) +PLATFORM_GAP+LOWEST_OPENING, y);
-            posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) , y+PLATFORM_GAP);
-
-            firstTime=false;
-        }
-        else {
-            if (platform == 0) {
-                posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) +LOWEST_OPENING +PLATFORM_GAP, y );
-                posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION), y+PLATFORM_GAP);
-            } else {
-                posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) +LOWEST_OPENING , y+PLATFORM_GAP);
-                posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION), y);
-            }
-        }
-
-        //posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) + PLATFORM_GAP + LOWEST_OPENING, y);
-       // posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) + PLATFORM_GAP, y);
-
-        //posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING, y);
-       // posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) , y);
+    protected Texture textPlat;
+    protected Vector2 positionPlat;
+    protected Rectangle boundsPlat;
 
 
-
-        boundsPlatform = new Rectangle(posNormalPlatform.x, posNormalPlatform.y, normalPlatform.getWidth(), normalPlatform.getHeight());
+    public Texture getTextPlatform() {
+        return textPlat;
     }
 
-    public Texture getSplitPlatform() {
-        return splitPlatform;
+    public Vector2 getPositionPlatform() {
+        return positionPlat;
     }
 
-    public Texture getNormalPlatform() {
-        return normalPlatform;
-    }
-
-    public Vector2 getPosSplitPlatform() {
-        return posSplitPlatform;
-    }
-
-    public Vector2 getPosNormalPlatform() {
-        return posNormalPlatform;
-    }
 
     public void reposition(float y){
-       // posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING, y);
-       // posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) , y);
 
-        rand = new Random();
-        platform= rand.nextInt(2);
+        boundsPlat.setPosition(positionPlat.x, positionPlat.y);
 
-        if (platform == 0) {
-            posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION) +LOWEST_OPENING +PLATFORM_GAP, y );
-            posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION), y+PLATFORM_GAP);
-        } else {
-            posNormalPlatform = new Vector2(rand.nextInt(FLUCTUATION) + LOWEST_OPENING, y + PLATFORM_GAP);
-            posSplitPlatform = new Vector2(rand.nextInt(FLUCTUATION), y);
-        }
-
-        boundsPlatform.setPosition(posNormalPlatform.x, posNormalPlatform.y);
     }
 
     public boolean collides(Rectangle player) {
-        return player.overlaps(boundsPlatform);
+
+            return player.overlaps(boundsPlat);
+
     }
 
     public void dispose(){
-        normalPlatform.dispose();
-        splitPlatform.dispose();
+      textPlat.dispose();
     }
 
 }

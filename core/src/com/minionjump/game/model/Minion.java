@@ -67,8 +67,8 @@ public class Minion {
         return minion;
     }
 
-    public void jump(){
-        velocity.y = 750;
+    public void jump(int number){
+        velocity.y = number;
     }
 
     public Rectangle getBounds(){
