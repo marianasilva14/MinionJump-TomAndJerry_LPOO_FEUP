@@ -92,11 +92,9 @@ public class MainMenu extends State {
 
         if(scoresBut.isPressed()) {
             System.out.println("scores pressed");
-            //gam.set(new PlayState(gam));
         }
         if(optionsBut.isPressed()) {
             System.out.println("options pressed");
-            //gam.set(new PlayState(gam));
         }
 
     }
@@ -108,5 +106,5 @@ public class MainMenu extends State {
         scoresBtn.dispose();
         optionsBtn.dispose();
         System.out.println("Menu State Disposed");
-    }
+}
 }
