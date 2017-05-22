@@ -36,6 +36,7 @@ public class MainMenu extends State {
 
     public MainMenu(GameStateManager game) {
         super(game);
+        cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
         background = new Texture("mainmenu.png");
         playBtn = new Texture("btnplay.png");
         scoresBtn = new Texture("scores.png");
@@ -79,9 +80,9 @@ public class MainMenu extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-
+        sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(background,0,0, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
+        sb.draw(background,0,0);
         sb.end();
         stage.act();
         stage.draw();

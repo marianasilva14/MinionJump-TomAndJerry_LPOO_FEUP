@@ -13,7 +13,7 @@ import com.minionjump.game.model.Platform;
  */
 
 public class PlayState extends State {
-    private static final int PLATFORM_SPACING = 125;
+    private static final int PLATFORM_SPACING = 75;
     private static final int PLATFORM_COUNT = 5;
 
     private Minion minion;
@@ -66,7 +66,7 @@ public class PlayState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-        sb.setProjectionMatrix((cam.combined));
+        sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.draw(bg, 0, cam.position.y - (cam.viewportHeight / 2));
         sb.draw(minion.getTexture(), minion.getPosition().x, minion.getPosition().y);
