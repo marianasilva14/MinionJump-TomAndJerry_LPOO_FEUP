@@ -1,8 +1,10 @@
 package com.minionjump.game.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.minionjump.game.MyMinionJump;
 import com.minionjump.game.model.Minion;
@@ -23,7 +25,7 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager gam) {
         super(gam);
-        minion = new Minion(150, 300);
+        minion = new Minion(150, 300,gam);
         cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
         bg = new Texture("background.png");
 
@@ -40,8 +42,35 @@ public class PlayState extends State {
         if(Gdx.input.justTouched())
             minion.jump();
             */
+        Vector3 new_position = minion.getPosition();
 
-        //Gdx.input.getAccelerometerX();
+        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
+            new_position.x-=15;
+            minion.setPosition(new_position);
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
+            new_position.x+=15;
+            minion.setPosition(new_position);
+        }
+     if(Gdx.input.getAccelerometerX() != 0){
+            new_position.x-=Gdx.input.getAccelerometerX()/1.2f;
+        }
+
+
+
+        //new_position.x+= Gdx.input.getAccelerometerX()/10;
+        //System.out.println( Gdx.input.getAccelerometerX());
+
+
+      if(minion.getPosition().x > MyMinionJump.WIDTH){
+          new_position.x = 0 ;
+          minion.setPosition(new_position);
+      }
+        if(minion.getPosition().x < 0){
+            new_position.x = MyMinionJump.WIDTH-10;
+            minion.setPosition(new_position);
+        }
+
     }
 
     @Override

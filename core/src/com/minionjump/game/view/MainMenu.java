@@ -94,7 +94,7 @@ public class MainMenu extends State {
             System.out.println("scores pressed");
         }
         if(optionsBut.isPressed()) {
-            System.out.println("options pressed");
+           gam.set(new OptionsMenu(gam));
         }
 
     }
