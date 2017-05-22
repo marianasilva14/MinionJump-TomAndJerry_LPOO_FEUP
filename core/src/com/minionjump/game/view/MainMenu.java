@@ -65,7 +65,6 @@ public class MainMenu extends State {
         optionsBut.setPosition(Gdx.graphics.getWidth()/2- 3*optionsBut.getWidth()/5+scoresBut.getWidth()+10,0);
 
         stage.addActor(optionsBut);
-        //lalala
 
     }
 
