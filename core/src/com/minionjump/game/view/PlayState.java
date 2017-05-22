@@ -117,8 +117,10 @@ public class PlayState extends State {
 
             else if((platforms.get(i) instanceof SpringPlatform)) {
                 if (platform.collides(minion.getBounds())) {
-                    if (minion.getVelocity().y < 0)
+                    if (minion.getVelocity().y < 0) {
                         minion.jump(1000);
+                        ((SpringPlatform)platforms.get(i)).update(20);
+                    }
                 }
             }
 
@@ -126,6 +128,13 @@ public class PlayState extends State {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0)
                         minion.jump(1500);
+                }
+            }
+
+            else if((platforms.get(i) instanceof SplitPlatform)) {
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0)
+                        ((SplitPlatform)platforms.get(i)).update(20);
                 }
             }
         }

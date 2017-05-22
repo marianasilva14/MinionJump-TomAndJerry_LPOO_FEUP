@@ -3,6 +3,7 @@ package com.minionjump.game.model;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.minionjump.game.view.Animation;
 import com.minionjump.game.view.GameOverMenu;
 import com.minionjump.game.view.GameStateManager;
 import com.minionjump.game.view.PlayState;
