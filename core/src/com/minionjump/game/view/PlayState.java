@@ -39,7 +39,7 @@ public class PlayState extends State {
         int deltaX = MyMinionJump.WIDTH/2 - 150;
         for(int i = 0; i < PLATFORM_COUNT/2; i++){
             for(int j = 0; j < 2; j++){
-                int platformType= rand.nextInt(4);
+                int platformType= rand.nextInt(7);
 
                 switch (platformType){
                     case 0:
@@ -53,6 +53,15 @@ public class PlayState extends State {
                         break;
                     case 3:
                         platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        break;
+                    case 4:
+                        platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        break;
+                    case 5:
+                        platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        break;
+                    case 6:
+                        platforms.add(new SplitPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
                         break;
                 }
             }
@@ -119,7 +128,7 @@ public class PlayState extends State {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0) {
                         minion.jump(1000);
-                        ((SpringPlatform)platforms.get(i)).update(20);
+                        ((SpringPlatform)platforms.get(i)).update(dt);
                     }
                 }
             }
@@ -134,7 +143,7 @@ public class PlayState extends State {
             else if((platforms.get(i) instanceof SplitPlatform)) {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0)
-                        ((SplitPlatform)platforms.get(i)).update(20);
+                        ((SplitPlatform)platforms.get(i)).update(dt);
                 }
             }
         }

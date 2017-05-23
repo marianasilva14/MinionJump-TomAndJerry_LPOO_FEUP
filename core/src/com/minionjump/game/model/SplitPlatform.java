@@ -22,6 +22,7 @@ public class SplitPlatform extends Platform {
     }
 
     public void update(float dt){
+
         textPlat = new Texture("splitAnimation.png");
         splitAnimation = new Animation(new TextureRegion(textPlat), 3, 0.5f);
         splitAnimation.update(dt);
