@@ -13,25 +13,23 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.minionjump.game.MyMinionJump;
 
 /**
- * Created by Mariana on 22/05/2017.
+ * Created by Sissi on 25/05/2017.
  */
 
-public class OptionsMenu extends State {
+public class ScoresMenu extends State{
 
-        private Texture menuoptions;
-        private Texture menuBtn, soundOnBtn, soundOffBtn;
-        private Button  menuBut, soundOnBut, soundOffBut;
+        private Texture menuscores;
+        private Texture menuBtn;
+        private Button menuBut;
         private Stage stage;
 
-        public OptionsMenu(GameStateManager gam) {
+        public ScoresMenu(GameStateManager gam) {
             super(gam);
 
             cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
 
-            menuoptions = new Texture("optionsmenu.png");
+            menuscores = new Texture("scoresmenu.png");
             menuBtn = new Texture("home.png");
-            soundOnBtn = new Texture("soundon.png");
-            soundOffBtn = new Texture("soundoff.png");
             stage = new Stage();
             Gdx.input.setInputProcessor(stage);
 
@@ -41,21 +39,6 @@ public class OptionsMenu extends State {
             menuBut.setPosition(Gdx.graphics.getWidth()/2- 3*menuBut.getWidth()/5+menuBut.getWidth()+10,0);
 
             stage.addActor(menuBut);
-
-            buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(soundOnBtn));
-            soundOnBut = new ImageButton(buttonDrawableSha);
-            soundOnBut .setSize(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/9);
-            soundOnBut .setPosition(Gdx.graphics.getWidth()/2- 5*soundOnBut .getWidth()/3,Gdx.graphics.getHeight()- 4*soundOnBut.getHeight());
-
-            stage.addActor(soundOnBut);
-/*
-            buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(soundOffBtn));
-            soundOffBut = new ImageButton(buttonDrawableSha);
-            soundOffBut .setSize(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/9);
-            soundOffBut .setPosition(Gdx.graphics.getWidth()/2- 5*soundOffBut .getWidth()/3,Gdx.graphics.getHeight()- 4*soundOffBut.getHeight());
-
-            stage.addActor(soundOffBut);
-*/
 
         }
 
@@ -75,22 +58,18 @@ public class OptionsMenu extends State {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             sb.setProjectionMatrix(cam.combined);
             sb.begin();
-            sb.draw(menuoptions,0,0);
+            sb.draw(menuscores,0,0);
             sb.end();
             stage.act();
             stage.draw();
 
             if(menuBut.isPressed())
                 gam.set(new MainMenu(gam));
-            //if(soundOnBut.isPressed())
-                //gam.set(new MainMenu(gam));
-
         }
 
         @Override
         public void dispose() {
             menuBtn.dispose();
-            soundOnBtn.dispose();
             System.out.println("Menu State Disposed");
         }
-    }
+}
