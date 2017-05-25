@@ -18,45 +18,50 @@ import com.minionjump.game.MyMinionJump;
 
 public class OptionsMenu extends State {
 
-        private Texture menuoptions;
-        private Texture menuBtn, soundOnBtn, soundOffBtn;
-        private Button  menuBut, soundOnBut, soundOffBut;
-        private Stage stage;
+    private Texture menuoptions;
+    private Texture menuBtn, soundOnBtn, soundOffBtn;
+    private Button  menuBut, soundBut;
+    private Stage stage;
+    private boolean sound = false;
+    private Drawable buttonDrawableSound;
 
-        public OptionsMenu(GameStateManager gam) {
-            super(gam);
+    public OptionsMenu(GameStateManager gam) {
+        super(gam);
 
-            cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
+        cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
 
-            menuoptions = new Texture("optionsmenu.png");
-            menuBtn = new Texture("home.png");
-            soundOnBtn = new Texture("soundon.png");
-            soundOffBtn = new Texture("soundoff.png");
-            stage = new Stage();
-            Gdx.input.setInputProcessor(stage);
+        menuoptions = new Texture("optionsmenu.png");
+        menuBtn = new Texture("home.png");
+        soundOnBtn = new Texture("soundon.png");
+        soundOffBtn = new Texture("soundoff.png");
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
 
-            Drawable buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(menuBtn));
-            menuBut = new ImageButton(buttonDrawableSha);
-            menuBut.setSize(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/7);
-            menuBut.setPosition(Gdx.graphics.getWidth()/2- 3*menuBut.getWidth()/5+menuBut.getWidth()+10,0);
+        Drawable buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(menuBtn));
+        menuBut = new ImageButton(buttonDrawableSha);
+        menuBut.setSize(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/7);
+        menuBut.setPosition(Gdx.graphics.getWidth()/2- 3*menuBut.getWidth()/5+menuBut.getWidth()+10,0);
 
-            stage.addActor(menuBut);
+        stage.addActor(menuBut);
 
-            buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(soundOnBtn));
-            soundOnBut = new ImageButton(buttonDrawableSha);
-            soundOnBut .setSize(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/9);
-            soundOnBut .setPosition(Gdx.graphics.getWidth()/2- 5*soundOnBut .getWidth()/3,Gdx.graphics.getHeight()- 4*soundOnBut.getHeight());
+        buttonDrawableSound = new TextureRegionDrawable(new TextureRegion(soundOffBtn));
+        soundBut = new ImageButton(buttonDrawableSound);
+        soundBut.setSize(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 9);
+        soundBut.setPosition(Gdx.graphics.getWidth() / 2 - 5 * soundBut.getWidth() / 3, Gdx.graphics.getHeight() - 4 * soundBut.getHeight());
 
-            stage.addActor(soundOnBut);
-/*
-            buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(soundOffBtn));
-            soundOffBut = new ImageButton(buttonDrawableSha);
-            soundOffBut .setSize(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/9);
-            soundOffBut .setPosition(Gdx.graphics.getWidth()/2- 5*soundOffBut .getWidth()/3,Gdx.graphics.getHeight()- 4*soundOffBut.getHeight());
+        stage.addActor(soundBut);
 
-            stage.addActor(soundOffBut);
-*/
+    /*
+    else {
+        buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(soundOffBtn));
+        soundOffBut = new ImageButton(buttonDrawableSha);
+        soundOffBut.setSize(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 9);
+        soundOffBut.setPosition(Gdx.graphics.getWidth() / 2 - 5 * soundOffBut.getWidth() / 3, Gdx.graphics.getHeight() - 4 * soundOffBut.getHeight());
 
+        stage.addActor(soundOffBut);
+
+    }
+    */
         }
 
         @Override
@@ -82,8 +87,30 @@ public class OptionsMenu extends State {
 
             if(menuBut.isPressed())
                 gam.set(new MainMenu(gam));
-            //if(soundOnBut.isPressed())
-                //gam.set(new MainMenu(gam));
+
+            if(soundBut.isPressed())
+                if(sound) {
+                    MyMinionJump.music.stop();
+                    sound = false;
+                    buttonDrawableSound = new TextureRegionDrawable(new TextureRegion(soundOffBtn));
+                    soundBut.clear();
+                    soundBut = new ImageButton(buttonDrawableSound);
+                    soundBut.setSize(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 9);
+                    soundBut.setPosition(Gdx.graphics.getWidth() / 2 - 5 * soundBut.getWidth() / 3, Gdx.graphics.getHeight() - 4 * soundBut.getHeight());
+
+                    stage.addActor(soundBut);
+                }
+                else{
+                    MyMinionJump.music.play();
+                    sound = true;
+                    buttonDrawableSound = new TextureRegionDrawable(new TextureRegion(soundOnBtn));
+                    soundBut.clear();
+                    soundBut = new ImageButton(buttonDrawableSound);
+                    soundBut.setSize(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 9);
+                    soundBut.setPosition(Gdx.graphics.getWidth() / 2 - 5 * soundBut.getWidth() / 3, Gdx.graphics.getHeight() - 4 *soundBut.getHeight());
+
+                   stage.addActor(soundBut);
+                }
 
         }
 
@@ -91,6 +118,7 @@ public class OptionsMenu extends State {
         public void dispose() {
             menuBtn.dispose();
             soundOnBtn.dispose();
+            soundOffBtn.dispose();
             System.out.println("Menu State Disposed");
         }
     }

@@ -2,6 +2,7 @@ package com.minionjump.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -17,10 +18,15 @@ public class MyMinionJump extends ApplicationAdapter {
 	public static final String TITLE = "Minion Jump";
 	private ArrayMap assetManager;
 
+	public static Music music;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		gam = new GameStateManager();
+		music= Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+		music.setLooping(true);
+		music.setVolume(2f);
 		Gdx.gl.glClearColor(1,0,0,1);
 		gam.push(new MainMenu(gam));
 	}
@@ -29,6 +35,12 @@ public class MyMinionJump extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gam.update(Gdx.graphics.getDeltaTime());
 		gam.render(batch);
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		music.dispose();
 	}
 
 
