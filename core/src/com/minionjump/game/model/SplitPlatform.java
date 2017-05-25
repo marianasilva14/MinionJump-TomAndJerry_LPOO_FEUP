@@ -15,22 +15,29 @@ public class SplitPlatform extends Platform {
     private Animation splitAnimation;
 
     public SplitPlatform(float x,float y) {
-        textPlat = new Texture("splitplatform.png");
+        textPlat = new TextureRegion(new Texture("splitplatform.png"));
 
+        Texture text = new Texture("splitAnimation.png");
+        splitAnimation = new Animation(new TextureRegion(text), 3, 0.5f);
         positionPlat = new Vector2(x, y);
-        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getWidth(), textPlat.getHeight());
+        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getRegionWidth(), textPlat.getRegionHeight());
     }
 
     public void update(float dt){
-
-        textPlat = new Texture("splitAnimation.png");
-        splitAnimation = new Animation(new TextureRegion(textPlat), 3, 0.5f);
+        collide = true;
         splitAnimation.update(dt);
     }
 
-    public TextureRegion getTexture(){
-        return splitAnimation.getFrame();
+    public TextureRegion getTextPlatform(){
+        if(collide){
+            return splitAnimation.getFrame();
+        }
+        else {
+            return super.getTextPlatform();
+        }
     }
+
+
 
 
 }

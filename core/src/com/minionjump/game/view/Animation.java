@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class Animation {
-
+    private boolean atEnd = false;
     private Array<TextureRegion> frames;
     private float maxFrameTime;
     private float currentFrameTime;
@@ -35,6 +35,15 @@ public class Animation {
             frame++;
             currentFrameTime = 0;
         }
+        if(frame >= frameCount){
+            frame = frameCount-1;
+            atEnd = true;
+        }
+
+    }
+
+    public boolean isAtEnd(){
+        return atEnd;
     }
 
     public TextureRegion getFrame(){

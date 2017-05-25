@@ -1,6 +1,7 @@
 package com.minionjump.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -9,13 +10,14 @@ import com.badlogic.gdx.math.Vector2;
  */
 
 public abstract class Platform {
+    public boolean collide = false;
     public static final int PLATFORM_HEIGHT = 40;
-    protected Texture textPlat;
+    protected TextureRegion textPlat;
     protected Vector2 positionPlat;
     protected Rectangle boundsPlat;
 
 
-    public Texture getTextPlatform() {
+    public TextureRegion getTextPlatform() {
         return textPlat;
     }
 
@@ -37,7 +39,7 @@ public abstract class Platform {
     }
 
     public void dispose(){
-      textPlat.dispose();
+
     }
 
 }

@@ -16,22 +16,34 @@ public class SpringPlatform extends Platform {
     private Animation springAnimation;
 
     public SpringPlatform(float x, float y) {
-
-        textPlat = new Texture("springplatform.png");
-
+        textPlat = new TextureRegion(new Texture("springplatform.png"));
+        Texture text = new Texture("springAnimation.png");
+        springAnimation = new Animation(new TextureRegion(text), 3, 0.25f);
         positionPlat = new Vector2(x, y);
-        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getWidth(), textPlat.getHeight());
+        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getRegionWidth(), textPlat.getRegionHeight());
     }
 
     public void update(float dt){
-        textPlat = new Texture("springAnimation.png");
-        springAnimation = new Animation(new TextureRegion(textPlat), 3, 0.5f);
+        collide = true;
         springAnimation.update(dt);
+        if(springAnimation.isAtEnd())
+            collide = false;
     }
 
-    public TextureRegion getTexture(){
-        return springAnimation.getFrame();
+    public TextureRegion getTextPlatform(){
+        if(collide){
+            return springAnimation.getFrame();
+        }
+        else {
+            return super.getTextPlatform();
+        }
+    }
+    public void dispose(){
+        //textPlat.dispose();
     }
 
+    public Animation getAnimation(){
+        return springAnimation;
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.minionjump.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -12,10 +13,10 @@ public class RocketPlatform extends Platform {
 
     public RocketPlatform(float x, float y) {
 
-        textPlat = new Texture("rocketplatform.png");
+        textPlat = new TextureRegion(new Texture("rocketplatform.png"));
 
         positionPlat = new Vector2(x, y);
-        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getWidth(), textPlat.getHeight());
+        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getRegionWidth(), textPlat.getRegionHeight());
     }
 
 

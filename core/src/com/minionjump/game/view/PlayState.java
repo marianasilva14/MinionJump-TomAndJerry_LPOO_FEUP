@@ -28,6 +28,7 @@ public class PlayState extends State {
     private Texture bg;
 
     private Array<Platform> platforms;
+    private int ymax=0;
 
     public PlayState(GameStateManager gam) {
         super(gam);
@@ -43,7 +44,7 @@ public class PlayState extends State {
 
                 switch (platformType){
                     case 0:
-                        platforms.add(new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                    platforms.add(new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
                         break;
                     case 1:
                         platforms.add(new SplitPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
@@ -114,7 +115,7 @@ public class PlayState extends State {
         for(int i = 0; i < platforms.size; i++){
             Platform platform = platforms.get(i);
 
-            if(cam.position.y - (cam.viewportHeight / 2) > platform.getPositionPlatform().y + platform.getTextPlatform().getHeight())
+            if(cam.position.y - (cam.viewportHeight / 2) > platform.getPositionPlatform().y + platform.getTextPlatform().getRegionHeight())
                 platform.reposition(platform.getPositionPlatform().y + ((Platform.PLATFORM_HEIGHT + PLATFORM_SPACING) * PLATFORM_COUNT));
 
             if((platforms.get(i) instanceof NormalPlatform)) {
@@ -125,10 +126,17 @@ public class PlayState extends State {
             }
 
             else if((platforms.get(i) instanceof SpringPlatform)) {
-                if (platform.collides(minion.getBounds())) {
-                    if (minion.getVelocity().y < 0) {
+                if(((SpringPlatform) platforms.get(i)).collide){
+                    ((SpringPlatform) platforms.get(i)).update(dt);
+                    if(((SpringPlatform) platforms.get(i)).getAnimation().isAtEnd())
                         minion.jump(1000);
+                }
+
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0 || ((SpringPlatform)platforms.get(i)).collide) {
+                        minion.jump(750);
                         ((SpringPlatform)platforms.get(i)).update(dt);
+
                     }
                 }
             }
@@ -141,9 +149,14 @@ public class PlayState extends State {
             }
 
             else if((platforms.get(i) instanceof SplitPlatform)) {
+                if(((SplitPlatform) platforms.get(i)).collide)
+                    ((SplitPlatform) platforms.get(i)).update(dt);
+
                 if (platform.collides(minion.getBounds())) {
-                    if (minion.getVelocity().y < 0)
-                        ((SplitPlatform)platforms.get(i)).update(dt);
+                    if (minion.getVelocity().y < 0) {
+                        ((SplitPlatform) platforms.get(i)).update(dt);
+                    }
+                    //platforms.removeIndex(i);
                 }
             }
         }

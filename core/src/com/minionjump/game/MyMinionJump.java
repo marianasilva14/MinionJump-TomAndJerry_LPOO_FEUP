@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.minionjump.game.view.GameStateManager;
 import com.minionjump.game.view.MainMenu;
 
@@ -14,7 +15,8 @@ public class MyMinionJump extends ApplicationAdapter {
 	public SpriteBatch batch;
 	public GameStateManager gam;
 	public static final String TITLE = "Minion Jump";
-	
+	private ArrayMap assetManager;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -30,4 +32,7 @@ public class MyMinionJump extends ApplicationAdapter {
 	}
 
 
+	public ArrayMap getAssetManager() {
+		return assetManager;
+	}
 }
