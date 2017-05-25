@@ -22,13 +22,16 @@ import java.util.Random;
 
 public class PlayState extends State {
     private static final int PLATFORM_SPACING = 250;
-    private static final int PLATFORM_COUNT = 100;
+    private static final int PLATFORM_COUNT = 10;
 
     private Minion minion;
     private Texture bg;
 
     private Array<Platform> platforms;
-    private int ymax=0;
+    private float ymax=0;
+    private int deltaX = MyMinionJump.WIDTH/2 - 150;
+    private int deltaY = MyMinionJump.HEIGHT/2 - 18;
+    private boolean isSplitPlatform=false;
 
     public PlayState(GameStateManager gam) {
         super(gam);
@@ -37,32 +40,45 @@ public class PlayState extends State {
         bg = new Texture("background.png");
         Random rand = new Random();
         platforms = new Array<Platform>();
-        int deltaX = MyMinionJump.WIDTH/2 - 150;
+        float y;
         for(int i = 0; i < PLATFORM_COUNT/2; i++){
             for(int j = 0; j < 2; j++){
-                int platformType= rand.nextInt(7);
+                int platformType= rand.nextInt(10);
 
                 switch (platformType){
                     case 0:
-                    platforms.add(new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        y=PLATFORM_SPACING*i+rand.nextFloat()*10;
+                        platforms.add(new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                        if(ymax < y)
+                            ymax=y;
                         break;
-                    case 1:
-                        platforms.add(new SplitPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                    case 1:case 6:
+                        if(isSplitPlatform==false) {
+                            y = PLATFORM_SPACING * i + rand.nextFloat() * 10;
+                            platforms.add(new SplitPlatform(MyMinionJump.WIDTH / 2 * j + rand.nextFloat() * deltaX, y));
+                            if (ymax < y)
+                                ymax = y;
+                            isSplitPlatform = true;
+                        }
+                        else{
+                            y=PLATFORM_SPACING*i+rand.nextFloat()*10;
+                            platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                            if(ymax < y)
+                                ymax=y;
+                            isSplitPlatform=false;
+                        }
                         break;
                     case 2:
-                        platforms.add(new RocketPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                        y=PLATFORM_SPACING*i+rand.nextFloat()*10;
+                        platforms.add(new RocketPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                        if(ymax < y)
+                            ymax=y;
                         break;
-                    case 3:
-                        platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
-                        break;
-                    case 4:
-                        platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
-                        break;
-                    case 5:
-                        platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
-                        break;
-                    case 6:
-                        platforms.add(new SplitPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,PLATFORM_SPACING*i+rand.nextFloat()*10));
+                    case 3: case 4:    case 5: case 7:case 8:case 9:
+                        y=PLATFORM_SPACING*i+rand.nextFloat()*10;
+                        platforms.add(new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                        if(ymax < y)
+                            ymax=y;
                         break;
                 }
             }
@@ -105,6 +121,53 @@ public class PlayState extends State {
         }
 
     }
+    public void reposition(Platform plat, int i){
+
+        float y;
+        Random rand = new Random();
+        float j = plat.getPositionPlatform().x <=  MyMinionJump.WIDTH/2? 0:1;
+        int platformType= rand.nextInt(10);
+        y=ymax+deltaY-40f;
+        if(j == 1)
+            ymax=y;
+            switch (platformType){
+            case 0:
+                SpringPlatform plat2 = (new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                platforms.removeIndex(i);
+                platforms.add(plat2);
+                break;
+            case 1:case 6:
+                if(isSplitPlatform==false) {
+                    SplitPlatform plat3 = (new SplitPlatform(MyMinionJump.WIDTH / 2 * j + rand.nextFloat() * deltaX, y));
+                    platforms.removeIndex(i);
+                    platforms.add(plat3);
+                    isSplitPlatform=true;
+                }
+                else{
+                    NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                    platforms.removeIndex(i);
+                    platforms.add(plat5);
+                    isSplitPlatform=false;
+                }
+                break;
+            case 2:
+                RocketPlatform plat4 = (new RocketPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                platforms.removeIndex(i);
+                platforms.add(plat4);
+                break;
+            case 3: case 4:    case 5: case 7:case 8:case 9:
+                    NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                    platforms.removeIndex(i);
+                    platforms.add(plat5);
+                    break;
+
+        }
+
+
+
+      //plat.getBoundsPlat().setPosition(plat.getPositionPlatform().x, plat.getPositionPlatform().y);
+
+    }
 
     @Override
     public void update(float dt) {
@@ -115,13 +178,16 @@ public class PlayState extends State {
         for(int i = 0; i < platforms.size; i++){
             Platform platform = platforms.get(i);
 
-            if(cam.position.y - (cam.viewportHeight / 2) > platform.getPositionPlatform().y + platform.getTextPlatform().getRegionHeight())
-                platform.reposition(platform.getPositionPlatform().y + ((Platform.PLATFORM_HEIGHT + PLATFORM_SPACING) * PLATFORM_COUNT));
+            //if(cam.position.y - (cam.viewportHeight / 2) > platform.getPositionPlatform().y + platform.getTextPlatform().getRegionHeight())
+            System.out.println(" y plat" +platforms.get(i).getPositionPlatform().y);
+            System.out.println (" e " +(minion.getPosition().y- MyMinionJump.HEIGHT/2));
+            if(platforms.get(i).getPositionPlatform().y < (minion.getPosition().y- MyMinionJump.HEIGHT/2))
+                reposition(platforms.get(i),i);
 
             if((platforms.get(i) instanceof NormalPlatform)) {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0)
-                        minion.jump(750);
+                        minion.jump(850);
                 }
             }
 
@@ -129,12 +195,12 @@ public class PlayState extends State {
                 if(((SpringPlatform) platforms.get(i)).collide){
                     ((SpringPlatform) platforms.get(i)).update(dt);
                     if(((SpringPlatform) platforms.get(i)).getAnimation().isAtEnd())
-                        minion.jump(1000);
+                        minion.jump(1200);
                 }
 
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0 || ((SpringPlatform)platforms.get(i)).collide) {
-                        minion.jump(750);
+                        minion.jump(850);
                         ((SpringPlatform)platforms.get(i)).update(dt);
 
                     }
@@ -144,7 +210,7 @@ public class PlayState extends State {
             else if((platforms.get(i) instanceof RocketPlatform)) {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0)
-                        minion.jump(1500);
+                        minion.jump(1800);
                 }
             }
 

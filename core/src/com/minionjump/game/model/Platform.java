@@ -25,17 +25,14 @@ public abstract class Platform {
         return positionPlat;
     }
 
-
-    public void reposition(float y){
-
-        boundsPlat.setPosition(positionPlat.x, positionPlat.y);
-
-    }
-
     public boolean collides(Rectangle player) {
 
             return player.overlaps(boundsPlat);
 
+    }
+
+    public Rectangle getBoundsPlat(){
+     return boundsPlat;
     }
 
     public void dispose(){
