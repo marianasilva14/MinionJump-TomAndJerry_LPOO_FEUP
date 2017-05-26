@@ -1,22 +1,15 @@
 package com.minionjump.game.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.minionjump.game.MyMinionJump;
 
@@ -30,7 +23,7 @@ public class MainMenu extends State {
     private Texture scoresBtn;
     private Texture optionsBtn;
     private Button playBut,scoresBut,optionsBut;
-    private PlayState play;
+    private com.minionjump.game.controller.PlayState play;
     private Stage stage;
     private MyMinionJump minionJump;
     private Viewport gamePort;
@@ -91,7 +84,7 @@ public class MainMenu extends State {
         stage.draw();
 
         if(playBut.isPressed())
-            gam.set(new PlayState(gam));
+            gam.set(new com.minionjump.game.controller.PlayState(gam));
 
         if(scoresBut.isPressed()) {
            gam.set(new ScoresMenu(gam));

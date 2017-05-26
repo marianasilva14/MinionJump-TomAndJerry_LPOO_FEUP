@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.minionjump.game.MyMinionJump;
@@ -39,7 +38,7 @@ public class GameOverMenu extends State{
         playAgainBtn = new Texture("btnplayagain.png");
         menuBtn = new Texture("btnmenu.png");
         stage = new Stage();
-       Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(stage);
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/al-seana.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -91,7 +90,7 @@ public class GameOverMenu extends State{
         stage.draw();
 
         if(playAgainBut.isPressed())
-            gam.set(new PlayState(gam));
+            gam.set(new com.minionjump.game.controller.PlayState(gam));
 
 
         if(menuBut.isPressed())

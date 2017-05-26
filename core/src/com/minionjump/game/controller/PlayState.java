@@ -1,4 +1,4 @@
-package com.minionjump.game.view;
+package com.minionjump.game.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -18,6 +18,11 @@ import com.minionjump.game.model.RocketPlatform;
 import com.minionjump.game.model.SplitPlatform;
 import com.minionjump.game.model.SpringPlatform;
 import com.minionjump.game.model.Villain;
+import com.minionjump.game.view.GameOverMenu;
+import com.minionjump.game.view.GameStateManager;
+import com.minionjump.game.view.GameView;
+import com.minionjump.game.view.Hud;
+import com.minionjump.game.view.State;
 
 import java.util.Random;
 
@@ -35,7 +40,6 @@ public class PlayState extends State {
     private Villain villain;
     private Texture bg;
     private Hud hud;
-    //private SpriteBatch sbb;
     private Viewport viewport;
     private Array<Platform> platforms;
     private float ymax=0;
@@ -255,18 +259,7 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         Gdx.gl.glClearColor(1, 1,1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        sb.setProjectionMatrix(cam.combined);
-        sb.begin();
-        sb.draw(bg, 0, cam.position.y - (cam.viewportHeight / 2));
-        sb.draw(minion.getTexture(), minion.getPosition().x, minion.getPosition().y);
-        if(villain.visible==true)
-            sb.draw(villain.getTexture(), villain.getPosition().x, villain.getPosition().y);
-        for(Platform platform : platforms) {
-            sb.draw(platform.getTextPlatform(), platform.getPositionPlatform().x, platform.getPositionPlatform().y);
-        }
-        sb.end();
-        MyMinionJump.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
+        GameView.gameState(sb,minion,villain,platforms,bg);
     }
 
     @Override

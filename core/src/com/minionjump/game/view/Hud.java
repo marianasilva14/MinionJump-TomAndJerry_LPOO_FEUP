@@ -18,7 +18,7 @@ import com.minionjump.game.MyMinionJump;
  */
 
 public class Hud {
-    public Stage stage;
+    public static Stage stage;
     private Viewport viewport;
     private float timeCount;
     public static Integer score;
