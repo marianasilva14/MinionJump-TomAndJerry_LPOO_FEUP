@@ -17,8 +17,11 @@ import com.minionjump.game.model.Platform;
 import com.minionjump.game.model.RocketPlatform;
 import com.minionjump.game.model.SplitPlatform;
 import com.minionjump.game.model.SpringPlatform;
+import com.minionjump.game.model.Villain;
 
 import java.util.Random;
+
+//import sun.security.mscapi.KeyStore;
 
 /**
  * Created by Mariana on 10/05/2017.
@@ -29,6 +32,7 @@ public class PlayState extends State {
     private static final int PLATFORM_COUNT = 10;
 
     private Minion minion;
+    private Villain villain;
     private Texture bg;
     private Hud hud;
     //private SpriteBatch sbb;
@@ -38,12 +42,14 @@ public class PlayState extends State {
     private int deltaX = MyMinionJump.WIDTH/2 - 150;
     private int deltaY = MyMinionJump.HEIGHT/2 - 18;
     private boolean isSplitPlatform=false;
+    private boolean villain_flag=false;
 
     public PlayState(GameStateManager gam) {
         super(gam);
         viewport= new FitViewport(MyMinionJump.V_WIDTH, MyMinionJump.V_HEIGHT,new OrthographicCamera());
         hud= new Hud(MyMinionJump.batch);
         minion = new Minion(150, 300,gam);
+        villain = new Villain(150,300, gam);
         cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
         bg = new Texture("background.png");
         Random rand = new Random();
@@ -163,9 +169,6 @@ public class PlayState extends State {
         }
 
 
-
-      //plat.getBoundsPlat().setPosition(plat.getPositionPlatform().x, plat.getPositionPlatform().y);
-
     }
 
     @Override
@@ -224,6 +227,27 @@ public class PlayState extends State {
                 }
             }
         }
+
+        System.out.println(minion.getPosition().y);
+        if(villain_flag==false) {
+            if (minion.getPosition().y > 10000) {
+                villain_flag= true;
+                Random rand = new Random();
+                float x = rand.nextInt(MyMinionJump.WIDTH);
+                float y = minion.getPosition().y + x;
+                Vector3 position = new Vector3(x, y, 0);
+                villain.setPosition(position);
+                villain.visible = true;
+                villain.getBounds().setPosition(x,y);
+            }
+        }
+        if(villain_flag==true) {
+            if (villain.collides(minion.getBounds()))
+                gam.set(new GameOverMenu(gam));
+        }
+        if(villain.getPosition().y < (minion.getPosition().y- MyMinionJump.HEIGHT/2))
+            villain.reposition(villain);
+
         cam.update();
     }
 
@@ -235,6 +259,8 @@ public class PlayState extends State {
         sb.begin();
         sb.draw(bg, 0, cam.position.y - (cam.viewportHeight / 2));
         sb.draw(minion.getTexture(), minion.getPosition().x, minion.getPosition().y);
+        if(villain.visible==true)
+            sb.draw(villain.getTexture(), villain.getPosition().x, villain.getPosition().y);
         for(Platform platform : platforms) {
             sb.draw(platform.getTextPlatform(), platform.getPositionPlatform().x, platform.getPositionPlatform().y);
         }
@@ -247,6 +273,7 @@ public class PlayState extends State {
     public void dispose() {
         bg.dispose();
         minion.dispose();
+        villain.dispose();
         for(Platform platform : platforms)
             platform.dispose();
     }

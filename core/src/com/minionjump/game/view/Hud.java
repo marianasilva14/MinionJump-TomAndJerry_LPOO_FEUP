@@ -1,9 +1,11 @@
 package com.minionjump.game.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -19,14 +21,14 @@ public class Hud {
     public Stage stage;
     private Viewport viewport;
     private float timeCount;
-    private static Integer score;
+    public static Integer score;
     private Integer worldTimer;
 
     private Label countdownLabel;
     private static Label scoreLable;
     private Label timeLable;
     private Label minionLabel;
-    private Label worldLabel;
+
 
     public Hud(SpriteBatch sb){
         timeCount=0;
@@ -39,16 +41,21 @@ public class Hud {
         table.top();
         table.setFillParent(true);
 
-
-        scoreLable = new Label(String.format("%06d",score),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        timeLable= new Label("SCORE",new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        countdownLabel= new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        minionLabel = new Label("TIME",new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/al-seana.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 22;
+        parameter.borderWidth=1;
+        parameter.borderColor=Color.BLACK;
+        BitmapFont font12 = generator.generateFont(parameter); // font size 12 pixels
+        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+        scoreLable = new Label(String.format("%06d",score),new Label.LabelStyle(font12, Color.BLACK));
+        timeLable= new Label("SCORE",new Label.LabelStyle(font12, Color.BLACK));
+        countdownLabel= new Label(String.format("%03d",worldTimer),new Label.LabelStyle(font12, Color.BLACK));
+        minionLabel = new Label("TIME",new Label.LabelStyle(font12, Color.BLACK));
 
 
         table.add(timeLable).expandX().padTop(10);
         table.add(minionLabel).expandX().padTop(10);
-        table.add(worldLabel).expandX().padTop(10);
         table.row();
         table.add(scoreLable).expandX();
         table.add(countdownLabel).expandX();
