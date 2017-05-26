@@ -32,6 +32,7 @@ public class Minion {
         bounds = new Rectangle(x, y, minion.getWidth(), minion.getHeight());
         minHeight=0;
         game=gam;
+
     }
 
     public void update(float dt){
@@ -47,12 +48,10 @@ public class Minion {
                 game.set(new GameOverMenu(game));
         }
 
-
-
-
         velocity.scl(1/dt);
         bounds.setPosition(position.x, position.y);
-    }
+
+        }
 
     public Vector3 getPosition() {
         return position;

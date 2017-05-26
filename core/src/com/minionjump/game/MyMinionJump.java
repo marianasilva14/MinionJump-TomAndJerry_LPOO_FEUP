@@ -12,8 +12,10 @@ import com.minionjump.game.view.MainMenu;
 public class MyMinionJump extends ApplicationAdapter {
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 480;
+	public static final int V_HEIGHT = 800;
+	public static final int V_WIDTH = 480;
 
-	public SpriteBatch batch;
+	public static SpriteBatch batch;
 	public GameStateManager gam;
 	public static final String TITLE = "Minion Jump";
 	private ArrayMap assetManager;
