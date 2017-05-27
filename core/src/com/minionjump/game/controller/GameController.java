@@ -58,7 +58,7 @@ public class GameController {
     private int deltaX = MyMinionJump.WIDTH/2 - 150;
     private int deltaY = MyMinionJump.HEIGHT/2 - 18;
     private boolean isSplitPlatform=false;
-    private boolean villain_flag=false;
+    public boolean villain_flag=false;
 
     private GameStateManager gam;
 
