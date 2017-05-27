@@ -11,13 +11,14 @@ import com.badlogic.gdx.math.Rectangle;
 public class NormalPlatform extends Platform {
 
 
-    public NormalPlatform(float x,float y)  {
-
-        textPlat = new TextureRegion(new Texture("platform.png"));
-
+    public NormalPlatform(float x,float y) {
         positionPlat = new Vector2(x, y);
-        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getRegionWidth(), textPlat.getRegionHeight());
+        boundsPlat = new Rectangle(positionPlat.x, positionPlat.y, 150, 18);
+
     }
+
+
+
 
 
 }

@@ -16,11 +16,8 @@ public class SpringPlatform extends Platform {
     private Animation springAnimation;
 
     public SpringPlatform(float x, float y) {
-        textPlat = new TextureRegion(new Texture("springplatform.png"));
-        Texture text = new Texture("springAnimation.png");
-        springAnimation = new Animation(new TextureRegion(text), 3, 0.25f);
         positionPlat = new Vector2(x, y);
-        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getRegionWidth(), textPlat.getRegionHeight());
+        boundsPlat = new Rectangle(positionPlat.x, positionPlat.y, 150, 70);
     }
 
     public void update(float dt){
@@ -42,6 +39,9 @@ public class SpringPlatform extends Platform {
         //textPlat.dispose();
     }
 
+    public void setAnimation(Animation ani) {
+        springAnimation = ani;
+    }
     public Animation getAnimation(){
         return springAnimation;
     }

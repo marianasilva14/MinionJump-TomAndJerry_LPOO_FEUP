@@ -12,11 +12,8 @@ import com.badlogic.gdx.math.Rectangle;
 public class RocketPlatform extends Platform {
 
     public RocketPlatform(float x, float y) {
-
-        textPlat = new TextureRegion(new Texture("rocketplatform.png"));
-
         positionPlat = new Vector2(x, y);
-        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getRegionWidth(), textPlat.getRegionHeight());
+        boundsPlat = new Rectangle(positionPlat.x, positionPlat.y, 150, 90);
     }
 
 

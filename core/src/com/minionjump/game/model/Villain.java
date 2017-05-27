@@ -24,18 +24,20 @@ public class Villain{
 
     private Vector3 velocity;
     private Rectangle bounds;
-    private GameStateManager game;
     private Texture villain;
     public boolean visible;
 
-    public Villain(int x, int y,GameStateManager gam){
+    public Villain(int x, int y){
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
-        villain = new Texture("villain.png");
-        bounds = new Rectangle(x, y, villain.getWidth(), villain.getHeight());
+
         minHeight=0;
-        game=gam;
         visible=false;
+        bounds = new Rectangle(position.x, position.y, 65, 110);
+    }
+
+    public void setTexture(Texture vil){
+        villain = vil;
     }
 
     public Vector3 getPosition() {

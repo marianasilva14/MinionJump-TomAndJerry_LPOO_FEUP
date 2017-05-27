@@ -16,6 +16,9 @@ public abstract class Platform {
     protected Vector2 positionPlat;
     protected Rectangle boundsPlat;
 
+    public void setTextureRegion(TextureRegion text){
+        textPlat = text;
+    }
 
     public TextureRegion getTextPlatform() {
         return textPlat;

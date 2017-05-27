@@ -15,12 +15,8 @@ public class SplitPlatform extends Platform {
     private Animation splitAnimation;
 
     public SplitPlatform(float x,float y) {
-        textPlat = new TextureRegion(new Texture("splitplatform.png"));
-
-        Texture text = new Texture("splitAnimation.png");
-        splitAnimation = new Animation(new TextureRegion(text), 3, 0.5f);
         positionPlat = new Vector2(x, y);
-        boundsPlat=new Rectangle(positionPlat.x, positionPlat.y, textPlat.getRegionWidth(), textPlat.getRegionHeight());
+        boundsPlat = new Rectangle(positionPlat.x, positionPlat.y, 143, 18);
     }
 
     public void update(float dt){
@@ -37,7 +33,9 @@ public class SplitPlatform extends Platform {
         }
     }
 
-
+    public void setAnimation(Animation ani) {
+        splitAnimation = ani;
+    }
 
 
 }

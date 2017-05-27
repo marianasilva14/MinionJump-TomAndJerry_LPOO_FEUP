@@ -16,23 +16,25 @@ public class Minion {
     private Vector3 position;
     private float minHeight;
 
+    public boolean isMinionLost() {
+        return minionLost;
+    }
+
+    private boolean minionLost = false;
+
     public Vector3 getVelocity() {
         return velocity;
     }
 
     private Vector3 velocity;
     private Rectangle bounds;
-   private GameStateManager game;
     private Texture minion;
 
-    public Minion(int x, int y,GameStateManager gam){
+    public Minion(int x, int y){
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
-        minion = new Texture("minion.png");
-        bounds = new Rectangle(x, y, minion.getWidth(), minion.getHeight());
+        bounds = new Rectangle(position.x, position.y,50, 47);
         minHeight=0;
-        game=gam;
-
     }
 
     public void update(float dt){
@@ -45,7 +47,7 @@ public class Minion {
             minHeight += MOVEMENT*dt;
         else{
             if(position.y < minHeight)
-                game.set(new GameOverMenu(game));
+                minionLost = true;
         }
 
         velocity.scl(1/dt);
@@ -64,6 +66,8 @@ public class Minion {
     public Texture getTexture() {
         return minion;
     }
+
+    public void setTexture(Texture min){minion = min;}
 
     public void jump(int number){
         velocity.y = number;

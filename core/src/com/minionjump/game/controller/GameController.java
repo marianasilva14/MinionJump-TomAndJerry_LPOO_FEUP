@@ -50,6 +50,10 @@ public class GameController {
     private Villain villain;
 
     private Array<Platform> platforms;
+
+    public void setPlatforms(Array<Platform>  plats){
+        platforms = plats;
+    }
     private float ymax=0;
     private int deltaX = MyMinionJump.WIDTH/2 - 150;
     private int deltaY = MyMinionJump.HEIGHT/2 - 18;
@@ -60,8 +64,8 @@ public class GameController {
 
     public GameController(GameStateManager gam){
         this.gam = gam;
-        minion = new Minion(150, 300,gam);
-        villain = new Villain(150,300, gam);
+        minion = new Minion(150, 300);
+        villain = new Villain(150,300);
 
         Random rand = new Random();
         platforms = new Array<Platform>();
@@ -257,8 +261,13 @@ public class GameController {
                 lost = true;
         }
 
+        if(minion.isMinionLost())
+            lost = true;
+
         if(villain.getPosition().y < (minion.getPosition().y- MyMinionJump.HEIGHT/2))
             villain.reposition(villain);
+
+
     }
 
     public void dispose() {

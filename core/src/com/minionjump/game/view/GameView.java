@@ -6,11 +6,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.minionjump.game.MyMinionJump;
 import com.minionjump.game.controller.GameController;
+import com.minionjump.game.model.NormalPlatform;
 import com.minionjump.game.model.Platform;
+import com.minionjump.game.model.RocketPlatform;
+import com.minionjump.game.model.SplitPlatform;
+import com.minionjump.game.model.SpringPlatform;
 
 
 /**
@@ -23,10 +28,47 @@ public class GameView extends State {
     private Hud hud;
     private Viewport viewport;
     GameController controller;
+    TextureRegion normalPlatform,splitPlatform,springPlatform,rocketPlatform;
+    Animation splitAni, springAni;
+
+
+
+    public void updateViews(){
+        for(Platform plat : controller.getPlatforms()){
+            if(plat instanceof NormalPlatform){
+                plat.setTextureRegion(normalPlatform);
+            }
+            else if(plat instanceof RocketPlatform){
+                plat.setTextureRegion(rocketPlatform);
+            }
+            else if(plat instanceof SpringPlatform){
+                plat.setTextureRegion(springPlatform);
+                ((SpringPlatform) plat).setAnimation(springAni);
+            } else if(plat instanceof SplitPlatform){
+                plat.setTextureRegion(splitPlatform);
+                ((SplitPlatform) plat).setAnimation(splitAni);
+            }
+        }
+    }
+
 
     public GameView(GameStateManager gam) {
         super(gam);
         controller = new GameController(gam);
+        controller.getVillain().setTexture(new Texture("villain.png"));
+        controller.getMinion().setTexture(new Texture("minion.png"));
+
+        normalPlatform = new TextureRegion(new Texture("platform.png"));
+        splitPlatform =  new TextureRegion(new Texture("splitplatform.png"));
+        springPlatform =  new TextureRegion(new Texture("springplatform.png"));
+        rocketPlatform =  new TextureRegion(new Texture("rocketplatform.png"));
+        Texture textAniSpring = new Texture("springAnimation.png");
+        springAni = new Animation(new TextureRegion(textAniSpring), 3, 0.25f);
+        Texture textAniSplit = new Texture("splitAnimation.png");
+        splitAni = new Animation(new TextureRegion(textAniSplit), 3, 0.5f);
+
+        updateViews();
+
         viewport= new FitViewport(MyMinionJump.V_WIDTH, MyMinionJump.V_HEIGHT,new OrthographicCamera());
         hud= new Hud(MyMinionJump.batch);
         cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
@@ -61,6 +103,7 @@ public class GameView extends State {
     public void update(float dt) {
         handleInput();
         controller.update(dt);
+        updateViews();
         hud.update(dt);
         cam.position.y = controller.getMinion().getPosition().y + 80;
         hud.setScore(controller.getScore());
