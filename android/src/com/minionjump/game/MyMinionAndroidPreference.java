@@ -5,4 +5,13 @@ package com.minionjump.game;
  */
 
 public class MyMinionAndroidPreference implements MyMinionPreference {
+    @Override
+    public int getScore() {
+        return 0;
+    }
+
+    @Override
+    public void setScore(int score) {
+
+    }
 }

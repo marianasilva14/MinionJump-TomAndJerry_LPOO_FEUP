@@ -19,9 +19,14 @@ public class MyMinionJump extends ApplicationAdapter {
 	public GameStateManager gam;
 	public static final String TITLE = "Minion Jump";
 	private ArrayMap assetManager;
+	private MyMinionPreference prefs;
 
 	public static Music music;
 
+	public MyMinionJump(MyMinionPreference prefs){
+		super();
+		this.prefs = prefs;
+	}
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
