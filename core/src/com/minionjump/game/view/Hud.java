@@ -80,5 +80,10 @@ public class Hud {
         scoreLable.setText(String.format("%06d",score));
     }
 
+    public static void setScore(int value){
+        score=value;
+        scoreLable.setText(String.format("%06d",score));
+    }
+
 
 }

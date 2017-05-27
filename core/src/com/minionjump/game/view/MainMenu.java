@@ -23,7 +23,6 @@ public class MainMenu extends State {
     private Texture scoresBtn;
     private Texture optionsBtn;
     private Button playBut,scoresBut,optionsBut;
-    private com.minionjump.game.controller.PlayState play;
     private Stage stage;
     private MyMinionJump minionJump;
     private Viewport gamePort;
@@ -84,7 +83,7 @@ public class MainMenu extends State {
         stage.draw();
 
         if(playBut.isPressed())
-            gam.set(new com.minionjump.game.controller.PlayState(gam));
+            gam.set(new GameView(gam));
 
         if(scoresBut.isPressed()) {
            gam.set(new ScoresMenu(gam));

@@ -90,7 +90,7 @@ public class GameOverMenu extends State{
         stage.draw();
 
         if(playAgainBut.isPressed())
-            gam.set(new com.minionjump.game.controller.PlayState(gam));
+            gam.set(new GameView(gam));
 
 
         if(menuBut.isPressed())

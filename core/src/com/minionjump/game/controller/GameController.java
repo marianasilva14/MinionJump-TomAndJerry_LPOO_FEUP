@@ -1,15 +1,7 @@
 package com.minionjump.game.controller;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.minionjump.game.MyMinionJump;
 import com.minionjump.game.model.Minion;
 import com.minionjump.game.model.NormalPlatform;
@@ -18,29 +10,45 @@ import com.minionjump.game.model.RocketPlatform;
 import com.minionjump.game.model.SplitPlatform;
 import com.minionjump.game.model.SpringPlatform;
 import com.minionjump.game.model.Villain;
-import com.minionjump.game.view.GameOverMenu;
 import com.minionjump.game.view.GameStateManager;
-import com.minionjump.game.view.GameView;
-import com.minionjump.game.view.Hud;
-import com.minionjump.game.view.State;
 
 import java.util.Random;
 
-//import sun.security.mscapi.KeyStore;
-
 /**
- * Created by Mariana on 10/05/2017.
+ * Created by Sissi on 27/05/2017.
  */
 
-public class PlayState extends State {
+public class GameController {
     private static final int PLATFORM_SPACING = 250;
     private static final int PLATFORM_COUNT = 10;
 
+    public boolean isLost() {
+        return lost;
+    }
+
+    private boolean lost =false;
+
     private Minion minion;
+    public Minion getMinion() {
+        return minion;
+    }
+
+    public Villain getVillain() {
+        return villain;
+    }
+
+    public Array<Platform> getPlatforms() {
+        return platforms;
+    }
+
+    private int score = 0;
+    public int getScore() {
+        return score;
+    }
+
+
     private Villain villain;
-    private Texture bg;
-    private Hud hud;
-    private Viewport viewport;
+
     private Array<Platform> platforms;
     private float ymax=0;
     private int deltaX = MyMinionJump.WIDTH/2 - 150;
@@ -48,14 +56,13 @@ public class PlayState extends State {
     private boolean isSplitPlatform=false;
     private boolean villain_flag=false;
 
-    public PlayState(GameStateManager gam) {
-        super(gam);
-        viewport= new FitViewport(MyMinionJump.V_WIDTH, MyMinionJump.V_HEIGHT,new OrthographicCamera());
-        hud= new Hud(MyMinionJump.batch);
+    private GameStateManager gam;
+
+    public GameController(GameStateManager gam){
+        this.gam = gam;
         minion = new Minion(150, 300,gam);
         villain = new Villain(150,300, gam);
-        cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
-        bg = new Texture("background.png");
+
         Random rand = new Random();
         platforms = new Array<Platform>();
         float y;
@@ -103,33 +110,36 @@ public class PlayState extends State {
         }
     }
 
-    @Override
-    protected void handleInput() {
-
+    public void handleInputs(boolean leftPressed, boolean rightPressed, float accelerometerX){
         Vector3 new_position = minion.getPosition();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
+        if(leftPressed){
             new_position.x-=15;
             minion.setPosition(new_position);
         }
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
+        else if(rightPressed){
             new_position.x+=15;
             minion.setPosition(new_position);
         }
-     if(Gdx.input.getAccelerometerX() != 0){
-            new_position.x-=Gdx.input.getAccelerometerX()/1.2f;
+
+        if(accelerometerX != 0){
+            new_position.x-=accelerometerX/1.2f;
         }
 
-      if(minion.getPosition().x > MyMinionJump.WIDTH){
-          new_position.x = 0 ;
-          minion.setPosition(new_position);
-      }
+
+        if(minion.getPosition().x > MyMinionJump.WIDTH){
+            new_position.x = 0 ;
+            minion.setPosition(new_position);
+        }
+
         if(minion.getPosition().x < 0){
             new_position.x = MyMinionJump.WIDTH-10;
             minion.setPosition(new_position);
         }
 
+
     }
+
     public void reposition(Platform plat, int i){
 
         float y;
@@ -139,7 +149,7 @@ public class PlayState extends State {
         y=ymax+deltaY-40f;
         if(j == 1)
             ymax=y;
-            switch (platformType){
+        switch (platformType){
             case 0:
                 SpringPlatform plat2 = (new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
                 platforms.removeIndex(i);
@@ -165,22 +175,18 @@ public class PlayState extends State {
                 platforms.add(plat4);
                 break;
             case 3: case 4:    case 5: case 7:case 8:case 9:
-                    NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
-                    platforms.removeIndex(i);
-                    platforms.add(plat5);
-                    break;
+                NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
+                platforms.removeIndex(i);
+                platforms.add(plat5);
+                break;
 
         }
 
 
     }
 
-    @Override
     public void update(float dt) {
-        handleInput();
         minion.update(dt);
-        hud.update(dt);
-        cam.position.y = minion.getPosition().y + 80;
 
         for(int i = 0; i < platforms.size; i++){
             Platform platform = platforms.get(i);
@@ -192,7 +198,7 @@ public class PlayState extends State {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0)
                         minion.jump(850);
-                    Hud.addScore(10);
+                    score += 10;
                 }
             }
 
@@ -201,7 +207,7 @@ public class PlayState extends State {
                     ((SpringPlatform) platforms.get(i)).update(dt);
                     if(((SpringPlatform) platforms.get(i)).getAnimation().isAtEnd())
                         minion.jump(1200);
-                    Hud.addScore(20);
+                    score+=20;
                 }
 
                 if (platform.collides(minion.getBounds())) {
@@ -216,7 +222,7 @@ public class PlayState extends State {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0)
                         minion.jump(1800);
-                    Hud.addScore(30);
+                    score+=30;
                 }
             }
 
@@ -245,26 +251,17 @@ public class PlayState extends State {
                 villain.getBounds().setPosition(x,y);
             }
         }
+
         if(villain_flag==true) {
             if (villain.collides(minion.getBounds()))
-                gam.set(new GameOverMenu(gam));
+                lost = true;
         }
+
         if(villain.getPosition().y < (minion.getPosition().y- MyMinionJump.HEIGHT/2))
             villain.reposition(villain);
-
-        cam.update();
     }
 
-    @Override
-    public void render(SpriteBatch sb) {
-        Gdx.gl.glClearColor(1, 1,1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        GameView.gameState(sb,minion,villain,platforms,bg);
-    }
-
-    @Override
     public void dispose() {
-        bg.dispose();
         minion.dispose();
         villain.dispose();
         for(Platform platform : platforms)
