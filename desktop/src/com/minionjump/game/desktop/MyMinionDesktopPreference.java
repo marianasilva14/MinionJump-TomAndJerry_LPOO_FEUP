@@ -7,4 +7,13 @@ import com.minionjump.game.MyMinionPreference;
  */
 
 public class MyMinionDesktopPreference implements MyMinionPreference {
+    @Override
+    public int getScore() {
+        return 0;
+    }
+
+    @Override
+    public void setScore(int score) {
+
+    }
 }

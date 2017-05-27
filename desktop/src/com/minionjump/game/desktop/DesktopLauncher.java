@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.width = MyMinionJump.WIDTH;
 		config.height = MyMinionJump.HEIGHT;
 		config.title = MyMinionJump.TITLE;
-		new LwjglApplication(new MyMinionJump(), config);
+		MyMinionDesktopPreference prefs = new MyMinionDesktopPreference();
+		new LwjglApplication(new MyMinionJump(prefs), config);
 	}
 }

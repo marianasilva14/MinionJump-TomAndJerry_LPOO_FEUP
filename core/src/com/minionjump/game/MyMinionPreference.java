@@ -5,4 +5,7 @@ package com.minionjump.game;
  */
 
 public interface MyMinionPreference {
+
+    public int getScore();
+    public void setScore(int score);
 }
