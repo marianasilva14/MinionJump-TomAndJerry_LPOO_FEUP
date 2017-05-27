@@ -241,8 +241,6 @@ public class GameController {
                 }
             }
         }
-
-        System.out.println(minion.getPosition().y);
         if(villain_flag==false) {
             if (minion.getPosition().y > 10000) {
                 villain_flag= true;

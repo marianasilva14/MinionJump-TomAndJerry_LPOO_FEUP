@@ -38,6 +38,8 @@ public class unit_tests {
         gam = new GameStateManager();
         controller = new GameController(gam);
         Array<Platform> dois =controller.getPlatforms();
+
+        controller.reposition(um.get(0),0);
         boolean iguais = true;
         for(int i = 0; i < um.size; i++){
             if(um.get(i).getClass() != dois.get(i).getClass()){
