@@ -3,8 +3,6 @@ package com.minionjump.game.model;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.minionjump.game.view.GameOverMenu;
-import com.minionjump.game.view.GameStateManager;
 
 /**
  * Created by Mariana on 10/05/2017.
@@ -26,6 +24,9 @@ public class Minion {
         return velocity;
     }
 
+    public void setVelocity(Vector3 v) {
+         velocity=v;
+    }
     private Vector3 velocity;
     private Rectangle bounds;
     private Texture minion;
@@ -75,6 +76,10 @@ public class Minion {
 
     public Rectangle getBounds(){
         return bounds;
+    }
+
+    public void setBounds(Rectangle b){
+        bounds=b;
     }
 
     public void dispose() {

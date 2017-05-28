@@ -150,7 +150,7 @@ public class GameController {
         Random rand = new Random();
         float j = plat.getPositionPlatform().x <=  MyMinionJump.WIDTH/2? 0:1;
         int platformType= rand.nextInt(10);
-        y=ymax+deltaY-40f;
+        y=ymax+deltaY;
         if(j == 1)
             ymax=y;
         switch (platformType){

@@ -1,11 +1,9 @@
 package com.minionjump.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.minionjump.game.MyMinionJump;
-import com.minionjump.game.view.GameStateManager;
 
 import java.util.Random;
 
