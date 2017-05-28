@@ -15,53 +15,122 @@ import com.minionjump.game.view.GameStateManager;
 import java.util.Random;
 
 /**
- * Created by Sissi on 27/05/2017.
+ * Controls the physics aspect of the game.
  */
-
 public class GameController {
+    /**
+     * space between platforms
+     */
     private static final int PLATFORM_SPACING = 250;
+
+    /**
+     * number of platfoms
+     */
     private static final int PLATFORM_COUNT = 10;
 
+    /**
+     * Variable used to determine if the user has lost
+     */
+    private boolean lost =false;
     public boolean isLost() {
         return lost;
     }
 
-    private boolean lost =false;
-
+    /**
+     * Create the minion
+     */
     private Minion minion;
+
+    /**
+     * Get Minion
+     * @return minion
+     */
     public Minion getMinion() {
         return minion;
     }
 
+    /**
+     * Create the villain
+     */
+    private Villain villain;
+
+    /**
+     * Get Villain
+     * @return villain
+     */
     public Villain getVillain() {
         return villain;
     }
 
+    /**
+     * Create the platforms
+     */
+    private Array<Platform> platforms;
+
+    /**
+     * Get's platforms
+     * @return platforms
+     */
     public Array<Platform> getPlatforms() {
         return platforms;
     }
 
+    /**
+     * Create the score
+     */
     private int score = 0;
+
+    /**
+     * Get's score
+     * @return score
+     */
     public int getScore() {
         return score;
     }
 
-
-    private Villain villain;
-
-    private Array<Platform> platforms;
-
+    /**
+     * Set's platforms
+     * @param plats
+     */
     public void setPlatforms(Array<Platform>  plats){
         platforms = plats;
     }
+
+    /**
+     * The maximum y of platforms
+     */
     private float ymax=0;
+
+    /**
+     * Variation of the positions in x of the platform
+     */
     private int deltaX = MyMinionJump.WIDTH/2 - 150;
+
+    /**
+     * Variation of the positions in y of the platform
+     */
     private int deltaY = MyMinionJump.HEIGHT/2 - 18;
+
+    /**
+     * Boolean variable used to ensure that there aren't two split platforms on the same line
+     */
     private boolean isSplitPlatform=false;
+
+    /**
+     * Boolean variable used to know if the village already appeared the first time
+     */
     public boolean villain_flag=false;
 
+    /**
+     * Game State Manager
+     */
     private GameStateManager gam;
 
+    /**
+     * Constructs a minion game
+     * Initializes minion,villain and platforms in their respective positions
+     * @param gam game state manager
+     */
     public GameController(GameStateManager gam){
         this.gam = gam;
         minion = new Minion(150, 300);
@@ -114,6 +183,12 @@ public class GameController {
         }
     }
 
+    /**
+     * Handles any inputs
+     * @param leftPressed verify if the left button was pressed
+     * @param rightPressed verify if the right button was pressed
+     * @param accelerometerX value of accelerometer of x
+     */
     public void handleInputs(boolean leftPressed, boolean rightPressed, float accelerometerX){
         Vector3 new_position = minion.getPosition();
 
@@ -144,6 +219,11 @@ public class GameController {
 
     }
 
+    /**
+     * Resets a platform in randomly generated positions
+     * @param plat platform
+     * @param i position of the platform in vector
+     */
     public void reposition(Platform plat, int i){
 
         float y;
@@ -189,6 +269,11 @@ public class GameController {
 
     }
 
+    /**
+     * Updates the game
+     * Restores the platforms, updates the score, puts or not the minion to jump and restores and creates the villain
+     * @param dt delta time
+     */
     public void update(float dt) {
         minion.update(dt);
 
@@ -268,6 +353,9 @@ public class GameController {
 
     }
 
+    /**
+     * Disposes of all assets.
+     */
     public void dispose() {
         minion.dispose();
         villain.dispose();

@@ -17,41 +17,46 @@ import com.minionjump.game.model.RocketPlatform;
 import com.minionjump.game.model.SplitPlatform;
 import com.minionjump.game.model.SpringPlatform;
 
-
 /**
- * Created by Sissi on 26/05/2017.
+ * A view representing the game screen. Draws all the other views and
+ * controls the camera.
  */
-
 public class GameView extends State {
 
+    /**
+     * Background Texture
+     */
     private Texture bg;
+
+    /**
+     * Create an hud
+     */
     private Hud hud;
+
+    /**
+     * Create an viewport for the hud
+     */
     private Viewport viewport;
+
+    /**
+     * Create a game controller
+     */
     GameController controller;
+
+    /**
+     * Platforms textures
+     */
     TextureRegion normalPlatform,splitPlatform,springPlatform,rocketPlatform;
+
+    /**
+     * Platforms animations
+     */
     Animation splitAni, springAni;
 
-
-
-    public void updateViews(){
-        for(Platform plat : controller.getPlatforms()){
-            if(plat instanceof NormalPlatform){
-                plat.setTextureRegion(normalPlatform);
-            }
-            else if(plat instanceof RocketPlatform){
-                plat.setTextureRegion(rocketPlatform);
-            }
-            else if(plat instanceof SpringPlatform){
-                plat.setTextureRegion(springPlatform);
-                ((SpringPlatform) plat).setAnimation(springAni);
-            } else if(plat instanceof SplitPlatform){
-                plat.setTextureRegion(splitPlatform);
-                ((SplitPlatform) plat).setAnimation(splitAni);
-            }
-        }
-    }
-
-
+    /**
+     * Creates the screen
+     * @param gam game state manager
+     */
     public GameView(GameStateManager gam) {
         super(gam);
         controller = new GameController(gam);
@@ -76,6 +81,31 @@ public class GameView extends State {
 
     }
 
+    /**
+     * Updates platforms textures and animations
+     */
+    public void updateViews(){
+        for(Platform plat : controller.getPlatforms()){
+            if(plat instanceof NormalPlatform){
+                plat.setTextureRegion(normalPlatform);
+            }
+            else if(plat instanceof RocketPlatform){
+                plat.setTextureRegion(rocketPlatform);
+            }
+            else if(plat instanceof SpringPlatform){
+                plat.setTextureRegion(springPlatform);
+                ((SpringPlatform) plat).setAnimation(springAni);
+            } else if(plat instanceof SplitPlatform){
+                plat.setTextureRegion(splitPlatform);
+                ((SplitPlatform) plat).setAnimation(splitAni);
+            }
+        }
+    }
+
+
+    /**
+     * Handles any inputs and passes them to the controller.
+     */
     @Override
     protected void handleInput() {
 
@@ -90,15 +120,16 @@ public class GameView extends State {
             right = true;
         }
 
-
         accelerometerX = Gdx.input.getAccelerometerX();
 
         controller.handleInputs(left,right,accelerometerX);
 
-
     }
 
-
+    /**
+     * Update views and hud score
+     * @param dt delta time
+     */
     @Override
     public void update(float dt) {
         handleInput();
@@ -114,6 +145,10 @@ public class GameView extends State {
         cam.update();
     }
 
+    /**
+     * Renders the screen
+     * @param sb sprite batch
+     */
     @Override
     public void render(SpriteBatch sb) {
         Gdx.gl.glClearColor(1, 1,1, 1);
@@ -134,6 +169,9 @@ public class GameView extends State {
         Hud.stage.draw();
     }
 
+    /**
+     * Disposes background and controller
+     */
     @Override
     public void dispose() {
         bg.dispose();
