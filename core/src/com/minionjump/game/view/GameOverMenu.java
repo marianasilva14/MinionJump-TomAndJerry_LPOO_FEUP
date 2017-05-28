@@ -17,18 +17,39 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.minionjump.game.MyMinionJump;
 
 /**
- * Created by Sissi on 11/05/2017.
+ * Class that represents the state: Game Over
  */
-
 public class GameOverMenu extends State{
 
+    /**
+     * Texture of background for menu "Game Over"
+     */
     private Texture menugameover;
+    /**
+     * Texture of button "Play Again"
+     */
     private Texture playAgainBtn;
+    /**
+     *  Texture of button "Menu"
+     */
     private Texture menuBtn;
+    /**
+     * Button for "Play Again" and "Menu"
+     */
     private Button playAgainBut,menuBut;
+    /**
+     * Stage of this class
+     */
     private Stage stage;
+    /**
+     * Label that indicates user score
+     */
     private Label userScore;
 
+    /**
+     * Constructs Game Over Menu and defines the position of each button
+     * @param gam Game State Manager
+     */
     public GameOverMenu(GameStateManager gam) {
         super(gam);
 
@@ -68,16 +89,27 @@ public class GameOverMenu extends State{
 
     }
 
+    /**
+     * Method for handle input
+     */
     @Override
     protected void handleInput() {
 
     }
 
+    /**
+     * Method that updates Game Over Menu
+     * @param dt
+     */
     @Override
     public void update(float dt) {
 
     }
 
+    /**
+     * Method that renders Game Over Menu
+     * @param sb
+     */
     @Override
     public void render(SpriteBatch sb) {
         Gdx.gl.glClearColor(1, 1,1, 1);
@@ -98,6 +130,9 @@ public class GameOverMenu extends State{
 
     }
 
+    /**
+     * Disposes all buttons
+     */
     @Override
     public void dispose() {
        menugameover.dispose();

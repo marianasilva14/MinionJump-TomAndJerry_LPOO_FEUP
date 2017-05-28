@@ -13,18 +13,38 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.minionjump.game.MyMinionJump;
 
 /**
- * Created by Mariana on 22/05/2017.
+ * Class that represents the state: Options Menu
  */
-
 public class OptionsMenu extends State {
-
+    /**
+     * Texture of background to Options Menu
+     */
     private Texture menuoptions;
+    /**
+     * Texture of buttons "Menu", "SoundOn" and "SoundOff"
+     */
     private Texture menuBtn, soundOnBtn, soundOffBtn;
+    /**
+     * Button for "Play", "Scores" and "Options"
+     */
     private Button  menuBut, soundBut;
+    /**
+     * Stage of this class
+     */
     private Stage stage;
+    /**
+     * Is the sound off?
+     */
     private boolean sound = false;
+    /**
+     * Button Sound
+     */
     private Drawable buttonDrawableSound;
 
+    /**
+     * Constructs Options Menu and defines the position of each button
+     * @param gam Game State Manager
+     */
     public OptionsMenu(GameStateManager gam) {
         super(gam);
 
@@ -51,29 +71,29 @@ public class OptionsMenu extends State {
 
         stage.addActor(soundBut);
 
-    /*
-    else {
-        buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(soundOffBtn));
-        soundOffBut = new ImageButton(buttonDrawableSha);
-        soundOffBut.setSize(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 9);
-        soundOffBut.setPosition(Gdx.graphics.getWidth() / 2 - 5 * soundOffBut.getWidth() / 3, Gdx.graphics.getHeight() - 4 * soundOffBut.getHeight());
-
-        stage.addActor(soundOffBut);
-
-    }
-    */
         }
 
+        /**
+        *  Method for handle input
+        */
         @Override
         protected void handleInput() {
 
         }
 
+    /**
+     * Method that updates Options Menu
+     * @param dt
+     */
         @Override
         public void update(float dt) {
 
         }
 
+    /**
+     * Method that renders Options Menu and responsible for turning the music on and off
+     * @param sb
+     */
         @Override
         public void render(SpriteBatch sb) {
             Gdx.gl.glClearColor(1, 1,1, 1);
@@ -114,7 +134,10 @@ public class OptionsMenu extends State {
 
         }
 
-        @Override
+    /**
+     * Disposes all buttons
+     */
+    @Override
         public void dispose() {
             menuBtn.dispose();
             soundOnBtn.dispose();

@@ -14,19 +14,41 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.minionjump.game.MyMinionJump;
 
 /**
- * Created by Mariana on 08/05/2017.
+ * Class that represents the state: Main Menu
  */
-
 public class MainMenu extends State {
+    /**
+     * Texture of background to Main Menu
+     */
     private Texture background;
+    /**
+     * Texture of button "Play"
+     */
     private Texture playBtn;
+    /**
+     * Texture of button "Scores"
+     */
     private Texture scoresBtn;
+    /**
+     * Texture of button "Options"
+     */
     private Texture optionsBtn;
+    /**
+     * Button for "Play", "Scores" and "Options"
+     */
     private Button playBut,scoresBut,optionsBut;
+    /**
+     * Stage of this class
+     */
     private Stage stage;
+
     private MyMinionJump minionJump;
     private Viewport gamePort;
 
+    /**
+     * Constructs Main Menu and defines the position of each button
+     * @param game Game State Manager
+     */
     public MainMenu(GameStateManager game) {
         super(game);
         cam.setToOrtho(false, MyMinionJump.WIDTH, MyMinionJump.HEIGHT);
@@ -61,16 +83,26 @@ public class MainMenu extends State {
 
     }
 
+    /**
+     * Method for handle input
+     */
     @Override
-
     public void handleInput() {
 
     }
 
+    /**
+     * Method that updates Main Menu
+     * @param dt
+     */
     @Override
     public void update(float dt) {
     }
 
+    /**
+     * Method that renders Main Menu
+     * @param sb
+     */
     @Override
     public void render(SpriteBatch sb) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -94,6 +126,9 @@ public class MainMenu extends State {
 
     }
 
+    /**
+     * Disposes all buttons
+     */
     @Override
     public void dispose() {
         background.dispose();

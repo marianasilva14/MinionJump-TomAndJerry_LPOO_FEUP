@@ -13,16 +13,31 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.minionjump.game.MyMinionJump;
 
 /**
- * Created by Sissi on 25/05/2017.
+ * Class that represents the state: Scores Menu
  */
-
 public class ScoresMenu extends State{
 
+    /**
+     * Texture of background to Scores Menu
+     */
         private Texture menuscores;
+    /**
+     * Texture of button "Menu"
+     */
         private Texture menuBtn;
+    /**
+     * Button for "Menu"
+     */
         private Button menuBut;
+    /**
+     * Stage of ths class
+     */
         private Stage stage;
 
+    /**
+     * Constructs Scores Menu and defines the position of each button
+     * @param gam Game State Manager
+     */
         public ScoresMenu(GameStateManager gam) {
             super(gam);
 
@@ -42,16 +57,27 @@ public class ScoresMenu extends State{
 
         }
 
+    /**
+     *  Method for handle input
+     */
         @Override
         protected void handleInput() {
 
         }
 
+    /**
+     * Method that updates Scores Menu
+     * @param dt
+     */
         @Override
         public void update(float dt) {
 
         }
 
+    /**
+     * Method that renders Scores Menu
+     * @param sb
+     */
         @Override
         public void render(SpriteBatch sb) {
             Gdx.gl.glClearColor(1, 1,1, 1);
@@ -67,7 +93,10 @@ public class ScoresMenu extends State{
                 gam.set(new MainMenu(gam));
         }
 
-        @Override
+    /**
+     * Disposes all buttons
+     */
+    @Override
         public void dispose() {
             menuBtn.dispose();
             System.out.println("Menu State Disposed");
