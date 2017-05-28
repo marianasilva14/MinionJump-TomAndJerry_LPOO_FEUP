@@ -48,6 +48,10 @@ public class Animation {
         frame = 0;
     }
 
+    /**
+     * Updates the animation
+     * @param dt
+     */
     public void update(float dt){
         currentFrameTime += dt;
 
@@ -62,10 +66,17 @@ public class Animation {
 
     }
 
+    /**
+     * Checks if the animatin is at end.
+     * @return true if animation is at end
+     */
     public boolean isAtEnd(){
         return atEnd;
     }
 
+    /**
+     * @return frame
+     */
     public TextureRegion getFrame(){
         return frames.get(frame);
     }

@@ -8,9 +8,6 @@ import com.minionjump.game.MyMinionJump;
 import java.util.Random;
 
 /**
- * Created by Sissi on 26/05/2017.
- */
-/**
  * A model representing villain
  */
 public class Villain{

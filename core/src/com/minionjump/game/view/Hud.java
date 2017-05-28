@@ -14,22 +14,47 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.minionjump.game.MyMinionJump;
 
 /**
- * Created by Sissi on 25/05/2017.
+ * Class that representing a hud (heads-up display) for score and time
  */
-
 public class Hud {
+    /**
+     * Stage of the hud
+     */
     public static Stage stage;
     private Viewport viewport;
+    /**
+     * Time count
+     */
     private float timeCount;
+    /**
+     * Score of player
+     */
     public static Integer score;
+    /**
+     * Time was passed
+     */
     private Integer worldTimer;
-
+    /**
+     * Label to count down
+     */
     private Label countdownLabel;
+    /**
+     * Label to score
+     */
     private static Label scoreLable;
+    /**
+     * Label to time
+     */
     private Label timeLable;
+    /**
+     * Label to minion
+     */
     private Label minionLabel;
 
-
+    /**
+     * Constructs a heads-up display and defines the type and size of lyrics
+     * @param sb SpriteBatch
+     */
     public Hud(SpriteBatch sb){
         timeCount=0;
         score=0;
@@ -62,6 +87,11 @@ public class Hud {
 
         stage.addActor(table);
     }
+
+    /**
+     * Updates the time
+     * @param dt
+     */
     public void update(float dt){
         timeCount+=dt;
         if(timeCount >= 1) {
@@ -71,15 +101,27 @@ public class Hud {
         }
 
     }
+
+    /**
+     * Disposes stage
+     */
     public void dispose(){
         stage.dispose();
     }
 
+    /**
+     * Add score and sets score label
+     * @param value Value to add to score
+     */
     public static void addScore(int value){
         score+=value;
         scoreLable.setText(String.format("%06d",score));
     }
 
+    /**
+     * Sets score
+     * @param value Value to sets score
+     */
     public static void setScore(int value){
         score=value;
         scoreLable.setText(String.format("%06d",score));

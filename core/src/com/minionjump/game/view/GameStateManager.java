@@ -7,33 +7,57 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Stack;
 
 /**
- * Created by Mariana on 08/05/2017.
+ * Class of Game State Manager
  */
-
 public class GameStateManager {
+    /**
+     * Stack that contains states
+     */
     private Stack<State> states;
 
+    /**
+     * Constructs Game State Manager
+     */
     public GameStateManager(){
         states = new Stack<State>();
     }
 
+    /**
+     * Push a state to stack of states
+     * @param state
+     */
     public void push(State state){
         states.push(state);
     }
 
+    /**
+     * Pop state of stack of states
+     */
     public void pop(){
         states.pop().dispose();
     }
 
+    /**
+     * Sets the state
+      * @param state
+     */
     public void set(State state){
         states.pop().dispose();
         states.push(state);
     }
 
+    /**
+     * Updates state
+     * @param dt
+     */
     public void update(float dt){
         states.peek().update(dt);
     }
 
+    /**
+     * Renders state
+     * @param sb SpriteBatch
+     */
     public void render(SpriteBatch sb){
         Gdx.gl.glClearColor(1, 1,1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
