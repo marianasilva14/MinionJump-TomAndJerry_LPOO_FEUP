@@ -11,7 +11,7 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		MyMinionAndroidPreference prefs = new MyMinionAndroidPreference();
+		MyMinionAndroidPreference prefs = new MyMinionAndroidPreference(this);
 		initialize(new MyMinionJump(prefs), config);
 	}
 }

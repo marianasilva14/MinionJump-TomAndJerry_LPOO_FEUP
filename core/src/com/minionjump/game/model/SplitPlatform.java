@@ -32,6 +32,8 @@ public class SplitPlatform extends Platform {
      */
     public void update(float dt){
         collide = true;
+        if(splitAnimation== null)
+            return;
         splitAnimation.update(dt);
     }
 

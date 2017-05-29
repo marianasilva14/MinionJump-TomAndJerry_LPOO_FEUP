@@ -32,6 +32,8 @@ public class SpringPlatform extends Platform {
      */
     public void update(float dt){
         collide = true;
+        if(springAnimation == null)
+            return;
         springAnimation.update(dt);
         if(springAnimation.isAtEnd())
             collide = false;

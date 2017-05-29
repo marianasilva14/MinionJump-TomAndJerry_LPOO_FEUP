@@ -270,6 +270,50 @@ public class GameController {
     }
 
     /**
+     * Makes the platform collide with the minion and updates the score
+     * @param dt
+     * @param platform
+     */
+    public void platformCollision(float dt,Platform platform) {
+
+            if ((platform instanceof NormalPlatform)) {
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0)
+                        minion.jump(850);
+                    score += 10;
+                }
+            } else if ((platform instanceof SpringPlatform)) {
+                if (((SpringPlatform) platform).collide) {
+                    ((SpringPlatform) platform).update(dt);
+                    if (((SpringPlatform) platform).getAnimation().isAtEnd())
+                        minion.jump(1200);
+                    score += 20;
+                }
+
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0 || ((SpringPlatform) platform).collide) {
+                        minion.jump(850);
+                        ((SpringPlatform) platform).update(dt);
+                    }
+                }
+            } else if ((platform instanceof RocketPlatform)) {
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0)
+                        minion.jump(1800);
+                    score += 30;
+                }
+            } else if ((platform instanceof SplitPlatform)) {
+                if (((SplitPlatform) platform).collide)
+                    ((SplitPlatform) platform).update(dt);
+
+                if (platform.collides(minion.getBounds())) {
+                    if (minion.getVelocity().y < 0) {
+                        ((SplitPlatform) platform).update(dt);
+                    }
+                }
+            }
+    }
+    /**
      * Updates the game
      * Restores the platforms, updates the score, puts or not the minion to jump and restores and creates the villain
      * @param dt delta time
@@ -283,48 +327,8 @@ public class GameController {
             if(platforms.get(i).getPositionPlatform().y < (minion.getPosition().y- MyMinionJump.HEIGHT/2))
                 reposition(platforms.get(i),i);
 
-            if((platforms.get(i) instanceof NormalPlatform)) {
-                if (platform.collides(minion.getBounds())) {
-                    if (minion.getVelocity().y < 0)
-                        minion.jump(850);
-                    score += 10;
-                }
-            }
+            platformCollision(dt,platform);
 
-            else if((platforms.get(i) instanceof SpringPlatform)) {
-                if(((SpringPlatform) platforms.get(i)).collide){
-                    ((SpringPlatform) platforms.get(i)).update(dt);
-                    if(((SpringPlatform) platforms.get(i)).getAnimation().isAtEnd())
-                        minion.jump(1200);
-                    score+=20;
-                }
-
-                if (platform.collides(minion.getBounds())) {
-                    if (minion.getVelocity().y < 0 || ((SpringPlatform)platforms.get(i)).collide) {
-                        minion.jump(850);
-                        ((SpringPlatform)platforms.get(i)).update(dt);
-                    }
-                }
-            }
-
-            else if((platforms.get(i) instanceof RocketPlatform)) {
-                if (platform.collides(minion.getBounds())) {
-                    if (minion.getVelocity().y < 0)
-                        minion.jump(1800);
-                    score+=30;
-                }
-            }
-
-            else if((platforms.get(i) instanceof SplitPlatform)) {
-                if(((SplitPlatform) platforms.get(i)).collide)
-                    ((SplitPlatform) platforms.get(i)).update(dt);
-
-                if (platform.collides(minion.getBounds())) {
-                    if (minion.getVelocity().y < 0) {
-                        ((SplitPlatform) platforms.get(i)).update(dt);
-                    }
-                }
-            }
         }
         if(villain_flag==false) {
             if (minion.getPosition().y > 10000) {

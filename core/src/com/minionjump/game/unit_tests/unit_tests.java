@@ -1,12 +1,6 @@
 package com.minionjump.game.unit_tests;
 
-/**
- * Created by Sissi on 26/05/2017.
- */
-
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.SpawnInfluencer;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.minionjump.game.controller.GameController;
@@ -18,9 +12,6 @@ import com.minionjump.game.model.SpringPlatform;
 import com.minionjump.game.view.GameStateManager;
 
 import org.junit.Test;
-
-import java.util.Random;
-
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -119,76 +110,65 @@ public class unit_tests {
         controller.update(10);
         assertTrue(controller.getVillain().visible);
     }
-/*
+
 
     @Test
     public void testIfScoreRaise() {
         GameStateManager gam = new GameStateManager();
         GameController controller = new GameController(gam);
 
-        boolean flag = false;
-        boolean value = false, value2 = false, value3 = false, value4 = false;
+        boolean differentScore=false;
+        boolean plat=false,plat2=false,plat3=false, plat4=false;
+        int option=2;
 
-        while (!value || !value2 || !value3 || !value4) {
-            int pos_rand = 4;
-            if (controller.getPlatforms().get(0) instanceof NormalPlatform)
-                pos_rand = 0;
-            else if (controller.getPlatforms().get(0) instanceof SpringPlatform)
-                pos_rand = 1;
-            else if (controller.getPlatforms().get(0) instanceof SplitPlatform)
-                pos_rand = 2;
-            else if (controller.getPlatforms().get(0) instanceof RocketPlatform)
-                pos_rand = 3;
+        while(!plat || !plat2 || !plat3 || !plat4){
+            if(controller.getPlatforms().get(0) instanceof NormalPlatform)
+                option=0;
+            else if(controller.getPlatforms().get(0) instanceof RocketPlatform)
+                option=1;
+            else if(controller.getPlatforms().get(0) instanceof SpringPlatform)
+                option=2;
+            else if(controller.getPlatforms().get(0) instanceof SplitPlatform)
+                option=3;
 
-            switch (pos_rand) {
+            switch (option){
                 case 0:
-                    value = true;
+                    plat=true;
+                    Vector2 position = controller.getPlatforms().get(0).getPositionPlatform();
+                    controller.getMinion().getBounds().setPosition(position.x, position.y);
+                    controller.getMinion().setVelocity(new Vector3(30,-1,0));
+                    controller.platformCollision(10,controller.getPlatforms().get(0));
                     break;
                 case 1:
-                    value2 = true;
+                    plat2=true;
+                    position = controller.getPlatforms().get(0).getPositionPlatform();
+                    controller.getMinion().getBounds().setPosition(position.x, position.y);
+                    controller.getMinion().setVelocity(new Vector3(30,-1,0));
+                    controller.platformCollision(10,controller.getPlatforms().get(0));
                     break;
                 case 2:
-                    value3 = true;
+                    plat3=true;
+                    position = controller.getPlatforms().get(0).getPositionPlatform();
+                    controller.getMinion().getBounds().setPosition(position.x, position.y);
+                    controller.getMinion().setVelocity(new Vector3(30,-1,0));
+                    controller.platformCollision(10,controller.getPlatforms().get(0));
                     break;
                 case 3:
-                    value4 = true;
+                    plat4=true;
+                    position = controller.getPlatforms().get(0).getPositionPlatform();
+                    controller.getMinion().getBounds().setPosition(position.x, position.y);
+                    controller.getMinion().setVelocity(new Vector3(30,-1,0));
+                    controller.platformCollision(10,controller.getPlatforms().get(0));
                     break;
-
             }
-            Rectangle bounds;
-            bounds = controller.getPlatforms().get(0).getBoundsPlat();
-            Vector3 position = new Vector3(bounds.x + bounds.width - 1, bounds.y + bounds.height, 0);
-            controller.getMinion().setPosition(position);
-            controller.update(10);
+            controller.reposition(controller.getPlatforms().get(0),0);
         }
 
-        if (controller.getScore() != 0)
-            flag = true;
-
-        assert (flag == true);
-
-        assertTrue(value);
-
-        assertTrue(value2);
-
-        assertTrue(value3);
-
-        assertTrue(value4);
-    }
-    @Test
-    public void testIfScoreRaise() {
-        GameStateManager gam = new GameStateManager();
-        GameController controller = new GameController(gam);
-        boolean scoreRaised=false;
-        float x= controller.getPlatforms().get(0).getPositionPlatform().x;
-        controller.getMinion().setVelocity(new Vector3(x,-9,0));
-        controller.update(10);
-
         if(controller.getScore() !=0)
-            scoreRaised=true;
+            differentScore=true;
 
-        assertTrue(scoreRaised);
+        assertTrue(differentScore);
 
     }
-*/
+
     }

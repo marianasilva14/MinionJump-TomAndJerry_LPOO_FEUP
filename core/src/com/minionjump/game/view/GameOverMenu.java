@@ -70,6 +70,8 @@ public class GameOverMenu extends State{
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
         userScore= new Label("",new Label.LabelStyle(font12, Color.BLACK));
         userScore.setText("Your Score: " + String.format("%06d",Hud.score));
+        if(Hud.score > MyMinionJump.prefs.getScore())
+            MyMinionJump.prefs.setScore(Hud.score);
         userScore.setPosition(Gdx.graphics.getWidth()/6, 9*Gdx.graphics.getHeight()/16);
         stage.addActor(userScore);
 

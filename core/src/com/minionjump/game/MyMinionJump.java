@@ -44,7 +44,7 @@ public class MyMinionJump extends ApplicationAdapter {
 	 */
 	public static final String TITLE = "Minion Jump";
 	private ArrayMap assetManager;
-	private MyMinionPreference prefs;
+	public static MyMinionPreference prefs;
 
 	/**
 	 * Game music
