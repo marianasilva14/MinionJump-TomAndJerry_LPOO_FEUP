@@ -26,7 +26,7 @@ In total we dedicate 100 hours to carry out the project
 ## Work distribution amongst team members
 The distribution was equitable for the two elements of the group.
 
-## User manual 
+# User manual 
 ## Screenshots explaining how to play/use the game/app
 <p>
 Main Menu
