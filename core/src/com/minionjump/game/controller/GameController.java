@@ -128,14 +128,6 @@ public class GameController {
      */
     public boolean villain_flag=false;
 
-    public ArrayList<Platform> getPlatforms2Remove() {
-        return platforms2Remove;
-    }
-
-    public ArrayList<Platform> getPlatforms2Add() {
-        return platforms2Add;
-    }
-
     /**
      * Platforms to remove after platforms reposition
      */
@@ -144,6 +136,23 @@ public class GameController {
      * Platforms to add after platforms reposition
      */
     private ArrayList<Platform> platforms2Add = new ArrayList<Platform>();
+
+    /**
+     * Get's platforms to remove after platforms reposition
+     * @return platforms2Remove
+     */
+    public ArrayList<Platform> getPlatforms2Remove() {
+        return platforms2Remove;
+    }
+
+    /**
+     * Get's platforms to add after platforms reposition
+     * @return platforms2Add
+     */
+    public ArrayList<Platform> getPlatforms2Add() {
+        return platforms2Add;
+    }
+
     /**
      * Variable used to toggle between left and right platforms
      */
