@@ -12,6 +12,7 @@
 
 # Development documentation 
 ## Updated UML diagrams
+![](https://cloud.githubusercontent.com/assets/22835568/26558618/2352d60c-44a2-11e7-91d2-e59216305937.jpg)
 
 ## Design Patterns used
 1. Strategy - for the different types of platforms: platform with spring, with rocket or normal and split platform.
