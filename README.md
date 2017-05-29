@@ -20,8 +20,8 @@
 ## Major difficulties along the way
 The biggest difficulty in implementing the game was the replacement of platforms and how to assign random positions along the screen.
 ## Lessons learned
--How to structure the project in MVC
--How to use LibGdx
+- How to structure the project in MVC
+- How to use LibGdx
 ## Overall time spent developing
 In total we dedicate 100 hours to carry out the project
 ## Work distribution amongst team members
