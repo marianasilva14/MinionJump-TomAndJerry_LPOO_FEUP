@@ -51,7 +51,7 @@ Game Mode
 
 ![](https://cloud.githubusercontent.com/assets/22794956/26551148/03468bd4-4479-11e7-9951-43a67451b27f.png "Game Mode")
 
-![](https://cloud.githubusercontent.com/assets/22794956/26551150/034acb86-4479-11e7-866c-b77766ee9e02.png "Game Mode")
+![](https://cloud.githubusercontent.com/assets/22794956/26556141/c03376f0-4490-11e7-9345-16134647b026.png "Game Mode")
 <p>
 Game Over
 
