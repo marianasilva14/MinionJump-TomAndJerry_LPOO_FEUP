@@ -49,23 +49,31 @@ Class responsible for platforms with rockets. This type of platform is where min
 <p>
 Main Menu
 
-![](https://cloud.githubusercontent.com/assets/22835568/25562908/32a8b318-2d89-11e7-90cc-62002322f5d7.png "Main Menu")
+![](https://cloud.githubusercontent.com/assets/22794956/26551147/0348e3c0-4479-11e7-8670-7ee85aa5692c.png "Main Menu")
 <p>
-Score Menu
+High Score Menu
 
-![](https://cloud.githubusercontent.com/assets/22835568/25562909/32af0f56-2d89-11e7-90b6-2fe3d179046d.png "Score Menu")
+![](https://cloud.githubusercontent.com/assets/22794956/26551151/034b6a46-4479-11e7-8030-3af04b364b47.png "High Score Menu")
 <p>
 Settings Menu
 
-![](https://cloud.githubusercontent.com/assets/22835568/25562910/32afa9de-2d89-11e7-8436-5dccf40c2be5.png "Settings Menu")
+![](https://cloud.githubusercontent.com/assets/22794956/26551153/0365cf94-4479-11e7-957b-c1f6e30d1472.png "Settings Menu")
+
+![](https://cloud.githubusercontent.com/assets/22794956/26551154/036aa41a-4479-11e7-904e-a9f3c7a1b87a.png "Settings Menu")
 <p>
 Game Mode
 
-![](https://cloud.githubusercontent.com/assets/22835568/25562911/32b5f5dc-2d89-11e7-8443-aa50e5ef65b3.png "Game Mode")
+![](https://cloud.githubusercontent.com/assets/22794956/26551155/036b415e-4479-11e7-804c-baa35bd3eb47.png "Game Mode")
+
+![](https://cloud.githubusercontent.com/assets/22794956/26551146/03467fb8-4479-11e7-9cc8-861028f429ff.jpg "Game Mode")
+
+![](https://cloud.githubusercontent.com/assets/22794956/26551148/03468bd4-4479-11e7-9951-43a67451b27f.png "Game Mode")
+
+![](https://cloud.githubusercontent.com/assets/22794956/26551150/034acb86-4479-11e7-866c-b77766ee9e02.png "Game Mode")
 <p>
 Game Over
 
-![](https://cloud.githubusercontent.com/assets/22835568/25565939/d3bf3d5a-2dc8-11e7-9fff-ac54be19d603.png "Game over")
+![](https://cloud.githubusercontent.com/assets/22794956/26551155/036b415e-4479-11e7-804c-baa35bd3eb47.png "Game over")
 
 # Test Design
 ## Listing of the expected final test cases:
