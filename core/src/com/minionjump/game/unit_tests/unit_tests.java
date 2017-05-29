@@ -12,6 +12,9 @@ import com.minionjump.game.model.SpringPlatform;
 import com.minionjump.game.view.GameStateManager;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -28,7 +31,7 @@ public class unit_tests {
     public void testIfLost() {
         GameStateManager gam = new GameStateManager();
         GameController controller = new GameController(gam);
-        controller.setPlatforms(new Array<Platform>());
+        controller.setPlatforms(new ArrayList<Platform>());
         controller.update(10f);
         assert (controller.isLost() == true);
     }
@@ -37,15 +40,15 @@ public class unit_tests {
     public void testRandomPlatforms() {
         GameStateManager gam = new GameStateManager();
         GameController controller = new GameController(gam);
-        Array<Platform> um = controller.getPlatforms();
+        ArrayList<Platform> um = controller.getPlatforms();
 
         gam = new GameStateManager();
         controller = new GameController(gam);
-        Array<Platform> dois = controller.getPlatforms();
+        ArrayList<Platform> dois = controller.getPlatforms();
 
         controller.reposition(um.get(0), 0);
         boolean iguais = true;
-        for (int i = 0; i < um.size; i++) {
+        for (int i = 0; i < um.size(); i++) {
             if (um.get(i).getClass() != dois.get(i).getClass()) {
                 iguais = false;
                 break;
@@ -112,7 +115,7 @@ public class unit_tests {
     }
 
 
-    @Test
+    @Test(timeout = 1000)
     public void testIfScoreRaise() {
         GameStateManager gam = new GameStateManager();
         GameController controller = new GameController(gam);
@@ -161,7 +164,16 @@ public class unit_tests {
                     controller.platformCollision(10,controller.getPlatforms().get(0));
                     break;
             }
-            controller.reposition(controller.getPlatforms().get(0),0);
+            controller.reposition(controller.getPlatforms().get(0),1);
+            for(int i = 0; i < controller.getPlatforms2Remove().size(); i++)
+                controller.getPlatforms().remove(controller.getPlatforms2Remove().get(i));
+
+            for(int i = 0; i < controller.getPlatforms2Add().size(); i++)
+                controller.getPlatforms().add(controller.getPlatforms2Add().get(i));
+
+            controller.getPlatforms2Remove().clear();
+            controller.getPlatforms2Add().clear();
+
         }
 
         if(controller.getScore() !=0)

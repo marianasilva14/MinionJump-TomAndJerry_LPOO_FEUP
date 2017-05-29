@@ -139,8 +139,10 @@ public class GameView extends State {
         cam.position.y = controller.getMinion().getPosition().y + 80;
         hud.setScore(controller.getScore());
 
-        if(controller.isLost())
+        if(controller.isLost()){
             gam.set(new GameOverMenu(gam));
+        }
+
 
         cam.update();
     }
