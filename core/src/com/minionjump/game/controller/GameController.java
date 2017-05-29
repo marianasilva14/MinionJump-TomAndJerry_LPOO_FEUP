@@ -321,6 +321,7 @@ public class GameController {
      * @param dt
      * @param platform
      */
+
     public void platformCollision(float dt,Platform platform) {
 
             if ((platform instanceof NormalPlatform)) {
