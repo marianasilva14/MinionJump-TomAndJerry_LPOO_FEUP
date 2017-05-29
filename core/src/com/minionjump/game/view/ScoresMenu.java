@@ -37,8 +37,10 @@ public class ScoresMenu extends State{
      * Stage of ths class
      */
         private Stage stage;
-
-    private Label userScore;
+    /**
+     *  Label that indicates user score
+     */
+        private Label userScore;
     /**
      * Constructs Scores Menu and defines the position of each button
      * @param gam Game State Manager
@@ -54,14 +56,14 @@ public class ScoresMenu extends State{
             Gdx.input.setInputProcessor(stage);
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/al-seana.ttf"));
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            parameter.size = 55;
+            parameter.size = 60;
             parameter.borderWidth=1;
             parameter.borderColor=Color.BLACK;
             BitmapFont font12 = generator.generateFont(parameter); // font size 12 pixels
             generator.dispose(); // don't forget to dispose to avoid memory leaks!
             userScore= new Label("",new Label.LabelStyle(font12, Color.BLACK));
-            userScore.setText(String.format("%06d",MyMinionJump.prefs.getScore())+ '\n');
-            userScore.setPosition(Gdx.graphics.getWidth()/6, 9*Gdx.graphics.getHeight()/16);
+            userScore.setText(String.format("%06d",MyMinionJump.prefs.getScore()));
+            userScore.setPosition(Gdx.graphics.getWidth()/6, 7*Gdx.graphics.getHeight()/14);
             stage.addActor(userScore);
 
             Drawable buttonDrawableSha = new TextureRegionDrawable(new TextureRegion(menuBtn));

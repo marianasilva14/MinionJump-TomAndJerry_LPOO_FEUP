@@ -12,6 +12,8 @@ import com.minionjump.game.model.SpringPlatform;
 import com.minionjump.game.model.Villain;
 import com.minionjump.game.view.GameStateManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -65,13 +67,13 @@ public class GameController {
     /**
      * Create the platforms
      */
-    private Array<Platform> platforms;
+    private ArrayList<Platform> platforms;
 
     /**
      * Get's platforms
      * @return platforms
      */
-    public Array<Platform> getPlatforms() {
+    public ArrayList<Platform> getPlatforms() {
         return platforms;
     }
 
@@ -92,7 +94,7 @@ public class GameController {
      * Set's platforms
      * @param plats
      */
-    public void setPlatforms(Array<Platform>  plats){
+    public void setPlatforms(ArrayList<Platform>  plats){
         platforms = plats;
     }
 
@@ -112,6 +114,11 @@ public class GameController {
     private int deltaY = MyMinionJump.HEIGHT/2 - 18;
 
     /**
+     * Variable used to put the platforms at different heights
+     */
+    private int deltaYY = 100;
+
+    /**
      * Boolean variable used to ensure that there aren't two split platforms on the same line
      */
     private boolean isSplitPlatform=false;
@@ -120,6 +127,27 @@ public class GameController {
      * Boolean variable used to know if the village already appeared the first time
      */
     public boolean villain_flag=false;
+
+    public ArrayList<Platform> getPlatforms2Remove() {
+        return platforms2Remove;
+    }
+
+    public ArrayList<Platform> getPlatforms2Add() {
+        return platforms2Add;
+    }
+
+    /**
+     * Platforms to remove after platforms reposition
+     */
+    private ArrayList<Platform> platforms2Remove = new ArrayList<Platform>();
+    /**
+     * Platforms to add after platforms reposition
+     */
+    private ArrayList<Platform> platforms2Add = new ArrayList<Platform>();
+    /**
+     * Variable used to toggle between left and right platforms
+     */
+    private boolean toggle = false;
 
     /**
      * Game State Manager
@@ -137,7 +165,7 @@ public class GameController {
         villain = new Villain(150,300);
 
         Random rand = new Random();
-        platforms = new Array<Platform>();
+        platforms = new ArrayList<Platform>();
         float y;
         for(int i = 0; i < PLATFORM_COUNT/2; i++){
             for(int j = 0; j < 2; j++){
@@ -228,40 +256,50 @@ public class GameController {
 
         float y;
         Random rand = new Random();
-        float j = plat.getPositionPlatform().x <=  MyMinionJump.WIDTH/2? 0:1;
-        int platformType= rand.nextInt(10);
+        int j;
         y=ymax+deltaY;
+        if(!toggle){
+            j = 0;
+            toggle = true;
+        }
+        else {
+            j=1;
+            toggle = false;
+        }
+
+        int platformType= rand.nextInt(10);
+
         if(j == 1)
             ymax=y;
         switch (platformType){
             case 0:
-                SpringPlatform plat2 = (new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
-                platforms.removeIndex(i);
-                platforms.add(plat2);
+                SpringPlatform plat2 = (new SpringPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y+rand.nextFloat()*deltaYY));
+                platforms2Remove.add(plat);
+                platforms2Add.add(plat2);
                 break;
             case 1:case 6:
                 if(isSplitPlatform==false) {
-                    SplitPlatform plat3 = (new SplitPlatform(MyMinionJump.WIDTH / 2 * j + rand.nextFloat() * deltaX, y));
-                    platforms.removeIndex(i);
-                    platforms.add(plat3);
+                    SplitPlatform plat3 = (new SplitPlatform(MyMinionJump.WIDTH / 2 * j + rand.nextFloat() * deltaX, y+rand.nextFloat()*deltaYY));
+                    platforms2Remove.add(plat);
+                    platforms2Add.add(plat3);
                     isSplitPlatform=true;
                 }
                 else{
-                    NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
-                    platforms.removeIndex(i);
-                    platforms.add(plat5);
+                    NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y+rand.nextFloat()*deltaYY));
+                    platforms2Remove.add(plat);
+                    platforms2Add.add(plat5);
                     isSplitPlatform=false;
                 }
                 break;
             case 2:
-                RocketPlatform plat4 = (new RocketPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
-                platforms.removeIndex(i);
-                platforms.add(plat4);
+                RocketPlatform plat4 = (new RocketPlatform(MyMinionJump.WIDTH/2f*j+rand.nextFloat()*deltaX,y+rand.nextFloat()*deltaYY));
+                platforms2Remove.add(plat);
+                platforms2Add.add(plat4);
                 break;
             case 3: case 4:    case 5: case 7:case 8:case 9:
-                NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y));
-                platforms.removeIndex(i);
-                platforms.add(plat5);
+                NormalPlatform plat5 = (new NormalPlatform(MyMinionJump.WIDTH/2*j+rand.nextFloat()*deltaX,y+rand.nextFloat()*deltaYY));
+                platforms2Remove.add(plat);
+                platforms2Add.add(plat5);
                 break;
 
         }
@@ -321,7 +359,9 @@ public class GameController {
     public void update(float dt) {
         minion.update(dt);
 
-        for(int i = 0; i < platforms.size; i++){
+        platforms2Remove.clear();
+        platforms2Add.clear();
+        for(int i = 0; i < platforms.size(); i++){
             Platform platform = platforms.get(i);
 
             if(platforms.get(i).getPositionPlatform().y < (minion.getPosition().y- MyMinionJump.HEIGHT/2))
@@ -330,6 +370,14 @@ public class GameController {
             platformCollision(dt,platform);
 
         }
+
+        for(int i = 0; i < platforms2Remove.size(); i++)
+            platforms.remove(platforms2Remove.get(i));
+
+        for(int i = 0; i < platforms2Add.size(); i++)
+            platforms.add(platforms2Add.get(i));
+
+
         if(villain_flag==false) {
             if (minion.getPosition().y > 10000) {
                 villain_flag= true;
