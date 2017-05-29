@@ -10,10 +10,8 @@
 # Setup/Installation procedure for both project and game/app 
 (how to install the development environment and how to install/run the game/app)
 
-
 # Development documentation 
 ## Updated UML diagrams
-![](https://cloud.githubusercontent.com/assets/22835568/25567109/8f3a4c4a-2dde-11e7-8ac0-c9cb16f14368.png)
 
 ## Design Patterns used
 1. Strategy - for the different types of platforms: platform with spring, with rocket or normal and split platform.
@@ -22,7 +20,7 @@
 The biggest difficulty in implementing the game was the replacement of platforms and how to assign random positions along the screen.
 ## Lessons learned
 -How to structure the project in MVC
-
+-How to use LibGdx
 ## Overall time spent developing
 In total we dedicate 100 hours to carry out the project
 ## Work distribution amongst team members
