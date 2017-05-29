@@ -326,7 +326,7 @@ public class GameController {
             if ((platform instanceof NormalPlatform)) {
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0)
-                        minion.jump(850);
+                        minion.jump(950);
                     score += 10;
                 }
             } else if ((platform instanceof SpringPlatform)) {
@@ -339,7 +339,7 @@ public class GameController {
 
                 if (platform.collides(minion.getBounds())) {
                     if (minion.getVelocity().y < 0 || ((SpringPlatform) platform).collide) {
-                        minion.jump(850);
+                        minion.jump(950);
                         ((SpringPlatform) platform).update(dt);
                     }
                 }
