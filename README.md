@@ -8,7 +8,9 @@
 - Mariana Lopes Silva - up201506197
 
 # Setup/Installation procedure for both project and game/app 
-(how to install the development environment and how to install/run the game/app)
+
+To import project for developing goal, the user needs import it as a Gradle project and to let the IDE sync the project and it is necessary install all the LibGDX libraries needed.
+For android App installation, the user has to download the .apk file to the device and open in the device using a file explorer. 
 
 # Development documentation 
 ## Updated UML diagrams
