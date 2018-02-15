@@ -1,10 +1,5 @@
 # LPOO1617_T6G6
 
-#### Group members
-
-- Francisca Leão Cerquinho Ribeiro da Fonseca - up201505791
-- Mariana Lopes Silva - up201506197
-
 # Architecture Design
 
 ## Package and class diagram (UML), documenting (describing) each class' responsibility:
@@ -74,3 +69,10 @@ Game Over
 3. Test player losing.
 4. Test randomness movement of the villain.
 5. Test highscore saving.
+
+
+
+#### Group members
+
+- Francisca Leão Cerquinho Ribeiro da Fonseca - up201505791
+- Mariana Lopes Silva - up201506197
